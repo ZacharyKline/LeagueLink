@@ -52,6 +52,39 @@ export default (state = initialState, action) => {
     case foo_FAIL:
       return { ...state, Error: action.payload, reducerLoading: false };
 
+    case foo:
+      return {
+        ...state,
+        reducerLoading: true,
+        Error: null
+      };
+    case foo_SUCCESS:
+      return { ...state, payload: action.payload, reducerLoading: false };
+    case foo_FAIL:
+      return { ...state, Error: action.payload, reducerLoading: false };
+
+    case foo:
+      return {
+        ...state,
+        reducerLoading: true,
+        Error: null
+      };
+    case foo_SUCCESS:
+      return { ...state, payload: action.payload, reducerLoading: false };
+    case foo_FAIL:
+      return { ...state, Error: action.payload, reducerLoading: false };
+
+    case foo:
+      return {
+        ...state,
+        reducerLoading: true,
+        Error: null
+      };
+    case foo_SUCCESS:
+      return { ...state, payload: action.payload, reducerLoading: false };
+    case foo_FAIL:
+      return { ...state, Error: action.payload, reducerLoading: false };
+
     default:
       return state;
   }
