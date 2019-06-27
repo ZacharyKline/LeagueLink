@@ -1,12 +1,15 @@
-import React from "react";
-import logo from "../logo.svg";
+import React, {Component} from "react";
 import "../App.css";
+import {Switch, Route} from 'react-router-dom'
+import LoginPage from './LoginPage'
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
-<h1>Blah</h1>
+        <Switch>
+        <Route exact path="/" render={() => <LoginPage />} />
+        </Switch>
       </React.Fragment>
     );
   }

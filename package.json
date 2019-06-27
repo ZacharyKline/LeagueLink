@@ -4,6 +4,7 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "dependencies": {
+    "antd": "^3.19.8",
     "connected-react-router": "^6.4.0",
     "history": "^4.9.0",
     "react": "^16.8.6",

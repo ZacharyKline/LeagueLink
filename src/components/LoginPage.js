@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navbar from '.'
+import Navbar from './Navbar'
 
 class LoginPage extends Component {
     render() {
