@@ -1,54 +1,72 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser as register } from "../actions";
-import {
-  Button,
-  Input,
-  Form,
-} from 'antd'
+import { Button, Input, Form } from "antd";
 import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
 
-
 class RegisterForm extends Component {
-  state = { username: "", password: "", displayname: "", confirmPassword: "", passwordMatch: true };
+  state = {
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    parent: false,
+    coach: false,
+    manager: false,
+    teamId: null,
+    facilityId: null,
+    facilityName: "",
+    facilityAddress: null,
+    facilityPhone: null,
+    facilityEmail: null,
+    facilityUrl: null,
+    displayname: "",
+    confirmPassword: "",
+    passwordMatch: true
+  };
   handleRegister = e => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (this.state.password !== this.state.confirmPassword) {
-      this.setState({ passwordMatch: false })
+      this.setState({ passwordMatch: false });
     } else {
-      this.props.register({ username: this.state.username, password: this.state.password, displayName: this.state.displayname })
+      this.props.register({
+        username: this.state.username,
+        password: this.state.password,
+        displayName: this.state.displayname
+      });
     }
-  }
+  };
 
   handleChange = e => {
-    this.setState({ passwordMatch: true })
+    this.setState({ passwordMatch: true });
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
-    const { handleRegister, handleChange } = this
-    const { passwordMatch } = this.state
+    const { handleRegister, handleChange } = this;
+    const { passwordMatch } = this.state;
     const { isLoading, err } = this.props;
     var stylesForm = {
-      color:'black',
-      backgroundColor:'lightgrey',
-      padding:'10px',
-      border:'1px black dashed',
-      width:'250px',
-      marginLeft:'550px',
-      marginTop:'100px'
+      color: "black",
+      backgroundColor: "lightgrey",
+      padding: "10px",
+      border: "1px black dashed",
+      width: "250px",
+      marginLeft: "550px",
+      marginTop: "100px"
     };
 
     return (
       <React.Fragment>
-         <Header />
-        <Form style={stylesForm}>
+        <Header />
         <h1>Register</h1>
+        <Form style={stylesForm}>
           <label htmlFor="userName">Username</label>
           <Form.Item>
-            
             <Input
               type="text"
               name="username"
@@ -57,19 +75,34 @@ class RegisterForm extends Component {
               onChange={handleChange}
             />
           </Form.Item>
-          <label htmlFor="displayName">Display Name</label>
+          <label htmlFor="firstName">First Name</label>
           <Form.Item>
-            
             <Input
               type="text"
-              name="displayname"
+              name="firstName"
               required
               onChange={handleChange}
             />
           </Form.Item>
+          <label htmlFor="lastName">Last Name</label>
+          <Form.Item>
+            <Input
+              type="text"
+              name="lastName"
+              required
+              onChange={handleChange}
+            />
+          </Form.Item>
+          <label htmlFor="email">Email</label>
+          <Form.Item>
+            <Input type="email" name="email" required onChange={handleChange} />
+          </Form.Item>
+          <label htmlFor="email">Email</label>
+          <Form.Item>
+            <Input type="email" name="email" required onChange={handleChange} />
+          </Form.Item>
           <label htmlFor="password">Password</label>
           <Form.Item>
-            
             <Input
               type="password"
               name="password"
@@ -79,7 +112,6 @@ class RegisterForm extends Component {
           </Form.Item>
           <label htmlFor="confirmPassword">Confirm Password</label>
           <Form.Item>
-            
             <Input
               type="password"
               name="confirmPassword"
@@ -88,18 +120,18 @@ class RegisterForm extends Component {
             />
           </Form.Item>
           <Form.Item>
-            <Button 
-            onClick={handleRegister}
-            type="submit" 
-            disabled={isLoading}>
+            <Button onClick={handleRegister} type="submit" disabled={isLoading}>
               Register
             </Button>
           </Form.Item>
-          <Link to={'/'} className={"registerLink"}>Login</Link>
-
+          <Link to={"/"} className={"registerLink"}>
+            Login
+          </Link>
         </Form>
 
-        {!passwordMatch && <p style={{ color: 'red' }}>passwords do not match</p>}
+        {!passwordMatch && (
+          <p style={{ color: "red" }}>passwords do not match</p>
+        )}
         {isLoading && <Spinner name="circle" color="blue" />}
         {err && <p style={{ color: "red" }}>{err}</p>}
       </React.Fragment>
