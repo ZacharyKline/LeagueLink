@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser as register } from "../actions";
-import { Button, Input, Form } from "antd";
+import { Input, Form, Icon } from "antd";
 import Spinner from "react-spinkit";
-import { Link } from "react-router-dom";
+import "../App.css";
+import { RegisterButton, RegisterHeader } from ".";
 
 class RegisterForm extends Component {
   state = {
-    username: "",
     password: "",
+    confirmPassword: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -18,16 +19,14 @@ class RegisterForm extends Component {
     manager: false,
     teamId: null,
     facilityId: null,
-    facilityName: "",
+    facilityName: null,
     facilityAddress: null,
     facilityPhone: null,
     facilityEmail: null,
     facilityUrl: null,
-    displayname: "",
-    confirmPassword: "",
     passwordMatch: true
   };
-  handleRegister = e => {
+  /*handleRegister = e => {
     e.preventDefault();
 
     if (this.state.password !== this.state.confirmPassword) {
@@ -40,7 +39,7 @@ class RegisterForm extends Component {
       });
     }
   };
-
+*/
   handleChange = e => {
     this.setState({ passwordMatch: true });
     this.setState({ [e.target.name]: e.target.value });
@@ -50,83 +49,79 @@ class RegisterForm extends Component {
     const { handleRegister, handleChange } = this;
     const { passwordMatch } = this.state;
     const { isLoading, err } = this.props;
-    var stylesForm = {
-      color: "black",
-      backgroundColor: "lightgrey",
-      padding: "10px",
-      border: "1px black dashed",
-      width: "250px",
-      marginLeft: "550px",
-      marginTop: "100px"
+    const stylesForm = {
+      color: "rgba(0, 53, 89, 1)",
+      backgroundColor: "rgb(74, 162, 197)",
+      padding: "20px",
+      border: "5px rgba(0, 53, 89, 1) solid",
+      borderRadius: "5px",
+      width: "400px",
+      display: "flex",
+      flexDirection: "column",
+      margin: "40px auto"
     };
 
     return (
       <React.Fragment>
-        <Header />
-        <h1>Register</h1>
         <Form style={stylesForm}>
-          <label htmlFor="userName">Username</label>
+          <RegisterHeader text={"Register"} />
           <Form.Item>
             <Input
-              type="text"
-              name="username"
-              autoFocus
-              required
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <label htmlFor="firstName">First Name</label>
-          <Form.Item>
-            <Input
+              addonBefore="First Name"
               type="text"
               name="firstName"
               required
               onChange={handleChange}
             />
-          </Form.Item>
-          <label htmlFor="lastName">Last Name</label>
-          <Form.Item>
             <Input
+              addonBefore="Last Name"
               type="text"
               name="lastName"
               required
               onChange={handleChange}
             />
           </Form.Item>
-          <label htmlFor="email">Email</label>
-          <Form.Item>
-            <Input type="email" name="email" required onChange={handleChange} />
-          </Form.Item>
-          <label htmlFor="email">Email</label>
-          <Form.Item>
-            <Input type="email" name="email" required onChange={handleChange} />
-          </Form.Item>
-          <label htmlFor="password">Password</label>
           <Form.Item>
             <Input
+              addonBefore="Email"
+              type="email"
+              name="email"
+              required
+              onChange={handleChange}
+            />
+            <Input
+              addonBefore="Phone"
+              type="tel"
+              name="phone"
+              placeholder="000-000-0000"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              onChange={handleChange}
+            />
+          </Form.Item>
+          <Form.Item>
+            <Input
+              addonBefore="Password"
               type="password"
               name="password"
               required
               onChange={handleChange}
             />
-          </Form.Item>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <Form.Item>
+
             <Input
+              addonBefore="Password"
               type="password"
               name="confirmPassword"
+              placeholder="Confirm"
               required
               onChange={handleChange}
             />
           </Form.Item>
-          <Form.Item>
-            <Button onClick={handleRegister} type="submit" disabled={isLoading}>
-              Register
-            </Button>
-          </Form.Item>
-          <Link to={"/"} className={"registerLink"}>
-            Login
-          </Link>
+          <RegisterButton
+            onClick={handleRegister}
+            disabled={isLoading}
+            value={"Next"}
+            iconAfter={<Icon type="right" />}
+          />
         </Form>
 
         {!passwordMatch && (
@@ -140,9 +135,6 @@ class RegisterForm extends Component {
 }
 
 export default connect(
-  ({ auth }) => ({
-    isLoading: auth.registerLoading,
-    err: auth.registerError
-  }),
+  null,
   { register }
 )(RegisterForm);
