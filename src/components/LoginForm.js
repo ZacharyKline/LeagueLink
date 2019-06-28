@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginThenGoToUserProfile as login } from "../actions";
 import Spinner from "react-spinkit";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { Button, Form, Input, Layout } from "antd";
 
 
@@ -32,7 +32,7 @@ class LoginForm extends Component {
       padding:'10px',
       border:'1px black dashed',
       width:'250px',
-      marginLeft:'550px',
+      marginLeft:'50px',
       marginTop:'100px'
     };
     return (
@@ -73,16 +73,13 @@ class LoginForm extends Component {
               Login
             </Button>
           </Form.Item>
-          <Link to={'/register'} className={"registerLink"}>Register</Link>
+          {/*<Link to={'/registration'} className={"registerLink"}>Register</Link>*/}
           {isLoading && <Spinner name="circle" color="blue" />}
           {err && <p style={{ color: "red" }}>{err}</p>}
 
         </Form>
         </Layout>
         <Layout style={{height: "250px"}}>
-        <p>
-          fkf
-        </p>
         </Layout>
       </React.Fragment>
         );

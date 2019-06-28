@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "../App.css";
 import { Switch, Route } from "react-router-dom";
-import LoginPage from "./LoginPage";
+//import LoginForm from "./LoginForm";
+import { LoginForm, UserProfile, RegisterForm, Settings} from ".";
 import { Navbar } from ".";
 
 class App extends Component {
@@ -10,7 +11,9 @@ class App extends Component {
       <React.Fragment>
         <Navbar />
         <Switch>
-          <Route exact path="/" render={() => <LoginPage />} />
+          <Route exact path="/" render={() => <LoginForm />} />
+          <Route path="/home" render={() => <homepage />} />
+          <Route path="/registration" render={() => <RegisterForm />} />
         </Switch>
       </React.Fragment>
     );
