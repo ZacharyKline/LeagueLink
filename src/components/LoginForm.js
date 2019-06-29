@@ -5,9 +5,6 @@ import Spinner from "react-spinkit";
 //import { Link } from "react-router-dom";
 import { Button, Form, Input, Layout } from "antd";
 
-
-//import "./index.css";
-
 class LoginForm extends Component {
   state = { username: "", password: "" };
 

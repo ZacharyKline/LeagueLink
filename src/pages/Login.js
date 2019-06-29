@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class login extends Component {
+export default class Login extends Component {
   render() {
     return (
       <React.Fragment>
@@ -9,5 +9,3 @@ class login extends Component {
     )
   }
 }
-
-export default login
