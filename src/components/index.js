@@ -1,6 +1,5 @@
-export { default as App } from "./App";
+export { default as App } from "../pages/App";
 export { default as Navbar } from "./navBar";
-
 export { default as LoginForm } from "./LoginForm";
 export { default as UserProfile } from "./UserProfile";
 export { default as RegisterForm } from "./RegisterForm";
