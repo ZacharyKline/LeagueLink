@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Calendar } from 'antd'
 // import CalendarComponent from './Calendar'
 const { Header, Sider, Content } = Layout
 
@@ -38,8 +38,8 @@ class CalendarPage extends Component {
                                 flexDirection: "column",
                                 
                             }}>
-                            This will be the content of the calendar is when I finally get it to actually work, but for now I will just fill this with text. Text and tears which slowly rolling down my cheeks as all of the regrets from my life flood back in, why didn't I play fetch with Fido more. Fido was such a good dog, he didn't deserve to go out like that, by not existing and just being a weird example my brain dreamed up to give me more regrets to imagine in my life. I am sitting in a completely dark room right now, listening to spooky stories and attempting to get this Calendar to work. Truly my coding is the spookiest thing of all.
-                    </Content>
+                            <Calendar></Calendar>
+                        </Content>
                         <Sider
                             style={{
                                 color: "rgba(0, 53, 89, 1)",
