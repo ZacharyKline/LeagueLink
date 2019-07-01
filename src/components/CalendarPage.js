@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Calendar } from 'antd'
-// import CalendarComponent from './Calendar'
 const { Header, Sider, Content } = Layout
 
 class CalendarPage extends Component {
