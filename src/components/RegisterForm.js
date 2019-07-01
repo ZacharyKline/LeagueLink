@@ -1,16 +1,12 @@
-
-import React, { Component } from 'react'
-
-export default class RegisterForm extends Component {
-  render() {
-    return (
-      <div>
-        <p>hello registration</p>
-      </div>
-    )
-  }
-}
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { registerUser as register } from "../actions";
+import { Input, Form, Icon, Radio } from "antd";
+import Spinner from "react-spinkit";
+import "../App.css";
+import { RegisterHeader } from ".";
+import teams from "../teams.json";
+//import facilities from "../facilities.json";
 
 /*
 import React, { Component } from "react";
@@ -23,7 +19,7 @@ import { RegisterHeader } from ".";
 import teams from "../teams.json";
 //import facilities from "../facilities.json";
 
-class RegisterForm extends Component {
+// class RegisterForm extends Component {
   state = {
     password: "",
     confirmPassword: "",
@@ -65,7 +61,34 @@ class RegisterForm extends Component {
     }
   };
 */
-
+class RegisterForm extends Component {
+  state = {
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    teamName: "",
+    ageGroup: "",
+    teamId: null,
+    facilityId: null,
+    facilityName: "",
+    facilityAddress: "",
+    facilityCity: "",
+    facilityState: "",
+    facilityZipCode: null,
+    facilityPhone: "",
+    facilityEmail: "",
+    facilityUrl: "",
+    passwordMatch: true,
+    firstPage: true,
+    secondPage: false,
+    thirdPage: false,
+    fourthPage: false,
+    confirmationPage: false,
+    radioValue: 1
+  };
   handleSubmit = radioValue => e => {
     if (radioValue === 1) {
       console.log("Create Parent, Add Parent ID to Coach");
@@ -871,4 +894,4 @@ export default connect(
   null,
   { register }
 )(RegisterForm);
-*/
+
