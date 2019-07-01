@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getTeamSchedule } from "../actions"
 import { Navbar, CalendarView } from "../components"
 
 export default class Calendar extends Component {
@@ -11,3 +13,9 @@ export default class Calendar extends Component {
     )
   }
 }
+export default connect(
+  ({ auth }) => ({
+    isLoading: auth.loginLoading,
+    err: auth.loginError
+  }),
+  { getTeamSchedule })(Login);
