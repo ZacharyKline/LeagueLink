@@ -8,7 +8,8 @@ import { RegisterHeader } from ".";
 import teams from "../teams.json";
 //import { tsImportEqualsDeclaration } from "@babel/types";
 import coaches from "../coaches.json";
-//import facilities from "../facilities.json";
+import facilities from "../facilities.json";
+import managers from "../managers.json";
 
 class RegisterForm extends Component {
   state = {
@@ -21,6 +22,7 @@ class RegisterForm extends Component {
     teamName: "",
     ageGroup: "",
     selectedTeamIds: [],
+    selectedFacilityId: null,
     teamId: null,
     facilityId: null,
     facilityName: "",
@@ -217,6 +219,10 @@ class RegisterForm extends Component {
     }
   };
 
+  handleSelectFacility = e => {
+    this.setState({ selectedFacilityId: e.target.value });
+  };
+
   render() {
     const { handleChange } = this;
     const { passwordMatch } = this.state;
@@ -411,7 +417,7 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.parentSelectTeamsForm || (
+        {this.state.parentSelectTeamsForm && (
           <Form style={stylesForm} id="parentSelectTeams">
             <RegisterHeader text={"Select your Team(s)"} />
             <div
@@ -524,6 +530,79 @@ class RegisterForm extends Component {
         {this.state.coachSelectFacilityForm && (
           <Form style={stylesForm} id="coachSelectFacility">
             <RegisterHeader text={"Select your Facility"} />
+            <div
+              style={{
+                background: "rgba(0, 53, 89, 1)",
+                borderRadius: "5px",
+                paddingTop: "10px"
+              }}
+            >
+              <Radio.Group
+                value={this.state.selectedFacilityId}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  padding: "15px",
+                  paddingLeft: "30px",
+                  fontSize: "large"
+                }}
+                onChange={this.handleSelectFacility}
+              >
+                {facilities.map(facility => {
+                  let index = managers.findIndex(
+                    manager => manager.id === facility.managerId
+                  );
+                  let currentManagerName = managers[index].name;
+                  return (
+                    <Radio
+                      key={facility.id}
+                      value={facility.id}
+                      style={{
+                        color: "rgb(161, 233, 29)",
+                        display: "flex",
+                        flexDirection: "row"
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          flex: "row",
+                          flexWrap: "wrap"
+                        }}
+                      >
+                        <div
+                          style={{
+                            paddingLeft: "10px"
+                          }}
+                        >
+                          <span>
+                            <b> {facility.name} </b>
+                          </span>
+                        </div>
+                        <div style={{ paddingLeft: "10px" }}>
+                          <span>
+                            {facility.address} {facility.city}, {facility.state}{" "}
+                            {facility.zipCode}
+                          </span>
+                        </div>
+                        <div style={{ paddingLeft: "10px" }}>
+                          {facility.phone}
+                        </div>
+                        <div style={{ paddingLeft: "10px" }}>
+                          {facility.email}
+                        </div>
+                        <div style={{ paddingLeft: "10px" }}>
+                          Contact: {currentManagerName}
+                        </div>
+                      </div>
+                      <br />
+                    </Radio>
+                  );
+                })}
+              </Radio.Group>
+            </div>
+            <br />
             <div
               style={{
                 maxWidth: "100%",
