@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "../App.css";
 import { Switch, Route } from "react-router-dom";
-import { LoginForm, UserProfile, RegisterForm, } from ".";
+import { LoginForm, UserProfile } from ".";
 import { Navbar } from ".";
+import RegisterForm from "./RegisterForm";
 import CalendarPage from './CalendarPage';
 
 class App extends Component {

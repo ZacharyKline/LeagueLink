@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "coachIds": [1],
+    "ageGroup": 5,
+    "name": "Tigers"
+  },
+  {
+    "id": 2,
+    "coachIds": [2],
+    "ageGroup": 5,
+    "name": "Frogs"
+  },
+  {
+    "id": 3,
+    "coachIds": [3],
+    "ageGroup": 5,
+    "name": "Turtles"
+  }
+]
