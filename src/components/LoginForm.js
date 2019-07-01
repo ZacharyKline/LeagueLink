@@ -40,14 +40,14 @@ class LoginForm extends Component {
         <Layout>
         <Form style={stylesForm}>
         <h1>Login</h1>
-          <label htmlFor="userName">Username</label>
+          <label htmlFor="email">Email</label>
           <Form.Item>
             
             <Input
               clasName={"stylee"}
               //style={}
-              type="text"
-              name="username"
+              type="email"
+              name="email"
               autoFocus
               required
               onChange={handleChange}
