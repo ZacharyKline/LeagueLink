@@ -6,6 +6,7 @@ import Spinner from "react-spinkit";
 import "../App.css";
 import { RegisterHeader } from ".";
 import teams from "../teams.json";
+//import { tsImportEqualsDeclaration } from "@babel/types";
 //import coaches from "../coaches.json";
 //import facilities from "../facilities.json";
 
@@ -30,12 +31,14 @@ class RegisterForm extends Component {
     facilityEmail: "",
     facilityUrl: "",
     passwordMatch: true,
-    firstPage: true,
-    secondPage: false,
-    thirdPage: false,
-    fourthPage: false,
-    confirmationPage: false,
-    radioValue: 1
+    userInformationForm: true,
+    userTypeForm: false,
+    parentSelectTeamsForm: false,
+    coachSelectFacilityForm: false,
+    coachRegisterTeamForm: false,
+    managerRegisterFacilityForm: false,
+    confirmationPageForm: false,
+    userType: "parent"
   };
   /*handleRegister = e => {
     e.preventDefault();
@@ -52,70 +55,142 @@ class RegisterForm extends Component {
   };
 */
 
-  handleSubmit = radioValue => e => {
-    if (radioValue === 1) {
+  handleSubmit = userType => e => {
+    if (userType === "parent") {
       console.log("Create Parent, Add Parent ID to Coach");
-    } else if (radioValue === 2) {
+    } else if (userType === "coach") {
       console.log("Create Coach, Create Team, Add Coach ID to Facility");
-    } else if (radioValue === 3) {
+    } else if (userType === "manager") {
       console.log("Create Manager, Create Facility");
     }
   };
 
-  handleNext = num => e => {
+  handleNext = whereTo => e => {
     //e.preventDefault();
-    if (
-      num === 1 &&
-      (this.state.firstName !== "" &&
-        this.state.lastName !== "" &&
-        this.state.email !== "" &&
-        this.state.phone !== "" &&
-        this.state.password !== "" &&
-        this.state.confirmPassword === this.state.password)
-    ) {
-      this.setState({ firstPage: false, secondPage: true });
-    }
-    if (num === 2) {
-      this.setState({ secondPage: false, thirdPage: true });
-    }
-    if (num === 3) {
-      if (
-        this.state.radioValue === 3 &&
-        this.state.facilityName !== "" &&
-        this.state.facilityAddress !== "" &&
-        this.state.facilityCity !== "" &&
-        this.state.facilityState !== "" &&
-        this.state.facilityZipCode !== "" &&
-        this.state.facilityEmail !== "" &&
-        this.state.facilityPhone !== ""
-      ) {
-        this.setState({ thirdPage: false, confirmationPage: true });
-      } else if (this.state.radioValue === 1) {
-        this.setState({ thirdPage: false, confirmationPage: true });
-      } else if (this.state.radioValue === 2) {
-        this.setState({ thirdPage: false, fourthPage: true });
-      }
-    }
-    if (num === 4) {
-      if (this.state.teamName !== "" && this.state.ageGroup !== "") {
-        this.setState({ fourthPage: false, confirmationPage: true });
-      }
+    switch (whereTo) {
+      case "toUserTypeForm":
+        if (
+          this.state.firstName !== "" &&
+          this.state.lastName !== "" &&
+          this.state.email !== "" &&
+          this.state.phone !== "" &&
+          this.state.password !== "" &&
+          this.state.confirmPassword === this.state.password
+        ) {
+          return this.setState({
+            userInformationForm: false,
+            userTypeForm: true
+          });
+        } else {
+          return this.setState({ userInformationForm: true });
+        }
+      case "parent":
+        return this.setState({
+          userTypeForm: false,
+          parentSelectTeamsForm: true
+        });
+
+      case "coach":
+        return this.setState({
+          userTypeForm: false,
+          coachSelectFacilityForm: true
+        });
+      case "manager":
+        return this.setState({
+          userTypeForm: false,
+          managerRegisterFacilityForm: true
+        });
+      case "toCoachRegisterTeamForm":
+        return this.setState({
+          coachSelectFacilityForm: false,
+          coachRegisterTeamForm: true
+        });
+      case "toConfirmationPageForm":
+        if (this.state.userType === "manager") {
+          if (
+            this.state.facilityName !== "" &&
+            this.state.facilityAddress !== "" &&
+            this.state.facilityCity !== "" &&
+            this.state.facilityState !== "" &&
+            this.state.facilityZipCode !== "" &&
+            this.state.facilityEmail !== "" &&
+            this.state.facilityPhone !== ""
+          ) {
+            return this.setState({
+              parentSelectTeamsForm: false,
+              coachRegisterTeamForm: false,
+              managerRegisterFacilityForm: false,
+              confirmationPageForm: true
+            });
+          } else {
+            return this.setState({
+              managerRegisterFacilityForm: true
+            });
+          }
+        }
+        if (this.state.userType === "coach") {
+          if (this.state.teamName !== "" && this.state.ageGroup !== "") {
+            return this.setState({
+              parentSelectTeamsForm: false,
+              coachRegisterTeamForm: false,
+              managerRegisterFacilityForm: false,
+              confirmationPageForm: true
+            });
+          } else {
+            return this.setState({
+              coachRegisterTeamForm: true
+            });
+          }
+        }
+        return this.setState({
+          parentSelectTeamsForm: false,
+          coachRegisterTeamForm: false,
+          managerRegisterFacilityForm: false,
+          confirmationPageForm: true
+        });
+      default:
+        return this.state;
     }
   };
 
-  handleBack = num => e => {
+  handleBack = whereTo => e => {
     e.preventDefault();
-
-    num === 1
-      ? this.setState({ firstPage: true, secondPage: false })
-      : num === 2
-      ? this.setState({ secondPage: true, thirdPage: false })
-      : num === 3 &&
-        (this.state.radioValue === 3 || this.state.radioValue === 1)
-      ? this.setState({ thirdPage: true, confirmationPage: false })
-      : num === 3 && this.state.radioValue === 2
-      ? this.setState({ fourthPage: true, confirmationPage: false })
-      : this.setState();
+    switch (whereTo) {
+      case "ToUserInformationForm":
+        return this.setState({
+          userInformationForm: true,
+          userTypeForm: false
+        });
+      case "toUserTypeForm":
+        return this.setState({
+          parentSelectTeamsForm: false,
+          coachSelectFacilityForm: false,
+          managerRegisterFacilityForm: false,
+          userTypeForm: true
+        });
+      case "toCoachSelectFacilityForm":
+        return this.setState({
+          coachRegisterTeamForm: false,
+          coachSelectFacilityForm: true
+        });
+      case "parent":
+        return this.setState({
+          confirmationPageForm: false,
+          parentSelectTeamsForm: true
+        });
+      case "coach":
+        return this.setState({
+          confirmationPageForm: false,
+          coachRegisterTeamForm: true
+        });
+      case "manager":
+        return this.setState({
+          confirmationPageForm: false,
+          managerRegisterFacilityForm: true
+        });
+      default:
+        return this.state;
+    }
   };
 
   handleChange = e => {
@@ -125,12 +200,12 @@ class RegisterForm extends Component {
 
   handleRadioClick = e => {
     this.setState({
-      radioValue: e.target.value
+      userType: e.target.value
     });
   };
 
   render() {
-    const { handleChange, handleNext } = this;
+    const { handleChange } = this;
     const { passwordMatch } = this.state;
     const { isLoading, err } = this.props;
     const stylesForm = {
@@ -154,8 +229,8 @@ class RegisterForm extends Component {
 
     return (
       <React.Fragment>
-        {this.state.firstPage && (
-          <Form style={stylesForm}>
+        {this.state.userInformationForm && (
+          <Form style={stylesForm} id="userInformation">
             <RegisterHeader text={"Register"} />
             <Form.Item>
               <Input
@@ -227,7 +302,7 @@ class RegisterForm extends Component {
             >
               <button
                 //type="submit"
-                onClick={handleNext(1)}
+                onClick={this.handleNext("toUserTypeForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -245,8 +320,8 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.secondPage && (
-          <Form style={stylesForm}>
+        {this.state.userTypeForm && (
+          <Form style={stylesForm} id="userTypeForm">
             <RegisterHeader text={"Are you a..."} />
             <div
               style={{
@@ -256,7 +331,7 @@ class RegisterForm extends Component {
             >
               <Radio.Group
                 onChange={this.handleRadioClick}
-                value={this.state.radioValue}
+                value={this.state.userType}
                 size="large"
                 style={{
                   display: "flex",
@@ -267,13 +342,13 @@ class RegisterForm extends Component {
                   fontSize: "large"
                 }}
               >
-                <Radio checked style={radioStyle} value={1}>
+                <Radio checked style={radioStyle} value={"parent"}>
                   Athlete / Athlete's Legal Guardian?
                 </Radio>
-                <Radio style={radioStyle} value={2}>
+                <Radio style={radioStyle} value={"coach"}>
                   Coach?
                 </Radio>
-                <Radio style={radioStyle} value={3}>
+                <Radio style={radioStyle} value={"manager"}>
                   League Manager?
                 </Radio>
               </Radio.Group>
@@ -289,7 +364,7 @@ class RegisterForm extends Component {
             >
               <button
                 type="submit"
-                onClick={this.handleNext(2)}
+                onClick={this.handleNext(this.state.userType)}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -305,7 +380,7 @@ class RegisterForm extends Component {
               </button>
               <button
                 type="submit"
-                onClick={this.handleBack(1)}
+                onClick={this.handleBack("ToUserInformationForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -323,10 +398,8 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {
-          /*this.state.thirdPage && this.state.radioValue === 1 && */ <Form
-            style={stylesForm}
-          >
+        {this.state.parentSelectTeamsForm && (
+          <Form style={stylesForm} id="parentSelectTeams">
             <RegisterHeader text={"Select your Team(s)"} />
             <div
               style={{
@@ -359,7 +432,7 @@ class RegisterForm extends Component {
             >
               <button
                 type="submit"
-                onClick={this.handleNext(3)}
+                onClick={this.handleNext("toConfirmationPageForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -375,54 +448,7 @@ class RegisterForm extends Component {
               </button>
               <button
                 type="submit"
-                onClick={this.handleBack(2)}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
-        }
-
-        {this.state.thirdPage && this.state.radioValue === 2 && (
-          <Form style={stylesForm}>
-            <RegisterHeader text={"Select your Facility"} />
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext(3)}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack(2)}
+                onClick={this.handleBack("toUserTypeForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -440,8 +466,55 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.fourthPage && (
-          <Form style={stylesForm}>
+        {this.state.coachSelectFacilityForm && (
+          <Form style={stylesForm} id="coachSelectFacility">
+            <RegisterHeader text={"Select your Facility"} />
+            <div
+              style={{
+                maxWidth: "100%",
+                display: "flex",
+                flexDirection: "row-reverse",
+                justifyContent: "space-between"
+              }}
+            >
+              <button
+                type="submit"
+                onClick={this.handleNext("toCoachRegisterTeamForm")}
+                style={{
+                  background:
+                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                  color: "rgb(161, 233, 29)",
+                  border: "2px rgb(130, 184, 31) solid",
+                  borderRadius: "25px",
+                  fontSize: "large",
+                  minWidth: "120px"
+                }}
+              >
+                Next
+                <Icon type="right" />
+              </button>
+              <button
+                type="submit"
+                onClick={this.handleBack("toUserTypeForm")}
+                style={{
+                  background:
+                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                  color: "rgb(161, 233, 29)",
+                  border: "2px rgb(130, 184, 31) solid",
+                  borderRadius: "25px",
+                  fontSize: "large",
+                  minWidth: "120px"
+                }}
+              >
+                <Icon type="left" />
+                Back
+              </button>
+            </div>
+          </Form>
+        )}
+
+        {this.state.coachRegisterTeamForm && (
+          <Form style={stylesForm} id="coachRegisterTeam">
             <RegisterHeader text={"Register Team"} />
             <Form.Item>
               <Input
@@ -473,7 +546,7 @@ class RegisterForm extends Component {
             >
               <button
                 type="submit"
-                onClick={this.handleNext(4)}
+                onClick={this.handleNext("toConfirmationPageForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -489,7 +562,7 @@ class RegisterForm extends Component {
               </button>
               <button
                 type="submit"
-                onClick={this.handleBack(3)}
+                onClick={this.handleBack("toCoachSelectFacilityForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -507,8 +580,8 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.thirdPage && this.state.radioValue === 3 && (
-          <Form style={stylesForm}>
+        {this.state.managerRegisterFacilityForm && (
+          <Form style={stylesForm} id="managerRegisterFacility">
             <RegisterHeader text={"Register your Facility"} />
             <Form.Item>
               <Input
@@ -599,7 +672,7 @@ class RegisterForm extends Component {
             >
               <button
                 type="submit"
-                onClick={this.handleNext(3)}
+                onClick={this.handleNext("toConfirmationPageForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -615,7 +688,7 @@ class RegisterForm extends Component {
               </button>
               <button
                 type="submit"
-                onClick={this.handleBack(2)}
+                onClick={this.handleBack("toUserTypeForm")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -633,8 +706,8 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.confirmationPage && (
-          <Form style={stylesForm}>
+        {this.state.confirmationPageForm && (
+          <Form style={stylesForm} id="confirmationPage">
             <RegisterHeader text={"Confirm your Details"} />
             <div
               style={{
@@ -687,8 +760,8 @@ class RegisterForm extends Component {
                   <span>{this.state.phone}</span>
                 </div>
                 {false &&
-                  (this.state.radioValue === 1 ||
-                    this.state.radioValue === 2) && (
+                  (this.state.userType === "parent" ||
+                    this.state.userType === "coach") && (
                     <div
                       style={{
                         marginTop: "0px",
@@ -699,7 +772,7 @@ class RegisterForm extends Component {
                       <span>{this.state.teamIds}</span>
                     </div>
                   )}
-                {false && this.state.radioValue === 2 && (
+                {false && this.state.userType === "coach" && (
                   <div
                     style={{
                       marginTop: "0px",
@@ -710,7 +783,7 @@ class RegisterForm extends Component {
                     <span>{this.state.facilityIds}</span>
                   </div>
                 )}
-                {this.state.radioValue === 3 && (
+                {this.state.userType === "manager" && (
                   <React.Fragment>
                     <br />
                     <div
@@ -822,7 +895,7 @@ class RegisterForm extends Component {
             >
               <button
                 type="submit"
-                onClick={this.handleSubmit(this.state.radioValue)}
+                onClick={this.handleSubmit(this.state.userType)}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -838,7 +911,7 @@ class RegisterForm extends Component {
               </button>
               <button
                 type="submit"
-                onClick={this.handleBack(3)}
+                onClick={this.handleBack(this.state.userType)}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
