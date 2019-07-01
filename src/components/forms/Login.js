@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginThenGoToUserProfile as login } from "../../actions";
 import Spinner from "react-spinkit";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Form, Input, Layout } from "antd";
 
-class LoginForm extends Component {
+class Login extends Component {
   state = { username: "", password: "" };
 
   handleLogin = e => {
@@ -32,7 +32,7 @@ class LoginForm extends Component {
             <Form.Item>
 
               <Input
-                className={"stylee"}
+                className="stylee"
                 type="text"
                 name="username"
                 autoFocus
@@ -44,7 +44,7 @@ class LoginForm extends Component {
             <Form.Item>
 
               <Input
-                className={"stylee"}
+                className="stylee"
                 type="password"
                 name="password"
                 required
@@ -53,14 +53,15 @@ class LoginForm extends Component {
             </Form.Item>
             <Form.Item>
               <Button
-                className={"btn"}
                 type="submit"
                 disabled={isLoading}
                 onClick={this.handleLogin}>
                 Login
             </Button>
+            <br />
+            <Link className="ant-btn btn ant-btn-submit"> Forgot Password </Link>
             </Form.Item>
-            {/*<Link to={'/registration'} className={"registerLink"}>Register</Link>*/}
+            <Link to={'/registration'} className={"registerLink"}>Register</Link>
             {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
 
@@ -77,4 +78,4 @@ export default connect(
     isLoading: auth.loginLoading,
     err: auth.loginError
   }),
-  { login })(LoginForm);
+  { login })(Login);

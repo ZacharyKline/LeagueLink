@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class RegisterForm extends Component {
+export default class Register extends Component {
   render() {
     return (
       <div>
