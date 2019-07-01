@@ -5,6 +5,8 @@ import { Input, Form, Icon, Radio } from "antd";
 import Spinner from "react-spinkit";
 import "../App.css";
 import { RegisterHeader } from ".";
+import teams from "../teams.json";
+//import facilities from "../facilities.json";
 
 class RegisterForm extends Component {
   state = {
@@ -320,9 +322,19 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.thirdPage && this.state.radioValue === 1 && (
-          <Form style={stylesForm}>
+        {
+          /*this.state.thirdPage && this.state.radioValue === 1 && */ <Form
+            style={stylesForm}
+          >
             <RegisterHeader text={"Select your Team(s)"} />
+            <ul>
+              {teams.map(team => (
+                <li>
+                  <input type="checkbox" />
+                  <span>{team.name}</span>
+                </li>
+              ))}
+            </ul>
             <div
               style={{
                 maxWidth: "100%",
@@ -365,7 +377,7 @@ class RegisterForm extends Component {
               </button>
             </div>
           </Form>
-        )}
+        }
 
         {this.state.thirdPage && this.state.radioValue === 2 && (
           <Form style={stylesForm}>
