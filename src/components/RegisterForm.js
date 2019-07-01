@@ -6,6 +6,7 @@ import Spinner from "react-spinkit";
 import "../App.css";
 import { RegisterHeader } from ".";
 import teams from "../teams.json";
+//import coaches from "../coaches.json";
 //import facilities from "../facilities.json";
 
 class RegisterForm extends Component {
@@ -327,14 +328,27 @@ class RegisterForm extends Component {
             style={stylesForm}
           >
             <RegisterHeader text={"Select your Team(s)"} />
-            <ul>
-              {teams.map(team => (
-                <li key={team.id}>
-                  <input type="checkbox" />
-                  <span>{team.name}</span>
-                </li>
-              ))}
-            </ul>
+            <div
+              style={{
+                background: "rgba(0, 53, 89, 1)",
+                borderRadius: "5px",
+                paddingTop: "10px"
+              }}
+            >
+              <ul style={{ listStyle: "none" }}>
+                {teams.map(team => (
+                  <li key={team.id} style={radioStyle}>
+                    <input type="checkbox" name="team" />
+                    <span> </span>
+                    <span>
+                      <b> {team.name} </b>
+                    </span>
+                    <span> {team.ageGroup} year olds</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <br />
             <div
               style={{
                 maxWidth: "100%",
