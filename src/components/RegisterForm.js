@@ -7,7 +7,7 @@ import "../App.css";
 import { RegisterHeader } from ".";
 import teams from "../teams.json";
 //import { tsImportEqualsDeclaration } from "@babel/types";
-//import coaches from "../coaches.json";
+import coaches from "../coaches.json";
 //import facilities from "../facilities.json";
 
 class RegisterForm extends Component {
@@ -20,6 +20,7 @@ class RegisterForm extends Component {
     phone: "",
     teamName: "",
     ageGroup: "",
+    selectedTeamIds: [],
     teamId: null,
     facilityId: null,
     facilityName: "",
@@ -202,6 +203,18 @@ class RegisterForm extends Component {
     this.setState({
       userType: e.target.value
     });
+  };
+
+  handleSelectTeam = teamId => e => {
+    if (this.state.selectedTeamIds.includes(teamId)) {
+      const filteredTeams = this.state.selectedTeamIds.filter(
+        id => id !== teamId
+      );
+      return this.setState({ selectedTeamIds: filteredTeams });
+    } else {
+      const newTeams = [...this.state.selectedTeamIds, teamId];
+      return this.setState({ selectedTeamIds: newTeams });
+    }
   };
 
   render() {
@@ -398,7 +411,7 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.parentSelectTeamsForm && (
+        {this.state.parentSelectTeamsForm || (
           <Form style={stylesForm} id="parentSelectTeams">
             <RegisterHeader text={"Select your Team(s)"} />
             <div
@@ -409,16 +422,58 @@ class RegisterForm extends Component {
               }}
             >
               <ul style={{ listStyle: "none" }}>
-                {teams.map(team => (
-                  <li key={team.id} style={radioStyle}>
-                    <input type="checkbox" name="team" />
-                    <span> </span>
-                    <span>
-                      <b> {team.name} </b>
-                    </span>
-                    <span> {team.ageGroup} year olds</span>
-                  </li>
-                ))}
+                {teams.map(team => {
+                  let index = coaches.findIndex(
+                    coach => coach.id === team.coachIds[0]
+                  );
+                  let currentCoachName = coaches[index].name;
+                  return (
+                    <li
+                      key={team.id}
+                      style={{
+                        color: "rgb(161, 233, 29)",
+                        display: "flex",
+                        flexDirection: "row"
+                      }}
+                    >
+                      <div>
+                        <input
+                          type="checkbox"
+                          name="team"
+                          onClick={this.handleSelectTeam(team.id)}
+                        />
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flex: "row",
+                          flexWrap: "wrap"
+                        }}
+                      >
+                        <div style={{ paddingLeft: "10px" }}>
+                          <span>
+                            <b> Team: </b>
+                            {team.name}
+                          </span>
+                        </div>
+                        <div style={{ paddingLeft: "10px" }}>
+                          <span>
+                            {" "}
+                            <b>Age Group: </b>
+                            {team.ageGroup}
+                          </span>
+                        </div>
+                        <div style={{ paddingLeft: "10px" }}>
+                          <span>
+                            {" "}
+                            <b>Coach:</b> {currentCoachName}
+                          </span>
+                        </div>
+                      </div>
+                      <br />
+                    </li>
+                  );
+                })}
               </ul>
             </div>
             <br />
