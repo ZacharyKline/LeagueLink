@@ -329,7 +329,7 @@ class RegisterForm extends Component {
             <RegisterHeader text={"Select your Team(s)"} />
             <ul>
               {teams.map(team => (
-                <li>
+                <li key={team.id}>
                   <input type="checkbox" />
                   <span>{team.name}</span>
                 </li>
