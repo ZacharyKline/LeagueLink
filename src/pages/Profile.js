@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { Navbar, LoginForm } from "../components"
+import { Navbar } from "../components"
 
 
-export default class Login extends Component {
+export default class Profile extends Component {
   render() {
     return (
       <React.Fragment>
         <Navbar />
-        <LoginForm />
+        <h1>This is the profile page</h1>
       </React.Fragment>
     )
   }
