@@ -1,21 +1,6 @@
-
-import React, { Component } from 'react'
-
-export default class RegisterForm extends Component {
-  render() {
-    return (
-      <div>
-        <p>hello registration</p>
-      </div>
-    )
-  }
-}
-
-
-/*
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { registerUser as register } from "../actions";
+import { registerUser as register } from "../../actions";
 import {
   Button,
   Input,
@@ -58,7 +43,7 @@ class RegisterForm extends Component {
 
     return (
       <React.Fragment>
-         <Header />
+        <h1> Registration page </h1>
         <Form style={stylesForm}>
         <h1>Register</h1>
           <label htmlFor="userName">Username</label>
@@ -129,4 +114,3 @@ export default connect(
   }),
   { register }
 )(RegisterForm);
-*/

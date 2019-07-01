@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const getInitState = () => {
-  return (  JSON.parse(localStorage.getItem("auth")) || initialState );
+  return ( /* JSON.parse(localStorage.getItem("auth")) || */ initialState );
 };
 
 export default (state = getInitState(), action) => {
