@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { Calendar } from 'antd'
 
-export default class Calendar extends Component {
+export default class CalendarView extends Component {
   render() {
     return (
       <div>
-        <p>hello registration</p>
+        <Calendar>
+          
+        </Calendar>
       </div>
     )
   }
