@@ -1,3 +1,18 @@
+
+import React, { Component } from 'react'
+
+export default class RegisterForm extends Component {
+  render() {
+    return (
+      <div>
+        <p>hello registration</p>
+      </div>
+    )
+  }
+}
+
+
+/*
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser as register } from "../actions";
@@ -856,3 +871,4 @@ export default connect(
   null,
   { register }
 )(RegisterForm);
+*/
