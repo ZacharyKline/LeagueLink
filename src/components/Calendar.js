@@ -5,9 +5,7 @@ export default class CalendarView extends Component {
   render() {
     return (
       <div>
-        <Calendar>
-          
-        </Calendar>
+        <Calendar />
       </div>
     )
   }
