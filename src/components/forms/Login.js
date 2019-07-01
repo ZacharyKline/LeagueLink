@@ -3,16 +3,23 @@ import { connect } from "react-redux";
 import { loginThenGoToUserProfile as login } from "../../actions";
 import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
+import ForgotPassword from "./ForgotPassword"
 import { Button, Form, Input, Layout } from "antd";
 
 class Login extends Component {
-  state = { username: "", password: "" };
+  state = { username: "", password: "", showModal: false };
 
   handleLogin = e => {
     e.preventDefault();
-    this.props.login(this.state);
+    const { username, password } = this.state
+    this.props.login({ username, password });
     console.log("test1")
   };
+
+  handleForgotPassword = e => {
+    e.preventDefault()
+    this.setState({showModal:true})
+  }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -59,14 +66,14 @@ class Login extends Component {
                 Login
             </Button>
             <br />
-            <Link className="ant-btn btn ant-btn-submit"> Forgot Password </Link>
+            <Button onClick={this.handleForgotPassword}>Forgot Password </Button>
             </Form.Item>
             <Link to={'/registration'} className={"registerLink"}>Register</Link>
             {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
-
           </Form>
         </Layout>
+        <ForgotPassword visible={this.state.showModal} Loading={isLoading}/>
 
       </React.Fragment>
     );
