@@ -13,9 +13,9 @@ export { default as UserProfile } from "./UserProfile";
 //export { default as Settings } from "./Settings";
 //export { default as Logout } from "./Logout";
 
-export { default as Err } from "./Err";
+export { default as InvalidUrlPage } from "./InvalidUrlPage";
 export { default as Landing } from "./Landing";
 export { default as Profile } from "./Profile";
 export { default as Login } from "./Login";
-export { default as Registration } from "./Registration";
+export { default as RegistrationPage } from "./RegistrationPage";
 export { default as Register } from "./Register";

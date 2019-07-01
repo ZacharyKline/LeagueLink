@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../App.css";
 import { Switch, Route } from "react-router-dom"
-import { Err, CalendarPage, Landing, Profile, Registration } from ".";
+import { InvalidUrlPage, CalendarPage, Landing, Profile, RegistrationPage } from ".";
 
 class App extends Component {
   render() {
@@ -11,8 +11,8 @@ class App extends Component {
             <Route exact path="/" render={() => <Landing />} />
             <Route path="/home" render={() => <CalendarPage />} />
             <Route path="/profile" render={() => <Profile />} />
-            <Route path="/registration" render={() => <Registration />} />
-            <Route render={() => <Err />} />
+            <Route path="/registration" render={() => <RegistrationPage />} />
+            <Route render={() => <InvalidUrlPage />} />
           </Switch>
       </React.Fragment>
     );

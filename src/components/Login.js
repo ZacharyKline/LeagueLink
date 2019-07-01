@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { loginThenGoToUserProfile as login } from "../actions";
 import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
-import ForgotPassword from "./ForgotPassword"
+import ForgotPassword from "./ForgotPasswordModal"
 import { Button, Form, Input, Layout } from "antd";
 
 class Login extends Component {
