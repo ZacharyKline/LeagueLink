@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { Navbar, Register } from "../components"
+import { Navbar, Login } from "."
 
 
-export default class Registration extends Component {
+export default class Landing extends Component {
   render() {
     return (
       <React.Fragment>
         <Navbar />
-        <Register />
+        <Login />
       </React.Fragment>
     )
   }

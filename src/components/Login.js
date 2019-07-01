@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginThenGoToUserProfile as login } from "../../actions";
+import { loginThenGoToUserProfile as login } from "../actions";
 import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
 import ForgotPassword from "./ForgotPassword"

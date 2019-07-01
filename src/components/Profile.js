@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar } from "../components"
+import { Navbar } from "."
 
 
 export default class Profile extends Component {
