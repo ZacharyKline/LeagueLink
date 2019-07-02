@@ -32,15 +32,6 @@ class Login extends Component {
     const { isLoading, err } = this.props;
     return (
       <React.Fragment>
-        <h1
-        style={{
-          background: "rgba(0, 53, 89, 1)",
-          color: "rgb(161, 233, 29)",
-          border: "3px rgb(130, 184, 31) solid",
-          borderRadius: "25px",
-          textAlign: "center",
-          width: "100%"
-        }}>this is the header</h1>
         <Layout>
           <Form className="myStyle" style={{
       color: "rgba(0, 53, 89, 1)",
@@ -53,12 +44,23 @@ class Login extends Component {
       flexDirection: "column",
       margin: "40px auto"
     }}>
-            <h1>Login</h1>
-            <label htmlFor="email">Email</label>
+            <h1
+            style={{
+              background: "rgba(0, 53, 89, 1)",
+              color: "rgb(161, 233, 29)",
+              border: "3px rgb(130, 184, 31) solid",
+              borderRadius: "25px",
+              textAlign: "center",
+              width: "100%"
+            }}
+            >Login</h1>
+            <br/>
             <Form.Item>
 
               <Input
                 className="stylee"
+                addonBefore="Email"
+
                 type="email"
                 name="email"
                 autoFocus
@@ -66,18 +68,22 @@ class Login extends Component {
                 onChange={handleChange}
               />
             </Form.Item >
-            <label htmlFor="password">Password</label>
             <Form.Item>
 
               <Input
                 className="stylee"
+                addonBefore="Password"
+
                 type="password"
                 name="password"
                 required
                 onChange={handleChange}
               />
+
+
             </Form.Item>
-            <Form.Item>
+            <Form.Item style={{marginLeft:"230px"}} >
+            
               <Button
               style={{
                 background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
@@ -90,17 +96,16 @@ class Login extends Component {
                 type="submit"
                 disabled={isLoading}
                 onClick={this.handleLogin}>
-                Login
+                Submit
             </Button>
             <br />
             <Button 
             onClick={this.handleForgotPassword}
             style={{
-              background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+              backgroundColor: "rgb(74, 162, 197)",
               color: "rgb(161, 233, 29)",
-              border: "2px rgb(130, 184, 31) solid",
+              border: "0px rgb(74, 162, 197) solid",
               borderRadius: "25px",
-              fontSize: "large",
               minWidth: "120px"
             }}
             >
@@ -115,6 +120,7 @@ class Login extends Component {
               borderRadius: "25px",
               fontSize: "large",
               textAlign: "center",
+              marginLeft:"235px",
               width: "120px"
             }}
             >
