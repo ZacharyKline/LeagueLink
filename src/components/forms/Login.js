@@ -32,16 +32,35 @@ class Login extends Component {
     const { isLoading, err } = this.props;
     return (
       <React.Fragment>
+        <h1
+        style={{
+          background: "rgba(0, 53, 89, 1)",
+          color: "rgb(161, 233, 29)",
+          border: "3px rgb(130, 184, 31) solid",
+          borderRadius: "25px",
+          textAlign: "center",
+          width: "100%"
+        }}>this is the header</h1>
         <Layout>
-          <Form className="myStyle">
+          <Form className="myStyle" style={{
+      color: "rgba(0, 53, 89, 1)",
+      backgroundColor: "rgb(74, 162, 197)",
+      padding: "20px",
+      border: "5px rgba(0, 53, 89, 1) solid",
+      borderRadius: "5px",
+      width: "400px",
+      display: "flex",
+      flexDirection: "column",
+      margin: "40px auto"
+    }}>
             <h1>Login</h1>
-            <label htmlFor="userName">Username</label>
+            <label htmlFor="email">Email</label>
             <Form.Item>
 
               <Input
                 className="stylee"
-                type="text"
-                name="username"
+                type="email"
+                name="email"
                 autoFocus
                 required
                 onChange={handleChange}
@@ -60,20 +79,54 @@ class Login extends Component {
             </Form.Item>
             <Form.Item>
               <Button
+              style={{
+                background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                color: "rgb(161, 233, 29)",
+                border: "2px rgb(130, 184, 31) solid",
+                borderRadius: "25px",
+                fontSize: "large",
+                minWidth: "120px"
+              }}
                 type="submit"
                 disabled={isLoading}
                 onClick={this.handleLogin}>
                 Login
             </Button>
             <br />
-            <Button onClick={this.handleForgotPassword}>Forgot Password </Button>
+            <Button 
+            onClick={this.handleForgotPassword}
+            style={{
+              background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+              color: "rgb(161, 233, 29)",
+              border: "2px rgb(130, 184, 31) solid",
+              borderRadius: "25px",
+              fontSize: "large",
+              minWidth: "120px"
+            }}
+            >
+              Forgot Password 
+            </Button>
             </Form.Item>
-            <Link to={'/registration'} className={"registerLink"}>Register</Link>
+            <Link to={'/registration'} className={"registerLink"}
+            style={{
+              background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+              color: "rgb(161, 233, 29)",
+              border: "2px rgb(130, 184, 31) solid",
+              borderRadius: "25px",
+              fontSize: "large",
+              textAlign: "center",
+              width: "120px"
+            }}
+            >
+              Register</Link>
             {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
           </Form>
         </Layout>
-        <ForgotPassword visible={this.state.showModal} Loading={isLoading}/>
+        <ForgotPassword 
+        visible={this.state.showModal} 
+        Loading={isLoading}
+        />
 
       </React.Fragment>
     );

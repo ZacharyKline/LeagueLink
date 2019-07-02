@@ -43,6 +43,15 @@ class RegisterForm extends Component {
 
     return (
       <React.Fragment>
+        <h1
+        style={{
+          background: "rgba(0, 53, 89, 1)",
+          color: "rgb(161, 233, 29)",
+          border: "3px rgb(130, 184, 31) solid",
+          borderRadius: "25px",
+          textAlign: "center",
+          width: "100%"
+        }}>this is the header</h1>
         <h1> Registration page </h1>
         <Form style={stylesForm}>
         <h1>Register</h1>
