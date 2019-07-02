@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Calendar } from 'antd'
 // import CalendarComponent from './Calendar'
+import { Navbar } from "."
 const { Header, Sider, Content } = Layout
+
 
 class CalendarPage extends Component {
     render() {
         return (
             <React.Fragment>
+                        <Navbar />
                 <div>
                     <Layout>
                         <Header style={{ backgroundColor: 'white' }}>

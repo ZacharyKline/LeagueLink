@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class UserProfile extends Component {
+export default class Calendar extends Component {
   render() {
     return (
       <div>
