@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { loginThenGoToUserProfile as login } from "../actions";
 import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
-import ForgotPassword from "./ForgotPasswordModal"
+import ForgotPasswordModal from "./ForgotPasswordModal"
 import { Button, Form, Input, Layout } from "antd";
 
 class Login extends Component {
@@ -33,47 +33,106 @@ class Login extends Component {
     return (
       <React.Fragment>
         <Layout>
-          <Form className="myStyle">
-            <h1>Login</h1>
-            <label htmlFor="userName">Username</label>
+          <Form className="myStyle" style={{
+      color: "rgba(0, 53, 89, 1)",
+      backgroundColor: "rgb(74, 162, 197)",
+      padding: "20px",
+      border: "5px rgba(0, 53, 89, 1) solid",
+      borderRadius: "5px",
+      width: "400px",
+      display: "flex",
+      flexDirection: "column",
+      margin: "40px auto"
+    }}>
+            <h1
+            style={{
+              background: "rgba(0, 53, 89, 1)",
+              color: "rgb(161, 233, 29)",
+              border: "3px rgb(130, 184, 31) solid",
+              borderRadius: "25px",
+              textAlign: "center",
+              width: "100%"
+            }}
+            >Login</h1>
+            <br/>
             <Form.Item>
 
               <Input
                 className="stylee"
-                type="text"
-                name="username"
+                addonBefore="Email"
+
+                type="email"
+                name="email"
                 autoFocus
                 required
                 onChange={handleChange}
               />
             </Form.Item >
-            <label htmlFor="password">Password</label>
             <Form.Item>
 
               <Input
                 className="stylee"
+                addonBefore="Password"
+
                 type="password"
                 name="password"
                 required
                 onChange={handleChange}
               />
+
+
             </Form.Item>
-            <Form.Item>
+            <Form.Item style={{marginLeft:"230px"}} >
+            
               <Button
+              style={{
+                background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                color: "rgb(161, 233, 29)",
+                border: "2px rgb(130, 184, 31) solid",
+                borderRadius: "25px",
+                fontSize: "large",
+                minWidth: "120px"
+              }}
                 type="submit"
                 disabled={isLoading}
                 onClick={this.handleLogin}>
-                Login
+                Submit
             </Button>
             <br />
-            <Button onClick={this.handleForgotPassword}>Forgot Password </Button>
+            <Button 
+            onClick={this.handleForgotPassword}
+            style={{
+              backgroundColor: "rgb(74, 162, 197)",
+              color: "rgb(161, 233, 29)",
+              border: "0px rgb(74, 162, 197) solid",
+              borderRadius: "25px",
+              minWidth: "120px"
+            }}
+            >
+              Forgot Password 
+            </Button>
             </Form.Item>
-            <Link to={'/registration'} className={"registerLink"}>Register</Link>
+            <Link to={'/registration'} className={"registerLink"}
+            style={{
+              background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+              color: "rgb(161, 233, 29)",
+              border: "2px rgb(130, 184, 31) solid",
+              borderRadius: "25px",
+              fontSize: "large",
+              textAlign: "center",
+              marginLeft:"235px",
+              width: "120px"
+            }}
+            >
+              Register</Link>
             {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
           </Form>
         </Layout>
-        <ForgotPassword visible={this.state.showModal} Loading={isLoading}/>
+        <ForgotPasswordModal
+        visible={this.state.showModal} 
+        Loading={isLoading}
+        />
 
       </React.Fragment>
     );
@@ -86,3 +145,28 @@ export default connect(
     err: auth.loginError
   }),
   { login })(Login);
+
+
+  /*
+
+  const stylesForm = {
+      color: "rgba(0, 53, 89, 1)",
+      backgroundColor: "rgb(74, 162, 197)",
+      padding: "20px",
+      border: "5px rgba(0, 53, 89, 1) solid",
+      borderRadius: "5px",
+      width: "400px",
+      display: "flex",
+      flexDirection: "column",
+      margin: "40px auto"
+    };
+    const buttonStyle = {
+      background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+      color: "rgb(161, 233, 29)",
+      border: "2px rgb(130, 184, 31) solid",
+      borderRadius: "25px",
+      fontSize: "large",
+      minWidth: "120px"
+    };
+
+  */
