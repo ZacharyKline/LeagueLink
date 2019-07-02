@@ -41,6 +41,8 @@ class RegisterForm extends Component {
     coachRegisterTeamForm: false,
     managerRegisterFacilityForm: false,
     confirmationPageForm: false,
+    missingTeamInformation: false,
+    missingFacilityForm: false,
     userType: "parent"
   };
   /*handleRegister = e => {
@@ -96,7 +98,8 @@ class RegisterForm extends Component {
       case "coach":
         return this.setState({
           userTypeForm: false,
-          coachSelectFacilityForm: true
+          coachSelectFacilityForm: true,
+          missingFacilityForm: false
         });
       case "manager":
         return this.setState({
@@ -106,7 +109,8 @@ class RegisterForm extends Component {
       case "toCoachRegisterTeamForm":
         return this.setState({
           coachSelectFacilityForm: false,
-          coachRegisterTeamForm: true
+          coachRegisterTeamForm: true,
+          missingFacilityForm: false
         });
       case "toConfirmationPageForm":
         if (this.state.userType === "manager") {
@@ -137,7 +141,8 @@ class RegisterForm extends Component {
               parentSelectTeamsForm: false,
               coachRegisterTeamForm: false,
               managerRegisterFacilityForm: false,
-              confirmationPageForm: true
+              confirmationPageForm: true,
+              missingFacilityForm: false
             });
           } else {
             return this.setState({
@@ -149,7 +154,18 @@ class RegisterForm extends Component {
           parentSelectTeamsForm: false,
           coachRegisterTeamForm: false,
           managerRegisterFacilityForm: false,
+          missingTeamInformation: false,
           confirmationPageForm: true
+        });
+      case "toMissingTeamInformationPage":
+        return this.setState({
+          parentSelectTeamsForm: false,
+          missingTeamInformation: true
+        });
+      case "toMissingFacilityPage":
+        return this.setState({
+          coachSelectFacilityForm: false,
+          missingFacilityForm: true
         });
       default:
         return this.state;
@@ -174,12 +190,14 @@ class RegisterForm extends Component {
       case "toCoachSelectFacilityForm":
         return this.setState({
           coachRegisterTeamForm: false,
-          coachSelectFacilityForm: true
+          coachSelectFacilityForm: true,
+          missingFacilityForm: false
         });
       case "parent":
         return this.setState({
           confirmationPageForm: false,
-          parentSelectTeamsForm: true
+          parentSelectTeamsForm: true,
+          missingTeamInformation: false
         });
       case "coach":
         return this.setState({
@@ -190,6 +208,16 @@ class RegisterForm extends Component {
         return this.setState({
           confirmationPageForm: false,
           managerRegisterFacilityForm: true
+        });
+      case "toMissingTeamInformationPage":
+        return this.setState({
+          parentSelectTeamsForm: false,
+          missingTeamInformation: true
+        });
+      case "toMissingFacilityPage":
+        return this.setState({
+          coachSelectFacilityForm: false,
+          missingFacilityForm: true
         });
       default:
         return this.state;
@@ -483,6 +511,22 @@ class RegisterForm extends Component {
               </ul>
             </div>
             <br />
+            <button
+              type="submit"
+              onClick={this.handleNext("toMissingTeamInformationPage")}
+              style={{
+                background:
+                  "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                color: "rgb(161, 233, 29)",
+                border: "2px rgb(130, 184, 31) solid",
+                borderRadius: "25px",
+                fontSize: "large",
+                minWidth: "120px"
+              }}
+            >
+              I do not see my team listed here.
+            </button>
+            <br />
             <div
               style={{
                 maxWidth: "100%",
@@ -603,6 +647,22 @@ class RegisterForm extends Component {
               </Radio.Group>
             </div>
             <br />
+            <button
+              type="submit"
+              onClick={this.handleNext("toMissingFacilityPage")}
+              style={{
+                background:
+                  "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                color: "rgb(161, 233, 29)",
+                border: "2px rgb(130, 184, 31) solid",
+                borderRadius: "25px",
+                fontSize: "large",
+                minWidth: "120px"
+              }}
+            >
+              I do not see the facility listed here.
+            </button>
+            <br />
             <div
               style={{
                 maxWidth: "100%",
@@ -630,6 +690,142 @@ class RegisterForm extends Component {
               <button
                 type="submit"
                 onClick={this.handleBack("toUserTypeForm")}
+                style={{
+                  background:
+                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                  color: "rgb(161, 233, 29)",
+                  border: "2px rgb(130, 184, 31) solid",
+                  borderRadius: "25px",
+                  fontSize: "large",
+                  minWidth: "120px"
+                }}
+              >
+                <Icon type="left" />
+                Back
+              </button>
+            </div>
+          </Form>
+        )}
+
+        {this.state.missingFacilityForm && (
+          <Form style={stylesForm} id="missingFacilityForm">
+            <div
+              style={{
+                background: "rgba(0, 53, 89, 1)",
+                borderRadius: "5px",
+                paddingTop: "10px",
+                color: "rgb(161, 233, 29)"
+              }}
+            >
+              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
+                Please check with your league manager to make sure your facility
+                has been registered under the correct name.{" "}
+              </h3>
+              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
+                You may finish registration at this time without linking your
+                account to a facility.
+              </h3>{" "}
+              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
+                You may link a facility to your account from the edit account
+                page in the future.
+              </h3>
+            </div>
+            <br />
+            <div
+              style={{
+                maxWidth: "100%",
+                display: "flex",
+                flexDirection: "row-reverse",
+                justifyContent: "space-between"
+              }}
+            >
+              <button
+                type="submit"
+                onClick={this.handleNext("toCoachRegisterTeamForm")}
+                style={{
+                  background:
+                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                  color: "rgb(161, 233, 29)",
+                  border: "2px rgb(130, 184, 31) solid",
+                  borderRadius: "25px",
+                  fontSize: "large",
+                  minWidth: "120px"
+                }}
+              >
+                Next
+                <Icon type="right" />
+              </button>
+              <button
+                type="submit"
+                onClick={this.handleBack("toCoachSelectFacilityForm")}
+                style={{
+                  background:
+                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                  color: "rgb(161, 233, 29)",
+                  border: "2px rgb(130, 184, 31) solid",
+                  borderRadius: "25px",
+                  fontSize: "large",
+                  minWidth: "120px"
+                }}
+              >
+                <Icon type="left" />
+                Back
+              </button>
+            </div>
+          </Form>
+        )}
+
+        {this.state.missingTeamInformation && (
+          <Form style={stylesForm} id="missingTeamInformation">
+            <div
+              style={{
+                background: "rgba(0, 53, 89, 1)",
+                borderRadius: "5px",
+                paddingTop: "10px",
+                color: "rgb(161, 233, 29)"
+              }}
+            >
+              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
+                Please check with your coach to confirm the team name that your
+                team has been registered.{" "}
+              </h3>
+              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
+                You may finish registration at this time without linking your
+                account to a team.
+              </h3>{" "}
+              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
+                Be sure to link your account to a team from the edit account
+                page in the future.
+              </h3>
+            </div>
+            <br />
+            <div
+              style={{
+                maxWidth: "100%",
+                display: "flex",
+                flexDirection: "row-reverse",
+                justifyContent: "space-between"
+              }}
+            >
+              <button
+                type="submit"
+                onClick={this.handleNext("toConfirmationPageForm")}
+                style={{
+                  background:
+                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                  color: "rgb(161, 233, 29)",
+                  border: "2px rgb(130, 184, 31) solid",
+                  borderRadius: "25px",
+                  fontSize: "large",
+                  minWidth: "120px"
+                }}
+              >
+                Next
+                <Icon type="right" />
+              </button>
+              <button
+                type="submit"
+                onClick={this.handleBack("parent")}
                 style={{
                   background:
                     "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
