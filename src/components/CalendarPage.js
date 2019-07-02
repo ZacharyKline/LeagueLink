@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Layout, Menu, Calendar } from 'antd'
 import { Navbar } from '.'
 // import CalendarComponent from './Calendar'
-import { Navbar } from "."
 const { Header, Sider, Content } = Layout
 
 
