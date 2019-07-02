@@ -46,28 +46,22 @@ class RegisterForm extends Component {
     missingFacilityForm: false,
     userType: "parent"
   };
-  /*handleRegister = e => {
-    e.preventDefault();
-
-    if (this.state.password !== this.state.confirmPassword) {
-      this.setState({ passwordMatch: false });
-    } else {
-      this.props.register({
-        username: this.state.username,
-        password: this.state.password,
-        displayName: this.state.displayname
-      });
-    }
-  };
-*/
 
   handleSubmit = userType => e => {
-    if (userType === "parent") {
-      console.log("Create Parent, Add Parent ID to Coach");
-    } else if (userType === "coach") {
-      console.log("Create Coach, Create Team, Add Coach ID to Facility");
-    } else if (userType === "manager") {
-      console.log("Create Manager, Create Facility");
+    e.preventDefault();
+    switch (userType) {
+      case "parent":
+        console.log("Create Parent, Add Parent ID to Coach");
+        break;
+      case "coach":
+        console.log("Create Coach, Create Team, Add Coach ID to Facility");
+        break;
+      case "manager":
+        console.log("Create Manager, Create Facility");
+        break;
+      default:
+        console.log("err");
+        break;
     }
   };
 
@@ -166,7 +160,8 @@ class RegisterForm extends Component {
       case "toMissingFacilityPage":
         return this.setState({
           coachSelectFacilityForm: false,
-          missingFacilityForm: true
+          missingFacilityForm: true,
+          selectedFacilityId: null
         });
       default:
         return this.state;
@@ -247,6 +242,10 @@ class RegisterForm extends Component {
       const newTeams = [...this.state.selectedTeamIds, teamId];
       return this.setState({ selectedTeamIds: newTeams });
     }
+  };
+
+  handleStaySelected = teamId => {
+    return this.state.selectedTeamIds.includes(teamId);
   };
 
   handleSelectFacility = e => {
@@ -476,7 +475,8 @@ class RegisterForm extends Component {
                         <input
                           type="checkbox"
                           name="team"
-                          onClick={this.handleSelectTeam(team.id)}
+                          checked={this.handleStaySelected(team.id)}
+                          onChange={this.handleSelectTeam(team.id)}
                         />
                       </div>
                       <div
@@ -1038,7 +1038,7 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.confirmationPageForm || (
+        {this.state.confirmationPageForm && (
           <Form style={stylesForm} id="confirmationPage">
             <RegisterHeader text={"Confirm your Details"} />
             <div
@@ -1090,6 +1090,7 @@ class RegisterForm extends Component {
                 >
                   <span>{this.state.phone}</span>
                 </div>
+                <br />
                 {this.state.userType === "parent" &&
                   this.state.selectedTeamIds.length === 0 && (
                     <div
@@ -1104,37 +1105,226 @@ class RegisterForm extends Component {
                   )}
                 {this.state.userType === "parent" &&
                   this.state.selectedTeamIds.length > 0 && (
-                    <ul style={{ listStyle: "none" }}>
-                      {this.state.selectedTeamIds.map(selectedId => {
-                        let currentTeam = teams.filter(
+                    <React.Fragment>
+                      {this.state.selectedTeamIds.map((selectedId, i) => {
+                        let currentTeam = teams.find(
                           team => team.id === selectedId
                         );
-                        console.log(currentTeam);
+
+                        let currentCoach = coaches.find(
+                          coach => coach.id === currentTeam.coachIds[0]
+                        );
 
                         return (
-                          <li key={currentTeam.id}>
-                            <span>{currentTeam.name}</span>
-                            <span>{currentTeam.ageGroup}</span>
-                          </li>
+                          <div
+                            key={currentTeam.id}
+                            style={{
+                              marginTop: "0px",
+                              marginBottom: "0px"
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "0px",
+                                maxHeight: "21px"
+                              }}
+                            >
+                              <span>
+                                <b>Team: </b>
+                                {currentTeam.name}
+                              </span>
+
+                              <span> </span>
+                              <span>
+                                <b>Age Group: </b>
+                                {currentTeam.ageGroup}
+                              </span>
+                            </p>
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "0px",
+                                maxHeight: "21px"
+                              }}
+                            >
+                              <span>
+                                <b>Coach: </b>
+                                {currentCoach.name}
+                              </span>
+                            </p>
+                            <br />
+                          </div>
                         );
                       })}
-                    </ul>
+                    </React.Fragment>
+                  )}
+                {this.state.userType === "coach" &&
+                  this.state.teamName !== "" &&
+                  this.state.ageGroup !== "" && (
+                    <React.Fragment>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        <span>
+                          <b>Coaching:</b>{" "}
+                        </span>
+                        <span>{this.state.teamName}</span>
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        <span>
+                          {" "}
+                          <b>Ages:</b>{" "}
+                        </span>
+                        <span>{this.state.ageGroup}</span>
+                      </div>
+                      <br />
+                    </React.Fragment>
                   )}
 
-                {false && this.state.userType === "coach" && (
-                  <div
-                    style={{
-                      marginTop: "0px",
-                      marginBottom: "0px",
-                      maxHeight: "21px"
-                    }}
-                  >
-                    <span>{this.state.facilityIds}</span>
-                  </div>
-                )}
+                {this.state.userType === "coach" &&
+                  this.state.selectedFacilityId === null && (
+                    <div
+                      style={{
+                        marginTop: "0px",
+                        marginBottom: "0px",
+                        maxHeight: "21px"
+                      }}
+                    >
+                      <span>Account not linked to Facility</span>
+                    </div>
+                  )}
+                {this.state.userType === "coach" &&
+                  this.state.selectedFacilityId !== null && (
+                    <React.Fragment>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        <b>
+                          {
+                            facilities.find(
+                              facility =>
+                                facility.id === this.state.selectedFacilityId
+                            ).name
+                          }
+                        </b>
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        {
+                          facilities.find(
+                            facility =>
+                              facility.id === this.state.selectedFacilityId
+                          ).address
+                        }
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        <span>
+                          {
+                            facilities.find(
+                              facility =>
+                                facility.id === this.state.selectedFacilityId
+                            ).city
+                          }
+                          ,
+                        </span>
+                        <span> </span>
+                        <span>
+                          {
+                            facilities.find(
+                              facility =>
+                                facility.id === this.state.selectedFacilityId
+                            ).city
+                          }
+                        </span>
+                        <span> </span>
+                        <span>
+                          {
+                            facilities.find(
+                              facility =>
+                                facility.id === this.state.selectedFacilityId
+                            ).zipCode
+                          }
+                        </span>
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        {
+                          facilities.find(
+                            facility =>
+                              facility.id === this.state.selectedFacilityId
+                          ).email
+                        }
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        {
+                          facilities.find(
+                            facility =>
+                              facility.id === this.state.selectedFacilityId
+                          ).phone
+                        }
+                      </div>
+                      <div
+                        style={{
+                          marginTop: "0px",
+                          marginBottom: "0px",
+                          maxHeight: "21px"
+                        }}
+                      >
+                        <span>
+                          <b>League Manager:</b>
+                        </span>
+                        <span> </span>
+                        <span>
+                          {
+                            managers.find(
+                              manager =>
+                                manager.facilityId ===
+                                this.state.selectedFacilityId
+                            ).name
+                          }
+                        </span>
+                      </div>
+                    </React.Fragment>
+                  )}
                 {this.state.userType === "manager" && (
                   <React.Fragment>
-                    <br />
                     <div
                       style={{
                         marginTop: "0px",
@@ -1243,7 +1433,7 @@ class RegisterForm extends Component {
               }}
             >
               <button
-                type="submit"
+                //type="submit"
                 onClick={this.handleSubmit(this.state.userType)}
                 style={{
                   background:
@@ -1259,7 +1449,7 @@ class RegisterForm extends Component {
                 <Icon type="right" />
               </button>
               <button
-                type="submit"
+                //type="submit"
                 onClick={this.handleBack(this.state.userType)}
                 style={{
                   background:
