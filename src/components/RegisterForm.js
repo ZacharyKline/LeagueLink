@@ -22,6 +22,7 @@ class RegisterForm extends Component {
     teamName: "",
     ageGroup: "",
     selectedTeamIds: [],
+    selectedCoachIds: [],
     selectedFacilityId: null,
     teamId: null,
     facilityId: null,
@@ -240,6 +241,7 @@ class RegisterForm extends Component {
       const filteredTeams = this.state.selectedTeamIds.filter(
         id => id !== teamId
       );
+
       return this.setState({ selectedTeamIds: filteredTeams });
     } else {
       const newTeams = [...this.state.selectedTeamIds, teamId];
@@ -1036,7 +1038,7 @@ class RegisterForm extends Component {
           </Form>
         )}
 
-        {this.state.confirmationPageForm && (
+        {this.state.confirmationPageForm || (
           <Form style={stylesForm} id="confirmationPage">
             <RegisterHeader text={"Confirm your Details"} />
             <div
@@ -1064,9 +1066,8 @@ class RegisterForm extends Component {
                   }}
                 >
                   <span>
-                    <b>{this.state.firstName}</b>
+                    <b>{this.state.firstName} </b>
                   </span>
-                  <span> </span>
                   <span>
                     <b>{this.state.lastName}</b>
                   </span>
@@ -1089,9 +1090,8 @@ class RegisterForm extends Component {
                 >
                   <span>{this.state.phone}</span>
                 </div>
-                {false &&
-                  (this.state.userType === "parent" ||
-                    this.state.userType === "coach") && (
+                {this.state.userType === "parent" &&
+                  this.state.selectedTeamIds.length === 0 && (
                     <div
                       style={{
                         marginTop: "0px",
@@ -1099,9 +1099,28 @@ class RegisterForm extends Component {
                         maxHeight: "21px"
                       }}
                     >
-                      <span>{this.state.teamIds}</span>
+                      <span>Account not linked to Team</span>
                     </div>
                   )}
+                {this.state.userType === "parent" &&
+                  this.state.selectedTeamIds.length > 0 && (
+                    <ul style={{ listStyle: "none" }}>
+                      {this.state.selectedTeamIds.map(selectedId => {
+                        let currentTeam = teams.filter(
+                          team => team.id === selectedId
+                        );
+                        console.log(currentTeam);
+
+                        return (
+                          <li key={currentTeam.id}>
+                            <span>{currentTeam.name}</span>
+                            <span>{currentTeam.ageGroup}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
+
                 {false && this.state.userType === "coach" && (
                   <div
                     style={{
