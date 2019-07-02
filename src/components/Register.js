@@ -788,8 +788,8 @@ class RegisterForm extends Component {
               }}
             >
               <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
-                Please check with your coach to confirm the team name that your
-                team has been registered.{" "}
+                Please check with your coach to confirm your team name and that
+                your team has been registered.{" "}
               </h3>
               <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
                 You may finish registration at this time without linking your
