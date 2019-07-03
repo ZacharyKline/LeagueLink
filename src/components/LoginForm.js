@@ -27,6 +27,11 @@ class LoginForm extends Component {
     this.setState({showModal:true})
   }
 
+  handleModalClose = e => {
+    e.preventDefault()
+    this.setState({showModal:false})
+  }
+
 
   
   render() {
@@ -143,6 +148,7 @@ class LoginForm extends Component {
       <ForgotPasswordModal
       visible={this.state.showModal} 
       Loading={isLoading}
+      close={this.handleModalClose}
       />
 
     </React.Fragment>
