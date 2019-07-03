@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Toby Great",
+    "teamId": 1
+  },
+  {
+    "id": 2,
+    "name": "Kermit Croaker",
+    "teamId": 2
+  },
+  {
+    "id": 3,
+    "name": "Mr. Splinter",
+    "teamId": 3
+  }
+]

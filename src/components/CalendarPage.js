@@ -8,6 +8,7 @@ const noConflict = 0
 const unresolvableConflict = 1
 const conflict = 2
 
+
 class CalendarPage extends Component {
 	//view should be renamed, but I don't know what to name it. true = calendar, false = list
 	state = { selectedDate: null, view: true, dateListObj: null }
