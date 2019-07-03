@@ -1,4 +1,4 @@
-import { Navbar, Register } from "."
+import { Navbar, RegistrationForm } from "."
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser as register } from "../actions";
@@ -14,7 +14,7 @@ export default class RegistrationPage extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <Register />
+        <RegistrationForm />
       </React.Fragment>
     )
   }
