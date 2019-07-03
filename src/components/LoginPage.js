@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Login } from "."
+import { Navbar, LoginForm } from "."
 
 
 export default class Landing extends Component {
@@ -7,7 +7,7 @@ export default class Landing extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <Login />
+        <LoginForm />
       </React.Fragment>
     )
   }

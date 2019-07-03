@@ -13,7 +13,7 @@ export default class RegistrationPage extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <Register />
+        <RegistrationForm />
       </React.Fragment>
     );
   }
