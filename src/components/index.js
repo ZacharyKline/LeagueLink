@@ -18,3 +18,4 @@ export { default as RegistrationPage } from "./RegistrationPage";
 export { default as RegistrationForm } from "./RegistrationForm";
 
 export { default as TimeBlock } from "./TimeBlock";
+export { default as Day } from "./Day";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Layout, Menu, Calendar, Button, List } from "antd";
-import { Navbar, TimeBlock } from ".";
+import { Navbar, Day } from ".";
 import { connect } from "tls";
 // import CalendarComponent from './Calendar'
 const { Header, Sider, Content } = Layout;
@@ -59,7 +59,9 @@ class CalendarPage extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <TimeBlock />
+        {this.state.selectedDate !== null && (
+          <Day date={this.state.selectedDate.toDateString()} />
+        )}
         <div>
           <Layout>
             <Header style={{ backgroundColor: "white" }}>

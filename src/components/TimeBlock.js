@@ -22,12 +22,32 @@ class TimeBlock extends Component {
   render() {
     let statusStyle =
       this.state.status === "okay"
-        ? { height: "30px", width: "30px", background: "blue" }
+        ? {
+            height: "50px",
+            width: "200px",
+            background: "blue",
+            border: "1px solid black"
+          }
         : this.state.status === "conflict"
-        ? { height: "30px", width: "30px", background: "orange" }
-        : { height: "30px", width: "30px", background: "red" };
+        ? {
+            height: "50px",
+            width: "200px",
+            background: "orange",
+            border: "1px solid black"
+          }
+        : {
+            height: "50px",
+            width: "200px",
+            background: "red",
+            border: "1px solid black"
+          };
 
-    return <div onClick={this.handleToggle} style={statusStyle} />;
+    return (
+      <div onClick={this.handleToggle} style={statusStyle}>
+        {this.props.date}
+        {this.props.hrBlock}
+      </div>
+    );
   }
 }
 
