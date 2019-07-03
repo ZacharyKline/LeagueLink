@@ -2,8 +2,6 @@ export { default as App } from "./App";
 export { default as Navbar } from "./NavBar";
 export { default as CalendarPage } from "./CalendarPage";
 
-
-
 export { default as RegisterHeader } from "./RegisterHeader";
 export { default as LoginForm } from "./LoginForm";
 export { default as UserProfile } from "./UserProfilePage";
@@ -18,3 +16,5 @@ export { default as LoginPage } from "./LoginPage";
 export { default as ProfilePage } from "./ProfilePage";
 export { default as RegistrationPage } from "./RegistrationPage";
 export { default as RegistrationForm } from "./RegistrationForm";
+
+export { default as TimeBlock } from "./TimeBlock";
