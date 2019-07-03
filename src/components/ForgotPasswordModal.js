@@ -12,15 +12,25 @@ export default class ForgotPasswordModal extends Component {
     this.props.ForgotPassword(this.state);
   }
 
+  handleOk = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.props.close()
+    }, 3000);
+  };
+
+
+
   render() {
     return (      
       <div>
         <Modal
           title="Title"
           visible={this.props.visible}
-          onCancel={this.handleCancel}
+          onOk={this.handleOk}
+          onCancel={this.props.close}
           footer={[
-            <Button key="cancel" onClick={this.handleCancel}>
+            <Button key="cancel" onClick={this.props.close}>
               cancel
             </Button>,
             <Button key="submit" type="primary" loading={this.props.loading} onClick={this.submitForm}>
