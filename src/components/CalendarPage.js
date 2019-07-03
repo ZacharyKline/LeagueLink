@@ -46,8 +46,10 @@ class CalendarPage extends Component {
 	renderList = () => {
 		let dateListObj = this.state.dateListObj
 		let arrOfDates = []
-		for (let [key, value] of Object.entries(dateListObj)) {
-			arrOfDates.push({ date: [key, value] })
+		if(dateListObj){
+			for (let [key, value] of Object.entries(dateListObj)) {
+				arrOfDates.push({ date: [key, value] })
+			}
 		}
 		return arrOfDates
 	}
