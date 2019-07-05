@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "facilityId": 1,
+    "name": "Joey Joe Joe",
+    "phone": "(123) 456-7891",
+    "email": "jjj@gmail.com"
+  },
+  {
+    "id": 2,
+    "facilityId": 2,
+    "name": "Joe Smoh",
+    "phone": "(123) 456-7892",
+    "email": "js@gmail.com"
+  },
+  {
+    "id": 3,
+    "facilityId": 3,
+    "name": "Bob Blah Blah",
+    "phone": "(123) 456-7893",
+    "email": "bbb@gmail.com"
+  }
+]
