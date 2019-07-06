@@ -1,15 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { registerUser as register } from "../actions";
-import { Input, Form, Icon, Radio } from "antd";
 import Spinner from "react-spinkit";
 import "../App.css";
-import { RegisterHeader } from ".";
+import {
+  RegisterUserInformationForm,
+  RegisterUserTypeForm,
+  RegisterParentSelectTeamsForm,
+  RegisterCoachSelectFacilityForm,
+  RegisterMissingFacilityForm,
+  RegisterMissingTeamInformation,
+  RegisterCoachRegisterTeamForm,
+  RegisterManagerRegisterFacilityForm,
+  RegisterConfirmationPageForm
+} from ".";
 import teams from "../teams.json";
-//import { tsImportEqualsDeclaration } from "@babel/types";
 import coaches from "../coaches.json";
 import facilities from "../facilities.json";
 import managers from "../managers.json";
+import "../registration.css";
 
 class RegisterForm extends Component {
   state = {
@@ -22,10 +31,7 @@ class RegisterForm extends Component {
     teamName: "",
     ageGroup: "",
     selectedTeamIds: [],
-    selectedCoachIds: [],
     selectedFacilityId: null,
-    teamId: null,
-    facilityId: null,
     facilityName: "",
     facilityAddress: "",
     facilityCity: "",
@@ -34,7 +40,6 @@ class RegisterForm extends Component {
     facilityPhone: "",
     facilityEmail: "",
     facilityUrl: "",
-    passwordMatch: true,
     userInformationForm: true,
     userTypeForm: false,
     parentSelectTeamsForm: false,
@@ -253,1224 +258,164 @@ class RegisterForm extends Component {
   };
 
   render() {
-    const { handleChange } = this;
-    const { passwordMatch } = this.state;
+    const {
+      handleChange,
+      handleNext,
+      handleBack,
+      handleRadioClick,
+      handleStaySelected,
+      handleSelectTeam,
+      handleSelectFacility,
+      handleSubmit
+    } = this;
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      password,
+      confirmPassword,
+      userInformationForm,
+      userTypeForm,
+      userType,
+      parentSelectTeamsForm,
+      coachSelectFacilityForm,
+      selectedFacilityId,
+      missingFacilityForm,
+      missingTeamInformation,
+      coachRegisterTeamForm,
+      teamName,
+      ageGroup,
+      managerRegisterFacilityForm,
+      facilityAddress,
+      facilityCity,
+      facilityEmail,
+      facilityName,
+      facilityPhone,
+      facilityState,
+      facilityUrl,
+      facilityZipCode,
+      confirmationPageForm,
+      selectedTeamIds
+    } = this.state;
     const { isLoading, err } = this.props;
-    const stylesForm = {
-      color: "rgba(0, 53, 89, 1)",
-      backgroundColor: "rgb(74, 162, 197)",
-      padding: "20px",
-      border: "5px rgba(0, 53, 89, 1) solid",
-      borderRadius: "5px",
-      width: "400px",
-      display: "flex",
-      flexDirection: "column",
-      margin: "40px auto"
-    };
-
-    const radioStyle = {
-      display: "block",
-      height: "30px",
-      lineHeight: "30px",
-      color: "rgb(161, 233, 29)"
-    };
 
     return (
       <React.Fragment>
-        {this.state.userInformationForm && (
-          <Form style={stylesForm} id="userInformation">
-            <RegisterHeader text={"Register"} />
-            <Form.Item>
-              <Input
-                addonBefore="First Name"
-                type="text"
-                name="firstName"
-                required
-                onChange={handleChange}
-                value={this.state.firstName}
-              />
-
-              <Input
-                addonBefore="Last Name"
-                type="text"
-                name="lastName"
-                required
-                onChange={handleChange}
-                value={this.state.lastName}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Input
-                addonBefore="Email"
-                type="email"
-                name="email"
-                required
-                onChange={handleChange}
-                value={this.state.email}
-              />
-              <Input
-                addonBefore="Phone"
-                type="tel"
-                name="phone"
-                placeholder="(000) 000-0000"
-                pattern="[(][0-9]{3}[)][\s][0-9]{3}-[0-9]{4}"
-                required
-                onChange={handleChange}
-                value={this.state.phone}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Input.Password
-                addonBefore="Password"
-                type="password"
-                name="password"
-                value={this.state.password}
-                required
-                onChange={handleChange}
-              />
-
-              <Input.Password
-                addonBefore="Password"
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm"
-                value={this.state.confirmPassword}
-                pattern={this.state.password}
-                required
-                onChange={handleChange}
-              />
-            </Form.Item>
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                //type="submit"
-                onClick={this.handleNext("toUserTypeForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-            </div>
-          </Form>
+        {userInformationForm && (
+          <RegisterUserInformationForm
+            handleChange={handleChange}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            phone={phone}
+            password={password}
+            confirmPassword={confirmPassword}
+            handleNext={handleNext("toUserTypeForm")}
+          />
         )}
 
-        {this.state.userTypeForm && (
-          <Form style={stylesForm} id="userTypeForm">
-            <RegisterHeader text={"Are you a..."} />
-            <div
-              style={{
-                background: "rgba(0, 53, 89, 1)",
-                borderRadius: "5px"
-              }}
-            >
-              <Radio.Group
-                onChange={this.handleRadioClick}
-                value={this.state.userType}
-                size="large"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  padding: "15px",
-                  paddingLeft: "30px",
-                  fontSize: "large"
-                }}
-              >
-                <Radio checked style={radioStyle} value={"parent"}>
-                  Athlete / Athlete's Legal Guardian?
-                </Radio>
-                <Radio style={radioStyle} value={"coach"}>
-                  Coach?
-                </Radio>
-                <Radio style={radioStyle} value={"manager"}>
-                  League Manager?
-                </Radio>
-              </Radio.Group>
-            </div>
-            <br />
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext(this.state.userType)}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack("ToUserInformationForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {userTypeForm && (
+          <RegisterUserTypeForm
+            handleRadioClick={handleRadioClick}
+            userType={userType}
+            handleNext={handleNext(userType)}
+            handleBack={handleBack("ToUserInformationForm")}
+          />
         )}
 
-        {this.state.parentSelectTeamsForm && (
-          <Form style={stylesForm} id="parentSelectTeams">
-            <RegisterHeader text={"Select your Team(s)"} />
-            <div
-              style={{
-                background: "rgba(0, 53, 89, 1)",
-                borderRadius: "5px",
-                paddingTop: "10px"
-              }}
-            >
-              <ul style={{ listStyle: "none" }}>
-                {teams.map(team => {
-                  let index = coaches.findIndex(
-                    coach => coach.id === team.coachIds[0]
-                  );
-                  let currentCoachName = coaches[index].name;
-                  return (
-                    <li
-                      key={team.id}
-                      style={{
-                        color: "rgb(161, 233, 29)",
-                        display: "flex",
-                        flexDirection: "row"
-                      }}
-                    >
-                      <div>
-                        <input
-                          type="checkbox"
-                          name="team"
-                          checked={this.handleStaySelected(team.id)}
-                          onChange={this.handleSelectTeam(team.id)}
-                        />
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flex: "row",
-                          flexWrap: "wrap"
-                        }}
-                      >
-                        <div style={{ paddingLeft: "10px" }}>
-                          <span>
-                            <b> Team: </b>
-                            {team.name}
-                          </span>
-                        </div>
-                        <div style={{ paddingLeft: "10px" }}>
-                          <span>
-                            {" "}
-                            <b>Age Group: </b>
-                            {team.ageGroup}
-                          </span>
-                        </div>
-                        <div style={{ paddingLeft: "10px" }}>
-                          <span>
-                            {" "}
-                            <b>Coach:</b> {currentCoachName}
-                          </span>
-                        </div>
-                      </div>
-                      <br />
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <br />
-            <button
-              type="submit"
-              onClick={this.handleNext("toMissingTeamInformationPage")}
-              style={{
-                background:
-                  "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                color: "rgb(161, 233, 29)",
-                border: "2px rgb(130, 184, 31) solid",
-                borderRadius: "25px",
-                fontSize: "large",
-                minWidth: "120px"
-              }}
-            >
-              I do not see my team listed here.
-            </button>
-            <br />
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext("toConfirmationPageForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack("toUserTypeForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {parentSelectTeamsForm && (
+          <RegisterParentSelectTeamsForm
+            teams={teams}
+            coaches={coaches}
+            handleStaySelected={handleStaySelected}
+            handleSelectTeam={handleSelectTeam}
+            handleNext2={handleNext("toMissingTeamInformationPage")}
+            handleNext={handleNext("toConfirmationPageForm")}
+            handleBack={handleBack("toUserTypeForm")}
+          />
         )}
 
-        {this.state.coachSelectFacilityForm && (
-          <Form style={stylesForm} id="coachSelectFacility">
-            <RegisterHeader text={"Select your Facility"} />
-            <div
-              style={{
-                background: "rgba(0, 53, 89, 1)",
-                borderRadius: "5px",
-                paddingTop: "10px"
-              }}
-            >
-              <Radio.Group
-                value={this.state.selectedFacilityId}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  padding: "15px",
-                  paddingLeft: "30px",
-                  fontSize: "large"
-                }}
-                onChange={this.handleSelectFacility}
-              >
-                {facilities.map(facility => {
-                  let index = managers.findIndex(
-                    manager => manager.id === facility.managerId
-                  );
-                  let currentManagerName = managers[index].name;
-                  return (
-                    <Radio
-                      key={facility.id}
-                      value={facility.id}
-                      style={{
-                        color: "rgb(161, 233, 29)",
-                        display: "flex",
-                        flexDirection: "row"
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          flex: "row",
-                          flexWrap: "wrap"
-                        }}
-                      >
-                        <div
-                          style={{
-                            paddingLeft: "10px"
-                          }}
-                        >
-                          <span>
-                            <b> {facility.name} </b>
-                          </span>
-                        </div>
-                        <div style={{ paddingLeft: "10px" }}>
-                          <span>
-                            {facility.address} {facility.city}, {facility.state}{" "}
-                            {facility.zipCode}
-                          </span>
-                        </div>
-                        <div style={{ paddingLeft: "10px" }}>
-                          {facility.phone}
-                        </div>
-                        <div style={{ paddingLeft: "10px" }}>
-                          {facility.email}
-                        </div>
-                        <div style={{ paddingLeft: "10px" }}>
-                          Contact: {currentManagerName}
-                        </div>
-                      </div>
-                      <br />
-                    </Radio>
-                  );
-                })}
-              </Radio.Group>
-            </div>
-            <br />
-            <button
-              type="submit"
-              onClick={this.handleNext("toMissingFacilityPage")}
-              style={{
-                background:
-                  "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                color: "rgb(161, 233, 29)",
-                border: "2px rgb(130, 184, 31) solid",
-                borderRadius: "25px",
-                fontSize: "large",
-                minWidth: "120px"
-              }}
-            >
-              I do not see the facility listed here.
-            </button>
-            <br />
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext("toCoachRegisterTeamForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack("toUserTypeForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {coachSelectFacilityForm && (
+          <RegisterCoachSelectFacilityForm
+            facilities={facilities}
+            managers={managers}
+            selectedFacilityId={selectedFacilityId}
+            handleSelectFacility={handleSelectFacility}
+            handleNext2={handleNext("toMissingFacilityPage")}
+            handleNext={handleNext("toCoachRegisterTeamForm")}
+            handleBack={handleBack("toUserTypeForm")}
+          />
         )}
 
-        {this.state.missingFacilityForm && (
-          <Form style={stylesForm} id="missingFacilityForm">
-            <div
-              style={{
-                background: "rgba(0, 53, 89, 1)",
-                borderRadius: "5px",
-                paddingTop: "10px",
-                color: "rgb(161, 233, 29)"
-              }}
-            >
-              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
-                Please check with your league manager to make sure your facility
-                has been registered under the correct name.{" "}
-              </h3>
-              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
-                You may finish registration at this time without linking your
-                account to a facility.
-              </h3>{" "}
-              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
-                You may link a facility to your account from the edit account
-                page in the future.
-              </h3>
-            </div>
-            <br />
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext("toCoachRegisterTeamForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack("toCoachSelectFacilityForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {missingFacilityForm && (
+          <RegisterMissingFacilityForm
+            handleNext={handleNext("toCoachRegisterTeamForm")}
+            handleBack={handleBack("toCoachSelectFacilityForm")}
+          />
         )}
 
-        {this.state.missingTeamInformation && (
-          <Form style={stylesForm} id="missingTeamInformation">
-            <div
-              style={{
-                background: "rgba(0, 53, 89, 1)",
-                borderRadius: "5px",
-                paddingTop: "10px",
-                color: "rgb(161, 233, 29)"
-              }}
-            >
-              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
-                Please check with your coach to confirm your team name and that
-                your team has been registered.{" "}
-              </h3>
-              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
-                You may finish registration at this time without linking your
-                account to a team.
-              </h3>{" "}
-              <h3 style={{ padding: "20px", color: "rgb(161, 233, 29)" }}>
-                Be sure to link your account to a team from the edit account
-                page in the future.
-              </h3>
-            </div>
-            <br />
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext("toConfirmationPageForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack("parent")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {missingTeamInformation && (
+          <RegisterMissingTeamInformation
+            handleBack={handleBack("parent")}
+            handleNext={handleNext("toConfirmationPageForm")}
+          />
         )}
 
-        {this.state.coachRegisterTeamForm && (
-          <Form style={stylesForm} id="coachRegisterTeam">
-            <RegisterHeader text={"Register Team"} />
-            <Form.Item>
-              <Input
-                addonBefore="Team Name"
-                type="text"
-                name="teamName"
-                required
-                onChange={handleChange}
-                value={this.state.teamName}
-              />
-
-              <Input
-                addonBefore="Age Group"
-                type="text"
-                name="ageGroup"
-                required
-                onChange={handleChange}
-                value={this.state.ageGroup}
-              />
-            </Form.Item>
-
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext("toConfirmationPageForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack("toCoachSelectFacilityForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {coachRegisterTeamForm && (
+          <RegisterCoachRegisterTeamForm
+            handleChange={handleChange}
+            handleNext={handleNext("toConfirmationPageForm")}
+            handleBack={handleBack("toCoachSelectFacilityForm")}
+            teamName={teamName}
+            ageGroup={ageGroup}
+          />
         )}
 
-        {this.state.managerRegisterFacilityForm && (
-          <Form style={stylesForm} id="managerRegisterFacility">
-            <RegisterHeader text={"Register your Facility"} />
-            <Form.Item>
-              <Input
-                addonBefore="Facility Name"
-                type="text"
-                name="facilityName"
-                required
-                onChange={handleChange}
-                value={this.state.facilityName}
-              />
-            </Form.Item>
-            <Form.Item>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <Input
-                  addonBefore="Street"
-                  type="text"
-                  name="facilityAddress"
-                  required
-                  onChange={handleChange}
-                  value={this.state.facilityAddress}
-                />
-
-                <Input
-                  addonBefore="City"
-                  type="text"
-                  name="facilityCity"
-                  required
-                  onChange={handleChange}
-                  value={this.state.facilityCity}
-                />
-                <div style={{ display: "flex" }}>
-                  <Input
-                    addonBefore="State"
-                    type="text"
-                    name="facilityState"
-                    maxLength={2}
-                    required
-                    onChange={handleChange}
-                    value={this.state.facilityState}
-                  />
-                  <Input
-                    addonBefore="Zip Code"
-                    type="text"
-                    name="facilityZipCode"
-                    required
-                    onChange={handleChange}
-                    value={this.state.facilityZipCode}
-                  />
-                </div>
-              </div>
-            </Form.Item>
-            <Form.Item>
-              <Input
-                addonBefore="Website Url"
-                type="url"
-                name="facilityUrl"
-                placeholder="optional"
-                onChange={handleChange}
-                value={this.state.facilityUrl}
-              />
-              <Input
-                addonBefore="Email"
-                type="email"
-                name="facilityEmail"
-                required
-                onChange={handleChange}
-                value={this.state.facilityEmail}
-              />
-              <Input
-                addonBefore="Phone"
-                type="tel"
-                name="facilityPhone"
-                placeholder="(000) 000-0000"
-                pattern="[(][0-9]{3}[)][\s][0-9]{3}-[0-9]{4}"
-                required
-                onChange={handleChange}
-                value={this.state.facilityPhone}
-              />
-            </Form.Item>
-
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                type="submit"
-                onClick={this.handleNext("toConfirmationPageForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                type="submit"
-                onClick={this.handleBack("toUserTypeForm")}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {managerRegisterFacilityForm && (
+          <RegisterManagerRegisterFacilityForm
+            handleChange={handleChange}
+            facilityName={facilityName}
+            facilityAddress={facilityAddress}
+            facilityCity={facilityCity}
+            facilityState={facilityState}
+            facilityZipCode={facilityZipCode}
+            facilityUrl={facilityUrl}
+            facilityEmail={facilityEmail}
+            facilityPhone={facilityPhone}
+            handleNext={handleNext("toConfirmationPageForm")}
+            handleBack={handleBack("toUserTypeForm")}
+          />
         )}
 
-        {this.state.confirmationPageForm && (
-          <Form style={stylesForm} id="confirmationPage">
-            <RegisterHeader text={"Confirm your Details"} />
-            <div
-              style={{
-                background: "rgba(0, 53, 89, 1)",
-                borderRadius: "5px"
-              }}
-            >
-              <Form.Item
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  padding: "15px",
-                  paddingLeft: "30px",
-                  fontSize: "large",
-                  color: "rgb(161, 233, 29)"
-                }}
-              >
-                <div
-                  style={{
-                    marginTop: "0px",
-                    marginBottom: "0px",
-                    maxHeight: "21px"
-                  }}
-                >
-                  <span>
-                    <b>{this.state.firstName} </b>
-                  </span>
-                  <span>
-                    <b>{this.state.lastName}</b>
-                  </span>
-                </div>
-                <div
-                  style={{
-                    marginTop: "0px",
-                    marginBottom: "0px",
-                    maxHeight: "21px"
-                  }}
-                >
-                  <span>{this.state.email}</span>
-                </div>
-                <div
-                  style={{
-                    marginTop: "0px",
-                    marginBottom: "0px",
-                    maxHeight: "21px"
-                  }}
-                >
-                  <span>{this.state.phone}</span>
-                </div>
-                <br />
-                {this.state.userType === "parent" &&
-                  this.state.selectedTeamIds.length === 0 && (
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        maxHeight: "21px"
-                      }}
-                    >
-                      <span>Account not linked to Team</span>
-                    </div>
-                  )}
-                {this.state.userType === "parent" &&
-                  this.state.selectedTeamIds.length > 0 && (
-                    <React.Fragment>
-                      {this.state.selectedTeamIds.map((selectedId, i) => {
-                        let currentTeam = teams.find(
-                          team => team.id === selectedId
-                        );
-
-                        let currentCoach = coaches.find(
-                          coach => coach.id === currentTeam.coachIds[0]
-                        );
-
-                        return (
-                          <div
-                            key={currentTeam.id}
-                            style={{
-                              marginTop: "0px",
-                              marginBottom: "0px"
-                            }}
-                          >
-                            <p
-                              style={{
-                                marginTop: "0px",
-                                marginBottom: "0px",
-                                maxHeight: "21px"
-                              }}
-                            >
-                              <span>
-                                <b>Team: </b>
-                                {currentTeam.name}
-                              </span>
-
-                              <span> </span>
-                              <span>
-                                <b>Age Group: </b>
-                                {currentTeam.ageGroup}
-                              </span>
-                            </p>
-                            <p
-                              style={{
-                                marginTop: "0px",
-                                marginBottom: "0px",
-                                maxHeight: "21px"
-                              }}
-                            >
-                              <span>
-                                <b>Coach: </b>
-                                {currentCoach.name}
-                              </span>
-                            </p>
-                            <br />
-                          </div>
-                        );
-                      })}
-                    </React.Fragment>
-                  )}
-                {this.state.userType === "coach" &&
-                  this.state.teamName !== "" &&
-                  this.state.ageGroup !== "" && (
-                    <React.Fragment>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        <span>
-                          <b>Coaching:</b>{" "}
-                        </span>
-                        <span>{this.state.teamName}</span>
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        <span>
-                          {" "}
-                          <b>Ages:</b>{" "}
-                        </span>
-                        <span>{this.state.ageGroup}</span>
-                      </div>
-                      <br />
-                    </React.Fragment>
-                  )}
-
-                {this.state.userType === "coach" &&
-                  this.state.selectedFacilityId === null && (
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        maxHeight: "21px"
-                      }}
-                    >
-                      <span>Account not linked to Facility</span>
-                    </div>
-                  )}
-                {this.state.userType === "coach" &&
-                  this.state.selectedFacilityId !== null && (
-                    <React.Fragment>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        <b>
-                          {
-                            facilities.find(
-                              facility =>
-                                facility.id === this.state.selectedFacilityId
-                            ).name
-                          }
-                        </b>
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        {
-                          facilities.find(
-                            facility =>
-                              facility.id === this.state.selectedFacilityId
-                          ).address
-                        }
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        <span>
-                          {
-                            facilities.find(
-                              facility =>
-                                facility.id === this.state.selectedFacilityId
-                            ).city
-                          }
-                          ,
-                        </span>
-                        <span> </span>
-                        <span>
-                          {
-                            facilities.find(
-                              facility =>
-                                facility.id === this.state.selectedFacilityId
-                            ).city
-                          }
-                        </span>
-                        <span> </span>
-                        <span>
-                          {
-                            facilities.find(
-                              facility =>
-                                facility.id === this.state.selectedFacilityId
-                            ).zipCode
-                          }
-                        </span>
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        {
-                          facilities.find(
-                            facility =>
-                              facility.id === this.state.selectedFacilityId
-                          ).email
-                        }
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        {
-                          facilities.find(
-                            facility =>
-                              facility.id === this.state.selectedFacilityId
-                          ).phone
-                        }
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        <span>
-                          <b>League Manager:</b>
-                        </span>
-                        <span> </span>
-                        <span>
-                          {
-                            managers.find(
-                              manager =>
-                                manager.facilityId ===
-                                this.state.selectedFacilityId
-                            ).name
-                          }
-                        </span>
-                      </div>
-                    </React.Fragment>
-                  )}
-                {this.state.userType === "manager" && (
-                  <React.Fragment>
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        maxHeight: "21px"
-                      }}
-                    >
-                      <span>
-                        <b>{this.state.facilityName}</b>
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        maxHeight: "21px"
-                      }}
-                    >
-                      <span>{this.state.facilityAddress}</span>
-                    </div>
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        maxHeight: "21px"
-                      }}
-                    >
-                      <span
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        {this.state.facilityCity}
-                      </span>
-                      <span>, </span>
-                      <span>{this.state.facilityState}</span>
-                      <span> </span>
-                      <span>{this.state.facilityZipCode}</span>
-                    </div>
-                    {this.state.facilityUrl !== "" && (
-                      <div
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        <span
-                          style={{
-                            marginTop: "0px",
-                            marginBottom: "0px",
-                            maxHeight: "21px"
-                          }}
-                        >
-                          {this.state.facilityUrl}
-                        </span>
-                      </div>
-                    )}
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        maxHeight: "21px"
-                      }}
-                    >
-                      <span
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        {this.state.facilityEmail}
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        marginTop: "0px",
-                        marginBottom: "0px",
-                        maxHeight: "21px"
-                      }}
-                    >
-                      <span
-                        style={{
-                          marginTop: "0px",
-                          marginBottom: "0px",
-                          maxHeight: "21px"
-                        }}
-                      >
-                        {this.state.facilityPhone}
-                      </span>
-                    </div>
-                  </React.Fragment>
-                )}
-              </Form.Item>
-            </div>
-            <br />
-            <div
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-                flexDirection: "row-reverse",
-                justifyContent: "space-between"
-              }}
-            >
-              <button
-                //type="submit"
-                onClick={this.handleSubmit(this.state.userType)}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                Next
-                <Icon type="right" />
-              </button>
-              <button
-                //type="submit"
-                onClick={this.handleBack(this.state.userType)}
-                style={{
-                  background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                  color: "rgb(161, 233, 29)",
-                  border: "2px rgb(130, 184, 31) solid",
-                  borderRadius: "25px",
-                  fontSize: "large",
-                  minWidth: "120px"
-                }}
-              >
-                <Icon type="left" />
-                Back
-              </button>
-            </div>
-          </Form>
+        {confirmationPageForm && (
+          <RegisterConfirmationPageForm
+            teams={teams}
+            coaches={coaches}
+            facilities={facilities}
+            managers={managers}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            phone={phone}
+            userType={userType}
+            selectedTeamIds={selectedTeamIds}
+            teamName={teamName}
+            ageGroup={ageGroup}
+            selectedFacilityId={selectedFacilityId}
+            facilityAddress={facilityAddress}
+            facilityCity={facilityCity}
+            facilityEmail={facilityEmail}
+            facilityName={facilityName}
+            facilityPhone={facilityPhone}
+            facilityState={facilityState}
+            facilityUrl={facilityUrl}
+            facilityZipCode={facilityZipCode}
+            handleBack={handleBack(userType)}
+            handleSubmit={handleSubmit(userType)}
+          />
         )}
 
-        {!passwordMatch && (
-          <p style={{ color: "red" }}>passwords do not match</p>
-        )}
         {isLoading && <Spinner name="circle" color="blue" />}
         {err && <p style={{ color: "red" }}>{err}</p>}
       </React.Fragment>

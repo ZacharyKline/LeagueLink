@@ -20,3 +20,31 @@ export { default as RegistrationForm } from "./RegistrationForm";
 export { default as TimeBlock } from "./TimeBlock";
 export { default as Day } from "./Day";
 export { default as Week } from "./Week";
+
+export {
+  default as RegisterUserInformationForm
+} from "./RegisterForms/RegisterUserInformationForm";
+export {
+  default as RegisterUserTypeForm
+} from "./RegisterForms/RegisterUserTypeForm";
+export {
+  default as RegisterParentSelectTeamsForm
+} from "./RegisterForms/RegisterParentSelectTeamsForm";
+export {
+  default as RegisterCoachSelectFacilityForm
+} from "./RegisterForms/RegisterCoachSelectFacilityForm";
+export {
+  default as RegisterMissingFacilityForm
+} from "./RegisterForms/RegisterMissingFacilityForm";
+export {
+  default as RegisterMissingTeamInformation
+} from "./RegisterForms/RegisterMissingTeamInformation";
+export {
+  default as RegisterCoachRegisterTeamForm
+} from "./RegisterForms/RegisterCoachRegisterTeamForm";
+export {
+  default as RegisterManagerRegisterFacilityForm
+} from "./RegisterForms/RegisterManagerRegisterFacilityForm";
+export {
+  default as RegisterConfirmationPageForm
+} from "./RegisterForms/RegisterConfirmationPageForm";
