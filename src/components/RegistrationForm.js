@@ -36,7 +36,7 @@ class RegisterForm extends Component {
     facilityAddress: "",
     facilityCity: "",
     facilityState: "",
-    facilityZipCode: null,
+    facilityZipCode: "",
     facilityPhone: "",
     facilityEmail: "",
     facilityUrl: "",
@@ -54,14 +54,45 @@ class RegisterForm extends Component {
 
   handleSubmit = userType => e => {
     e.preventDefault();
+    const fullName = this.state.firstName + " " + this.state.lastName;
+    const facilityObj = {};
+    if (userType === "manager") {
+      facilityObj.name = this.state.facilityName;
+      facilityObj.email = this.state.facilityEmail;
+      facilityObj.url = this.state.facilityUrl;
+      facilityObj.streetAddress = this.state.facilityAddress;
+      facilityObj.city = this.state.facilityCity;
+      facilityObj.theState = this.state.facilityState;
+      facilityObj.zipCode = this.state.facilityZipCode;
+    }
+    const teamObj = {};
+    if (userType === "coach") {
+      teamObj.name = this.state.teamName;
+      teamObj.ageGroup = this.state.ageGroup;
+    }
+    const userObj = {
+      fullName: fullName,
+      email: this.state.email,
+      phone: this.state.phone,
+      password: this.state.password,
+      userType: this.state.userType
+    };
+
     switch (userType) {
       case "parent":
+        userObj.teamIds = this.state.selectedTeamIds;
+        console.log(userObj);
         console.log("Create Parent, Add Parent ID to Coach");
         break;
       case "coach":
+        userObj.team = teamObj;
+        userObj.facilityId = this.state.selectedFacilityId;
+        console.log(userObj);
         console.log("Create Coach, Create Team, Add Coach ID to Facility");
         break;
       case "manager":
+        userObj.facility = facilityObj;
+        console.log(userObj);
         console.log("Create Manager, Create Facility");
         break;
       default:
