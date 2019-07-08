@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Navbar } from "."
 import { Row, Col,Card, Button, Calendar, Avatar,Popconfirm, message  } from 'antd'
+import { connect } from "react-redux";
+import { deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
 
 
 const text = 'Are you sure to delete this Account?';
@@ -11,7 +13,7 @@ function confirm() {
 
 
 
-export default class Profile extends Component {
+export class Profile extends Component {
   render() {
     return (
       <React.Fragment>
@@ -47,7 +49,7 @@ export default class Profile extends Component {
         Edit User
     </Button>
     <Col />
-    <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Yes" cancelText="No">
+    <Popconfirm placement="top" title={text} onClick={this.props.handleDeleteUser} onConfirm={confirm} okText="Yes" cancelText="No">
         <Button span={8} offset={4} type="dashed ">Delete Acount</Button>
       </Popconfirm>
       </Col>
@@ -69,3 +71,19 @@ export default class Profile extends Component {
     )
   }
 }
+
+function mapStateToProps({ auth}) {
+  return {
+    // id: auth.login.id,
+  };
+}
+
+const mapDispatchToProps = {
+  handleDeleteUser
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);
+
