@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { registerUser as register } from "../actions";
+import {
+  createUserThenLoginThenAddUserIdToTeamTheRedirect,
+  createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
+  createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
+} from "../actions";
 import Spinner from "react-spinkit";
 import "../App.css";
 import {
@@ -69,6 +73,7 @@ class RegisterForm extends Component {
     if (userType === "coach") {
       teamObj.name = this.state.teamName;
       teamObj.ageGroup = this.state.ageGroup;
+      teamObj.facilityId = this.state.selectedFacilityId;
     }
     const userObj = {
       fullName: fullName,
@@ -82,18 +87,25 @@ class RegisterForm extends Component {
       case "parent":
         userObj.teamIds = this.state.selectedTeamIds;
         console.log(userObj);
-        console.log("Create Parent, Add Parent ID to Coach");
+        console.log(
+          "Create Parent, Login In User,Add Parent ID to Team, Redirect to Profile page"
+        );
+        this.props.registerParent(userObj);
         break;
       case "coach":
-        userObj.team = teamObj;
         userObj.facilityId = this.state.selectedFacilityId;
         console.log(userObj);
-        console.log("Create Coach, Create Team, Add Coach ID to Facility");
+        console.log(teamObj);
+        console.log(
+          "Create Coach, Login In User, Create Team, Add Team ID to Facility, Add Team ID to Coach, Redirect to Profile Page"
+        );
+        this.props.registerCoach(userObj, teamObj);
         break;
       case "manager":
-        userObj.facility = facilityObj;
-        console.log(userObj);
-        console.log("Create Manager, Create Facility");
+        console.log(
+          "Create Manager, Login In User, Create Facility, Add Facility ID to Manager, Add ManagerId to Facility, redirect to profile page"
+        );
+        this.props.registerManager(userObj, facilityObj);
         break;
       default:
         console.log("err");
@@ -454,7 +466,20 @@ class RegisterForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    facilityId: state.facilities.facilityId,
+    userId: state.users.userId
+  };
+};
+
+const mapDispatchToProps = {
+  registerParent: createUserThenLoginThenAddUserIdToTeamTheRedirect,
+  registerCoach: createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
+  registerManager: createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
+};
+
 export default connect(
-  null,
-  { register }
+  mapStateToProps,
+  mapDispatchToProps
 )(RegisterForm);
