@@ -9,7 +9,7 @@ import {
 } from "../actions";
 import { push } from "connected-react-router";
 
-const url = domain + "/users";
+const url = domain + "users";
 
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
@@ -20,15 +20,15 @@ export const ADD_FACILITYID_TO_USER_FAIL = "ADD_FACILITYID_TO_USER_FAIL";
 export const DELETE_USER = "DELETE_USER";
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
-export const EDIT_PROFILE = 'EDIT_PROFILE';
-export const EDIT_PROFILE_SUCCESS = 'EDIT_PROFILE_SUCCESS';
-export const EDIT_PROFILE_FAIL = 'EDIT_PROFILE_FAIL';
+export const EDIT_PROFILE = "EDIT_PROFILE";
+export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS";
+export const EDIT_PROFILE_FAIL = "EDIT_PROFILE_FAIL";
 
 export const createUser = registerData => dispatch => {
   dispatch({
     type: CREATE_USER
   });
-  return fetch(domain + "/users", {
+  return fetch(url + "/register", {
     method: "POST",
     headers: jsonHeaders,
     body: JSON.stringify(registerData)
@@ -182,33 +182,33 @@ export const createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRed
 };
 
 export const editProfile = data => (dispatch, getState) => {
-    const token = getState().auth.login.token;
-    const id = getState().auth.login.id;
+  const token = getState().auth.login.token;
+  const id = getState().auth.login.id;
   dispatch({
     type: EDIT_PROFILE
   });
-    return fetch(url + id, {
-        method: "PUT",
-        headers: {
-          ...jsonHeaders,
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(data)
-      })
-        .then(handleJsonResponse)
-        .then(result => {
-          return dispatch({
-            type: EDIT_PROFILE_SUCCESS,
-            payload: result.user
-          });
-        })
-        .then(result => {
-          dispatch(push("/profile"));
-        })
-        .catch(err => {
-            console.log(err);
-            return Promise.reject(
-              dispatch({ type: EDIT_PROFILE_FAIL, payload: err.message })
-            );
-          });
-    };
+  return fetch(url + id, {
+    method: "PUT",
+    headers: {
+      ...jsonHeaders,
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(data)
+  })
+    .then(handleJsonResponse)
+    .then(result => {
+      return dispatch({
+        type: EDIT_PROFILE_SUCCESS,
+        payload: result.user
+      });
+    })
+    .then(result => {
+      dispatch(push("/profile"));
+    })
+    .catch(err => {
+      console.log(err);
+      return Promise.reject(
+        dispatch({ type: EDIT_PROFILE_FAIL, payload: err.message })
+      );
+    });
+};

@@ -3,6 +3,7 @@ export const domain = "https://intermural-scheduler-api.herokuapp.com/";
 export const jsonHeaders = {
   "Content-Type": "application/json",
   Accept: "application/json"
+  //"Access-Control-Allow-Origin": "*"
 };
 
 export const handleJsonResponse = res => {
@@ -13,4 +14,3 @@ export const handleJsonResponse = res => {
     throw result;
   });
 };
-

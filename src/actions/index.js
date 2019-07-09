@@ -1,4 +1,3 @@
-//export * from "./parents";
 export * from "./teams";
 export * from "./facilities";
 export * from "./users";

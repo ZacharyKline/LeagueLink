@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  createUser,
   createUserThenLoginThenAddUserIdToTeamTheRedirect,
   createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
   createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
@@ -80,7 +81,7 @@ class RegisterForm extends Component {
       email: this.state.email,
       phone: this.state.phone,
       password: this.state.password,
-      userType: this.state.userType
+      type: this.state.userType
     };
 
     switch (userType) {
@@ -90,7 +91,8 @@ class RegisterForm extends Component {
         console.log(
           "Create Parent, Login In User,Add Parent ID to Team, Redirect to Profile page"
         );
-        this.props.registerParent(userObj);
+        this.props.createUser(userObj);
+        //this.props.registerParent(userObj);
         break;
       case "coach":
         userObj.facilityId = this.state.selectedFacilityId;
@@ -99,13 +101,15 @@ class RegisterForm extends Component {
         console.log(
           "Create Coach, Login In User, Create Team, Add Team ID to Facility, Add Team ID to Coach, Redirect to Profile Page"
         );
-        this.props.registerCoach(userObj, teamObj);
+        this.props.createUser(userObj);
+        //this.props.registerCoach(userObj, teamObj);
         break;
       case "manager":
         console.log(
           "Create Manager, Login In User, Create Facility, Add Facility ID to Manager, Add ManagerId to Facility, redirect to profile page"
         );
-        this.props.registerManager(userObj, facilityObj);
+        this.props.createUser(userObj);
+        //this.props.registerManager(userObj, facilityObj);
         break;
       default:
         console.log("err");
@@ -474,6 +478,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+  createUser,
   registerParent: createUserThenLoginThenAddUserIdToTeamTheRedirect,
   registerCoach: createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
   registerManager: createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
