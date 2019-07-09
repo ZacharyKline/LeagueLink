@@ -9,7 +9,7 @@ import ForgotPasswordModal from "./ForgotPasswordModal";
 //import "./index.css";
 
 class LoginForm extends Component {
-  state = { username: "", password: "" };
+  state = { email: "", password: "" };
 
   handleLogin = e => {
     e.preventDefault();
@@ -106,7 +106,7 @@ class LoginForm extends Component {
                   minWidth: "120px"
                 }}
                 type="submit"
-                disabled={isLoading}
+                // disabled={isLoading}
                 onClick={this.handleLogin}
               >
                 Submit

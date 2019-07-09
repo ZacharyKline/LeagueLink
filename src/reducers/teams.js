@@ -2,15 +2,12 @@ import {
   CREATE_TEAM,
   CREATE_TEAM_SUCCESS,
   CREATE_TEAM_FAIL,
-  ADD_COACHID_TO_TEAM,
-  ADD_COACHID_TO_TEAM_SUCCESS,
-  ADD_COACHID_TO_TEAM_FAIL,
+  ADD_USERID_TO_TEAM,
+  ADD_USERID_TO_TEAM_SUCCESS,
+  ADD_USERID_TO_TEAM_FAIL,
   ADD_FACILITYID_TO_TEAM,
   ADD_FACILITYID_TO_TEAM_SUCCESS,
-  ADD_FACILITYID_TO_TEAM_FAIL,
-  foo,
-  foo_FAIL,
-  foo_SUCCESS
+  ADD_FACILITYID_TO_TEAM_FAIL
 } from "../actions";
 
 const initialState = {
@@ -45,15 +42,15 @@ export default (state = initialState, action) => {
         createTeamLoading: false
       };
 
-    case ADD_COACHID_TO_TEAM:
+    case ADD_USERID_TO_TEAM:
       return {
         ...state,
         addCoachIdTOTeamLoading: true,
         addCoachIdTOTeamError: null
       };
-    case ADD_COACHID_TO_TEAM_SUCCESS:
+    case ADD_USERID_TO_TEAM_SUCCESS:
       return { ...state, accountLinked: true, addCoachIdTOTeamLoading: false };
-    case ADD_COACHID_TO_TEAM_FAIL:
+    case ADD_USERID_TO_TEAM_FAIL:
       return {
         ...state,
         addCoachIdTOTeamError: action.payload,
@@ -78,7 +75,7 @@ export default (state = initialState, action) => {
         addFacilityIdToTeamError: action.payload,
         addFacilityIdToTeamLoading: false
       };
-
+    /*
     case foo:
       return {
         ...state,
@@ -89,7 +86,7 @@ export default (state = initialState, action) => {
       return { ...state, payload: action.payload, reducerLoading: false };
     case foo_FAIL:
       return { ...state, Error: action.payload, reducerLoading: false };
-
+*/
     default:
       return state;
   }
