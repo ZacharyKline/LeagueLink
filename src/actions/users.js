@@ -5,7 +5,8 @@ import {
   createFacility,
   addUserIdToTeam,
   createTeam,
-  addTeamIdToFacility
+  addTeamIdToFacility,
+  loginThenGoToUserProfile
 } from "../actions";
 import { push } from "connected-react-router";
 
