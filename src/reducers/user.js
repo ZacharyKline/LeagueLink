@@ -2,6 +2,7 @@ import {
   CREATE_USER,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAIL
+
   //foo,
   //foo_FAIL,
   //foo_SUCCESS
@@ -29,17 +30,8 @@ export default (state = initialState, action) => {
         createUserError: action.payload,
         createUserLoading: false
       };
+
     /*
-    case foo:
-      return {
-        ...state,
-        reducerLoading: true,
-        Error: null
-      };
-    case foo_SUCCESS:
-      return { ...state, payload: action.payload, reducerLoading: false };
-    case foo_FAIL:
-      return { ...state, Error: action.payload, reducerLoading: false };
 
     case foo:
       return {

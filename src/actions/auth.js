@@ -6,10 +6,10 @@ export const LOGIN = "LOGIN";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 
-const url = domain + "/auth";
+const url = domain + "auth";
 
 // action creators
-const login = loginData => dispatch => {
+export const login = loginData => dispatch => {
   dispatch({
     type: LOGIN
   });

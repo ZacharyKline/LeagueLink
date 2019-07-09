@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { registerUser as register } from "../../actions";
+//import { connect } from "react-redux";
+//import { registerUser as register } from "../../actions";
 import { Form, Icon, Radio } from "antd";
 import "../../App.css";
 import { RegisterHeader } from "..";
@@ -46,7 +46,4 @@ class RegisterUserTypeForm extends Component {
   }
 }
 
-export default connect(
-  null,
-  { register }
-)(RegisterUserTypeForm);
+export default RegisterUserTypeForm;

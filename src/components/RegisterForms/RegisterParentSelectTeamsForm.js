@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { registerUser as register } from "../../actions";
+//import { connect } from "react-redux";
+//import { registerUser as register } from "../../actions";
 import { Form, Icon } from "antd";
 import "../../App.css";
 import { RegisterHeader } from "..";
@@ -84,7 +84,4 @@ class RegisterParentSelectTeamsForm extends Component {
   }
 }
 
-export default connect(
-  null,
-  { register }
-)(RegisterParentSelectTeamsForm);
+export default RegisterParentSelectTeamsForm;

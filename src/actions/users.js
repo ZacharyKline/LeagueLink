@@ -11,15 +11,15 @@ import { push } from "connected-react-router";
 
 const url = domain + "/users";
 
-export const DELETE_USER = "DELETE_USER";
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 export const CREATE_USER_FAIL = "CREATE_USER_FAIL";
 export const ADD_FACILITYID_TO_USER = "ADD_FACILITYID_TO_USER";
 export const ADD_FACILITYID_TO_USER_SUCCESS = "ADD_FACILITYID_TO_USER_SUCCESS";
 export const ADD_FACILITYID_TO_USER_FAIL = "ADD_FACILITYID_TO_USER_FAIL";
+export const DELETE_USER = "DELETE_USER";
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
-export const DELETE_USER_FAILURE = "DELETE_USER_FAILURE";
+export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
 
 export const createUser = registerData => dispatch => {
   dispatch({
@@ -91,7 +91,7 @@ const handleDeleteUser = () => (dispatch, getState) => {
     .catch(err => {
       console.log(err);
       return Promise.reject(
-        dispatch({ type: DELETE_USER_FAILURE, payload: err.message })
+        dispatch({ type: DELETE_USER_FAIL, payload: err.message })
       );
     });
 };
@@ -111,9 +111,11 @@ export const createUserThenLoginThenAddUserIdToTeamTheRedirect = userData => (
     .then(() => {
       let teams = userData.teamIds;
       let userId = getState().users.userId;
-      for (let i = 0; i < teams.length; i++) {
-        let currentTeam = teams[i];
-        dispatch(addUserIdToTeam({ id: currentTeam, parentId: userId }));
+      if (teams.length !== 0) {
+        for (let i = 0; i < teams.length; i++) {
+          let currentTeam = teams[i];
+          dispatch(addUserIdToTeam({ id: currentTeam, parentId: userId }));
+        }
       }
     })
     .then(() => {

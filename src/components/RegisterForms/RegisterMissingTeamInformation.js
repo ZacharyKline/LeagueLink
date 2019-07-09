@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { registerUser as register } from "../../actions";
+//import { connect } from "react-redux";
+//import { registerUser as register } from "../../actions";
 import { Form, Icon } from "antd";
 import "../../App.css";
 import "../../registration.css";
@@ -39,7 +39,4 @@ class RegisterMissingTeamInformation extends Component {
     );
   }
 }
-export default connect(
-  null,
-  { register }
-)(RegisterMissingTeamInformation);
+export default RegisterMissingTeamInformation;
