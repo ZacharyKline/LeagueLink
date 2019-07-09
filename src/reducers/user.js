@@ -1,17 +1,22 @@
 import {
   CREATE_USER,
   CREATE_USER_SUCCESS,
-  CREATE_USER_FAIL
+  CREATE_USER_FAIL,
+  EDIT_PROFILE,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_FAIL
 
-  //foo,
-  //foo_FAIL,
-  //foo_SUCCESS
 } from "../actions";
 
 const initialState = {
   createUserLoading: false,
   createUserError: null,
-  userId: null
+  userId: null,
+  name: '',
+  contactPhone: '',
+  teamAffiliation: '',
+  editUserLoading: false,
+  editUserError: null
 };
 
 export default (state = initialState, action) => {
@@ -30,64 +35,13 @@ export default (state = initialState, action) => {
         createUserError: action.payload,
         createUserLoading: false
       };
+    case EDIT_PROFILE:
+      return { ...state, editUserLoading: true, editUserError: null}
+    case EDIT_PROFILE_SUCCESS:
+      return { ...state, userId: action.payload.id, contactPhone: action.payload.contactPhone, teamAffiliation: action.payload.teamAffiliation, editUserLoading: false}
+    case EDIT_PROFILE_FAIL:
+      return { ...state, editUserError: action.payload, editUserLoading: false}
 
-    /*
-
-    case foo:
-      return {
-        ...state,
-        reducerLoading: true,
-        Error: null
-      };
-    case foo_SUCCESS:
-      return { ...state, payload: action.payload, reducerLoading: false };
-    case foo_FAIL:
-      return { ...state, Error: action.payload, reducerLoading: false };
-
-    case foo:
-      return {
-        ...state,
-        reducerLoading: true,
-        Error: null
-      };
-    case foo_SUCCESS:
-      return { ...state, payload: action.payload, reducerLoading: false };
-    case foo_FAIL:
-      return { ...state, Error: action.payload, reducerLoading: false };
-
-    case foo:
-      return {
-        ...state,
-        reducerLoading: true,
-        Error: null
-      };
-    case foo_SUCCESS:
-      return { ...state, payload: action.payload, reducerLoading: false };
-    case foo_FAIL:
-      return { ...state, Error: action.payload, reducerLoading: false };
-
-    case foo:
-      return {
-        ...state,
-        reducerLoading: true,
-        Error: null
-      };
-    case foo_SUCCESS:
-      return { ...state, payload: action.payload, reducerLoading: false };
-    case foo_FAIL:
-      return { ...state, Error: action.payload, reducerLoading: false };
-
-    case foo:
-      return {
-        ...state,
-        reducerLoading: true,
-        Error: null
-      };
-    case foo_SUCCESS:
-      return { ...state, payload: action.payload, reducerLoading: false };
-    case foo_FAIL:
-      return { ...state, Error: action.payload, reducerLoading: false };
-*/
     default:
       return state;
   }
