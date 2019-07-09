@@ -1,10 +1,10 @@
 import {
   CREATE_USER,
   CREATE_USER_SUCCESS,
-  CREATE_USER_FAIL,
-  foo,
-  foo_FAIL,
-  foo_SUCCESS
+  CREATE_USER_FAIL
+  //foo,
+  //foo_FAIL,
+  //foo_SUCCESS
 } from "../actions";
 
 const initialState = {
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
         createUserError: action.payload,
         createUserLoading: false
       };
-
+    /*
     case foo:
       return {
         ...state,
@@ -95,7 +95,7 @@ export default (state = initialState, action) => {
       return { ...state, payload: action.payload, reducerLoading: false };
     case foo_FAIL:
       return { ...state, Error: action.payload, reducerLoading: false };
-
+*/
     default:
       return state;
   }

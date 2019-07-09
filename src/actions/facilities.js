@@ -1,5 +1,5 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants";
-import { createUser } from ".";
+//import { createUser } from ".";
 
 export const CREATE_FACILITY = "CREATE_FACILITY";
 export const CREATE_FACILITY_SUCCESS = "CREATE_FACILITY_SUCCESS";
