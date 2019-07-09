@@ -21,6 +21,7 @@ export const login = loginData => dispatch => {
   })
     .then(handleJsonResponse)
     .then(result => {
+      console.log(result);
       return dispatch({
         type: LOGIN_SUCCESS,
         payload: result

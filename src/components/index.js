@@ -9,7 +9,7 @@ export { default as UserProfile } from "./UserProfilePage";
 
 //export { default as Menu } from "./Menu";
 //export { default as Settings } from "./Settings";
-//export { default as Logout } from "./Logout";
+export { default as Logout } from "./Logout";
 
 export { default as InvalidUrlPage } from "./InvalidUrlPage";
 export { default as LoginPage } from "./LoginPage";
