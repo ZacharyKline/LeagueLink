@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Menu } from "antd";
+import { Menu, Icon } from "antd";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
+import { Logout } from ".";
+
 
 class Navbar extends Component {
   render() {
@@ -26,6 +28,13 @@ class Navbar extends Component {
           <Menu.Item>
             <Link to="/registration" style={{ color: "rgb(161, 233, 29)"}} >Registration Page</Link>
           </Menu.Item>
+          <Menu.Item>
+                            <div>
+                                <Icon type='logout'/>
+                                <Logout />
+                            </div>
+                        </Menu.Item>
+
         </Menu>
       </React.Fragment>
     );
