@@ -21,16 +21,6 @@ export { default as TimeBlock } from "./TimeBlock";
 export { default as Day } from "./Day";
 export { default as Week } from "./Week";
 
-export { default as InvalidUrlPage } from "./InvalidUrlPage";
-export { default as LoginPage } from "./LoginPage";
-export { default as ProfilePage } from "./ProfilePage";
-export { default as RegistrationPage } from "./RegistrationPage";
-export { default as RegistrationForm } from "./RegistrationForm";
-
-export { default as TimeBlock } from "./TimeBlock";
-export { default as Day } from "./Day";
-export { default as Week } from "./Week";
-
 export {
   default as RegisterUserInformationForm
 } from "./RegisterForms/RegisterUserInformationForm";
