@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { registerUser as register } from "../actions";
+import {
+  createUserThenLoginThenAddUserIdToTeamTheRedirect,
+  createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
+  createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
+} from "../actions";
 import Spinner from "react-spinkit";
 import "../App.css";
 import {
@@ -36,7 +40,7 @@ class RegisterForm extends Component {
     facilityAddress: "",
     facilityCity: "",
     facilityState: "",
-    facilityZipCode: null,
+    facilityZipCode: "",
     facilityPhone: "",
     facilityEmail: "",
     facilityUrl: "",
@@ -54,15 +58,54 @@ class RegisterForm extends Component {
 
   handleSubmit = userType => e => {
     e.preventDefault();
+    const fullName = this.state.firstName + " " + this.state.lastName;
+    const facilityObj = {};
+    if (userType === "manager") {
+      facilityObj.name = this.state.facilityName;
+      facilityObj.email = this.state.facilityEmail;
+      facilityObj.url = this.state.facilityUrl;
+      facilityObj.streetAddress = this.state.facilityAddress;
+      facilityObj.city = this.state.facilityCity;
+      facilityObj.theState = this.state.facilityState;
+      facilityObj.zipCode = this.state.facilityZipCode;
+    }
+    const teamObj = {};
+    if (userType === "coach") {
+      teamObj.name = this.state.teamName;
+      teamObj.ageGroup = this.state.ageGroup;
+      teamObj.facilityId = this.state.selectedFacilityId;
+    }
+    const userObj = {
+      fullName: fullName,
+      email: this.state.email,
+      phone: this.state.phone,
+      password: this.state.password,
+      userType: this.state.userType
+    };
+
     switch (userType) {
       case "parent":
-        console.log("Create Parent, Add Parent ID to Coach");
+        userObj.teamIds = this.state.selectedTeamIds;
+        console.log(userObj);
+        console.log(
+          "Create Parent, Login In User,Add Parent ID to Team, Redirect to Profile page"
+        );
+        this.props.registerParent(userObj);
         break;
       case "coach":
-        console.log("Create Coach, Create Team, Add Coach ID to Facility");
+        userObj.facilityId = this.state.selectedFacilityId;
+        console.log(userObj);
+        console.log(teamObj);
+        console.log(
+          "Create Coach, Login In User, Create Team, Add Team ID to Facility, Add Team ID to Coach, Redirect to Profile Page"
+        );
+        this.props.registerCoach(userObj, teamObj);
         break;
       case "manager":
-        console.log("Create Manager, Create Facility");
+        console.log(
+          "Create Manager, Login In User, Create Facility, Add Facility ID to Manager, Add ManagerId to Facility, redirect to profile page"
+        );
+        this.props.registerManager(userObj, facilityObj);
         break;
       default:
         console.log("err");
@@ -423,7 +466,20 @@ class RegisterForm extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    facilityId: state.facilities.facilityId,
+    userId: state.users.userId
+  };
+};
+
+const mapDispatchToProps = {
+  registerParent: createUserThenLoginThenAddUserIdToTeamTheRedirect,
+  registerCoach: createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
+  registerManager: createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
+};
+
 export default connect(
-  null,
-  { register }
+  mapStateToProps,
+  mapDispatchToProps
 )(RegisterForm);
