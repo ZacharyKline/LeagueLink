@@ -18,6 +18,8 @@ export const CREATE_USER_FAIL = "CREATE_USER_FAIL";
 export const ADD_FACILITYID_TO_USER = "ADD_FACILITYID_TO_USER";
 export const ADD_FACILITYID_TO_USER_SUCCESS = "ADD_FACILITYID_TO_USER_SUCCESS";
 export const ADD_FACILITYID_TO_USER_FAIL = "ADD_FACILITYID_TO_USER_FAIL";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_FAILURE = "DELETE_USER_FAILURE";
 
 export const createUser = registerData => dispatch => {
   dispatch({
@@ -65,6 +67,10 @@ export const addFacilityIdToUser = dataObj => dispatch => {
 };
 
 const handleDeleteUser = () => (dispatch, getState) => {
+  dispatch({
+    type: DELETE_USER
+  });
+
   const id = getState().auth.login.id;
   const token = getState().auth.login.token;
 
@@ -77,7 +83,16 @@ const handleDeleteUser = () => (dispatch, getState) => {
   })
     .then(handleJsonResponse)
     .then(result => {
-      console.log(result);
+      return dispatch({
+        type: DELETE_USER_SUCCESS,
+        payload: result
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      return Promise.reject(
+        dispatch({ type: DELETE_USER_FAILURE, payload: err.message })
+      );
     });
 };
 
