@@ -9,7 +9,7 @@ import {
 } from "../actions";
 import { push } from "connected-react-router";
 
-const url = domain + "/users";
+const url = domain + "users";
 
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
@@ -25,7 +25,7 @@ export const createUser = registerData => dispatch => {
   dispatch({
     type: CREATE_USER
   });
-  return fetch(domain + "/users", {
+  return fetch(url + "/register", {
     method: "POST",
     headers: jsonHeaders,
     body: JSON.stringify(registerData)
