@@ -9,7 +9,17 @@ export { default as UserProfile } from "./UserProfilePage";
 
 //export { default as Menu } from "./Menu";
 //export { default as Settings } from "./Settings";
-//export { default as Logout } from "./Logout";
+export { default as Logout } from "./Logout";
+
+export { default as InvalidUrlPage } from "./InvalidUrlPage";
+export { default as LoginPage } from "./LoginPage";
+export { default as ProfilePage } from "./ProfilePage";
+export { default as RegistrationPage } from "./RegistrationPage";
+export { default as RegistrationForm } from "./RegistrationForm";
+
+export { default as TimeBlock } from "./TimeBlock";
+export { default as Day } from "./Day";
+export { default as Week } from "./Week";
 
 export { default as InvalidUrlPage } from "./InvalidUrlPage";
 export { default as LoginPage } from "./LoginPage";
