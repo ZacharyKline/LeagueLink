@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  createUser,
   createUserThenLoginThenAddUserIdToTeamTheRedirect,
   createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
   createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
@@ -90,7 +91,8 @@ class RegisterForm extends Component {
         console.log(
           "Create Parent, Login In User,Add Parent ID to Team, Redirect to Profile page"
         );
-        this.props.registerParent(userObj);
+
+        //this.props.registerParent(userObj);
         break;
       case "coach":
         userObj.facilityId = this.state.selectedFacilityId;
@@ -474,6 +476,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+  createUser,
   registerParent: createUserThenLoginThenAddUserIdToTeamTheRedirect,
   registerCoach: createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
   registerManager: createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
