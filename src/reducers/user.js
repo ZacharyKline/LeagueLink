@@ -36,11 +36,11 @@ export default (state = initialState, action) => {
         createUserLoading: false
       };
     case EDIT_PROFILE:
-      return { ...state, editUserLoading: true, editUserError: null}
+      return { ...state, editUserLoading: true, editUserError: null }
     case EDIT_PROFILE_SUCCESS:
-      return { ...state, userId: action.payload.id, contactPhone: action.payload.contactPhone, teamAffiliation: action.payload.teamAffiliation, editUserLoading: false}
+      return { ...state, userId: action.payload.id, contactPhone: action.payload.contactPhone, teamAffiliation: action.payload.teamAffiliation, editUserLoading: false }
     case EDIT_PROFILE_FAIL:
-      return { ...state, editUserError: action.payload, editUserLoading: false}
+      return { ...state, editUserError: action.payload, editUserLoading: false }
 
     default:
       return state;
