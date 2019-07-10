@@ -6,6 +6,7 @@ export { default as RegisterHeader } from "./RegisterHeader";
 export { default as LoginForm } from "./LoginForm";
 export { default as UserProfile } from "./UserProfilePage";
 // export { default as RegisterForm } from "./RegisterForm";
+export { default as EditProfile } from './EditProfilePage'
 
 //export { default as Menu } from "./Menu";
 //export { default as Settings } from "./Settings";
