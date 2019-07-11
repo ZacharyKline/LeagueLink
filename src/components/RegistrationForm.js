@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  getCoachByCoachId,
+  getManagerByManagerId,
+  getParentByParentId,
+  getParents,
+  getCoaches,
+  getManagers,
   getUsers,
   createUser,
   createUserThenLogin,
@@ -61,7 +67,13 @@ class RegisterForm extends Component {
   };
 
   componentDidMount = () => {
-    this.props.getUsers(1000);
+    //this.props.getUsers(1000);
+    //this.props.getCoaches();
+    //this.props.getManagers();
+    //this.props.getParents();
+    //this.props.getParentByParentId("5d24de27a4462a0017208514");
+    //this.props.getCoachByCoachId("5d24e09217527b00173993be");
+    //this.props.getManagerByManagerId("5d24e09217527b00173993bf");
   };
 
   handleSubmit = userType => e => {
@@ -489,6 +501,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+  getCoachByCoachId,
+  getManagerByManagerId,
+  getParentByParentId,
+  getParents,
+  getCoaches,
+  getManagers,
   getUsers,
   createUser,
   createUserThenLogin,

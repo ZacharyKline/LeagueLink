@@ -1,6 +1,6 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants";
 import { push } from "connected-react-router";
-import {getUsers} from '../actions'
+import { getUsers } from "../actions";
 import { getUserById } from "./users";
 
 // action types
@@ -38,10 +38,13 @@ export const login = loginData => dispatch => {
 };
 
 export const loginThenGoToUserProfile = loginData => (dispatch, getState) => {
-  return dispatch(login(loginData)).then(() => dispatch(getUsers())).then(() => {
-    const id = getState().auth.login.id
-    dispatch(getUserById(id))
-  }).then(() => dispatch(push("/profile")));
+  return dispatch(login(loginData))
+    .then(() => dispatch(getUsers()))
+    .then(() => {
+      const id = getState().auth.login.id;
+      dispatch(getUserById(id));
+    })
+    .then(() => dispatch(push("/profile")));
 };
 
 export const LOGOUT = "LOGOUT";
