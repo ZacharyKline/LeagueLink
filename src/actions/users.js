@@ -74,7 +74,10 @@ export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS";
 export const EDIT_PROFILE_FAIL = "EDIT_PROFILE_FAIL";
-export const GET_USER_BY_ID = 'GET_USER_BY_ID'
+
+export const GET_USER_BY_ID = "GET_USER_BY_ID";
+export const GET_USER_BY_ID_SUCCESS = "GET_USER_BY_ID_SUCCESS";
+export const GET_USER_BY_ID_FAIL = "GET_USER_BY_ID_FAIL";
 
 export const createUser = registerData => dispatch => {
   dispatch({
@@ -526,6 +529,25 @@ export const createUserThenLoginThenCreateTeam = (userData, teamData) => (
     });
 };
 
-export const getUserById = id => (dispatch, getState) => {
-  dispatch({type: GET_USER_BY_ID, payload: id})
-}
+export const getUserById = id => dispatch => {
+  dispatch({ type: GET_USER_BY_ID });
+
+  return fetch(url + `/${id}`, {
+    method: "GET",
+    headers: jsonHeaders
+  })
+    .then(handleJsonResponse)
+    .then(result => {
+      return dispatch({
+        type: GET_USER_BY_ID_SUCCESS,
+        payload: result
+      });
+    })
+    .catch(err => {
+      return Promise.reject(
+        dispatch({ type: GET_USER_BY_ID_FAIL, payload: err.message })
+      );
+    });
+
+  //dispatch({ type: GET_USER_BY_ID, payload: id });
+};
