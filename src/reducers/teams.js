@@ -2,6 +2,21 @@ import {
   CREATE_TEAM,
   CREATE_TEAM_SUCCESS,
   CREATE_TEAM_FAIL,
+  GET_TEAMS,
+  GET_TEAMS_SUCCESS,
+  GET_TEAMS_FAIL,
+  GET_TEAMS_BY_FACILITYID,
+  GET_TEAMS_BY_FACILITYID_SUCCESS,
+  GET_TEAMS_BY_FACILITYID_FAIL,
+  GET_TEAM_BY_TEAMID,
+  GET_TEAM_BY_TEAMID_SUCCESS,
+  GET_TEAM_BY_TEAMID_FAIL,
+  GET_TEAM_BY_COACHID,
+  GET_TEAM_BY_COACHID_SUCCESS,
+  GET_TEAM_BY_COACHID_FAIL,
+  UPDATE_TEAM,
+  UPDATE_TEAM_SUCCESS,
+  UPDATE_TEAM_FAIL,
   ADD_USERID_TO_TEAM,
   ADD_USERID_TO_TEAM_SUCCESS,
   ADD_USERID_TO_TEAM_FAIL,
@@ -13,7 +28,22 @@ import {
 const initialState = {
   createTeamLoading: false,
   createTeamError: null,
-  teamId: null,
+  newTeam: {},
+  getTeamsError: null,
+  getTeamsLoading: false,
+  teams: [],
+  getTeamsByFacilityIdError: null,
+  getTeamsByFacilityIdLoading: false,
+  leagueTeams: [],
+  getTeamByIdError: null,
+  getTeamByIdLoading: false,
+  specificTeam: {},
+  getTeamByCoachIdError: null,
+  getTeamByCoachIdLoading: false,
+  coachTeam: {},
+  updateTeamError: null,
+  updateTeamLoading: false,
+
   addCoachIdTOTeamLoading: false,
   addCoachIdTOTeamError: null,
   coachLinkedToTeam: false,
@@ -34,12 +64,102 @@ export default (state = initialState, action) => {
         createTeamError: null
       };
     case CREATE_TEAM_SUCCESS:
-      return { ...state, teamId: action.payload.id, createTeamLoading: false };
+      return { ...state, newTeam: action.payload, createTeamLoading: false };
     case CREATE_TEAM_FAIL:
       return {
         ...state,
         createTeamError: action.payload,
         createTeamLoading: false
+      };
+
+    case GET_TEAMS:
+      return {
+        ...state,
+        getTeamsLoading: true,
+        getTeamsError: null
+      };
+    case GET_TEAMS_SUCCESS:
+      return { ...state, teams: action.payload, getTeamsLoading: false };
+    case GET_TEAMS_FAIL:
+      return {
+        ...state,
+        getTeamsError: action.payload,
+        getTeamsLoading: false
+      };
+
+    case GET_TEAMS_BY_FACILITYID:
+      return {
+        ...state,
+        getTeamsByFacilityIdLoading: true,
+        getTeamsByFacilityIdError: null
+      };
+    case GET_TEAMS_BY_FACILITYID_SUCCESS:
+      return {
+        ...state,
+        leagueTeams: action.payload,
+        getTeamsByFacilityIdLoading: false
+      };
+    case GET_TEAMS_BY_FACILITYID_FAIL:
+      return {
+        ...state,
+        getTeamsByFacilityIdError: action.payload,
+        getTeamsByFacilityIdLoading: false
+      };
+
+    case GET_TEAM_BY_TEAMID:
+      return {
+        ...state,
+        getTeamByIdLoading: true,
+        getTeamByIdError: null
+      };
+    case GET_TEAM_BY_TEAMID_SUCCESS:
+      return {
+        ...state,
+        specificTeam: action.payload,
+        getTeamByIdLoading: false
+      };
+    case GET_TEAM_BY_TEAMID_FAIL:
+      return {
+        ...state,
+        getTeamByIdError: action.payload,
+        getTeamByIdLoading: false
+      };
+
+    case GET_TEAM_BY_COACHID:
+      return {
+        ...state,
+        getTeamByCoachIdLoading: true,
+        getTeamByCoachIdError: null
+      };
+    case GET_TEAM_BY_COACHID_SUCCESS:
+      return {
+        ...state,
+        coachTeam: action.payload,
+        getTeamByCoachIdLoading: false
+      };
+    case GET_TEAM_BY_COACHID_FAIL:
+      return {
+        ...state,
+        getTeamByCoachIdError: action.payload,
+        getTeamByCoachIdLoading: false
+      };
+
+    case UPDATE_TEAM:
+      return {
+        ...state,
+        updateTeamLoading: true,
+        updateTeamError: null
+      };
+    case UPDATE_TEAM_SUCCESS:
+      return {
+        ...state,
+        updateTeamLoading: false
+      };
+    case UPDATE_TEAM_FAIL:
+      return {
+        ...state,
+        updateTeamLoading: false,
+        updateTeamError: action.payload
       };
 
     case ADD_USERID_TO_TEAM:
