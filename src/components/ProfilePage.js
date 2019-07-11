@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { Navbar } from "."
 import { Row, Col, Card, Button, Calendar, Avatar, Popconfirm, message } from 'antd'
-import { Link } from "react-router-dom";
-
+// import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const text = 'Are you sure to delete this Account?';
 
@@ -17,7 +17,7 @@ function onPanelChange(value, mode) {
 }
 
 
-export default class Profile extends Component {
+class Profile extends Component {
   render() {
     return (
       <React.Fragment >
@@ -44,20 +44,20 @@ export default class Profile extends Component {
                   }} >
                     <Avatar shape="square" size={64} icon="user" />
                     <br />
-                    Name
+                    Name: {this.props.fullName}
                       <br />
-                    Contact Info
+                    Contact Info {this.props.phone}
                       <br />
-                    Team Affiliation
+                    Team Affiliation 
                     </Card>
-                  <Link to="/editprofile">
+                  {/* <Link to="/editprofile">
                     <Button type="dashed" style={{
                       border: "2px rgba(0, 53, 89, 1) solid",
                       borderRadius: "25px"
                     }} >
                       Edit User
                       </Button>
-                  </Link>
+                  </Link> */}
                   <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Yes" cancelText="No">
                     <Button span={8} offset={4} type="dashed " style={{
                       border: "2px rgba(0, 53, 89, 1) solid",
@@ -69,7 +69,7 @@ export default class Profile extends Component {
                     border: "2px rgba(0, 53, 89, 1) solid",
                     borderRadius: "25px", marginBottom: "0px"
                   }}  >
-                    <div  /*   The Calender   */ style={{ width: "100%", border: '1px solid #d9d9d9', borderRadius: 4 }}>
+                    <div style={{ width: "100%", border: '1px solid #d9d9d9', borderRadius: 4 }}>
                       <Calendar fullscreen={false} onPanelChange={onPanelChange} />
                     </div>
 
@@ -79,13 +79,13 @@ export default class Profile extends Component {
                 </Col>
 
               </div>
-              <Col span={8} offset={2}>
-              </Col>
+              {/* <Col span={8} offset={2}>
+              </Col> */}
 
               <Row>
-                <Col span={12} offset={6}>
+                {/* <Col span={12} offset={6}>
                   Something Righteous
-              </Col>
+              </Col> */}
               </Row>
             </div >
           </div>
@@ -94,14 +94,24 @@ export default class Profile extends Component {
     )
   }
 }
-/*
+
 /////////////////////// incoming change
+
+function mapStateToProps({ users, auth }) {
+  return {
+    id: auth.login.id,
+    fullName: users.user.fullName,
+    phone: users.user.phone,
+    TeamIds: users.user.TeamIds,
+
+  };
+}
 const mapDispatchToProps = {
-  handleDeleteUser
+  
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Profile);
-*/
+
