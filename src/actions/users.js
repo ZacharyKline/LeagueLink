@@ -74,6 +74,7 @@ export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS";
 export const EDIT_PROFILE_FAIL = "EDIT_PROFILE_FAIL";
+export const GET_USER_BY_ID = 'GET_USER_BY_ID'
 
 export const createUser = registerData => dispatch => {
   dispatch({
@@ -118,6 +119,10 @@ export const getUsers = () => dispatch => {
       );
     });
 };
+
+// export const loginThenGetUsers = loginData => dispatch => {
+//   dispatch(login(loginData)).then(() => dispatch(getUsers()))
+// }
 
 export const getParents = () => dispatch => {
   dispatch({ type: GET_PARENTS });
@@ -520,3 +525,7 @@ export const createUserThenLoginThenCreateTeam = (userData, teamData) => (
       return dispatch(createTeam(teamData));
     });
 };
+
+export const getUserById = id => (dispatch, getState) => {
+  dispatch({type: GET_USER_BY_ID, payload: id})
+}

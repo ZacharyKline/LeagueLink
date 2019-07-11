@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { editProfile } from "../actions";
 import { connect } from "react-redux";
-import { Button, Form, Input, Layout } from "antd";
+import { Button, Form, Input, Layout, Select } from "antd";
+const { Option } = Select;
 
 
 class EditProfile extends Component {
@@ -56,6 +57,7 @@ class EditProfile extends Component {
                                 addonBefore="Name"
                                 autoFocus
                                 required
+                                placeholder='Change your name'
                             ></Input>
                         </Form.Item>
                         <Form.Item>
@@ -63,15 +65,18 @@ class EditProfile extends Component {
                                 type='phone'
                                 addonBefore="Contact Phone"
                                 required
-                                
+                                placeholder='(000) 000-0000'
+
                             ></Input>
                         </Form.Item>
                         <Form.Item>
-                            <Input
-                                type='text'
-                                addonBefore='Team Affiliation'
-
-                            ></Input>
+                            <Select
+                                placeholder="Team Affiliation(s)"
+                            >
+                                <Option value='tigers'>Tigers</Option>
+                                <Option value='frogs'>Frogs</Option>
+                                <Option value='turtles'>Turtles</Option>
+                            </Select>
                         </Form.Item>
                         <Form.Item>
                             <Button
@@ -98,9 +103,9 @@ class EditProfile extends Component {
 function mapStateToProps({ users, editProfile }) {
     return {
         //   userId: user.login.userId,
-          name: users.name,
-          contactPhone: users.contactPhone,
-          teamAffiliation: users.teamAffiliation
+        name: users.name,
+        contactPhone: users.contactPhone,
+        teamAffiliation: users.teamAffiliation
 
     };
 }
