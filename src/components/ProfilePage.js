@@ -81,9 +81,11 @@ class Profile extends Component {
                     <br />
                     Name: {this.props.fullName}
                     <br />
-                    Contact Info {this.props.phone}
+                    Contact Info: {this.props.phone}
                     <br />
-                    Team Affiliation(s)
+                    Team(s):
+                    <br />
+                    Account Type: {this.props.userLevel}
                   </Card>
                   {/* <Link to="/editprofile">
                     <Button type="dashed" style={{
@@ -158,7 +160,8 @@ function mapStateToProps({ users, auth }) {
     login: auth.login,
     fullName: users.user.fullName,
     phone: users.user.phone,
-    TeamIds: users.user.TeamIds
+    TeamIds: users.user.TeamIds,
+    userLevel: users.user.userLevel
   };
 }
 const mapDispatchToProps = {
