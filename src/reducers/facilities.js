@@ -2,6 +2,18 @@ import {
   CREATE_FACILITY,
   CREATE_FACILITY_SUCCESS,
   CREATE_FACILITY_FAIL,
+  GET_FACILITIES,
+  GET_FACILITIES_SUCCESS,
+  GET_FACILITIES_FAIL,
+  GET_FACILITY_BY_FACILITYID,
+  GET_FACILITY_BY_FACILITYID_SUCCESS,
+  GET_FACILITY_BY_FACILITYID_FAIL,
+  GET_FACILITY_BY_MANAGERID,
+  GET_FACILITY_BY_MANAGERID_SUCCESS,
+  GET_FACILITY_BY_MANAGERID_FAIL,
+  GET_FACILITY_BY_TEAMID,
+  GET_FACILITY_BY_TEAMID_SUCCESS,
+  GET_FACILITY_BY_TEAMID_FAIL,
   ADD_MANAGERID_TO_FACILITY,
   ADD_MANAGERID_TO_FACILITY_SUCCESS,
   ADD_MANAGERID_TO_FACILITY_FAIL,
@@ -14,6 +26,18 @@ const initialState = {
   createFacilityLoading: false,
   facilityId: null,
   createFacilityError: null,
+  getFacilitiesError: null,
+  getFacilitiesLoading: false,
+  facilities: [],
+  getFacilityByIdError: null,
+  getFacilityByIdLoading: false,
+  specificFacility: {},
+  getFacilityByManagerIdError: null,
+  getFacilityByManagerIdLoading: false,
+  managerFacility: {},
+  getFacilityByTeamIdError: null,
+  getFacilityByTeamIdLoading: false,
+  teamFacility: {},
   addManagerIdLoading: false,
   addManagerError: null,
   managerLinkedToFaciity: false,
@@ -42,6 +66,83 @@ export default (state = initialState, action) => {
         createFacilityError: action.payload,
         createFacilityLoading: false
       };
+
+    case GET_FACILITIES:
+      return {
+        ...state,
+        getFacilitiesError: null,
+        getFacilitiesLoading: true
+      };
+    case GET_FACILITIES_SUCCESS:
+      return {
+        ...state,
+        getFacilitiesLoading: false,
+        facilities: action.payload
+      };
+    case GET_FACILITIES_FAIL:
+      return {
+        ...state,
+        getFacilitiesError: action.payload,
+        getFacilitiesLoading: false
+      };
+
+    case GET_FACILITY_BY_FACILITYID:
+      return {
+        ...state,
+        getFacilityByIdError: null,
+        getFacilityByIdLoading: true
+      };
+    case GET_FACILITY_BY_FACILITYID_SUCCESS:
+      return {
+        ...state,
+        getFacilityByIdLoading: false,
+        specificFacility: action.payload
+      };
+    case GET_FACILITY_BY_FACILITYID_FAIL:
+      return {
+        ...state,
+        getFacilityByIdError: action.payload,
+        getFacilityByIdLoading: false
+      };
+
+    case GET_FACILITY_BY_MANAGERID:
+      return {
+        ...state,
+        getFacilityByManagerIdError: null,
+        getFacilityByManagerIdLoading: true
+      };
+    case GET_FACILITY_BY_MANAGERID_SUCCESS:
+      return {
+        ...state,
+        getFacilityByManagerIdLoading: false,
+        managerFacility: action.payload
+      };
+    case GET_FACILITY_BY_MANAGERID_FAIL:
+      return {
+        ...state,
+        getFacilityByManagerIdError: action.payload,
+        getFacilityByManagerIdLoading: false
+      };
+
+    case GET_FACILITY_BY_TEAMID:
+      return {
+        ...state,
+        getFacilityByTeamIdError: null,
+        getFacilityByTeamIdLoading: true
+      };
+    case GET_FACILITY_BY_TEAMID_SUCCESS:
+      return {
+        ...state,
+        getFacilityByTeamIdLoading: false,
+        teamFacility: action.payload
+      };
+    case GET_FACILITY_BY_TEAMID_FAIL:
+      return {
+        ...state,
+        getFacilityByTeamIdError: action.payload,
+        getFacilityByTeamIdLoading: false
+      };
+
     case ADD_MANAGERID_TO_FACILITY:
       return {
         ...state,

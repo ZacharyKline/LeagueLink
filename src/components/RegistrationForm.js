@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
+  getUsers,
   createUser,
+  createUserThenLogin,
+  createUserThenLoginThenCreateTeam,
   createUserThenLoginThenAddUserIdToTeamTheRedirect,
   createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
   createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
@@ -57,6 +60,10 @@ class RegisterForm extends Component {
     userType: "parent"
   };
 
+  componentDidMount = () => {
+    this.props.getUsers(1000);
+  };
+
   handleSubmit = userType => e => {
     e.preventDefault();
     const fullName = this.state.firstName + " " + this.state.lastName;
@@ -91,7 +98,8 @@ class RegisterForm extends Component {
         console.log(
           "Create Parent, Login In User,Add Parent ID to Team, Redirect to Profile page"
         );
-        this.props.createUser(userObj);
+        //this.props.createUser(userObj);
+        this.props.createUserThenLogin(userObj);
         //this.props.registerParent(userObj);
         break;
       case "coach":
@@ -101,14 +109,17 @@ class RegisterForm extends Component {
         console.log(
           "Create Coach, Login In User, Create Team, Add Team ID to Facility, Add Team ID to Coach, Redirect to Profile Page"
         );
-        this.props.createUser(userObj);
+        //this.props.createUser(userObj);
+        //this.props.createUserThenLogin(userObj);
+        this.props.createUserThenLoginThenCreateTeam(userObj, teamObj);
         //this.props.registerCoach(userObj, teamObj);
         break;
       case "manager":
         console.log(
           "Create Manager, Login In User, Create Facility, Add Facility ID to Manager, Add ManagerId to Facility, redirect to profile page"
         );
-        this.props.createUser(userObj);
+        //this.props.createUser(userObj);
+        this.props.createUserThenLogin(userObj);
         //this.props.registerManager(userObj, facilityObj);
         break;
       default:
@@ -478,7 +489,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+  getUsers,
   createUser,
+  createUserThenLogin,
+  createUserThenLoginThenCreateTeam,
   registerParent: createUserThenLoginThenAddUserIdToTeamTheRedirect,
   registerCoach: createUserThenLoginThenCreateTeamThenAddTeamIdToCoachThenAddTeamIdToFacilityThenRedirect,
   registerManager: createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRedirect
