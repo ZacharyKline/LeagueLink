@@ -33,14 +33,14 @@ export const ADD_TEAMID_TO_FACILITY = "ADD_TEAMID_TO_FACILITY";
 export const ADD_TEAMID_TO_FACILITY_SUCCESS = "ADD_TEAMID_TO_FACILITY_SUCCESS";
 export const ADD_TEAMID_TO_FACILITY_FAIL = "ADD_TEAMID_TO_FACILITY_FAIL";
 
-const url = domain + "/facilities";
+const url = domain + "facility";
 
 export const createFacility = facilityData => (dispatch, getState) => {
   const token = getState().auth.login.token;
   dispatch({
     type: CREATE_FACILITY
   });
-  return fetch(url, {
+  return fetch(url + "/new", {
     method: "POST",
     headers: { ...jsonHeaders, Authorization: `Bearer ${token}` },
     body: JSON.stringify(facilityData)
