@@ -1,34 +1,34 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants";
 //import { createUser } from ".";
-
+//untested, may need backend additions
 export const CREATE_FACILITY = "CREATE_FACILITY";
 export const CREATE_FACILITY_SUCCESS = "CREATE_FACILITY_SUCCESS";
 export const CREATE_FACILITY_FAIL = "CREATE_FACILITY_FAIL";
-
+//untested, may need backend additions
 export const GET_FACILITIES = "GET_FACILITIES";
 export const GET_FACILITIES_SUCCESS = "GET_FACILITIES_SUCCESS";
 export const GET_FACILITIES_FAIL = "GET_FACILITIES_FAIL";
-
+//untested, may need backend additions
 export const GET_FACILITY_BY_FACILITYID = "GET_FACILITY_BY_FACILITYID";
 export const GET_FACILITY_BY_FACILITYID_SUCCESS =
   "GET_FACILITY_BY_FACILITYID_SUCCESS";
 export const GET_FACILITY_BY_FACILITYID_FAIL =
   "GET_FACILITY_BY_FACILITYID_FAIL";
-
+//untested, may need backend additions
 export const GET_FACILITY_BY_MANAGERID = "GET_FACILITY_BY_MANAGERID";
 export const GET_FACILITY_BY_MANAGERID_SUCCESS =
   "GET_FACILITY_BY_MANAGERID_SUCCESS";
 export const GET_FACILITY_BY_MANAGERID_FAIL = "GET_FACILITY_BY_MANAGERID_FAIL";
-
+//untested, may need backend additions
 export const GET_FACILITY_BY_TEAMID = "GET_FACILITY_BY_TEAMID";
 export const GET_FACILITY_BY_TEAMID_SUCCESS = "GET_FACILITY_BY_TEAMID_SUCCESS";
 export const GET_FACILITY_BY_TEAMID_FAIL = "GET_FACILITY_BY_TEAMID_FAIL";
-
+//untested, may need backend additions
 export const ADD_MANAGERID_TO_FACILITY = "ADD_MANAGERID_TO_FACILITY";
 export const ADD_MANAGERID_TO_FACILITY_SUCCESS =
   "ADD_MANAGERID_TO_FACILITY_SUCCESS";
 export const ADD_MANAGERID_TO_FACILITY_FAIL = "ADD_MANAGERID_TO_FACILITY_FAIL";
-
+//untested, may need backend additions
 export const ADD_TEAMID_TO_FACILITY = "ADD_TEAMID_TO_FACILITY";
 export const ADD_TEAMID_TO_FACILITY_SUCCESS = "ADD_TEAMID_TO_FACILITY_SUCCESS";
 export const ADD_TEAMID_TO_FACILITY_FAIL = "ADD_TEAMID_TO_FACILITY_FAIL";

@@ -1,43 +1,57 @@
 import {
+  //mostly working, not adding all information correctly to user in db
   CREATE_USER,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAIL,
+  //working, but packaging of data and the keys need to be looked at to get the data
   GET_USERS,
   GET_USERS_SUCCESS,
   GET_USERS_FAIL,
+  //I have not tested
   EDIT_PROFILE,
   EDIT_PROFILE_SUCCESS,
   EDIT_PROFILE_FAIL,
+  //working, same issues as get users
   GET_PARENTS,
   GET_PARENTS_SUCCESS,
   GET_PARENTS_FAIL,
+  //not working, get error
   GET_PARENT_BY_PARENTID,
   GET_PARENT_BY_PARENTID_SUCCESS,
   GET_PARENT_BY_PARENTID_FAIL,
+  //not set up to work yet, will need addition to backend
   GET_PARENTS_BY_TEAMID,
   GET_PARENTS_BY_TEAMID_SUCCESS,
   GET_PARENTS_BY_TEAMID_FAIL,
+  //working, same issues as get users
   GET_COACHES,
   GET_COACHES_SUCCESS,
   GET_COACHES_FAIL,
+  //not working, get error
   GET_COACH_BY_COACHID,
   GET_COACH_BY_COACHID_SUCCESS,
   GET_COACH_BY_COACHID_FAIL,
+  //not set up to work yet, will need addition to backend
   GET_COACH_BY_TEAMID,
   GET_COACH_BY_TEAMID_SUCCESS,
   GET_COACH_BY_TEAMID_FAIL,
+  //not set up to work yet, will need addition to backend
   GET_COACHES_BY_FACILITYID,
   GET_COACHES_BY_FACILITYID_SUCCESS,
   GET_COACHES_BY_FACILITYID_FAIL,
+  //working same issues as get users
   GET_MANAGERS,
   GET_MANAGERS_SUCCESS,
   GET_MANAGERS_FAIL,
+  //not working get error
   GET_MANAGER_BY_MANAGERID,
   GET_MANAGER_BY_MANAGERID_SUCCESS,
   GET_MANAGER_BY_MANAGERID_FAIL,
+  //not set up to work yet, will need addition to backend
   GET_MANAGER_BY_FACILITYID,
   GET_MANAGER_BY_FACILITYID_SUCCESS,
   GET_MANAGER_BY_FACILITYID_FAIL,
+  //not set up to work yet, will need addition to backend
   ADD_FACILITYID_TO_USER,
   ADD_FACILITYID_TO_USER_SUCCESS,
   ADD_FACILITYID_TO_USER_FAIL
