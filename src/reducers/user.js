@@ -54,7 +54,9 @@ import {
   //not set up to work yet, will need addition to backend
   ADD_FACILITYID_TO_USER,
   ADD_FACILITYID_TO_USER_SUCCESS,
-  ADD_FACILITYID_TO_USER_FAIL
+  ADD_FACILITYID_TO_USER_FAIL,
+
+  GET_USER_BY_ID
 } from "../actions";
 
 const initialState = {
@@ -96,9 +98,6 @@ const initialState = {
   facilityManager: {},
   addFacilityIdToUserError: null,
   addFacilityIdToUserLoading: false,
-  name: "",
-  contactPhone: "",
-  teamAffiliation: "",
   editUserLoading: false,
   editUserError: null
 };
@@ -127,10 +126,13 @@ export default (state = initialState, action) => {
         getUsersError: null
       };
     case GET_USERS_SUCCESS:
+      // const loggedUser = action.payload.foundUsers[0]
       return {
         ...state,
         users: action.payload.foundUsers,
-        getUsersLoading: false
+        getUsersLoading: false,
+        // user: loggedUser
+
       };
     case GET_USERS_FAIL:
       return {
@@ -362,7 +364,12 @@ export default (state = initialState, action) => {
         editUserError: action.payload,
         editUserLoading: false
       };
-
+    case GET_USER_BY_ID:
+      const foundUser = state.users.find(user => user._id === action.payload)
+      return {
+        ...state,
+        user: foundUser
+      }
     default:
       return state;
   }
