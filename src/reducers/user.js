@@ -55,8 +55,9 @@ import {
   ADD_FACILITYID_TO_USER,
   ADD_FACILITYID_TO_USER_SUCCESS,
   ADD_FACILITYID_TO_USER_FAIL,
-
-  GET_USER_BY_ID
+  GET_USER_BY_ID,
+  GET_USER_BY_ID_SUCCESS,
+  GET_USER_BY_ID_FAIL
 } from "../actions";
 
 const initialState = {
@@ -99,7 +100,9 @@ const initialState = {
   addFacilityIdToUserError: null,
   addFacilityIdToUserLoading: false,
   editUserLoading: false,
-  editUserError: null
+  editUserError: null,
+  getUserByIdError: null,
+  getUserByIdLoading: false
 };
 
 export default (state = initialState, action) => {
@@ -130,9 +133,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: action.payload.foundUsers,
-        getUsersLoading: false,
+        getUsersLoading: false
         // user: loggedUser
-
       };
     case GET_USERS_FAIL:
       return {
@@ -365,11 +367,23 @@ export default (state = initialState, action) => {
         editUserLoading: false
       };
     case GET_USER_BY_ID:
-      const foundUser = state.users.find(user => user._id === action.payload)
       return {
         ...state,
-        user: foundUser
-      }
+        getUserByIdLoading: true,
+        getUserByIdError: null
+      };
+    case GET_USER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.foundUser,
+        getUserByIdLoading: false
+      };
+    case GET_USER_BY_ID_FAIL:
+      return {
+        ...state,
+        getUserByIdLoading: false,
+        getUserByIdError: action.payload
+      };
     default:
       return state;
   }

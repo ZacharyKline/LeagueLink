@@ -1,5 +1,3 @@
-//////////  Brett work
-
 import React, { Component } from "react";
 import { Navbar } from ".";
 import {
@@ -12,8 +10,8 @@ import {
   Popconfirm,
   message
 } from "antd";
-// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { getUserById } from "../actions";
 
 const text = "Are you sure to delete this Account?";
 
@@ -26,6 +24,9 @@ function onPanelChange(value, mode) {
 }
 
 class Profile extends Component {
+  componentDidMount() {
+    this.props.getUserById(this.props.login.id);
+  }
   render() {
     return (
       <React.Fragment>
@@ -82,7 +83,7 @@ class Profile extends Component {
                     <br />
                     Contact Info {this.props.phone}
                     <br />
-                    Team Affiliation
+                    Team Affiliation(s)
                   </Card>
                   {/* <Link to="/editprofile">
                     <Button type="dashed" style={{
@@ -154,13 +155,15 @@ class Profile extends Component {
 
 function mapStateToProps({ users, auth }) {
   return {
-    id: auth.login.id,
+    login: auth.login,
     fullName: users.user.fullName,
     phone: users.user.phone,
     TeamIds: users.user.TeamIds
   };
 }
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getUserById
+};
 
 export default connect(
   mapStateToProps,
