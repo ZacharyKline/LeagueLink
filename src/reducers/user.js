@@ -166,7 +166,7 @@ export default (state = initialState, action) => {
     case GET_PARENT_BY_PARENTID_SUCCESS:
       return {
         ...state,
-        specificParent: action.payload.user,
+        specificParent: action.payload.foundParent,
         getParentByIdLoading: false
       };
     case GET_PARENT_BY_PARENTID_FAIL:
@@ -223,7 +223,7 @@ export default (state = initialState, action) => {
     case GET_COACH_BY_COACHID_SUCCESS:
       return {
         ...state,
-        specificCoach: action.payload,
+        specificCoach: action.payload.foundCoach,
         getCoachByIdLoading: false
       };
     case GET_COACH_BY_COACHID_FAIL:
@@ -299,7 +299,7 @@ export default (state = initialState, action) => {
     case GET_MANAGER_BY_MANAGERID_SUCCESS:
       return {
         ...state,
-        specificManager: action.payload,
+        specificManager: action.payload.foundManager,
         getManagerByIdLoading: false
       };
     case GET_MANAGER_BY_MANAGERID_FAIL:
