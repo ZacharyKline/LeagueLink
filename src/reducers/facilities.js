@@ -19,7 +19,10 @@ import {
   ADD_MANAGERID_TO_FACILITY_FAIL,
   ADD_TEAMID_TO_FACILITY,
   ADD_TEAMID_TO_FACILITY_SUCCESS,
-  ADD_TEAMID_TO_FACILITY_FAIL
+  ADD_TEAMID_TO_FACILITY_FAIL,
+  UPDATE_FACILITY,
+  UPDATE_FACILITY_SUCCESS,
+  UPDATE_FACILITY_FAIL
 } from "../actions";
 
 const initialState = {
@@ -43,7 +46,11 @@ const initialState = {
   managerLinkedToFaciity: false,
   addTeamIdLoading: false,
   addTeamIdError: null,
-  teamLinkedToFaciity: false
+  teamLinkedToFaciity: false,
+  updateFacilityLoading: false,
+  updateFacilityError: null,
+  updateFacility: null
+
 };
 
 export default (state = initialState, action) => {
@@ -180,6 +187,24 @@ export default (state = initialState, action) => {
         addTeamIdError: action.payload,
         addTeamIdLoading: false
       };
+    case UPDATE_FACILITY:
+      return {
+        ...state,
+        updateFacilityLoading: true,
+        updateFacilityError: null
+      }
+    case UPDATE_FACILITY_SUCCESS:
+      return {
+        ...state,
+        updateFacility: action.payload.foundFacility,
+        updateFacilityLoading: null
+      }
+    case UPDATE_FACILITY_FAIL:
+      return {
+        ...state,
+        updateFacilityLoading: false,
+        updateFacilityError: action.payload
+      }
     default:
       return state;
   }

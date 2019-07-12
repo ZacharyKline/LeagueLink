@@ -112,7 +112,7 @@ class LoginForm extends Component {
                 Submit
               </Button>
               <br />
-              <Button
+              {/* <Button
                 onClick={this.handleForgotPassword}
                 style={{
                   backgroundColor: "rgb(74, 162, 197)",
@@ -123,7 +123,7 @@ class LoginForm extends Component {
                 }}
               >
                 Forgot Password
-              </Button>
+              </Button> */}
             </Form.Item>
             <Link
               to={"/registration"}

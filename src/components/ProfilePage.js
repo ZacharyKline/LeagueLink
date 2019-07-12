@@ -7,17 +7,13 @@ import {
   Button,
   Calendar,
   Avatar,
-  Popconfirm,
-  message
+  Popconfirm
 } from "antd";
 import { connect } from "react-redux";
 import { getUserById } from "../actions";
-
+import { deleteUserThenGoToLoginPage as handleDeleteUser} from '../actions'
 const text = "Are you sure to delete this Account?";
 
-function confirm() {
-  message.info("Clicked on Yes.");
-}
 
 function onPanelChange(value, mode) {
   console.log(value, mode);
@@ -81,9 +77,10 @@ class Profile extends Component {
                     <br />
                     Name: {this.props.fullName}
                     <br />
-                    Contact Info {this.props.phone}
+                    Contact Info: {this.props.phone}
+
                     <br />
-                    Team Affiliation(s)
+                    Account Type: {this.props.userLevel}
                   </Card>
                   {/* <Link to="/editprofile">
                     <Button type="dashed" style={{
@@ -96,14 +93,15 @@ class Profile extends Component {
                   <Popconfirm
                     placement="top"
                     title={text}
-                    onConfirm={confirm}
+                    onConfirm={this.props.handleDeleteUser}
                     okText="Yes"
                     cancelText="No"
                   >
                     <Button
+                      
                       span={8}
                       offset={4}
-                      type="dashed "
+                      type='submit'
                       style={{
                         border: "2px rgba(0, 53, 89, 1) solid",
                         borderRadius: "25px"
@@ -158,11 +156,13 @@ function mapStateToProps({ users, auth }) {
     login: auth.login,
     fullName: users.user.fullName,
     phone: users.user.phone,
-    TeamIds: users.user.TeamIds
+    TeamIds: users.user.TeamIds,
+    userLevel: users.user.userLevel
   };
 }
 const mapDispatchToProps = {
-  getUserById
+  getUserById,
+  handleDeleteUser
 };
 
 export default connect(
