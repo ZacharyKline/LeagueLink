@@ -183,23 +183,6 @@ class CalendarPage extends Component {
               This is where when you click on an event the information will go
             </Sider>
           </Layout>
-          <Layout>
-            <Header
-              style={{
-                color: "rgba(0, 53, 89, 1)",
-                backgroundColor: "rgb(74, 162, 197)",
-                padding: "10px",
-                border: "5px rgba(0, 53, 89, 1) solid",
-                borderRadius: "5px",
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                textAlign: "center"
-              }}
-            >
-              2nd area
-            </Header>
-          </Layout>
         </div>
       </React.Fragment>
     );
