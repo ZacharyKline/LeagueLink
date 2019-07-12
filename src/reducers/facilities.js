@@ -196,7 +196,7 @@ export default (state = initialState, action) => {
     case UPDATE_FACILITY_SUCCESS:
       return {
         ...state,
-        updateFacility: action.payload,
+        updateFacility: action.payload.foundFacility,
         updateFacilityLoading: null
       }
     case UPDATE_FACILITY_FAIL:
