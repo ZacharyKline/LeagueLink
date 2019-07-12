@@ -33,6 +33,10 @@ export const ADD_TEAMID_TO_FACILITY = "ADD_TEAMID_TO_FACILITY";
 export const ADD_TEAMID_TO_FACILITY_SUCCESS = "ADD_TEAMID_TO_FACILITY_SUCCESS";
 export const ADD_TEAMID_TO_FACILITY_FAIL = "ADD_TEAMID_TO_FACILITY_FAIL";
 
+export const UPDATE_FACILITY = 'UPDATE_FACILITY';
+export const UPDATE_FACILITY_SUCCESS = 'UPDATE_FACILITY_SUCCESS';
+export const UPDATE_FACILITY_FAIL = 'UPDATE_FACILITY_FAIL'
+
 const url = domain + "facility";
 
 export const createFacility = facilityData => (dispatch, getState) => {
@@ -196,3 +200,25 @@ export const addTeamIdToFacility = dataObj => (dispatch, getState) => {
       );
     });
 };
+
+export const updateFacility = facilityData => (dispatch, getState) => {
+  const token = getState().auth.login.token;
+  dispatch({ type: UPDATE_FACILITY});
+  return fetch(url + `/${facilityData.facilityId}`, {
+    method: 'PUT',
+    headers: { ...jsonHeaders, Authorization: `Bearer ${token}` },
+    body: JSON.stringify(facilityData)
+  })
+  .then(handleJsonResponse)
+  .then(result => {
+    return dispatch({
+      type: UPDATE_FACILITY_SUCCESS,
+      payload: result
+    });
+  })
+  .catch(err => {
+    return Promise.reject(
+      dispatch({ type: UPDATE_FACILITY_FAIL, payload: err.message })
+    );
+  });
+}
