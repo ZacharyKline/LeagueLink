@@ -358,7 +358,7 @@ const handleDeleteUser = () => (dispatch, getState) => {
   const id = getState().auth.login.id;
   const token = getState().auth.login.token;
 
-  return fetch(url + id, {
+  return fetch(url + `/${id}`, {
     method: "DELETE",
     headers: {
       ...jsonHeaders,
@@ -367,6 +367,7 @@ const handleDeleteUser = () => (dispatch, getState) => {
   })
     .then(handleJsonResponse)
     .then(result => {
+      console.log(result)
       return dispatch({
         type: DELETE_USER_SUCCESS,
         payload: result
