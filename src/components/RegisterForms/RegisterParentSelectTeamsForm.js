@@ -23,9 +23,7 @@ class RegisterParentSelectTeamsForm extends Component {
         <div className="ulContainerDiv">
           <ul style={{ listStyle: "none" }}>
             {teams.map(team => {
-              let index = coaches.findIndex(
-                coach => coach.id === team.coachIds[0]
-              );
+              let index = coaches.findIndex(coach => coach.id === team.coachId);
               let currentCoachName = coaches[index].name;
               return (
                 <li key={team.id} className="liTeam">

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 //import { connect } from "react-redux";
+import { Icon } from "antd";
 
 class TimeBlock extends Component {
   state = {
@@ -13,17 +14,31 @@ class TimeBlock extends Component {
   handleToggle = e => {
     switch (this.state.status) {
       case "okay":
-        return this.setState({ status: "conflict" });
+        return this.setState({ status: "conflict", iconType: "meh" });
       case "conflict":
-        return this.setState({ status: "impossible" });
+        return this.setState({ status: "impossible", iconType: "frown" });
       case "impossible":
-        return this.setState({ status: "okay" });
+        return this.setState({ status: "okay", iconType: "smile" });
       default:
         return this.state;
     }
   };
 
   render() {
+    let faceIcon =
+      this.state.status === "okay"
+        ? "smile"
+        : this.state.status === "conflict"
+        ? "meh"
+        : "frown";
+
+    let iconStyle =
+      this.state.status === "okay"
+        ? { color: "rgb(74, 112, 4)", fontSize: "25px" }
+        : this.state.status === "conflict"
+        ? { color: "rgb(131, 68, 10)", fontSize: "25px" }
+        : { color: "rgb(74, 162, 197)", fontSize: "25px" };
+
     let statusStyle =
       this.state.status === "okay"
         ? {
@@ -65,6 +80,8 @@ class TimeBlock extends Component {
     return (
       <div onClick={this.handleToggle} style={statusStyle}>
         {this.state.start} - {this.state.end}
+        <br />
+        <Icon type={faceIcon} style={iconStyle} />
       </div>
     );
   }
