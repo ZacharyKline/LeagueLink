@@ -53,14 +53,14 @@
   padding: 20px;
   border: 5px rgba(0, 53, 89, 1) solid;
   border-radius: 5px;
-  max-width: 390px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
 }
 
 .timeBlockDiv {
   background: rgb(74, 162, 197);
-  height: 570px;
+  height: 590px;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -83,4 +83,13 @@
   background-color: rgb(235, 236, 238);
   font-size: 16px;
   line-height: 50px;
+}
+
+.buttonStyle {
+  background: linear-gradient(rgb(8, 77, 121), rgba(0, 53, 89, 1));
+  color: rgb(161, 233, 29);
+  border: 2px rgb(130, 184, 31) solid;
+  border-radius: 25px;
+  font-size: large;
+  min-width: 120px;
 }

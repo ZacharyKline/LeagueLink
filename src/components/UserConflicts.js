@@ -34,55 +34,58 @@ class UserConflicts extends Component {
     timeBlock4: "",
     timeBlock5: "",
     timeBlock6: "",
-    timeBlock7: ""
+    timeBlock7: "",
+    click1: true
   };
 
-  handleObjectToPost = () => {
-    if (this.state.dateSelected) {
-      const dataObj = {
-        year: this.state.selectedYear,
-        month: this.state.selectedMonth,
-        day: this.state.selectedDay,
-        userId: this.props.myLogin.id
-      };
-      const data = {};
-      if (this.state.timeBlock1 !== "okay") {
-        data[1] = this.state.timeBlock1;
-      }
-      if (this.state.timeBlock2 !== "okay") {
-        data[2] = this.state.timeBlock2;
-      }
-      if (this.state.timeBlock3 !== "okay") {
-        data[3] = this.state.timeBlock3;
-      }
-      if (this.state.timeBlock4 !== "okay") {
-        data[4] = this.state.timeBlock4;
-      }
-      if (this.state.timeBlock5 !== "okay") {
-        data[5] = this.state.timeBlock5;
-      }
-      if (this.state.timeBlock6 !== "okay") {
-        data[6] = this.state.timeBlock6;
-      }
-      if (this.state.timeBlock7 !== "okay") {
-        data[7] = this.state.timeBlock7;
-      }
-      dataObj[data] = data;
-      this.setState({
-        dateSelected: false,
-        currentDate: this.state.selectedDate.toDateString()
-      });
-      console.log(dataObj);
-      return dataObj;
+  handleSave = () => {
+    const dataObj = {
+      year: this.state.selectedYear,
+      month: this.state.selectedMonth,
+      day: this.state.selectedDay,
+      userId: this.props.myLogin.id
+    };
+    const data = {};
+    if (this.state.timeBlock1 !== "okay") {
+      data[1] = this.state.timeBlock1;
     }
+    if (this.state.timeBlock2 !== "okay") {
+      data[2] = this.state.timeBlock2;
+    }
+    if (this.state.timeBlock3 !== "okay") {
+      data[3] = this.state.timeBlock3;
+    }
+    if (this.state.timeBlock4 !== "okay") {
+      data[4] = this.state.timeBlock4;
+    }
+    if (this.state.timeBlock5 !== "okay") {
+      data[5] = this.state.timeBlock5;
+    }
+    if (this.state.timeBlock6 !== "okay") {
+      data[6] = this.state.timeBlock6;
+    }
+    if (this.state.timeBlock7 !== "okay") {
+      data[7] = this.state.timeBlock7;
+    }
+    dataObj[data] = data;
+    this.setState({
+      dateSelected: false,
+      currentDate: this.state.selectedDate.toDateString()
+    });
+    console.log(dataObj);
+    return dataObj;
   };
 
   handleSelect = value => {
-    if (this.state.dateSelected) {
-      this.handleObjectToPost();
+    if (!this.state.click1) {
+      this.setState({
+        currentDate: this.state.selectedDate.toDateString(),
+        click1: true
+      });
     } else {
-      this.setState({ dateSelected: true });
+      this.setState({ currentDate: "", click1: false });
     }
+
     let selectedDate = value._d;
     let selectedMonth = value.get("month");
     let selectedDay = value.get("date");
@@ -95,6 +98,7 @@ class UserConflicts extends Component {
       selectedDay: selectedDay,
       selectedYear: selectedYear
     });
+
     return this.handleBlocks();
   };
 
@@ -270,6 +274,11 @@ class UserConflicts extends Component {
                     A column of blocks will appear. Each block represents 2
                     hours.
                   </li>
+                  <li>
+                    IMPORTANT! Make sure the date is displayed above the blocks
+                    is correct. If you do not see a date, click on the
+                    calandar's date again.
+                  </li>
                   <li>If a time works, leave it green.</li>
                   <li>
                     If a time is inconvenient, click on it once and it will turn
@@ -284,11 +293,9 @@ class UserConflicts extends Component {
                     the correct color
                   </li>
                   <li>
-                    When you are done with the conflicts for the date, simply
-                    doubleClick another date you wish to change.
-                  </li>
-                  <li>
-                    Your changes will be saved and accessible to your coach.
+                    When you are satisfied with the conflicts for a particluar
+                    date, click the "save changes" button before selecting a new
+                    date.
                   </li>
                 </ul>
               </div>
@@ -317,6 +324,11 @@ class UserConflicts extends Component {
                     />
                   );
                 })}
+              {this.state.selectedDate !== null && (
+                <button className="buttonStyle" onClick={this.handleSave}>
+                  Save Changes
+                </button>
+              )}
             </div>
           </div>
         </div>
