@@ -26,6 +26,7 @@
   border-bottom: 5px solid rgb(74, 112, 4);
   border-right: 5px solid rgb(99, 150, 5);
   font-size: 16px;
+  user-select: none;
 }
 
 .conflict {
@@ -35,6 +36,7 @@
   border-bottom: 5px solid rgb(248, 201, 114);
   border-right: 5px solid rgb(247, 187, 75);
   font-size: 16px;
+  user-select: none;
 }
 
 .impossible {
@@ -42,4 +44,43 @@
   border: 5px solid rgba(0, 53, 89, 1);
   color: rgb(161, 233, 29);
   font-size: 16px;
+  user-select: none;
+}
+
+.instructionsDiv {
+  color: rgba(0, 53, 89, 1);
+  background-color: rgb(235, 236, 238);
+  padding: 20px;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  max-width: 390px;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeBlockDiv {
+  background: rgb(74, 162, 197);
+  height: 570px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  margin: 5px;
+  margin-left: 15px;
+}
+
+.date {
+  height: 60px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+  color: rgba(0, 53, 89, 1);
+  border: 5px rgba(0, 53, 89, 1) solid;
+  background-color: rgb(235, 236, 238);
+  font-size: 16px;
+  line-height: 50px;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Calendar, Icon } from "antd";
-import { Navbar, TimeBlock, RegisterHeader, Day } from ".";
+import { Calendar } from "antd";
+import { Navbar, TimeBlock, RegisterHeader } from ".";
 import {
   getTimeBlocksByUserId,
   updateTimeBlock,
@@ -10,13 +10,10 @@ import {
 } from "../actions";
 import moment from "moment";
 import "../userConflicts.css";
-import dates from "../dates.json";
 import monthDefaultOkay from "../monthDefaultOkay.json";
 import fakeBackendMonth from "../fakeBackendMonth.json";
-import dayDefaultOkay from "../dayDefaultOkay.json";
 
 class UserConflicts extends Component {
-  //view should be renamed, but I don't know what to name it. true = calendar, false = list
   state = {
     value: null,
     selectedDate: null,
@@ -24,6 +21,8 @@ class UserConflicts extends Component {
     selectedMonth: null,
     selectedDay: null,
     selectedYear: null,
+    dateSelected: false,
+    currentDate: "",
     year: 2020,
     firstMonth: 3,
     lastMonth: 6,
@@ -38,70 +37,152 @@ class UserConflicts extends Component {
     timeBlock7: ""
   };
 
+  handleObjectToPost = () => {
+    if (this.state.dateSelected) {
+      const dataObj = {
+        year: this.state.selectedYear,
+        month: this.state.selectedMonth,
+        day: this.state.selectedDay,
+        userId: this.props.myLogin.id
+      };
+      const data = {};
+      if (this.state.timeBlock1 !== "okay") {
+        data[1] = this.state.timeBlock1;
+      }
+      if (this.state.timeBlock2 !== "okay") {
+        data[2] = this.state.timeBlock2;
+      }
+      if (this.state.timeBlock3 !== "okay") {
+        data[3] = this.state.timeBlock3;
+      }
+      if (this.state.timeBlock4 !== "okay") {
+        data[4] = this.state.timeBlock4;
+      }
+      if (this.state.timeBlock5 !== "okay") {
+        data[5] = this.state.timeBlock5;
+      }
+      if (this.state.timeBlock6 !== "okay") {
+        data[6] = this.state.timeBlock6;
+      }
+      if (this.state.timeBlock7 !== "okay") {
+        data[7] = this.state.timeBlock7;
+      }
+      dataObj[data] = data;
+      this.setState({
+        dateSelected: false,
+        currentDate: this.state.selectedDate.toDateString()
+      });
+      console.log(dataObj);
+      return dataObj;
+    }
+  };
+
   handleSelect = value => {
+    if (this.state.dateSelected) {
+      this.handleObjectToPost();
+    } else {
+      this.setState({ dateSelected: true });
+    }
     let selectedDate = value._d;
     let selectedMonth = value.get("month");
     let selectedDay = value.get("date");
+    let selectedYear = value.get("year");
 
     this.setState({
       value,
       selectedDate: selectedDate,
       selectedMonth: selectedMonth,
-      selectedDay: selectedDay
+      selectedDay: selectedDay,
+      selectedYear: selectedYear
     });
     return this.handleBlocks();
   };
 
   handleBlocks = () => {
-    let number = this.selectedDate !== null ? this.state.selectedDay : 1;
+    let number = this.selectedDate !== null ? this.state.selectedDay : 0;
     let monthObj = this.fillOutMonth();
     let currentDay = monthObj[number];
-    console.log(currentDay);
     let block1 = currentDay !== undefined ? currentDay[1] : undefined;
     block1 = block1 === undefined ? "okay" : block1;
-    this.state.timeBlock1 = block1 === undefined ? "okay" : block1;
     let block2 = currentDay !== undefined ? currentDay[2] : undefined;
     block2 = block2 === undefined ? "okay" : block2;
-    this.state.timeBlock2 = block2 === undefined ? "okay" : block2;
     let block3 = currentDay !== undefined ? currentDay[3] : undefined;
     block3 = block3 === undefined ? "okay" : block3;
-    this.state.timeBlock3 = block3 === undefined ? "okay" : block3;
     let block4 = currentDay !== undefined ? currentDay[4] : undefined;
     block4 = block4 === undefined ? "okay" : block4;
-    this.state.timeBlock4 = block4 === undefined ? "okay" : block4;
     let block5 = currentDay !== undefined ? currentDay[5] : undefined;
     block5 = block5 === undefined ? "okay" : block5;
-    this.state.timeBlock5 = block5 === undefined ? "okay" : block5;
     let block6 = currentDay !== undefined ? currentDay[6] : undefined;
     block6 = block6 === undefined ? "okay" : block6;
-    this.state.timeBlock6 = block6 === undefined ? "okay" : block6;
     let block7 = currentDay !== undefined ? currentDay[7] : undefined;
     block7 = block7 === undefined ? "okay" : block7;
-    this.state.timeBlock7 = block7 === undefined ? "okay" : block7;
-    let hourBlocks = [
-      this.state.timeBlock1,
-      this.state.timeBlock2,
-      this.state.timeBlock3,
-      this.state.timeBlock4,
-      this.state.timeBlock5,
-      this.state.timeBlock6,
-      this.state.timeBlock7
-    ];
-    return hourBlocks;
+    return this.setState({
+      timeBlock1: block1,
+      timeBlock2: block2,
+      timeBlock3: block3,
+      timeBlock4: block4,
+      timeBlock5: block5,
+      timeBlock6: block6,
+      timeBlock7: block7
+    });
   };
 
-  handleClick = (hourBlocks, hourblock, i) => e => {
-    console.log("click");
-    console.log(hourblock);
-    console.log(i);
+  handleClick = (hourblock, i) => e => {
     if (i === 0) {
       if (this.state.timeBlock1 === "okay") {
-        console.log("change");
         return this.setState({ timeBlock1: "conflict" });
       } else if (hourblock === "conflict") {
         return this.setState({ timeBlock1: "impossible" });
       } else if (hourblock === "impossible") {
         return this.setState({ timeBlock1: "okay" });
+      }
+    } else if (i === 1) {
+      if (this.state.timeBlock2 === "okay") {
+        return this.setState({ timeBlock2: "conflict" });
+      } else if (hourblock === "conflict") {
+        return this.setState({ timeBlock2: "impossible" });
+      } else if (hourblock === "impossible") {
+        return this.setState({ timeBlock2: "okay" });
+      }
+    } else if (i === 2) {
+      if (this.state.timeBlock3 === "okay") {
+        return this.setState({ timeBlock3: "conflict" });
+      } else if (hourblock === "conflict") {
+        return this.setState({ timeBlock3: "impossible" });
+      } else if (hourblock === "impossible") {
+        return this.setState({ timeBlock3: "okay" });
+      }
+    } else if (i === 3) {
+      if (this.state.timeBlock4 === "okay") {
+        return this.setState({ timeBlock4: "conflict" });
+      } else if (hourblock === "conflict") {
+        return this.setState({ timeBlock4: "impossible" });
+      } else if (hourblock === "impossible") {
+        return this.setState({ timeBlock4: "okay" });
+      }
+    } else if (i === 4) {
+      if (this.state.timeBlock5 === "okay") {
+        return this.setState({ timeBlock5: "conflict" });
+      } else if (hourblock === "conflict") {
+        return this.setState({ timeBlock5: "impossible" });
+      } else if (hourblock === "impossible") {
+        return this.setState({ timeBlock5: "okay" });
+      }
+    } else if (i === 5) {
+      if (this.state.timeBlock6 === "okay") {
+        return this.setState({ timeBlock6: "conflict" });
+      } else if (hourblock === "conflict") {
+        return this.setState({ timeBlock6: "impossible" });
+      } else if (hourblock === "impossible") {
+        return this.setState({ timeBlock6: "okay" });
+      }
+    } else if (i === 6) {
+      if (this.state.timeBlock7 === "okay") {
+        return this.setState({ timeBlock7: "conflict" });
+      } else if (hourblock === "conflict") {
+        return this.setState({ timeBlock7: "impossible" });
+      } else if (hourblock === "impossible") {
+        return this.setState({ timeBlock7: "okay" });
       }
     }
   };
@@ -113,10 +194,15 @@ class UserConflicts extends Component {
   };
 
   render() {
-    let number = this.selectedDate !== null ? this.state.selectedDay : 1;
-    let monthObj = this.fillOutMonth();
-    let currentDay = monthObj[number];
-    let hourBlocks = this.handleBlocks(currentDay);
+    let hourBlocks = [
+      this.state.timeBlock1,
+      this.state.timeBlock2,
+      this.state.timeBlock3,
+      this.state.timeBlock4,
+      this.state.timeBlock5,
+      this.state.timeBlock6,
+      this.state.timeBlock7
+    ];
 
     let hours = [
       "8AM - 10AM",
@@ -176,31 +262,18 @@ class UserConflicts extends Component {
                 />
               </div>
               <br />
-              <div
-                style={{
-                  color: "rgba(0, 53, 89, 1)",
-                  backgroundColor: "rgb(235, 236, 238)",
-                  padding: "20px",
-                  border: "5px rgba(0, 53, 89, 1) solid",
-                  borderRadius: "5px",
-                  maxWidth: "390px",
-
-                  display: "flex",
-                  flexDirection: "column"
-                  //boxSizing: "border-box"
-                }}
-              >
+              <div className="instructionsDiv">
                 <h4>Instructions:</h4>
                 <ul>
-                  <li>Select a date from calandar.</li>
+                  <li>Double click a date from calandar.</li>
                   <li>
-                    A column of green blocks will appear. Each block represents
-                    2 hours for the selected date.
+                    A column of blocks will appear. Each block represents 2
+                    hours.
                   </li>
                   <li>If a time works, leave it green.</li>
                   <li>
-                    If a time works but is inconvenient, click on it once and it
-                    will turn orange.
+                    If a time is inconvenient, click on it once and it will turn
+                    orange.
                   </li>
                   <li>
                     If a time is impossible, click it twice and it will turn
@@ -212,28 +285,19 @@ class UserConflicts extends Component {
                   </li>
                   <li>
                     When you are done with the conflicts for the date, simply
-                    select the next date you wish to change. Your changes will
-                    be saved and accessible to your coach.
+                    doubleClick another date you wish to change.
+                  </li>
+                  <li>
+                    Your changes will be saved and accessible to your coach.
                   </li>
                 </ul>
               </div>
             </div>
 
-            <div
-              style={{
-                background: "rgb(74, 162, 197)",
-                height: "570px",
-                width: "200px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                border: "5px rgba(0, 53, 89, 1) solid",
-                borderRadius: "5px",
-                margin: "5px",
-                marginLeft: "15px"
-              }}
-            >
+            <div className="timeBlockDiv">
+              {this.state.selectedDate !== null && (
+                <div className="date">{this.state.currentDate}</div>
+              )}
               {this.state.selectedDate !== null &&
                 hourBlocks.map((hourblock, i) => {
                   let faceIcon =
@@ -245,11 +309,11 @@ class UserConflicts extends Component {
                   return (
                     <TimeBlock
                       key={i}
-                      className={"block" + " " + hourBlocks[i]}
+                      className={`block ${hourBlocks[i]}`}
                       status={hourBlocks[i]}
                       hours={hours[i]}
                       type={faceIcon}
-                      onClick={this.handleClick(hourBlocks, hourblock, i)}
+                      onClick={this.handleClick(hourblock, i)}
                     />
                   );
                 })}
@@ -278,51 +342,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(UserConflicts);
-
-/*<div
-                  style={{
-                    background: "rgb(74, 162, 197)",
-                    height: "570px",
-                    width: "200px",
-                    display: "flex",
-                    flexBasis: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    border: "5px rgba(0, 53, 89, 1) solid",
-                    borderRadius: "5px"
-                  }}
-                >
-                  <div>
-                    <div
-                      style={{
-                        height: "30px",
-                        width: "160px",
-
-                        textAlign: "center",
-                        border: "5px rgb(161, 233, 29) solid",
-                        borderRadius: "5px",
-                        color: "rgb(161, 233, 29)",
-                        background: "rgba(0, 53, 89, 1)"
-                      }}
-                    >
-                      {this.state.selectedDate.toDateString()}
-                    </div>
-                    {dates
-                      .find(
-                        day =>
-                          day.date === this.state.selectedDate.toDateString()
-                      )
-                      .timeBlocks.map(timeBlock => {
-                        return (
-                          <TimeBlock
-                            key={timeBlock.id}
-                            date={this.state.selectedDate.toDateString()}
-                            status={timeBlock.status}
-                            start={timeBlock.start}
-                            id={timeBlock.id}
-                            end={timeBlock.end}
-                          />
-                        );
-                      })}
-                  </div>
-                </div> */
