@@ -1,0 +1,58 @@
+{
+  "1": {
+    "6": "impossible",
+    "7": "impossible"
+  },
+  "2": {
+    "1": "conflict",
+    "2": "conflict",
+    "3": "conflict"
+  },
+  "4": {
+    "6": "conflict",
+    "7": "impossible"
+  },
+  "5": {
+    "1": "impossible",
+    "7": "conflict"
+  },
+  "6": {
+    "4": "impossible"
+  },
+  "7": {
+    "7": "impossible"
+  },
+  "8": {
+    "1": "impossible",
+    "2": "impossible",
+    "3": "impossible",
+    "4": "impossible",
+    "5": "impossible",
+    "6": "impossible",
+    "7": "impossible"
+  },
+  "9": {
+    "1": "conflict",
+    "2": "conflict",
+    "7": "conflict"
+  },
+  "10": {
+    "7": "impossible"
+  },
+  "11": {
+    "6": "impossible"
+  },
+  "13": {
+    "6": "impossible",
+    "7": "impossible"
+  },
+  "14": {
+    "3": "impossible"
+  },
+  "17": {
+    "1": "conflict"
+  },
+  "18": {
+    "1": "impossible"
+  }
+}

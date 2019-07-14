@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { Icon } from "antd";
+import "../userConflicts.css";
 
 class TimeBlock extends Component {
   state = {
@@ -26,30 +27,28 @@ class TimeBlock extends Component {
 
   render() {
     let faceIcon =
-      this.state.status === "okay"
-        ? "smile"
+      this.state.status === "impossible"
+        ? "frown"
         : this.state.status === "conflict"
         ? "meh"
-        : "frown";
+        : "smile";
 
     let iconStyle =
-      this.state.status === "okay"
-        ? { color: "rgb(74, 112, 4)", fontSize: "25px" }
+      this.state.status === "impossible"
+        ? { color: "rgb(74, 162, 197)", fontSize: "25px" }
         : this.state.status === "conflict"
         ? { color: "rgb(131, 68, 10)", fontSize: "25px" }
-        : { color: "rgb(74, 162, 197)", fontSize: "25px" };
+        : { color: "rgb(74, 112, 4)", fontSize: "25px" };
 
     let statusStyle =
-      this.state.status === "okay"
+      this.state.status === "impossible"
         ? {
             height: "60px",
             width: "160px",
-            background: "rgb(161, 233, 29)",
-            borderTop: "5px solid rgb(220, 250, 164)",
-            borderLeft: "5px solid rgb(194, 238, 113)",
-            borderBottom: "5px solid rgb(74, 112, 4)",
-            borderRight: "5px solid rgb(99, 150, 5)",
+            background: "rgba(0, 53, 89, 1)",
+            border: "5px solid rgba(0, 53, 89, 1)",
             borderRadius: "5px",
+            color: "rgb(161, 233, 29)",
             textAlign: "center",
             margin: "3px"
           }
@@ -69,19 +68,21 @@ class TimeBlock extends Component {
         : {
             height: "60px",
             width: "160px",
-            background: "rgba(0, 53, 89, 1)",
-            border: "5px solid rgba(0, 53, 89, 1)",
+            background: "rgb(161, 233, 29)",
+            borderTop: "5px solid rgb(220, 250, 164)",
+            borderLeft: "5px solid rgb(194, 238, 113)",
+            borderBottom: "5px solid rgb(74, 112, 4)",
+            borderRight: "5px solid rgb(99, 150, 5)",
             borderRadius: "5px",
-            color: "rgb(161, 233, 29)",
             textAlign: "center",
             margin: "3px"
           };
 
     return (
-      <div onClick={this.handleToggle} style={statusStyle}>
-        {this.state.start} - {this.state.end}
+      <div onClick={this.handleToggle} className={this.props.className}>
+        {this.props.hours}
         <br />
-        <Icon type={faceIcon} style={iconStyle} />
+        <Icon type={this.props.type} />
       </div>
     );
   }
