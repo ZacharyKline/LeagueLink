@@ -477,7 +477,7 @@ export const editProfile = data => (dispatch, getState) => {
   dispatch({
     type: EDIT_PROFILE
   });
-  return fetch(url + id, {
+  return fetch(url + `/edit/${id}`, {
     method: "PUT",
     headers: {
       ...jsonHeaders,

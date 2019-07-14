@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import { editProfile } from "../actions";
 import { connect } from "react-redux";
-import { Button, Form, Input, Layout, Select } from "antd";
-const { Option } = Select;
+import {
+    Button, 
+    Form,
+    Input,
+    Layout,
+        } from "antd";
+import { getUserById } from "../actions";
 
 
 class EditProfile extends Component {
-    //-----------  Might need this if we have to set a current user info, depending on how Elizabeth did it?
-    // componentDidMount() {  
-    //     this.props.setCurrentInfo(this.props.id);
-    // } 
+    componentDidMount() {
+        this.props.getUserById(this.props.login.id);
+    }
 
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
@@ -18,9 +22,8 @@ class EditProfile extends Component {
     handleEditProfile = event => {
         event.preventDefault();
         let inputObj = {
-            name: this.state.name,
-            contactPhone: this.state.contactPhone,
-            teamAffiliation: this.state.teamAffiliation
+            fullName: this.state.fullName,
+            phone: this.state.phone,
         };
         this.props.editProfile(inputObj);
     };
@@ -57,7 +60,7 @@ class EditProfile extends Component {
                                 addonBefore="Name"
                                 autoFocus
                                 required
-                                placeholder='Change your name'
+                                placeholder={this.props.fullName}
                             ></Input>
                         </Form.Item>
                         <Form.Item>
@@ -65,24 +68,14 @@ class EditProfile extends Component {
                                 type='phone'
                                 addonBefore="Contact Phone"
                                 required
-                                placeholder='(000) 000-0000'
+                                placeholder={this.props.phone}
 
                             ></Input>
                         </Form.Item>
                         <Form.Item>
-                            <Select
-                                placeholder="Team Affiliation(s)"
-                            >
-                                <Option value='tigers'>Tigers</Option>
-                                <Option value='frogs'>Frogs</Option>
-                                <Option value='turtles'>Turtles</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item>
                             <Button
                                 style={{
-                                    background:
-                                        "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                                    background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
                                     color: "rgb(161, 233, 29)",
                                     border: "2px rgb(130, 184, 31) solid",
                                     borderRadius: "25px",
@@ -91,7 +84,8 @@ class EditProfile extends Component {
                                 }}
                                 type="submit"
                                 value="submit"
-                                onClick={this.handleEditProfile}>Submit</Button>
+                                // onClick={this.handleEditProfile}
+                                >Submit</Button>
                         </Form.Item>
                     </Form>
                 </Layout>
@@ -100,18 +94,18 @@ class EditProfile extends Component {
     }
 }
 
-function mapStateToProps({ users, editProfile }) {
+function mapStateToProps({ users, auth }) {
     return {
-        //   userId: user.login.userId,
-        name: users.name,
-        contactPhone: users.contactPhone,
-        teamAffiliation: users.teamAffiliation
+        login: auth.login,
+        fullName: users.user.fullName,
+        phone: users.user.phone,
 
     };
 }
 
 const mapDispatchToProps = {
-    editProfile
+    editProfile,
+    getUserById
 };
 
 export default connect(
