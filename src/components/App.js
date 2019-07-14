@@ -8,8 +8,10 @@ import {
   ProfilePage,
   RegistrationPage,
   EditProfile,
-  Conflicts
+  //Conflicts,
+  UserConflicts
 } from ".";
+//import UserConflicts from "./UserConflicts";
 
 class App extends Component {
   render() {
@@ -21,7 +23,7 @@ class App extends Component {
           <Route path="/profile" render={() => <ProfilePage />} />
           <Route path="/registration" render={() => <RegistrationPage />} />
           <Route path="/editprofile" render={() => <EditProfile />} />
-          <Route path="/conflicts" render={() => <Conflicts />} />
+          <Route path="/conflicts" render={() => <UserConflicts />} />
           <Route render={() => <InvalidUrlPage />} />
         </Switch>
       </React.Fragment>
