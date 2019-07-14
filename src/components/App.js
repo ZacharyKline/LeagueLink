@@ -11,7 +11,6 @@ import {
   //Conflicts,
   UserConflicts
 } from ".";
-//import UserConflicts from "./UserConflicts";
 
 class App extends Component {
   render() {
