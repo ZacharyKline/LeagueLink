@@ -275,9 +275,9 @@ class UserConflicts extends Component {
                     hours.
                   </li>
                   <li>
-                    IMPORTANT! Make sure the date is displayed above the blocks
-                    is correct. If you do not see a date, click on the
-                    calandar's date again.
+                    IMPORTANT! Make sure the date is displayed above the blocks.
+                    If you do not see a date, click on the calandar's date
+                    again.
                   </li>
                   <li>If a time works, leave it green.</li>
                   <li>
