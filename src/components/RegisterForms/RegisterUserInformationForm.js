@@ -46,6 +46,7 @@ class RegisterUserInformationForm extends Component {
             type="email"
             name="email"
             required
+            placeholder="For login"
             onChange={handleChange}
             value={email}
           />
