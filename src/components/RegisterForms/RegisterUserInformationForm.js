@@ -21,7 +21,7 @@ class RegisterUserInformationForm extends Component {
     return (
       <Form className="stylesForm" id="userInformation">
         <RegisterHeader text={"Register"} />
-        <Form.Item>
+        <Form.Item layout="vertical">
           <Input
             addonBefore="First Name"
             type="text"

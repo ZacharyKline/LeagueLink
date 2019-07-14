@@ -269,7 +269,7 @@ class UserConflicts extends Component {
               <div className="instructionsDiv">
                 <h4>Instructions:</h4>
                 <ul>
-                  <li>Double click a date from calandar.</li>
+                  <li>Double click a date from calendar.</li>
                   <li>
                     A column of blocks will appear. Each block represents 2
                     hours.
