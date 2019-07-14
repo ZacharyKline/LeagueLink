@@ -7,6 +7,7 @@ import {
     Input,
     Layout,
         } from "antd";
+import { Link } from 'react-router-dom'
 import { getUserById } from "../actions";
 
 
@@ -44,6 +45,17 @@ class EditProfile extends Component {
                             flexDirection: "column",
                             margin: "40px auto"
                         }}>
+                        <Link to='/profile'>
+                        <Button 
+                        style={{
+                            background: "rgba(0, 53, 89, 1)",
+                            color: "rgb(161, 233, 29)",
+                            border: "3px rgb(130, 184, 31) solid",
+                            borderRadius: "25px",
+                            textAlign: "center",
+                        }}>Go Back</Button>
+                        </Link>
+                        <br />
                         <h1
                             style={{
                                 background: "rgba(0, 53, 89, 1)",
