@@ -28,7 +28,14 @@ class UserConflicts extends Component {
     firstMonth: 3,
     lastMonth: 6,
     firstDay: 1,
-    lastDay: 30
+    lastDay: 30,
+    timeBlock1: "",
+    timeBlock2: "",
+    timeBlock3: "",
+    timeBlock4: "",
+    timeBlock5: "",
+    timeBlock6: "",
+    timeBlock7: ""
   };
 
   handleSelect = value => {
@@ -52,29 +59,50 @@ class UserConflicts extends Component {
     console.log(currentDay);
     let block1 = currentDay !== undefined ? currentDay[1] : undefined;
     block1 = block1 === undefined ? "okay" : block1;
+    this.state.timeBlock1 = block1 === undefined ? "okay" : block1;
     let block2 = currentDay !== undefined ? currentDay[2] : undefined;
     block2 = block2 === undefined ? "okay" : block2;
+    this.state.timeBlock2 = block2 === undefined ? "okay" : block2;
     let block3 = currentDay !== undefined ? currentDay[3] : undefined;
     block3 = block3 === undefined ? "okay" : block3;
+    this.state.timeBlock3 = block3 === undefined ? "okay" : block3;
     let block4 = currentDay !== undefined ? currentDay[4] : undefined;
     block4 = block4 === undefined ? "okay" : block4;
+    this.state.timeBlock4 = block4 === undefined ? "okay" : block4;
     let block5 = currentDay !== undefined ? currentDay[5] : undefined;
     block5 = block5 === undefined ? "okay" : block5;
+    this.state.timeBlock5 = block5 === undefined ? "okay" : block5;
     let block6 = currentDay !== undefined ? currentDay[6] : undefined;
     block6 = block6 === undefined ? "okay" : block6;
+    this.state.timeBlock6 = block6 === undefined ? "okay" : block6;
     let block7 = currentDay !== undefined ? currentDay[7] : undefined;
     block7 = block7 === undefined ? "okay" : block7;
-    let hourBlocks = [block1, block2, block3, block4, block5, block6, block7];
+    this.state.timeBlock7 = block7 === undefined ? "okay" : block7;
+    let hourBlocks = [
+      this.state.timeBlock1,
+      this.state.timeBlock2,
+      this.state.timeBlock3,
+      this.state.timeBlock4,
+      this.state.timeBlock5,
+      this.state.timeBlock6,
+      this.state.timeBlock7
+    ];
     return hourBlocks;
   };
 
   handleClick = (hourBlocks, hourblock, i) => e => {
-    if (hourblock === "okay") {
-      hourblock = "conflict";
-    } else if (hourblock === "conflict") {
-      hourblock = "impossible";
-    } else if (hourblock === "impossible") {
-      hourblock = "okay";
+    console.log("click");
+    console.log(hourblock);
+    console.log(i);
+    if (i === 0) {
+      if (this.state.timeBlock1 === "okay") {
+        console.log("change");
+        return this.setState({ timeBlock1: "conflict" });
+      } else if (hourblock === "conflict") {
+        return this.setState({ timeBlock1: "impossible" });
+      } else if (hourblock === "impossible") {
+        return this.setState({ timeBlock1: "okay" });
+      }
     }
   };
 
@@ -85,16 +113,10 @@ class UserConflicts extends Component {
   };
 
   render() {
-    let hourBlocks = this.handleBlocks();
-    let timeblocks = [
-      this.state.timeBlock1,
-      this.state.timeBlock2,
-      this.state.timeBlock3,
-      this.state.timeBlock4,
-      this.state.timeBlock5,
-      this.state.timeBlock6,
-      this.state.timeBlock7
-    ];
+    let number = this.selectedDate !== null ? this.state.selectedDay : 1;
+    let monthObj = this.fillOutMonth();
+    let currentDay = monthObj[number];
+    let hourBlocks = this.handleBlocks(currentDay);
 
     let hours = [
       "8AM - 10AM",
@@ -227,7 +249,7 @@ class UserConflicts extends Component {
                       status={hourBlocks[i]}
                       hours={hours[i]}
                       type={faceIcon}
-                      onclick={this.handleClick(hourBlocks, hourblock, i)}
+                      onClick={this.handleClick(hourBlocks, hourblock, i)}
                     />
                   );
                 })}

@@ -41,7 +41,7 @@ class TimeBlock extends Component {
         : { color: "rgb(74, 112, 4)", fontSize: "25px" };
 
     let statusStyle =
-      this.state.status === "impossible"
+      this.props.status === "impossible"
         ? {
             height: "60px",
             width: "160px",
@@ -79,7 +79,12 @@ class TimeBlock extends Component {
           };
 
     return (
-      <div onClick={this.handleToggle} className={this.props.className}>
+      <div
+        className={this.props.className}
+        onClick={this.props.onClick}
+        status={this.props.status}
+        style={{ statusStyle }}
+      >
         {this.props.hours}
         <br />
         <Icon type={this.props.type} />
