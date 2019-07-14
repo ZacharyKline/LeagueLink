@@ -85,7 +85,7 @@ class LoginForm extends Component {
               />
             </Form.Item>
             <Form.Item>
-              <Input
+              <Input.Password
                 className="stylee"
                 addonBefore="Password"
                 type="password"

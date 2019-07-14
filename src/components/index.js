@@ -6,8 +6,8 @@ export { default as RegisterHeader } from "./RegisterHeader";
 export { default as LoginForm } from "./LoginForm";
 export { default as UserProfile } from "./UserProfilePage";
 // export { default as RegisterForm } from "./RegisterForm";
-export { default as EditProfile } from './EditProfilePage'
-export { default as Conflicts } from './Conflicts'
+export { default as EditProfile } from "./EditProfilePage";
+export { default as Conflicts } from "./Conflicts";
 
 //export { default as Menu } from "./Menu";
 //export { default as Settings } from "./Settings";
@@ -50,3 +50,5 @@ export {
 export {
   default as RegisterConfirmationPageForm
 } from "./RegisterForms/RegisterConfirmationPageForm";
+
+export { default as UserConflicts } from "./UserConflicts";

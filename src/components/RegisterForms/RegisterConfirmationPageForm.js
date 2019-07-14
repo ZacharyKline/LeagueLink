@@ -64,7 +64,7 @@ class RegisterConfirmationPageForm extends Component {
                   let currentTeam = teams.find(team => team.id === selectedId);
 
                   let currentCoach = coaches.find(
-                    coach => coach.id === currentTeam.coachIds[0]
+                    coach => coach.id === currentTeam.coachId
                   );
 
                   return (
