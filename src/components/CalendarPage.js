@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Menu, Calendar, Button, List } from "antd";
+import { Layout, Menu, Calendar, List } from "antd";
 import { Navbar, TimeBlock } from ".";
 //import { connect } from "tls";
 // import CalendarComponent from './Calendar'
@@ -61,54 +61,7 @@ class CalendarPage extends Component {
       <React.Fragment>
         <Navbar />
 
-        {this.state.selectedDate !== null && (
-          <div
-            style={{
-              background: "rgb(74, 162, 197)",
-              height: "570px",
-              width: "200px",
-              display: "flex",
-              flexBasis: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              border: "5px rgba(0, 53, 89, 1) solid",
-              borderRadius: "5px"
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  height: "30px",
-                  width: "160px",
 
-                  textAlign: "center",
-                  border: "5px rgb(161, 233, 29) solid",
-                  borderRadius: "5px",
-                  color: "rgb(161, 233, 29)",
-                  background: "rgba(0, 53, 89, 1)"
-                }}
-              >
-                {this.state.selectedDate.toDateString()}
-              </div>
-              {dates
-                .find(
-                  day => day.date === this.state.selectedDate.toDateString()
-                )
-                .timeBlocks.map(timeBlock => {
-                  return (
-                    <TimeBlock
-                      key={timeBlock.id}
-                      date={this.state.selectedDate.toDateString()}
-                      status={timeBlock.status}
-                      start={timeBlock.start}
-                      id={timeBlock.id}
-                      end={timeBlock.end}
-                    />
-                  );
-                })}
-            </div>
-          </div>
-        )}
 
         <div>
           <Layout>
@@ -166,13 +119,12 @@ class CalendarPage extends Component {
                 />
               )}
 
-              <Button onClick={this.toggleView}>Toggle Calendar View</Button>
+              {/* <Button onClick={this.toggleView}>Toggle Calendar View</Button> */}
             </Content>
             <Sider
               style={{
                 color: "rgba(0, 53, 89, 1)",
                 backgroundColor: "rgb(74, 162, 197)",
-                padding: "20px",
                 border: "5px rgba(0, 53, 89, 1) solid",
                 borderRadius: "5px",
                 width: "100%",
@@ -180,8 +132,57 @@ class CalendarPage extends Component {
                 flexDirection: "column"
               }}
             >
-              This is where when you click on an event the information will go
-            </Sider>
+
+              {/* STARTS HERE  */}
+        {this.state.selectedDate !== null && (
+          <div
+            style={{
+              // background: "rgb(74, 162, 197)",
+              height: "570px",
+              width: "200px",
+              display: "flex",
+              flexBasis: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              // border: "5px rgba(0, 53, 89, 1) solid",
+              borderRadius: "5px"
+            }}
+          >
+            <div>
+              <div
+                style={{
+                  height: "30px",
+                  width: "160px",
+                  textAlign: "center",
+                  border: "5px rgb(161, 233, 29) solid",
+                  borderRadius: "5px",
+                  color: "rgb(161, 233, 29)",
+                  background: "rgba(0, 53, 89, 1)"
+                }}
+              >
+                {this.state.selectedDate.toDateString()}
+              </div>
+              {dates
+                .find(
+                  day => day.date === this.state.selectedDate.toDateString()
+                )
+                .timeBlocks.map(timeBlock => {
+                  return (
+                    <TimeBlock
+                      key={timeBlock.id}
+                      date={this.state.selectedDate.toDateString()}
+                      status={timeBlock.status}
+                      start={timeBlock.start}
+                      id={timeBlock.id}
+                      end={timeBlock.end}
+                    />
+                  );
+                })}
+            </div>
+          </div>
+        )}            </Sider>
+
+      {/* // ENDS HERE */}
           </Layout>
         </div>
       </React.Fragment>

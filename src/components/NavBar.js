@@ -45,6 +45,11 @@ class Navbar extends Component {
             </Link>
           </Menu.Item>
           <Menu.Item>
+            <Link to="/conflicts" style={{ color: "rgb(161, 233, 29)" }}>
+              Conflicts
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
             <div>
               <Icon type="logout" />
               <Logout />
