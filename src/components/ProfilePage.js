@@ -37,7 +37,7 @@ class Profile extends Component {
 
           <div
             style={{
-              backgroundColor: "lightblue",
+              backgroundColor: "rgb(74, 162, 197)",
               width: "1000px",
               margin: "auto",
               alignContent: "center",
@@ -102,10 +102,13 @@ class Profile extends Component {
                       span={8}
                       offset={4}
                       type='submit'
-                      style={{
-                        border: "2px rgba(0, 53, 89, 1) solid",
-                        borderRadius: "25px"
-                      }}
+                                style={{
+                background: "rgba(0, 53, 89, 1)",
+                color: "rgb(161, 233, 29)",
+                border: "3px rgb(130, 184, 31) solid",
+                borderRadius: "25px",
+                textAlign: "center",
+              }}
                     >
                       Delete Account
                     </Button>
