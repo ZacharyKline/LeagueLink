@@ -22,26 +22,27 @@ class Profile extends Component {
       <React.Fragment>
         <section>
           <Navbar />
-
+          <div style={{marginTop: '40px'}}  />
           <div
             style={{
               backgroundColor: "rgb(74, 162, 197)",
-              width: "500px",
+              width: "400px",
               margin: "auto",
               alignContent: "center",
-              border: "5px darkblue solid",
-              borderRadius: "25px"
+              border: "5px rgba(0, 53, 89, 1) solid",
+              borderRadius: "5px",
             }}
           >
             <div
               style={{
-                margin: "auto",
+                margin: "40px auto",
                 alignContent: "center",
                 border: "0",
                 marginTop: "50px"
               }}
             >
-              <div style={{ marginBottom: "175px" }}>
+              <div
+               >
                 <Col>
                   <Card
                     style={{
