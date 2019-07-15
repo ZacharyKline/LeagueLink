@@ -19,6 +19,14 @@
   margin: 3px;
 }
 
+.teamBlock {
+  height: 100px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+}
+
 .okay {
   background: rgb(161, 233, 29);
   border-top: 5px solid rgb(220, 250, 164);
@@ -72,6 +80,20 @@
   margin-left: 15px;
 }
 
+.teamTimeBlockDiv {
+  background: rgb(74, 162, 197);
+  height: 590px;
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  margin: 5px;
+  margin-left: 15px;
+}
+
 .date {
   height: 60px;
   width: 160px;
@@ -83,6 +105,23 @@
   background-color: rgb(235, 236, 238);
   font-size: 16px;
   line-height: 50px;
+}
+
+.teamDate {
+  height: 100px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+  color: rgba(0, 53, 89, 1);
+  border: 5px rgba(0, 53, 89, 1) solid;
+  background-color: rgb(235, 236, 238);
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .buttonStyle {
