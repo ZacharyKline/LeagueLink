@@ -24,11 +24,11 @@ class Navbar extends Component {
               Login Page
             </Link>
           </Menu.Item>
-          <Menu.Item>
-            {/* <Link to="/home" style={{ color: "rgb(161, 233, 29)" }}>
+          {/* <Menu.Item>
+            <Link to="/home" style={{ color: "rgb(161, 233, 29)" }}>
               Calendar Page
-            </Link> */}
-          </Menu.Item>
+            </Link>
+          </Menu.Item> */}
           <Menu.Item>
             <Link to="/conflicts" style={{ color: "rgb(161, 233, 29)" }}>
               Conflicts

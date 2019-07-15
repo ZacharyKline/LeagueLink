@@ -55,7 +55,7 @@ class Profile extends Component {
                     Contact Info: {this.props.phone}
 
                     <br />
-                    Account Type: {this.props.userLevel}
+                    Account Type: {this.props.userLevel}{this.props.userType}
                   </Card>
                   <Link to='/editprofile'>
                     <Button
@@ -155,9 +155,9 @@ function mapStateToProps({ auth }) {
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     TeamIds: auth.user.teamIds,
-    userLevel: auth.user.userType
+    userLevel: auth.user.userType,
   };
-}
+ }
 const mapDispatchToProps = {
   getUserById,
   handleDeleteUser
