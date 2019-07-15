@@ -17,7 +17,8 @@ const initialState = {
   deleteUserLoading: false,
   deleteUserError: null,
   logoutError: null,
-  logoutLoading: false
+  logoutLoading: false,
+  user:{},
 };
 
 const getInitState = () => {
