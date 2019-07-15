@@ -39,11 +39,6 @@ export const login = loginData => dispatch => {
 
 export const loginThenGoToUserProfile = loginData => (dispatch, getState) => {
   return dispatch(login(loginData))
-    .then(() => dispatch(getUsers()))
-    .then(() => {
-      const id = getState().auth.login.id;
-      dispatch(getUserById(id));
-    })
     .then(() => dispatch(push("/profile")));
 };
 
@@ -74,6 +69,7 @@ const logout = () => (dispatch, getState) => {
       );
     });
 };
+
 
 export const logoutThenGoToHomepage = () => dispatch => {
   return dispatch(logout()).then(() => dispatch(push("/")));

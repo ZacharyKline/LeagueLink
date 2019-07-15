@@ -474,10 +474,11 @@ export const createUserThenLoginThenCreateFacilityThenAddFacilityIdToUserThenRed
 export const editProfile = data => (dispatch, getState) => {
   const token = getState().auth.login.token;
   const id = getState().auth.login.id;
+  console.log(data)
   dispatch({
     type: EDIT_PROFILE
   });
-  return fetch(url + `/edit/${id}`, {
+  return fetch(url + `/users/edit/${id}`, {
     method: "PUT",
     headers: {
       ...jsonHeaders,
@@ -489,7 +490,7 @@ export const editProfile = data => (dispatch, getState) => {
     .then(result => {
       return dispatch({
         type: EDIT_PROFILE_SUCCESS,
-        payload: result.user
+        payload: result.modifiedUser
       });
     })
     .then(result => {
