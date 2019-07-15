@@ -225,11 +225,11 @@ class UserConflicts extends Component {
       <React.Fragment>
         <Navbar />
         <div
+          className="stylesForm"
           style={{ display: "flex", flexDirection: "column", width: "670px" }}
         >
           <RegisterHeader text={"Remove Times that Conflict"} />
           <div
-            // className="stylesForm"
             style={{ display: "flex", flexDirection: "row", width: "650px" }}
           >
             <div style={{ margin: "5px" }}>
