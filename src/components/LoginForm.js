@@ -51,6 +51,7 @@ class LoginForm extends Component {
               flexDirection: "column",
               margin: "40px auto"
             }}
+            onSubmit={this.handleLogin}
           >
             <h1
               style={{
@@ -84,6 +85,9 @@ class LoginForm extends Component {
                 name="password"
                 required
                 onChange={handleChange}
+                onKeyPress={e => {
+                  if (e.key === 'Enter') this.handleLogin(e);
+                }}
               />
             </Form.Item>
             <Form.Item style={{ marginLeft: "230px" }}>
@@ -99,7 +103,7 @@ class LoginForm extends Component {
                 }}
                 type="submit"
                 // disabled={isLoading}
-                onClick={this.handleLogin}
+                onSubmit={this.handleLogin}
               >
                 Submit
               </Button>
