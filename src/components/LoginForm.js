@@ -52,7 +52,8 @@ class LoginForm extends Component {
               flexDirection: "column",
               margin: "40px auto"
             }}
-            >
+            onSubmit={this.handleLogin}
+          >
             <h1
               style={{
                 background: "rgba(0, 53, 89, 1)",
@@ -85,7 +86,10 @@ class LoginForm extends Component {
                 name="password"
                 required
                 onChange={handleChange}
-                />
+                onKeyPress={e => {
+                  if (e.key === 'Enter') this.handleLogin(e);
+                }}
+              />
             </Form.Item>
             <Form.Item style={{ marginLeft: "230px" }}>
               <Button
@@ -100,6 +104,9 @@ class LoginForm extends Component {
                   fontSize: "large",
                   minWidth: "120px"
                 }}
+                type="submit"
+                // disabled={isLoading}
+                onSubmit={this.handleLogin}
               >
                 Submit
               </Button>
