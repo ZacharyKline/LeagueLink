@@ -50,3 +50,4 @@ export {
 } from "./RegisterForms/RegisterConfirmationPageForm";
 
 export { default as UserConflicts } from "./UserConflicts";
+export { default as TeamConflicts } from "./TeamConflicts";

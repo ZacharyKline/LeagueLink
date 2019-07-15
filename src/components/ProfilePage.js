@@ -148,9 +148,8 @@ class Profile extends Component {
   }
 }
 
-/////////////////////// incoming change
 
-function mapStateToProps({ users, auth }) {
+function mapStateToProps({ auth }) {
   return {
     login: auth.login,
     fullName: users.user.fullName,

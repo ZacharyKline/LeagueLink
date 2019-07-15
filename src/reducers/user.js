@@ -357,9 +357,7 @@ export default (state = initialState, action) => {
     case EDIT_PROFILE_SUCCESS:
       return {
         ...state,
-        // userId: action.payload.id,
-        fullName: action.payload.fullName,
-        phone: action.payload.phone,
+        user: action.payload,
         editUserLoading: false
       };
     case EDIT_PROFILE_FAIL:
