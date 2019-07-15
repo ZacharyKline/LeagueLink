@@ -22,6 +22,7 @@ class UserConflicts extends Component {
     selectedDay: null,
     selectedYear: null,
     dateSelected: false,
+    isodate: "",
     currentDate: "",
     year: 2020,
     firstMonth: 3,
@@ -39,11 +40,10 @@ class UserConflicts extends Component {
   };
 
   handleSave = () => {
+    let userId = this.props.myLogin.id;
     const dataObj = {
-      year: this.state.selectedYear,
-      month: this.state.selectedMonth,
-      day: this.state.selectedDay,
-      userId: this.props.myLogin.id
+      date: this.state.isodate.slice(0, 10),
+      userId: userId
     };
     const data = {};
     if (this.state.timeBlock1 !== "okay") {
@@ -73,6 +73,7 @@ class UserConflicts extends Component {
       currentDate: this.state.selectedDate.toDateString()
     });
     console.log(dataObj);
+    this.props.updateTimeBlock(userId, dataObj);
     return dataObj;
   };
 
@@ -90,13 +91,15 @@ class UserConflicts extends Component {
     let selectedMonth = value.get("month");
     let selectedDay = value.get("date");
     let selectedYear = value.get("year");
+    let isodate = value.toISOString();
 
     this.setState({
       value,
       selectedDate: selectedDate,
       selectedMonth: selectedMonth,
       selectedDay: selectedDay,
-      selectedYear: selectedYear
+      selectedYear: selectedYear,
+      isodate: isodate
     });
 
     return this.handleBlocks();

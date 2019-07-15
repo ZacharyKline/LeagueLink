@@ -16,7 +16,7 @@ import {
 const initialState = {
   getTimeBlocksByIdLoading: false,
   getTimeBlocksByIdError: null,
-  timeBlocks: [],
+  timeBlocks: {},
   updateTimeBlocksError: null,
   updateTimeBlocksLoading: false,
   getTimeBlockByDateError: null,
