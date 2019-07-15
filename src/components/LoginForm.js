@@ -52,7 +52,6 @@ class LoginForm extends Component {
               flexDirection: "column",
               margin: "40px auto"
             }}
-            onSubmit={this.handleLogin}
           >
             <h1
               style={{
@@ -104,9 +103,7 @@ class LoginForm extends Component {
                   fontSize: "large",
                   minWidth: "120px"
                 }}
-                type="submit"
                 // disabled={isLoading}
-                onSubmit={this.handleLogin}
               >
                 Submit
               </Button>
