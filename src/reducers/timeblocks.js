@@ -16,7 +16,7 @@ import {
 const initialState = {
   getTimeBlocksByIdLoading: false,
   getTimeBlocksByIdError: null,
-  timeBlocks: [],
+  timeBlocks: {},
   updateTimeBlocksError: null,
   updateTimeBlocksLoading: false,
   getTimeBlockByDateError: null,
@@ -57,7 +57,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         updateTimeBlocksLoading: false,
-        timeBlocks: action.payload.data
+        timeBlocks: action.payload
       };
     case UPDATE_TIMEBLOCKS_BY_USERID_FAIL:
       return {

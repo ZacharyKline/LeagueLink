@@ -4,6 +4,7 @@ import auth from "./auth";
 import facilities from "./facilities";
 import users from "./user";
 import teams from "./teams";
+import timeblocks from "./timeblocks";
 
 export default history =>
   combineReducers({
@@ -11,5 +12,6 @@ export default history =>
     auth,
     facilities,
     users,
-    teams
+    teams,
+    timeblocks
   });
