@@ -33,7 +33,7 @@ export default (state = getInitState(), action) => {
         loginError: null
       };
     case LOGIN_SUCCESS:
-      return { ...state, login: action.payload, token: action.payload.token, loginLoading: false };
+      return { ...state, login: action.payload, user: action.payload.user[0], token: action.payload.token, loginLoading: false };
     case LOGIN_FAIL:
       return { ...state, loginError: action.payload, loginLoading: false };
     case DELETE_USER:
