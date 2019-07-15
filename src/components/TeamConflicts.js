@@ -289,13 +289,9 @@ class TeamConflicts extends Component {
                     availble to be scheduled for a game during the various
                     blocks as of time
                   </li>
-                  <li>
-                    Green = "okay to schedule game"
-                    <li>
-                      Orange = "inconvient, but can schedule if necessary",
-                    </li>
-                    <li>Dark blue = "impossible, do not schedule"</li>
-                  </li>
+                  <li>Green = "okay to schedule game"</li>
+                  <li>Orange = "inconvient, but can schedule if necessary",</li>
+                  <li>Dark blue = "impossible, do not schedule"</li>
                   <li>Remember to save before moving on to the next date.</li>
                 </ul>
               </div>
