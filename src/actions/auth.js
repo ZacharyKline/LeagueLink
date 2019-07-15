@@ -56,7 +56,7 @@ const logout = () => (dispatch, getState) => {
     type: LOGOUT
   });
 
-  const token = getState().auth.login.token;
+  const token = getState().auth.token;
   return fetch(url + "/logout", {
     method: "GET",
     headers: { ...jsonHeaders, Authorization: `Bearer ${token}` }
