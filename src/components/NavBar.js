@@ -25,9 +25,9 @@ class Navbar extends Component {
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/home" style={{ color: "rgb(161, 233, 29)" }}>
+            {/* <Link to="/home" style={{ color: "rgb(161, 233, 29)" }}>
               Calendar Page
-            </Link>
+            </Link> */}
           </Menu.Item>
           <Menu.Item>
             <Link to="/conflicts" style={{ color: "rgb(161, 233, 29)" }}>

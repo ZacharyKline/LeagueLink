@@ -34,15 +34,7 @@ class LoginForm extends Component {
   render() {
     const { handleChange } = this;
     const { isLoading, err } = this.props;
-    /*var stylesForm = {
-      color:'black',
-      backgroundColor:'lightgrey',
-      padding:'10px',
-      border:'1px black dashed',
-      width:'250px',
-      marginLeft:'50px',
-      marginTop:'100px'
-    };*/
+
     return (
       <React.Fragment>
         <Layout>
