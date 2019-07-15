@@ -152,13 +152,12 @@ class Profile extends Component {
 function mapStateToProps({ auth }) {
   return {
     login: auth.login,
-    fullName: users.user.fullName,
-    phone: users.user.phone,
-    TeamIds: users.user.TeamIds,
-    userLevel: users.user.userLevel,
-    userType: users.user.userType
+    fullName: auth.user.fullName,
+    phone: auth.user.phone,
+    TeamIds: auth.user.teamIds,
+    userLevel: auth.user.userType,
   };
-}
+ }
 const mapDispatchToProps = {
   getUserById,
   handleDeleteUser
