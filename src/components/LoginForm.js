@@ -14,7 +14,6 @@ class LoginForm extends Component {
   handleLogin = e => {
     e.preventDefault();
     this.props.login(this.state);
-    console.log("test1");
   };
 
   handleChange = e => {

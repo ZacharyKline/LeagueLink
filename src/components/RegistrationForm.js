@@ -102,7 +102,8 @@ class RegisterForm extends Component {
       password: this.state.password,
       type: this.state.userType
     };
-
+    console.log("line 105")
+    console.log(userObj)
     switch (userType) {
       case "parent":
         userObj.teamIds = this.state.selectedTeamIds;
