@@ -367,7 +367,7 @@ const handleDeleteUser = () => (dispatch, getState) => {
   })
     .then(handleJsonResponse)
     .then(result => {
-      console.log(result)
+      console.log(result);
       return dispatch({
         type: DELETE_USER_SUCCESS,
         payload: result
@@ -526,7 +526,7 @@ export const createUserThenLoginThenCreateTeam = (userData, teamData) => (
     })
     .then(() => {
       let userId = getState().auth.login.id;
-      teamData.coachIds = [userId];
+      teamData.coachId = userId;
       console.log(teamData);
       return dispatch(createTeam(teamData));
     });

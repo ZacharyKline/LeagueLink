@@ -13,7 +13,7 @@ import "../userConflicts.css";
 import monthDefaultOkay from "../monthDefaultOkay.json";
 import fakeBackendMonth from "../fakeBackendMonth.json";
 
-class UserConflicts extends Component {
+class TeamConflicts extends Component {
   state = {
     value: null,
     selectedDate: null,
@@ -226,11 +226,11 @@ class UserConflicts extends Component {
         <Navbar />
         <div
           className="stylesForm"
-          style={{ display: "flex", flexDirection: "column", width: "670px" }}
+          style={{ display: "flex", flexDirection: "column", width: "95%" }}
         >
-          <RegisterHeader text={"Remove Times that Conflict"} />
+          <RegisterHeader text={"Remove Confict Times for Team"} />
           <div
-            style={{ display: "flex", flexDirection: "row", width: "650px" }}
+            style={{ display: "flex", flexDirection: "row", width: "700px" }}
           >
             <div style={{ margin: "5px" }}>
               <div
@@ -276,60 +276,73 @@ class UserConflicts extends Component {
                     hours.
                   </li>
                   <li>
-                    IMPORTANT! Make sure the date is displayed above the blocks.
-                    If you do not see a date, click on the calandar's date
-                    again.
-                  </li>
-                  <li>If a time works, leave it green.</li>
-                  <li>
-                    If a time is inconvenient, click on it once and it will turn
-                    orange.
+                    IMPORTANT! Make sure the date is displayed beside the
+                    blocks. If you do not see a date, click on the calandar's
+                    date again.
                   </li>
                   <li>
-                    If a time is impossible, click it twice and it will turn
-                    dark blue
+                    Your conflicts and the conflicts of your athletes are
+                    displayed beneath your team's row of blocks
                   </li>
                   <li>
-                    If you made a mistake, just keep clicking until the block is
-                    the correct color
+                    Use this informtion as a guide to decide if your team is
+                    availble to be scheduled for a game during the various
+                    blocks as of time
                   </li>
-                  <li>
-                    When you are satisfied with the conflicts for a particluar
-                    date, click the "save changes" button before selecting a new
-                    date.
-                  </li>
+                  <li>Green = "okay to schedule game"</li>
+                  <li>Orange = "inconvient, but can schedule if necessary",</li>
+                  <li>Dark blue = "impossible, do not schedule"</li>
+                  <li>Remember to save before moving on to the next date.</li>
                 </ul>
               </div>
             </div>
 
-            <div className="timeBlockDiv">
-              {this.state.selectedDate !== null && (
-                <div className="date">{this.state.currentDate}</div>
-              )}
-              {this.state.selectedDate !== null &&
-                hourBlocks.map((hourblock, i) => {
-                  let faceIcon =
-                    hourblock === "impossible"
-                      ? "frown"
-                      : hourblock === "conflict"
-                      ? "meh"
-                      : "smile";
-                  return (
-                    <TimeBlock
-                      key={i}
-                      className={`block ${hourBlocks[i]}`}
-                      status={hourBlocks[i]}
-                      hours={hours[i]}
-                      type={faceIcon}
-                      onClick={this.handleClick(hourblock, i)}
-                    />
-                  );
-                })}
-              {this.state.selectedDate !== null && (
-                <button className="buttonStyle" onClick={this.handleSave}>
-                  Save Changes
-                </button>
-              )}
+            <div className="teamTimeBlockDiv">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "880px",
+                  padding: "5px",
+                  paddingTop: "10px"
+                }}
+              >
+                {this.state.selectedDate !== null && (
+                  <div className="teamDate">{this.state.currentDate}</div>
+                )}
+                {this.state.selectedDate !== null &&
+                  hourBlocks.map((hourblock, i) => {
+                    let faceIcon =
+                      hourblock === "impossible"
+                        ? "frown"
+                        : hourblock === "conflict"
+                        ? "meh"
+                        : "smile";
+                    return (
+                      <TimeBlock
+                        key={i}
+                        className={`teamBlock ${hourBlocks[i]}`}
+                        status={hourBlocks[i]}
+                        hours={hours[i]}
+                        type={faceIcon}
+                        onClick={this.handleClick(hourblock, i)}
+                      />
+                    );
+                  })}
+                {this.state.selectedDate !== null && (
+                  <button className="buttonStyle" onClick={this.handleSave}>
+                    Save Changes
+                  </button>
+                )}
+              </div>
+              <hr
+                style={{
+                  background: "rgba(0, 53, 89, 1)",
+                  height: "5px",
+                  width: "90%",
+                  borderStyle: "none"
+                }}
+              />
             </div>
           </div>
         </div>
@@ -354,4 +367,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserConflicts);
+)(TeamConflicts);

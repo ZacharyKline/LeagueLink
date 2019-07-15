@@ -35,6 +35,11 @@ class Navbar extends Component {
             </Link>
           </Menu.Item>
           <Menu.Item>
+            <Link to="/teamconflicts" style={{ color: "rgb(161, 233, 29)" }}>
+              Team Conflicts
+            </Link>
+          </Menu.Item>
+          <Menu.Item>
             <Link to="/profile" style={{ color: "rgb(161, 233, 29)" }}>
               Profile Page
             </Link>
