@@ -1,0 +1,72 @@
+[
+  {
+    "teamId": "1",
+    "teamName": "The Owls",
+    "facilityId": "3",
+    "ageGroup": "5",
+    "coachId": "1"
+  },
+  {
+    "teamId": "2",
+    "teamName": "The Bears",
+    "facilityId": "3",
+    "ageGroup": "5",
+    "coachId": "2"
+  },
+  {
+    "teamId": "3",
+    "teamName": "The Mongooses",
+    "facilityId": "3",
+    "ageGroup": "5",
+    "coachId": "3"
+  },
+  {
+    "teamId": "4",
+    "teamName": "The Honey Badgers",
+    "facilityId": "3",
+    "ageGroup": "5",
+    "coachId": "4"
+  },
+  {
+    "teamId": "5",
+    "teamName": "The Berserkers",
+    "facilityId": "3",
+    "ageGroup": "10",
+    "coachId": "5"
+  },
+  {
+    "teamId": "6",
+    "teamName": "The Zombies",
+    "facilityId": "3",
+    "ageGroup": "10",
+    "coachId": "6"
+  },
+  {
+    "teamId": "7",
+    "teamName": "The Roosters",
+    "facilityId": "3",
+    "ageGroup": "10",
+    "coachId": "7"
+  },
+  {
+    "teamId": "8",
+    "teamName": "The Turtles",
+    "facilityId": "3",
+    "ageGroup": "5",
+    "coachId": "8"
+  },
+  {
+    "teamId": "9",
+    "teamName": "The Frogs",
+    "facilityId": "3",
+    "ageGroup": "5",
+    "coachId": "9"
+  },
+  {
+    "teamId": "10",
+    "teamName": "The Chupacabras",
+    "facilityId": "3",
+    "ageGroup": "10",
+    "coachId": "10"
+  }
+]
