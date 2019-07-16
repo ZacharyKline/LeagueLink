@@ -76,8 +76,7 @@ body {
   color: rgb(161, 233, 29);
   font-size: 20px;
 }
-
-.foo.foo{
+.something.something {
   height: 100%;
   width: 100%;
 }
