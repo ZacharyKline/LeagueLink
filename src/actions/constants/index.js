@@ -1,5 +1,5 @@
-// export const domain = "http://localhost:5500/";
-export const domain = "https://intermural-scheduler-api.herokuapp.com/";
+export const domain = "http://localhost:5500/";
+// export const domain = "https://intermural-scheduler-api.herokuapp.com/";
 
 export const jsonHeaders = {
   "Content-Type": "application/json",

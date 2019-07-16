@@ -1,6 +1,12 @@
 body {
-  background-size: 100ev;
+  display: flex !important;
 }
+
+#root#root{
+  width: 100%;
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -69,4 +75,9 @@ body {
 .welcomeExplain {
   color: rgb(161, 233, 29);
   font-size: 20px;
+}
+
+.foo.foo{
+  height: 100%;
+  width: 100%;
 }

@@ -15,6 +15,7 @@ export default class RegistrationPage extends Component {
     return (
       <React.Fragment>
         <Layout
+          className="foo"
           style={{
           display: 'flex',
           flexDirection: 'row',
