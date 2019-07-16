@@ -103,7 +103,7 @@ class LoginForm extends Component {
                 }}
                 type="submit"
                 // disabled={isLoading}
-                onSubmit={this.handleLogin}
+                onClick={this.handleLogin}
               >
                 Submit
               </Button>
