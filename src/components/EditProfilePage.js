@@ -12,6 +12,10 @@ import { getUserById } from "../actions";
 
 
 class EditProfile extends Component {
+    state = {
+        fullName : "",
+        phone : ""
+    }
     componentDidMount() {
         this.props.getUserById(this.props.login.id);
     }
@@ -70,8 +74,10 @@ class EditProfile extends Component {
                                 type='text'
                                 className="stylee"
                                 addonBefore="Name"
+                                name="fullName"
                                 autoFocus
                                 required
+                                onChange={this.handleChange}
                                 placeholder={this.props.fullName}
                             ></Input>
                         </Form.Item>
@@ -80,8 +86,9 @@ class EditProfile extends Component {
                                 type='phone'
                                 addonBefore="Contact Phone"
                                 required
+                                name="phone"
+                                onChange={this.handleChange}
                                 placeholder={this.props.phone}
-
                             ></Input>
                         </Form.Item>
                         <Form.Item>
@@ -96,7 +103,7 @@ class EditProfile extends Component {
                                 }}
                                 type="submit"
                                 value="submit"
-                                // onClick={this.handleEditProfile}
+                                onClick={this.handleEditProfile}
                                 >Submit</Button>
                         </Form.Item>
                     </Form>
@@ -106,11 +113,11 @@ class EditProfile extends Component {
     }
 }
 
-function mapStateToProps({ users, auth }) {
+function mapStateToProps({ auth }) {
     return {
         login: auth.login,
-        fullName: users.user.fullName,
-        phone: users.user.phone,
+        fullName: auth.user.fullName,
+        phone: auth.user.phone,
 
     };
 }
