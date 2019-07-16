@@ -24,22 +24,22 @@ export default class RegistrationPage extends Component {
           }}
         >
         <div
-            className='welcomeBox'
-            // style={{
-            //   color: "rgba(0, 53, 89, 1)",
-            //   backgroundColor: "rgba(0, 53, 89, 1)",
-            //   backgroundSize: 'cover',
-            //   padding: "20px",
-            //   border: "5px rgba(0, 53, 89, 1) solid",
-            //   borderRadius: "5px",
-            //   width: "60%",
-            //   height: '100ev',
-            //   display: "flex",
-            //   flexDirection: "column",
-            //   margin: '2ev',
-            //   minWidth: '40%'
-            // }}
-          ></div>
+            className='welcomeBox'>
+                         <h1
+           className='welcomeText'
+           >Welcome to League Link!</h1> 
+           <p 
+           className='welcomeExplain'
+           >League Link is a tool for coaches and parents to connect and plan scheduling for intramural sports games and practices. Some features include:</p>
+           <ul className='welcomeExplain'>
+             <li>A calendar feature which lets you set conflicts</li>
+             <li>Ability conflicts across an entire team</li>
+             <li>Setting practice/match schedule utilizing conflict data</li>
+             <li>Easy to use user profile</li>
+             <li>and more features coming!</li>
+           </ul>
+           <div className='welcomeExplain'>Thank you for your support!</div>
+            </div>
           <RegistrationForm />
         </Layout>
       </React.Fragment>

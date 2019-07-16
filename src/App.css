@@ -1,4 +1,6 @@
-
+body {
+  background-size: 100ev;
+}
 .App {
   text-align: center;
 }
@@ -56,4 +58,15 @@
   flex-direction: column;
   margin: 2ev;
   min-width: 40%;
+}
+
+.welcomeText {
+  color: rgb(161, 233, 29);
+  text-align: center;
+  font-size: 32px;
+}
+
+.welcomeExplain {
+  color: rgb(161, 233, 29);
+  font-size: 20px;
 }
