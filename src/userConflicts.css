@@ -19,13 +19,21 @@
   margin: 3px;
 }
 
+.teamBlock {
+  height: 80px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+}
+
 .okay {
   background: rgb(161, 233, 29);
   border-top: 5px solid rgb(220, 250, 164);
   border-left: 5px solid rgb(194, 238, 113);
   border-bottom: 5px solid rgb(74, 112, 4);
   border-right: 5px solid rgb(99, 150, 5);
-  font-size: 16px;
+  font-size: 14px;
   user-select: none;
 }
 
@@ -35,7 +43,7 @@
   border-left: 5px solid rgb(189, 124, 3);
   border-bottom: 5px solid rgb(248, 201, 114);
   border-right: 5px solid rgb(247, 187, 75);
-  font-size: 16px;
+  font-size: 14px;
   user-select: none;
 }
 
@@ -43,7 +51,7 @@
   background: rgba(0, 53, 89, 1);
   border: 5px solid rgba(0, 53, 89, 1);
   color: rgb(161, 233, 29);
-  font-size: 16px;
+  font-size: 14px;
   user-select: none;
 }
 
@@ -72,6 +80,20 @@
   margin-left: 15px;
 }
 
+.teamTimeBlockDiv {
+  background: rgb(74, 162, 197);
+
+  width: 990px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  margin: 5px;
+  margin-left: 15px;
+}
+
 .date {
   height: 60px;
   width: 160px;
@@ -83,6 +105,25 @@
   background-color: rgb(235, 236, 238);
   font-size: 16px;
   line-height: 50px;
+  user-select: none;
+}
+
+.teamDate {
+  height: 50px;
+  width: 150px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+  color: rgba(0, 53, 89, 1);
+  border: 5px rgba(0, 53, 89, 1) solid;
+  background-color: rgb(235, 236, 238);
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  user-select: none;
 }
 
 .buttonStyle {
@@ -92,4 +133,143 @@
   border-radius: 25px;
   font-size: large;
   min-width: 120px;
+  user-select: none;
+  outline: none;
+}
+
+.cell {
+  height: 50px;
+  width: 110px;
+  margin: 3px;
+}
+.teamCalendarDivContainer {
+  color: rgba(0, 53, 89, 1);
+  background-color: rgb(235, 236, 238);
+  padding: 20px;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  max-width: 410px;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.teamTimeBlockDiv2 {
+  display: flex;
+  flex-direction: row;
+  width: 920px;
+  padding: 5px;
+  padding-top: 10px;
+}
+
+.teamTimeBlockDiv3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+hr {
+  background: rgba(0, 53, 89, 1);
+  height: 5px;
+  width: 100%;
+  border-style: none;
+}
+
+.coachTimeBlockDiv {
+  display: flex;
+  flex-direction: row;
+  width: 910px;
+  padding: 0px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.myConflictsDiv {
+  height: 50px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+  color: rgba(0, 53, 89, 1);
+  border: 5px rgba(0, 53, 89, 1) solid;
+  background-color: rgb(235, 236, 238);
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  user-select: none;
+}
+
+.parentTimeBlockDiv {
+  display: flex;
+  flex-direction: column;
+  width: 910px;
+  padding: 0px;
+  user-select: none;
+}
+
+.userConflictsContainerDiv {
+  color: rgba(0, 53, 89, 1);
+  background-color: rgb(74, 162, 197);
+  padding: 20px;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  width: 670px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+}
+
+.userConflictsContainerDiv2 {
+  display: flex;
+  flex-direction: row;
+  width: 650px;
+}
+
+.userConflictsContainerDiv3 {
+  margin: 5px;
+}
+
+.userConflictCalendarDiv {
+  color: rgba(0, 53, 89, 1);
+  background-color: rgb(235, 236, 238);
+  padding: 20px;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  max-width: 410px;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.menuContainerDiv {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.menuStyle {
+  background: rgba(0, 53, 89, 1);
+  color: rgb(161, 233, 29);
+
+  border-bottom: 4px rgb(130, 184, 31) solid;
+
+  font-size: large;
+  min-width: 700px;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  user-select: none;
+}
+
+h1 {
+  user-select: none;
 }

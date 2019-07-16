@@ -5,18 +5,26 @@ import {
   Col,
   Card,
   Button,
-  Popconfirm
+  Popconfirm,
+  Modal
 } from "antd";
 import { connect } from "react-redux";
-import { getUserById } from "../actions";
-import { deleteUserThenGoToLoginPage as handleDeleteUser } from '../actions'
+import RegisterParentSelectTeamsForm from "../components/RegisterForms/RegisterParentSelectTeamsForm"
+import { getUserById, getTeamByTeamId, editProfile, deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
+
 const text = "Are you sure to delete this Account?";
 
 class Profile extends Component {
+  state = {}
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
-    // this.props.getCoachByTeamId(this.props.teamId)
+    console.log(this.props)
+    this.props.getTeamByTeamId(this.props.teamId)
   }
+  toggleModal = () => {
+    this.setState({modal : !this.state.modal})
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -55,7 +63,7 @@ class Profile extends Component {
                     Contact Info: {this.props.phone}
 
                     <br />
-                    Account Type: {this.props.userLevel}
+                    Account Type: {this.props.userLevel}{this.props.userType}
                   </Card>
                   <Link to='/editprofile'>
                     <Button
@@ -103,7 +111,7 @@ class Profile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    Teams
+                    Teams: {this.props.teamIds}
                     <br />
                     Team Name- Coaches Info
                   </Card>
@@ -118,6 +126,7 @@ class Profile extends Component {
                       borderRadius: "25px",
                       textAlign: "center",
                     }}
+                    onClick={this.toggleModal}
                   >
                     Add Team(s)
                     </Button>
@@ -143,25 +152,35 @@ class Profile extends Component {
             </div>
           </div>
         </section>
+        <Modal
+          title="Basic Modal"
+          visible={this.state.modal}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <RegisterParentSelectTeamsForm />
+        </Modal>
       </React.Fragment>
     );
   }
 }
 
-/////////////////////// incoming change
 
-function mapStateToProps({ users, auth }) {
+function mapStateToProps({ auth }) {
   return {
     login: auth.login,
-    fullName: users.user.fullName,
-    phone: users.user.phone,
-    TeamIds: users.user.TeamIds,
-    userLevel: users.user.userLevel
+    fullName: auth.user.fullName,
+    phone: auth.user.phone,
+    teamIds: auth.user.teamIds,
+    userLevel: auth.user.userType,
   };
-}
+ }
+
 const mapDispatchToProps = {
   getUserById,
-  handleDeleteUser
+  handleDeleteUser,
+  getTeamByTeamId,
+  editProfile
 };
 
 export default connect(

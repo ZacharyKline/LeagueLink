@@ -9,7 +9,8 @@ import {
   RegistrationPage,
   EditProfile,
   //Conflicts,
-  UserConflicts
+  UserConflicts,
+  TeamConflicts
 } from ".";
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route path="/registration" render={() => <RegistrationPage />} />
           <Route path="/editprofile" render={() => <EditProfile />} />
           <Route path="/conflicts" render={() => <UserConflicts />} />
+          <Route path="/teamconflicts" render={() => <TeamConflicts />} />
           <Route render={() => <InvalidUrlPage />} />
         </Switch>
       </React.Fragment>

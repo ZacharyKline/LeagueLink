@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Calendar } from "antd";
-import { Navbar, TimeBlock, RegisterHeader } from ".";
+import { Navbar, TimeBlock, RegisterHeader, Cell, Row } from ".";
 import {
   getTimeBlocksByUserId,
   updateTimeBlock,
@@ -11,9 +11,11 @@ import {
 import moment from "moment";
 import "../userConflicts.css";
 import monthDefaultOkay from "../monthDefaultOkay.json";
-import fakeBackendMonth from "../fakeBackendMonth.json";
+import atheletesConflicts from "../fakeAtheletesConflicts.json";
+import teamconflicts from "../fakeTeamconflicts.json";
+import coachConflicts from "../fakeCoachConflicts.json";
 
-class UserConflicts extends Component {
+class TeamConflicts extends Component {
   state = {
     value: null,
     selectedDate: null,
@@ -30,7 +32,9 @@ class UserConflicts extends Component {
     timeBlock4: "",
     timeBlock5: "",
     timeBlock6: "",
-    timeBlock7: ""
+    timeBlock7: "",
+    coachHours: [],
+    parentHours: []
   };
 
   componentDidMount = () => {};
@@ -64,6 +68,10 @@ class UserConflicts extends Component {
       data[7] = this.state.timeBlock7;
     }
     dataObj[data] = data;
+    this.setState({
+      dateSelected: false,
+      currentDate: this.state.selectedDate.toDateString()
+    });
     console.log(dataObj);
     this.props.updateTimeBlock(userId, dataObj);
     return dataObj;
@@ -79,12 +87,58 @@ class UserConflicts extends Component {
       selectedDay: selectedDay,
       isodate: isodate
     });
+    this.handleCoachHours(coachConflicts, selectedDay);
+    this.handleParentHours(selectedDay);
     return this.handleBlocks(selectedDay);
+  };
+
+  handleCoachHours = (conflictsObj, selectedDay) => {
+    let arr = [];
+    let conflicts = this.fillOutMonth(monthDefaultOkay, conflictsObj);
+    let dayConflicts = conflicts[selectedDay];
+    for (let i = 1; i < 8; i++) {
+      if (dayConflicts[i] === undefined) {
+        arr.push("okay");
+      } else {
+        arr.push(dayConflicts[i]);
+      }
+    }
+    return this.setState({
+      coachHours: arr
+    });
+  };
+
+  fillOutMonth = (okaysObj, incompleteObj) => {
+    return Object.assign({}, okaysObj, incompleteObj);
+  };
+
+  handleParentHours = selectedDay => {
+    let containerArr = [];
+    for (let i = 0; i < atheletesConflicts.length; i++) {
+      let arr = [];
+      let dayConflicts = atheletesConflicts[i].data[selectedDay];
+      let x = Object.assign(
+        {
+          "1": "okay",
+          "2": "okay",
+          "3": "okay",
+          "4": "okay",
+          "5": "okay",
+          "6": "okay",
+          "7": "okay"
+        },
+        dayConflicts
+      );
+      let arr2 = Object.values(x);
+      arr.push(arr2);
+      containerArr.push(arr);
+    }
+    this.setState({ parentHours: containerArr });
   };
 
   handleBlocks = selectedDay => {
     let arr = [];
-    let monthObj = this.fillOutMonth(monthDefaultOkay, fakeBackendMonth);
+    let monthObj = this.fillOutMonth(monthDefaultOkay, teamconflicts);
     let currentDay = monthObj[selectedDay];
     for (let i = 1; i < 8; i++) {
       if (currentDay[i] === undefined) {
@@ -164,10 +218,6 @@ class UserConflicts extends Component {
     }
   };
 
-  fillOutMonth = (okaysObj, incompleteObj) => {
-    return Object.assign({}, okaysObj, incompleteObj);
-  };
-
   render() {
     let hourBlocks = [
       this.state.timeBlock1,
@@ -180,23 +230,31 @@ class UserConflicts extends Component {
     ];
 
     let hours = [
-      "8AM - 10AM",
-      "10AM - 12PM",
-      "12PM - 2PM",
-      "2PM - 4PM",
-      "4PM - 6PM",
-      "6PM - 8PM",
-      "8PM - 10PM"
+      "8AM-10AM",
+      "10AM-12PM",
+      "12PM-2PM",
+      "2PM-4PM",
+      "4PM-6PM",
+      "6PM-8PM",
+      "8PM-10PM"
     ];
 
     return (
       <React.Fragment>
         <Navbar />
-        <div className="userConflictsContainerDiv">
-          <RegisterHeader text={"Remove Times that Conflict"} />
-          <div className="userConflictsContainerDiv2">
-            <div className="userConflictsContainerDiv3">
-              <div className="userConflictCalendarDiv">
+        <div
+          className="stylesForm"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "95%",
+            marginTop: "20px"
+          }}
+        >
+          <RegisterHeader text={"Remove Confict Times for Team"} />
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <div style={{ margin: "5px" }}>
+              <div className="teamCalendarDivContainer">
                 <Calendar
                   onSelect={this.handleSelect}
                   fullscreen={false}
@@ -222,60 +280,83 @@ class UserConflicts extends Component {
                 <ul>
                   <li>Select a date from calendar.</li>
                   <li>
-                    A column of blocks will appear. Each block represents 2
-                    hours.
-                  </li>
-                  <li>If a time works, leave it green.</li>
-                  <li>
-                    If a time is inconvenient, click on it once and it will turn
-                    orange.
+                    A row of blocks will appear at the top. Each block
+                    represents 2 hours.
                   </li>
                   <li>
-                    If a time is impossible, click it twice and it will turn
-                    dark blue
+                    Your conflicts and the conflicts of your athletes are
+                    displayed beneath your team's row of blocks
                   </li>
                   <li>
-                    If you made a mistake, just keep clicking until the block is
-                    the correct color
+                    Use this informtion as a guide to decide if your team is
+                    availble to be scheduled for a game during each block of
+                    time.
                   </li>
+                  <li>Green = "okay to schedule game"</li>
                   <li>
-                    When you are satisfied with the conflicts for a particluar
-                    date, click the "save changes" button before selecting a new
-                    date.
+                    Orange = "inconvenient, but can schedule if necessary",
                   </li>
+                  <li>Dark blue = "impossible, do not schedule"</li>
+                  <li>Remember to save before moving on to the next date.</li>
                 </ul>
               </div>
             </div>
 
-            <div className="timeBlockDiv">
+            <div className="teamTimeBlockDiv">
               {this.state.selectedDate !== null && (
-                <div className="date">
-                  {this.state.selectedDate.toDateString()}
-                </div>
-              )}
-              {this.state.selectedDate !== null &&
-                hourBlocks.map((block, i) => {
-                  let faceIcon =
-                    block === "impossible"
-                      ? "frown"
-                      : block === "conflict"
-                      ? "meh"
-                      : "smile";
-                  return (
-                    <TimeBlock
-                      key={i}
-                      className={`block ${block}`}
-                      status={block}
-                      hours={hours[i]}
-                      type={faceIcon}
-                      onClick={this.handleClick(block, i)}
-                    />
-                  );
-                })}
-              {this.state.selectedDate !== null && (
-                <button className="buttonStyle" onClick={this.handleSave}>
-                  Save Changes
-                </button>
+                <React.Fragment>
+                  <div className="teamTimeBlockDiv2">
+                    <div className="teamTimeBlockDiv3">
+                      <div className="teamDate">
+                        {this.state.selectedDate.toDateString()}
+                      </div>
+                      <button className="buttonStyle" onClick={this.handleSave}>
+                        Save Changes
+                      </button>
+                    </div>
+                    {hourBlocks.map((block, i) => {
+                      let faceIcon =
+                        block === "impossible"
+                          ? "frown"
+                          : block === "conflict"
+                          ? "meh"
+                          : "smile";
+                      return (
+                        <TimeBlock
+                          key={i}
+                          className={`teamBlock ${block}`}
+                          status={block}
+                          hours={hours[i]}
+                          type={faceIcon}
+                          onClick={this.handleClick(block, i)}
+                        />
+                      );
+                    })}
+                  </div>
+                  <hr />
+                  <div className="coachTimeBlockDiv">
+                    <div className="myConflictsDiv">My Conflicts</div>
+                    {this.state.coachHours.map((block, i) => {
+                      return <Cell className={`${block} cell`} key={i} />;
+                    })}
+                  </div>
+                  <div className="parentTimeBlockDiv">
+                    {this.state.parentHours.map((day, i) => {
+                      return (
+                        <Row
+                          className1={`${day[0][0]} cell`}
+                          className2={`${day[0][1]} cell`}
+                          className3={`${day[0][2]} cell`}
+                          className4={`${day[0][3]} cell`}
+                          className5={`${day[0][4]} cell`}
+                          className6={`${day[0][5]} cell`}
+                          className7={`${day[0][6]} cell`}
+                          key={i}
+                        />
+                      );
+                    })}
+                  </div>
+                </React.Fragment>
               )}
             </div>
           </div>
@@ -301,4 +382,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserConflicts);
+)(TeamConflicts);

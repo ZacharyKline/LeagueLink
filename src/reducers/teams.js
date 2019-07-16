@@ -113,6 +113,7 @@ export default (state = initialState, action) => {
         getTeamByIdError: null
       };
     case GET_TEAM_BY_TEAMID_SUCCESS:
+      console.log(action)
       return {
         ...state,
         specificTeam: action.payload,
