@@ -40,6 +40,7 @@ class LoginForm extends Component {
         <Layout>
           <Form
             className="myStyle"
+            onSubmit={this.handleLogin}
             style={{
               color: "rgba(0, 53, 89, 1)",
               backgroundColor: "rgb(74, 162, 197)",
@@ -51,7 +52,6 @@ class LoginForm extends Component {
               flexDirection: "column",
               margin: "40px auto"
             }}
-            onSubmit={this.handleLogin}
           >
             <h1
               style={{
@@ -62,7 +62,7 @@ class LoginForm extends Component {
                 textAlign: "center",
                 width: "100%"
               }}
-            >
+              >
               Login
             </h1>
             <br />
@@ -75,7 +75,7 @@ class LoginForm extends Component {
                 autoFocus
                 required
                 onChange={handleChange}
-              />
+                />
             </Form.Item>
             <Form.Item>
               <Input.Password
@@ -92,34 +92,22 @@ class LoginForm extends Component {
             </Form.Item>
             <Form.Item style={{ marginLeft: "230px" }}>
               <Button
+              onClick={this.handleLogin}
+                type="submit"
                 style={{
                   background:
-                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                  "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
                   color: "rgb(161, 233, 29)",
                   border: "2px rgb(130, 184, 31) solid",
                   borderRadius: "25px",
                   fontSize: "large",
                   minWidth: "120px"
                 }}
-                type="submit"
                 // disabled={isLoading}
-                onClick={this.handleLogin}
               >
                 Submit
               </Button>
               <br />
-              {/* <Button
-                onClick={this.handleForgotPassword}
-                style={{
-                  backgroundColor: "rgb(74, 162, 197)",
-                  color: "rgb(161, 233, 29)",
-                  border: "0px rgb(74, 162, 197) solid",
-                  borderRadius: "25px",
-                  minWidth: "120px"
-                }}
-              >
-                Forgot Password
-              </Button> */}
             </Form.Item>
             <Link
               to={"/registration"}

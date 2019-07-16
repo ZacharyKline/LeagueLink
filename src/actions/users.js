@@ -529,7 +529,10 @@ export const createUserThenLoginThenCreateTeam = (userData, teamData) => (
       teamData.coachId = userId;
       console.log(teamData);
       return dispatch(createTeam(teamData));
-    });
+    })
+    .then(() => {
+      return dispatch(push('/profile'));
+    })
 };
 
 export const getUserById = id => dispatch => {

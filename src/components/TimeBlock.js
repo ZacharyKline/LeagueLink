@@ -8,7 +8,7 @@ class TimeBlock extends Component {
       <div className={this.props.className} onClick={this.props.onClick}>
         {this.props.hours}
         <br />
-        <Icon type={this.props.type} />
+        <Icon type={this.props.type} style={{ fontSize: "22px" }} />
       </div>
     );
   }

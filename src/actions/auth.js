@@ -1,7 +1,6 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants";
 import { push } from "connected-react-router";
-import { getUsers } from "../actions";
-import { getUserById } from "./users";
+
 
 // action types
 //working
