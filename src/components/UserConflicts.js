@@ -17,13 +17,8 @@ class UserConflicts extends Component {
   state = {
     value: null,
     selectedDate: null,
-    selectedDateString: null,
-    selectedMonth: null,
     selectedDay: null,
-    selectedYear: null,
-    dateSelected: false,
     isodate: "",
-    currentDate: "",
     year: 2020,
     firstMonth: 3,
     lastMonth: 6,
@@ -35,9 +30,10 @@ class UserConflicts extends Component {
     timeBlock4: "",
     timeBlock5: "",
     timeBlock6: "",
-    timeBlock7: "",
-    click1: true
+    timeBlock7: ""
   };
+
+  componentDidMount = () => {};
 
   handleSave = () => {
     let userId = this.props.myLogin.id;
@@ -68,69 +64,43 @@ class UserConflicts extends Component {
       data[7] = this.state.timeBlock7;
     }
     dataObj[data] = data;
-    this.setState({
-      dateSelected: false,
-      currentDate: this.state.selectedDate.toDateString()
-    });
     console.log(dataObj);
     this.props.updateTimeBlock(userId, dataObj);
     return dataObj;
   };
 
   handleSelect = value => {
-    if (!this.state.click1) {
-      this.setState({
-        currentDate: this.state.selectedDate.toDateString(),
-        click1: true
-      });
-    } else {
-      this.setState({ currentDate: "", click1: false });
-    }
-
     let selectedDate = value._d;
-    let selectedMonth = value.get("month");
     let selectedDay = value.get("date");
-    let selectedYear = value.get("year");
     let isodate = value.toISOString();
-
     this.setState({
       value,
       selectedDate: selectedDate,
-      selectedMonth: selectedMonth,
       selectedDay: selectedDay,
-      selectedYear: selectedYear,
       isodate: isodate
     });
-
-    return this.handleBlocks();
+    return this.handleBlocks(selectedDay);
   };
 
-  handleBlocks = () => {
-    let number = this.selectedDate !== null ? this.state.selectedDay : 0;
-    let monthObj = this.fillOutMonth();
-    let currentDay = monthObj[number];
-    let block1 = currentDay !== undefined ? currentDay[1] : undefined;
-    block1 = block1 === undefined ? "okay" : block1;
-    let block2 = currentDay !== undefined ? currentDay[2] : undefined;
-    block2 = block2 === undefined ? "okay" : block2;
-    let block3 = currentDay !== undefined ? currentDay[3] : undefined;
-    block3 = block3 === undefined ? "okay" : block3;
-    let block4 = currentDay !== undefined ? currentDay[4] : undefined;
-    block4 = block4 === undefined ? "okay" : block4;
-    let block5 = currentDay !== undefined ? currentDay[5] : undefined;
-    block5 = block5 === undefined ? "okay" : block5;
-    let block6 = currentDay !== undefined ? currentDay[6] : undefined;
-    block6 = block6 === undefined ? "okay" : block6;
-    let block7 = currentDay !== undefined ? currentDay[7] : undefined;
-    block7 = block7 === undefined ? "okay" : block7;
+  handleBlocks = selectedDay => {
+    let arr = [];
+    let monthObj = this.fillOutMonth(monthDefaultOkay, fakeBackendMonth);
+    let currentDay = monthObj[selectedDay];
+    for (let i = 1; i < 8; i++) {
+      if (currentDay[i] === undefined) {
+        arr.push("okay");
+      } else {
+        arr.push(currentDay[i]);
+      }
+    }
     return this.setState({
-      timeBlock1: block1,
-      timeBlock2: block2,
-      timeBlock3: block3,
-      timeBlock4: block4,
-      timeBlock5: block5,
-      timeBlock6: block6,
-      timeBlock7: block7
+      timeBlock1: arr[0],
+      timeBlock2: arr[1],
+      timeBlock3: arr[2],
+      timeBlock4: arr[3],
+      timeBlock5: arr[4],
+      timeBlock6: arr[5],
+      timeBlock7: arr[6]
     });
   };
 
@@ -194,10 +164,8 @@ class UserConflicts extends Component {
     }
   };
 
-  componentDidMount = () => {};
-
-  fillOutMonth = () => {
-    return Object.assign(monthDefaultOkay, fakeBackendMonth);
+  fillOutMonth = (okaysObj, incompleteObj) => {
+    return Object.assign({}, okaysObj, incompleteObj);
   };
 
   render() {
@@ -224,29 +192,11 @@ class UserConflicts extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <div
-          className="stylesForm"
-          style={{ display: "flex", flexDirection: "column", width: "670px" }}
-        >
+        <div className="userConflictsContainerDiv">
           <RegisterHeader text={"Remove Times that Conflict"} />
-          <div
-            style={{ display: "flex", flexDirection: "row", width: "650px" }}
-          >
-            <div style={{ margin: "5px" }}>
-              <div
-                style={{
-                  color: "rgba(0, 53, 89, 1)",
-                  backgroundColor: "rgb(235, 236, 238)",
-                  padding: "20px",
-                  border: "5px rgba(0, 53, 89, 1) solid",
-                  borderRadius: "5px",
-                  maxWidth: "410px",
-                  maxHeight: "360px",
-                  display: "flex",
-                  flexDirection: "column",
-                  boxSizing: "border-box"
-                }}
-              >
+          <div className="userConflictsContainerDiv2">
+            <div className="userConflictsContainerDiv3">
+              <div className="userConflictCalendarDiv">
                 <Calendar
                   onSelect={this.handleSelect}
                   fullscreen={false}
@@ -270,15 +220,10 @@ class UserConflicts extends Component {
               <div className="instructionsDiv">
                 <h4>Instructions:</h4>
                 <ul>
-                  <li>Double click a date from calendar.</li>
+                  <li>Select a date from calendar.</li>
                   <li>
                     A column of blocks will appear. Each block represents 2
                     hours.
-                  </li>
-                  <li>
-                    IMPORTANT! Make sure the date is displayed above the blocks.
-                    If you do not see a date, click on the calandar's date
-                    again.
                   </li>
                   <li>If a time works, leave it green.</li>
                   <li>
@@ -304,24 +249,26 @@ class UserConflicts extends Component {
 
             <div className="timeBlockDiv">
               {this.state.selectedDate !== null && (
-                <div className="date">{this.state.currentDate}</div>
+                <div className="date">
+                  {this.state.selectedDate.toDateString()}
+                </div>
               )}
               {this.state.selectedDate !== null &&
-                hourBlocks.map((hourblock, i) => {
+                hourBlocks.map((block, i) => {
                   let faceIcon =
-                    hourblock === "impossible"
+                    block === "impossible"
                       ? "frown"
-                      : hourblock === "conflict"
+                      : block === "conflict"
                       ? "meh"
                       : "smile";
                   return (
                     <TimeBlock
                       key={i}
-                      className={`block ${hourBlocks[i]}`}
-                      status={hourBlocks[i]}
+                      className={`block ${block}`}
+                      status={block}
                       hours={hours[i]}
                       type={faceIcon}
-                      onClick={this.handleClick(hourblock, i)}
+                      onClick={this.handleClick(block, i)}
                     />
                   );
                 })}
