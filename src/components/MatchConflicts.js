@@ -32,6 +32,12 @@ class MatchConflicts extends Component {
     this.setState({ ageGroup: value });
   };
 
+  handleAllowSelect = e => {
+    if (this.state.teamIds.length > 0) {
+      alert("Please uncheck boxes first");
+    }
+  };
+
   handleSelectTeams = e => {
     let newArr;
     let teamId = e.target.value;
@@ -170,12 +176,9 @@ class MatchConflicts extends Component {
                   </li>
                   <li>Dark blue = "impossible, do not schedule a game!"</li>
                   <li>
-                    If you do not see a good times to schedule a match on the
+                    If you do not see a good time to schedule a match on the
                     selected day, click on other dates until you find a time
                     that works for everyone.
-                  </li>
-                  <li>
-                    Before changing age categories, be sure to uncheck all boxes
                   </li>
                 </ul>
               </div>
@@ -200,6 +203,7 @@ class MatchConflicts extends Component {
                   defaultValue="Select an Age Category"
                   style={{ width: 300 }}
                   onChange={this.handleChange}
+                  onMouseEnter={this.handleAllowSelect}
                 >
                   <Option value="Select an Age Category">
                     Select An Age Category
