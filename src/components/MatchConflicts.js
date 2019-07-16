@@ -23,7 +23,7 @@ class MatchConflicts extends Component {
     firstDay: 1,
     lastDay: 30,
     ageCategory: "",
-    matchHours: [],
+    matchBlocks: [],
     coachHours: [],
     parentHours: [],
     ageGroup: "",
@@ -36,19 +36,72 @@ class MatchConflicts extends Component {
   };
 
   handleSelectTeams = e => {
-    console.log(e.target.value);
+    let newArr;
     let teamId = e.target.value;
-    if (this.statecounter < 2) {
-      if (!this.state.teamIds.includes(teamId)) {
-        let sum = this.state.counter + 1;
-        let newArr = [...this.state.teamIds, teamId];
-        console.log(newArr);
-        this.setState({ counter: sum, teamIds: newArr });
+    if (!this.state.teamIds.includes(teamId)) {
+      newArr = [...this.state.teamIds, teamId];
+      console.log(newArr);
+      this.setState({ teamIds: newArr });
+    } else {
+      newArr = this.state.teamIds.filter(id => id !== teamId);
+      this.setState({ teamIds: newArr });
+    }
+  };
+
+  handleSelect = value => {
+    if (this.state.teamIds.length === 2) {
+      let team1 = this.state.teamIds[0];
+      let team2 = this.state.teamIds[1];
+      let selectedDate = value._d;
+      let selectedDay = value.get("date");
+      let isodate = value.toISOString();
+      this.setState({
+        value,
+        selectedDate: selectedDate,
+        selectedDay: selectedDay,
+        isodate: isodate
+      });
+      let team1Blocks = this.handleTeamConflicts(team1, selectedDay);
+      console.log(team1Blocks);
+      let team2Blocks = this.handleTeamConflicts(team2, selectedDay);
+      console.log(team2Blocks);
+      let combinedBlocks = this.handleCombine(team1Blocks, team2Blocks);
+      // console.log(combinedBlocks);
+      this.setState({ matchBlocks: combinedBlocks });
+    } else {
+      alert("Select two Teams");
+    }
+  };
+
+  handleCombine = (blocks1, blocks2) => {
+    let arr = [];
+    for (let i = 0; i < blocks1.length; i++) {
+      if (blocks1[i] === "impossible" || blocks2[i] === "impossible") {
+        arr.push("impossible");
+      } else if (blocks1[i] === "conflict" || blocks2[i] === "conflict") {
+        arr.push("conflict");
+      } else {
+        arr.push("okay");
       }
-    } else if (this.state.counter === 2) {
-      if (!this.state.teamIds.includes(teamId)) {
-        alert("Please only Select 2 Teams at a time");
+    }
+    return arr;
+  };
+
+  handleTeamConflicts = (teamId, selectedDay) => {
+    let arr = [];
+    let conflicts = teamsConflicts.find(team => team.teamId === teamId);
+    let dayConflicts = conflicts.data[selectedDay];
+    if (dayConflicts === undefined) {
+      return ["okay", "okay", "okay", "okay", "okay", "okay", "okay"];
+    } else {
+      for (let i = 1; i < 8; i++) {
+        if (dayConflicts[i] === undefined) {
+          arr.push("okay");
+        } else {
+          arr.push(dayConflicts[i]);
+        }
       }
+      return arr;
     }
   };
 
@@ -117,57 +170,88 @@ class MatchConflicts extends Component {
                 </ul>
               </div>
             </div>
-            <div>
-              <Select
-                defaultValue="Select an Age Category"
-                style={{ width: 200 }}
-                onChange={this.handleChange}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                //justifyContent: "center"
+                allignItems: "center"
+              }}
+            >
+              <div
+                className="instructionsDiv"
+                style={{
+                  background: " rgb(235, 236, 238)",
+                  margin: "5px",
+                  marginLeft: "10px"
+                }}
               >
-                <Option value="Select an Age Category">
-                  Select An Age Category
-                </Option>
-                <Option value="5">5 year olds</Option>
-                <Option value="6">6 year olds</Option>
-                <Option value="7">7 year olds</Option>
-                <Option value="8">8 year olds</Option>
-                <Option value="9">9 year olds</Option>
-                <Option value="10">10 year olds</Option>
-                <Option value="11">11 year olds</Option>
-                <Option value="12">12 year olds</Option>
-                <Option value="13">13 year olds</Option>
-                <Option value="14">14 year olds</Option>
-                <Option value="15">15 year olds</Option>
-                <Option value="16">16 year olds</Option>
-                <Option value="17">17 year olds</Option>
-                <Option value="Adult">Adult </Option>
-              </Select>
-              {this.state.ageGroup !== "" && (
-                <Form>
-                  {teams
-                    .filter(team => team.ageGroup === this.state.ageGroup)
-                    .map((team, i) => {
-                      let currentCoach = coaches.find(
-                        coach => coach.id === team.coachId
-                      );
-                      console.log(team.teamName);
-                      return (
-                        <div key={i}>
-                          <Checkbox
-                            value={team.id}
-                            onChange={this.handleSelectTeams}
-                          />
+                <Select
+                  defaultValue="Select an Age Category"
+                  style={{ width: 300 }}
+                  onChange={this.handleChange}
+                >
+                  <Option value="Select an Age Category">
+                    Select An Age Category
+                  </Option>
+                  <Option value="5">5 year olds</Option>
+                  <Option value="6">6 year olds</Option>
+                  <Option value="7">7 year olds</Option>
+                  <Option value="8">8 year olds</Option>
+                  <Option value="9">9 year olds</Option>
+                  <Option value="10">10 year olds</Option>
+                  <Option value="11">11 year olds</Option>
+                  <Option value="12">12 year olds</Option>
+                  <Option value="13">13 year olds</Option>
+                  <Option value="14">14 year olds</Option>
+                  <Option value="15">15 year olds</Option>
+                  <Option value="16">16 year olds</Option>
+                  <Option value="17">17 year olds</Option>
+                  <Option value="Adult">Adult </Option>
+                </Select>
+                {this.state.ageGroup !== "" && (
+                  <Form style={{ margin: "5px", padding: "10px" }}>
+                    <h2>Select two teams</h2>
+                    {teams
+                      .filter(team => team.ageGroup === this.state.ageGroup)
+                      .map((team, i) => {
+                        let currentCoach = coaches.find(
+                          coach => coach.id === team.coachId
+                        );
+                        let teamId = team.id;
+                        console.log(team.teamName);
+                        return (
+                          <div
+                            key={i}
+                            style={{ display: "flex", flexDirection: "row" }}
+                          >
+                            <Checkbox
+                              value={team.id}
+                              onChange={this.handleSelectTeams}
+                              style={{ margin: "5px" }}
+                              disabled={
+                                this.state.teamIds.length === 2 &&
+                                !this.state.teamIds.includes(teamId)
+                              }
+                            />
 
-                          <span>
-                            <b>{team.teamName}</b>
-                          </span>
-                          <span> - Coach: </span>
-                          <span>{currentCoach.fullName}</span>
-                        </div>
-                      );
-                    })}
-                </Form>
-              )}
+                            <p>
+                              <b>{team.teamName}</b>
+                              <br />
+                              <span>Coach: {currentCoach.fullName}</span>
+                              <br />
+                              <span>Email: {currentCoach.email}</span>
+                              <br />
+                              <span>Phone: {currentCoach.phone}</span>
+                            </p>
+                          </div>
+                        );
+                      })}
+                  </Form>
+                )}
+              </div>
             </div>
+            <div>blah</div>
           </div>
         </div>
       </React.Fragment>
