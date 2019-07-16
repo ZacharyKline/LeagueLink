@@ -83,15 +83,4 @@ class RegisterParentSelectTeamsForm extends Component {
   }
 }
 
-// const mapStateToProps = ({teams, users}) => {
-//   return {
-//     teams: teams.teams,
-//     coaches: users.coaches
-//   };
-// }
-
-
-
-
-// export default connect (mapStateToProps, )(RegisterParentSelectTeamsForm);
-export default RegisterParentSelectTeamsForm
+export default RegisterParentSelectTeamsForm;
