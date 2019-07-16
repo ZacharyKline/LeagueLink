@@ -1,4 +1,6 @@
-
+body {
+  background-size: 100ev;
+}
 .App {
   text-align: center;
 }
@@ -41,4 +43,30 @@
   padding: 10px;
   border: 1px black dashed;
   width: 250px;
+}
+
+.welcomeBox {
+  color: rgb(176, 192, 203);
+  background: rgba(0, 53, 89, 1);
+  background-size: cover;
+  padding: 20px;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  width: 60%;
+  height: 100ev;
+  display: flex;
+  flex-direction: column;
+  margin: 2ev;
+  min-width: 40%;
+}
+
+.welcomeText {
+  color: rgb(161, 233, 29);
+  text-align: center;
+  font-size: 32px;
+}
+
+.welcomeExplain {
+  color: rgb(161, 233, 29);
+  font-size: 20px;
 }
