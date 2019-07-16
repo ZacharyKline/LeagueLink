@@ -8,6 +8,7 @@ export default class Landing extends Component {
     return (
       <React.Fragment>
         <Layout
+          className="something"
           style={{
           display: 'flex',
           flexDirection: 'row',
