@@ -5,8 +5,6 @@ import { Navbar, TimeBlock, RegisterHeader } from ".";
 import {} from "../actions";
 import moment from "moment";
 import "../userConflicts.css";
-import monthDefaultOkay from "../monthDefaultOkay.json";
-import fakeBackendMonth from "../fakeBackendMonth.json";
 import teamsConflicts from "../fakeTeamsConflicts.json";
 import coaches from "../fakeCoaches.json";
 import teams from "../fakeTeams.json";
@@ -27,8 +25,7 @@ class MatchConflicts extends Component {
     coachHours: [],
     parentHours: [],
     ageGroup: "",
-    teamIds: [],
-    counter: 0
+    teamIds: []
   };
 
   handleChange = value => {
@@ -44,7 +41,7 @@ class MatchConflicts extends Component {
       this.setState({ teamIds: newArr });
     } else {
       newArr = this.state.teamIds.filter(id => id !== teamId);
-      this.setState({ teamIds: newArr });
+      this.setState({ teamIds: newArr, selectedDate: null });
     }
   };
 
@@ -106,6 +103,15 @@ class MatchConflicts extends Component {
   };
 
   render() {
+    let hours = [
+      "8AM - 10AM",
+      "10AM - 12PM",
+      "12PM - 2PM",
+      "2PM - 4PM",
+      "4PM - 6PM",
+      "6PM - 8PM",
+      "8PM - 10PM"
+    ];
     return (
       <React.Fragment>
         <Navbar />
@@ -114,7 +120,8 @@ class MatchConflicts extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "95%",
+            justifyContent: "center",
+            width: "100%",
             marginTop: "20px"
           }}
         >
@@ -166,6 +173,9 @@ class MatchConflicts extends Component {
                     If you do not see a good times to schedule a match on the
                     selected day, click on other dates until you find a time
                     that works for everyone.
+                  </li>
+                  <li>
+                    Before changing age categories, be sure to uncheck all boxes
                   </li>
                 </ul>
               </div>
@@ -251,7 +261,34 @@ class MatchConflicts extends Component {
                 )}
               </div>
             </div>
-            <div>blah</div>
+            {this.state.teamIds.length === 2 &&
+              this.state.selectedDate !== null && (
+                <div className="timeBlockDiv" style={{ height: "540px" }}>
+                  {this.state.selectedDate !== null && (
+                    <div className="date">
+                      {this.state.selectedDate.toDateString()}
+                    </div>
+                  )}
+                  {this.state.selectedDate !== null &&
+                    this.state.matchBlocks.map((block, i) => {
+                      let faceIcon =
+                        block === "impossible"
+                          ? "frown"
+                          : block === "conflict"
+                          ? "meh"
+                          : "smile";
+                      return (
+                        <TimeBlock
+                          key={i}
+                          className={`block ${block}`}
+                          status={block}
+                          hours={hours[i]}
+                          type={faceIcon}
+                        />
+                      );
+                    })}
+                </div>
+              )}
           </div>
         </div>
       </React.Fragment>
