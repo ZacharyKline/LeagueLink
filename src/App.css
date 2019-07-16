@@ -1,5 +1,6 @@
 body {
-  background-size: 100ev;
+  display: flex;
+  background-size: 100%;
 }
 .App {
   text-align: center;
@@ -69,4 +70,8 @@ body {
 .welcomeExplain {
   color: rgb(161, 233, 29);
   font-size: 20px;
+}
+.something.something {
+  height: 100%;
+  width: 100%;
 }
