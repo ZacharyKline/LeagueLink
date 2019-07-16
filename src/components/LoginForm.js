@@ -38,6 +38,7 @@ class LoginForm extends Component {
     return (
       <React.Fragment>
         <Layout>
+
           <Form
             className="myStyle"
             onSubmit={this.handleLogin}
@@ -50,7 +51,8 @@ class LoginForm extends Component {
               width: "400px",
               display: "flex",
               flexDirection: "column",
-              margin: "40px auto"
+              margin: "40px auto",
+              marginLeft: '40px'
             }}
           >
             <h1

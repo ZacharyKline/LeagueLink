@@ -8,14 +8,14 @@ import {
   Popconfirm
 } from "antd";
 import { connect } from "react-redux";
-import { getUserById } from "../actions";
+import { getUserById, getTeamByTeamId } from "../actions";
 import { deleteUserThenGoToLoginPage as handleDeleteUser } from '../actions'
 const text = "Are you sure to delete this Account?";
 
 class Profile extends Component {
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
-    // this.props.getCoachByTeamId(this.props.teamId)
+    this.props.getTeamByTeamId(this.props.teamId)
   }
   render() {
     return (
@@ -103,7 +103,7 @@ class Profile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    Teams
+                    Teams: {this.props.teamIds}
                     <br />
                     Team Name- Coaches Info
                   </Card>
@@ -154,13 +154,14 @@ function mapStateToProps({ auth }) {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
-    TeamIds: auth.user.teamIds,
+    teamIds: auth.user.teamIds,
     userLevel: auth.user.userType,
   };
  }
 const mapDispatchToProps = {
   getUserById,
-  handleDeleteUser
+  handleDeleteUser,
+  getTeamByTeamId
 };
 
 export default connect(
