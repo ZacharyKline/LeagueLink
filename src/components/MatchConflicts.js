@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Calendar } from "antd";
+import { Calendar, Select, Form, Checkbox } from "antd";
 import { Navbar, TimeBlock, RegisterHeader } from ".";
 import {} from "../actions";
 import moment from "moment";
@@ -10,10 +10,10 @@ import fakeBackendMonth from "../fakeBackendMonth.json";
 import teamsConflicts from "../fakeTeamsConflicts.json";
 import coaches from "../fakeCoaches.json";
 import teams from "../fakeTeams.json";
+const { Option } = Select;
 
 class MatchConflicts extends Component {
   state = {
-    value: null,
     selectedDate: null,
     selectedDay: null,
     isodate: "",
@@ -25,8 +25,33 @@ class MatchConflicts extends Component {
     ageCategory: "",
     matchHours: [],
     coachHours: [],
-    parentHours: []
+    parentHours: [],
+    ageGroup: "",
+    teamIds: [],
+    counter: 0
   };
+
+  handleChange = value => {
+    this.setState({ ageGroup: value });
+  };
+
+  handleSelectTeams = e => {
+    console.log(e.target.value);
+    let teamId = e.target.value;
+    if (this.statecounter < 2) {
+      if (!this.state.teamIds.includes(teamId)) {
+        let sum = this.state.counter + 1;
+        let newArr = [...this.state.teamIds, teamId];
+        console.log(newArr);
+        this.setState({ counter: sum, teamIds: newArr });
+      }
+    } else if (this.state.counter === 2) {
+      if (!this.state.teamIds.includes(teamId)) {
+        alert("Please only Select 2 Teams at a time");
+      }
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -91,6 +116,57 @@ class MatchConflicts extends Component {
                   </li>
                 </ul>
               </div>
+            </div>
+            <div>
+              <Select
+                defaultValue="Select an Age Category"
+                style={{ width: 200 }}
+                onChange={this.handleChange}
+              >
+                <Option value="Select an Age Category">
+                  Select An Age Category
+                </Option>
+                <Option value="5">5 year olds</Option>
+                <Option value="6">6 year olds</Option>
+                <Option value="7">7 year olds</Option>
+                <Option value="8">8 year olds</Option>
+                <Option value="9">9 year olds</Option>
+                <Option value="10">10 year olds</Option>
+                <Option value="11">11 year olds</Option>
+                <Option value="12">12 year olds</Option>
+                <Option value="13">13 year olds</Option>
+                <Option value="14">14 year olds</Option>
+                <Option value="15">15 year olds</Option>
+                <Option value="16">16 year olds</Option>
+                <Option value="17">17 year olds</Option>
+                <Option value="Adult">Adult </Option>
+              </Select>
+              {this.state.ageGroup !== "" && (
+                <Form>
+                  {teams
+                    .filter(team => team.ageGroup === this.state.ageGroup)
+                    .map((team, i) => {
+                      let currentCoach = coaches.find(
+                        coach => coach.id === team.coachId
+                      );
+                      console.log(team.teamName);
+                      return (
+                        <div key={i}>
+                          <Checkbox
+                            value={team.id}
+                            onChange={this.handleSelectTeams}
+                          />
+
+                          <span>
+                            <b>{team.teamName}</b>
+                          </span>
+                          <span> - Coach: </span>
+                          <span>{currentCoach.fullName}</span>
+                        </div>
+                      );
+                    })}
+                </Form>
+              )}
             </div>
           </div>
         </div>
