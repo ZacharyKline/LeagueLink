@@ -103,9 +103,9 @@ class Profile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    Teams: {this.props.teamIds}
-                    <br />
-                    Team Name- Coaches Info
+                    Teams: <h4>Frogs</h4>
+
+                    Coach: <h4>Kermit Croaker</h4>
                   </Card>
                   <Button
                     span={8}
