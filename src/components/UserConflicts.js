@@ -18,7 +18,6 @@ class UserConflicts extends Component {
     value: null,
     selectedDate: null,
     selectedDay: null,
-    dateSelected: false,
     isodate: "",
     year: 2020,
     firstMonth: 3,
@@ -33,6 +32,8 @@ class UserConflicts extends Component {
     timeBlock6: "",
     timeBlock7: ""
   };
+
+  componentDidMount = () => {};
 
   handleSave = () => {
     let userId = this.props.myLogin.id;
@@ -63,10 +64,6 @@ class UserConflicts extends Component {
       data[7] = this.state.timeBlock7;
     }
     dataObj[data] = data;
-    this.setState({
-      dateSelected: false,
-      currentDate: this.state.selectedDate.toDateString()
-    });
     console.log(dataObj);
     this.props.updateTimeBlock(userId, dataObj);
     return dataObj;
@@ -76,14 +73,12 @@ class UserConflicts extends Component {
     let selectedDate = value._d;
     let selectedDay = value.get("date");
     let isodate = value.toISOString();
-
     this.setState({
       value,
       selectedDate: selectedDate,
       selectedDay: selectedDay,
       isodate: isodate
     });
-
     return this.handleBlocks(selectedDay);
   };
 
@@ -169,8 +164,6 @@ class UserConflicts extends Component {
     }
   };
 
-  componentDidMount = () => {};
-
   fillOutMonth = (okaysObj, incompleteObj) => {
     return Object.assign({}, okaysObj, incompleteObj);
   };
@@ -199,29 +192,11 @@ class UserConflicts extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <div
-          className="stylesForm"
-          style={{ display: "flex", flexDirection: "column", width: "670px" }}
-        >
+        <div className="userConflictsContainerDiv">
           <RegisterHeader text={"Remove Times that Conflict"} />
-          <div
-            style={{ display: "flex", flexDirection: "row", width: "650px" }}
-          >
-            <div style={{ margin: "5px" }}>
-              <div
-                style={{
-                  color: "rgba(0, 53, 89, 1)",
-                  backgroundColor: "rgb(235, 236, 238)",
-                  padding: "20px",
-                  border: "5px rgba(0, 53, 89, 1) solid",
-                  borderRadius: "5px",
-                  maxWidth: "410px",
-                  maxHeight: "360px",
-                  display: "flex",
-                  flexDirection: "column",
-                  boxSizing: "border-box"
-                }}
-              >
+          <div className="userConflictsContainerDiv2">
+            <div className="userConflictsContainerDiv3">
+              <div className="userConflictCalendarDiv">
                 <Calendar
                   onSelect={this.handleSelect}
                   fullscreen={false}
