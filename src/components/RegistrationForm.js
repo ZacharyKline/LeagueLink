@@ -485,9 +485,10 @@ class RegisterForm extends Component {
             handleSubmit={handleSubmit(userType)}
           />
         )}
-
+        
         {isLoading && <Spinner name="circle" color="blue" />}
         {err && <p style={{ color: "red" }}>{err}</p>}
+        
       </React.Fragment>
     );
   }
