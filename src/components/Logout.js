@@ -9,7 +9,7 @@ class Logout extends Component {
         <button
           style={{
             border: "0",
-            background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+            background: "rgba(0, 53, 89, 1)",
             color: "rgb(161, 233, 29)"
           }}
           className="logout"

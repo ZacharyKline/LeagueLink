@@ -4,6 +4,7 @@ import { Menu, Icon } from "antd";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { Logout } from ".";
+import "../userConflicts.css";
 
 class Navbar extends Component {
   render() {
@@ -11,29 +12,8 @@ class Navbar extends Component {
 
     return (
       <React.Fragment>
-        <div
-          style={{
-            maxWidth: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center"
-          }}
-        >
-          <Menu
-            mode="horizontal"
-            style={{
-              background: "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-              color: "rgb(161, 233, 29)",
-              border: "3px rgb(130, 184, 31) solid",
-              borderRadius: "25px",
-              fontSize: "large",
-              minWidth: "700px",
-              maxWidth: "70%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around"
-            }}
-          >
+        <div className="menuContainerDiv">
+          <Menu className="menuStyle" mode="horizontal">
             {false && (
               <Menu.Item>
                 {/* <Link to="/home" style={{ color: "rgb(161, 233, 29)" }}>

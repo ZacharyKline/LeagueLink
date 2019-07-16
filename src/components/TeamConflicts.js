@@ -244,12 +244,15 @@ class TeamConflicts extends Component {
         <Navbar />
         <div
           className="stylesForm"
-          style={{ display: "flex", flexDirection: "column", width: "95%" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "95%",
+            marginTop: "20px"
+          }}
         >
           <RegisterHeader text={"Remove Confict Times for Team"} />
-          <div
-            style={{ display: "flex", flexDirection: "row", width: "700px" }}
-          >
+          <div style={{ display: "flex", flexDirection: "row" }}>
             <div style={{ margin: "5px" }}>
               <div className="teamCalendarDivContainer">
                 <Calendar

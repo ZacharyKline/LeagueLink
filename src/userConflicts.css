@@ -105,6 +105,7 @@
   background-color: rgb(235, 236, 238);
   font-size: 16px;
   line-height: 50px;
+  user-select: none;
 }
 
 .teamDate {
@@ -122,6 +123,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  user-select: none;
 }
 
 .buttonStyle {
@@ -131,6 +133,8 @@
   border-radius: 25px;
   font-size: large;
   min-width: 120px;
+  user-select: none;
+  outline: none;
 }
 
 .cell {
@@ -196,6 +200,7 @@ hr {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  user-select: none;
 }
 
 .parentTimeBlockDiv {
@@ -203,6 +208,7 @@ hr {
   flex-direction: column;
   width: 910px;
   padding: 0px;
+  user-select: none;
 }
 
 .userConflictsContainerDiv {
@@ -239,4 +245,31 @@ hr {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}
+
+.menuContainerDiv {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.menuStyle {
+  background: rgba(0, 53, 89, 1);
+  color: rgb(161, 233, 29);
+
+  border-bottom: 4px rgb(130, 184, 31) solid;
+
+  font-size: large;
+  min-width: 700px;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  user-select: none;
+}
+
+h1 {
+  user-select: none;
 }
