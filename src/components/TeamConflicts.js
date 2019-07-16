@@ -14,19 +14,13 @@ import monthDefaultOkay from "../monthDefaultOkay.json";
 import atheletesConflicts from "../fakeAtheletesConflicts.json";
 import teamconflicts from "../fakeTeamconflicts.json";
 import coachConflicts from "../fakeCoachConflicts.json";
-//console.log(atheletesConflicts[0].data[1]);
 
 class TeamConflicts extends Component {
   state = {
     value: null,
     selectedDate: null,
-    selectedDateString: null,
-    selectedMonth: null,
     selectedDay: null,
-    selectedYear: null,
-    dateSelected: false,
     isodate: "",
-    currentDate: "",
     year: 2020,
     firstMonth: 3,
     lastMonth: 6,
@@ -39,10 +33,11 @@ class TeamConflicts extends Component {
     timeBlock5: "",
     timeBlock6: "",
     timeBlock7: "",
-    click1: true,
     coachHours: [],
     parentHours: []
   };
+
+  componentDidMount = () => {};
 
   handleSave = () => {
     let userId = this.props.myLogin.id;
@@ -83,34 +78,21 @@ class TeamConflicts extends Component {
   };
 
   handleSelect = value => {
-    if (!this.state.click1) {
-      this.setState({
-        currentDate: this.state.selectedDate.toDateString(),
-        click1: true
-      });
-    } else {
-      this.setState({ currentDate: "", click1: false });
-    }
     let selectedDate = value._d;
-    let selectedMonth = value.get("month");
     let selectedDay = value.get("date");
-    let selectedYear = value.get("year");
     let isodate = value.toISOString();
-
     this.setState({
       value,
       selectedDate: selectedDate,
-      selectedMonth: selectedMonth,
       selectedDay: selectedDay,
-      selectedYear: selectedYear,
       isodate: isodate
     });
-    this.handleHours(coachConflicts, selectedDay);
+    this.handleCoachHours(coachConflicts, selectedDay);
     this.handleParentHours(selectedDay);
     return this.handleBlocks(selectedDay);
   };
 
-  handleHours = (conflictsObj, selectedDay) => {
+  handleCoachHours = (conflictsObj, selectedDay) => {
     let arr = [];
     let conflicts = this.fillOutMonth(monthDefaultOkay, conflictsObj);
     let dayConflicts = conflicts[selectedDay];
@@ -121,10 +103,13 @@ class TeamConflicts extends Component {
         arr.push(dayConflicts[i]);
       }
     }
-    //console.log(arr);
     return this.setState({
       coachHours: arr
     });
+  };
+
+  fillOutMonth = (okaysObj, incompleteObj) => {
+    return Object.assign({}, okaysObj, incompleteObj);
   };
 
   handleParentHours = selectedDay => {
@@ -148,7 +133,6 @@ class TeamConflicts extends Component {
       arr.push(arr2);
       containerArr.push(arr);
     }
-    console.log(containerArr);
     this.setState({ parentHours: containerArr });
   };
 
@@ -234,12 +218,6 @@ class TeamConflicts extends Component {
     }
   };
 
-  componentDidMount = () => {};
-
-  fillOutMonth = (okaysObj, incompleteObj) => {
-    return Object.assign({}, okaysObj, incompleteObj);
-  };
-
   render() {
     let hourBlocks = [
       this.state.timeBlock1,
@@ -273,20 +251,7 @@ class TeamConflicts extends Component {
             style={{ display: "flex", flexDirection: "row", width: "700px" }}
           >
             <div style={{ margin: "5px" }}>
-              <div
-                style={{
-                  color: "rgba(0, 53, 89, 1)",
-                  backgroundColor: "rgb(235, 236, 238)",
-                  padding: "20px",
-                  border: "5px rgba(0, 53, 89, 1) solid",
-                  borderRadius: "5px",
-                  maxWidth: "410px",
-                  maxHeight: "360px",
-                  display: "flex",
-                  flexDirection: "column",
-                  boxSizing: "border-box"
-                }}
-              >
+              <div className="teamCalendarDivContainer">
                 <Calendar
                   onSelect={this.handleSelect}
                   fullscreen={false}
@@ -310,15 +275,10 @@ class TeamConflicts extends Component {
               <div className="instructionsDiv">
                 <h4>Instructions:</h4>
                 <ul>
-                  <li>Double click a date from calendar.</li>
+                  <li>Select a date from calendar.</li>
                   <li>
-                    A column of blocks will appear. Each block represents 2
-                    hours.
-                  </li>
-                  <li>
-                    IMPORTANT! Make sure the date is displayed beside the
-                    blocks. If you do not see a date, click on the calandar's
-                    date again.
+                    A row of blocks will appear at the top. Each block
+                    represents 2 hours.
                   </li>
                   <li>
                     Your conflicts and the conflicts of your athletes are
@@ -326,11 +286,13 @@ class TeamConflicts extends Component {
                   </li>
                   <li>
                     Use this informtion as a guide to decide if your team is
-                    availble to be scheduled for a game during the various
-                    blocks as of time
+                    availble to be scheduled for a game during each block of
+                    time.
                   </li>
                   <li>Green = "okay to schedule game"</li>
-                  <li>Orange = "inconvient, but can schedule if necessary",</li>
+                  <li>
+                    Orange = "inconvenient, but can schedule if necessary",
+                  </li>
                   <li>Dark blue = "impossible, do not schedule"</li>
                   <li>Remember to save before moving on to the next date.</li>
                 </ul>
@@ -338,108 +300,61 @@ class TeamConflicts extends Component {
             </div>
 
             <div className="teamTimeBlockDiv">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  width: "920px",
-                  padding: "5px",
-                  paddingTop: "10px"
-                }}
-              >
-                {this.state.selectedDate !== null && (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center"
-                    }}
-                  >
-                    <div className="teamDate">{this.state.currentDate}</div>
-                    <button className="buttonStyle" onClick={this.handleSave}>
-                      Save Changes
-                    </button>
+              {this.state.selectedDate !== null && (
+                <React.Fragment>
+                  <div className="teamTimeBlockDiv2">
+                    <div className="teamTimeBlockDiv3">
+                      <div className="teamDate">
+                        {this.state.selectedDate.toDateString()}
+                      </div>
+                      <button className="buttonStyle" onClick={this.handleSave}>
+                        Save Changes
+                      </button>
+                    </div>
+                    {hourBlocks.map((block, i) => {
+                      let faceIcon =
+                        block === "impossible"
+                          ? "frown"
+                          : block === "conflict"
+                          ? "meh"
+                          : "smile";
+                      return (
+                        <TimeBlock
+                          key={i}
+                          className={`teamBlock ${block}`}
+                          status={block}
+                          hours={hours[i]}
+                          type={faceIcon}
+                          onClick={this.handleClick(block, i)}
+                        />
+                      );
+                    })}
                   </div>
-                )}
-                {this.state.selectedDate !== null &&
-                  hourBlocks.map((block, i) => {
-                    let faceIcon =
-                      block === "impossible"
-                        ? "frown"
-                        : block === "conflict"
-                        ? "meh"
-                        : "smile";
-                    return (
-                      <TimeBlock
-                        key={i}
-                        className={`teamBlock ${block}`}
-                        status={block}
-                        hours={hours[i]}
-                        type={faceIcon}
-                        onClick={this.handleClick(block, i)}
-                      />
-                    );
-                  })}
-              </div>
-
-              <hr
-                style={{
-                  background: "rgba(0, 53, 89, 1)",
-                  height: "5px",
-                  width: "100%",
-                  borderStyle: "none"
-                }}
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  width: "910px",
-                  padding: "0px",
-                  paddingTop: "10px",
-                  paddingBottom: "0px"
-                }}
-              >
-                {this.state.selectedDate !== null && (
-                  <div
-                    className="teamDate"
-                    style={{ width: "160px", height: "50px" }}
-                  >
-                    My Conflicts
+                  <hr />
+                  <div className="coachTimeBlockDiv">
+                    <div className="myConflictsDiv">My Conflicts</div>
+                    {this.state.coachHours.map((block, i) => {
+                      return <Cell className={`${block} cell`} key={i} />;
+                    })}
                   </div>
-                )}
-                {this.state.selectedDate !== null &&
-                  this.state.coachHours.map((hour, i) => {
-                    return <Cell className={`${hour} cell`} key={i} />;
-                  })}
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "910px",
-                  padding: "0px",
-                  paddingTop: "0px"
-                }}
-              >
-                {this.state.selectedDate !== null &&
-                  this.state.parentHours.map((day, i) => {
-                    console.log(day[0][6]);
-                    return (
-                      <Row
-                        className1={`${day[0][0]} cell`}
-                        className2={`${day[0][1]} cell`}
-                        className3={`${day[0][2]} cell`}
-                        className4={`${day[0][3]} cell`}
-                        className5={`${day[0][4]} cell`}
-                        className6={`${day[0][5]} cell`}
-                        className7={`${day[0][6]} cell`}
-                        key={i}
-                      />
-                    );
-                  })}
-              </div>
+                  <div className="parentTimeBlockDiv">
+                    {this.state.parentHours.map((day, i) => {
+                      return (
+                        <Row
+                          className1={`${day[0][0]} cell`}
+                          className2={`${day[0][1]} cell`}
+                          className3={`${day[0][2]} cell`}
+                          className4={`${day[0][3]} cell`}
+                          className5={`${day[0][4]} cell`}
+                          className6={`${day[0][5]} cell`}
+                          className7={`${day[0][6]} cell`}
+                          key={i}
+                        />
+                      );
+                    })}
+                  </div>
+                </React.Fragment>
+              )}
             </div>
           </div>
         </div>

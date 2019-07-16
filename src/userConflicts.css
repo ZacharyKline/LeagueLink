@@ -138,3 +138,69 @@
   width: 110px;
   margin: 3px;
 }
+.teamCalendarDivContainer {
+  color: rgba(0, 53, 89, 1);
+  background-color: rgb(235, 236, 238);
+  padding: 20px;
+  border: 5px rgba(0, 53, 89, 1) solid;
+  border-radius: 5px;
+  max-width: 410px;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.teamTimeBlockDiv2 {
+  display: flex;
+  flex-direction: row;
+  width: 920px;
+  padding: 5px;
+  padding-top: 10px;
+}
+
+.teamTimeBlockDiv3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+hr {
+  background: rgba(0, 53, 89, 1);
+  height: 5px;
+  width: 100%;
+  border-style: none;
+}
+
+.coachTimeBlockDiv {
+  display: flex;
+  flex-direction: row;
+  width: 910px;
+  padding: 0px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.myConflictsDiv {
+  height: 50px;
+  width: 160px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 3px;
+  color: rgba(0, 53, 89, 1);
+  border: 5px rgba(0, 53, 89, 1) solid;
+  background-color: rgb(235, 236, 238);
+  font-size: 16px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.parentTimeBlockDiv {
+  display: flex;
+  flex-direction: column;
+  width: 910px;
+  padding: 0px;
+}
