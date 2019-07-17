@@ -12,10 +12,6 @@ import { getUserById } from "../actions";
 
 
 class EditProfile extends Component {
-    state = {
-        fullName : "",
-        phone : ""
-    }
     componentDidMount() {
         this.props.getUserById(this.props.login.id);
     }
@@ -24,13 +20,9 @@ class EditProfile extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    handleEditProfile = event => {
-        event.preventDefault();
-        let inputObj = {
-            fullName: this.state.fullName,
-            phone: this.state.phone,
-        };
-        this.props.editProfile(inputObj);
+    handleEditProfile = e => {
+        e.preventDefault()
+        this.props.editProfile(this.state);
     };
 
     render() {
