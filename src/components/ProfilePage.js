@@ -8,14 +8,14 @@ import {
   Popconfirm
 } from "antd";
 import { connect } from "react-redux";
-import { getUserById } from "../actions";
+import { getUserById, getTeamByTeamId } from "../actions";
 import { deleteUserThenGoToLoginPage as handleDeleteUser } from '../actions'
 const text = "Are you sure you want to delete this Account?";
 
 class Profile extends Component {
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
-    // this.props.getCoachByTeamId(this.props.teamId)
+    this.props.getTeamByTeamId(this.props.teamId)
   }
   render() {
     return (
@@ -55,7 +55,7 @@ class Profile extends Component {
                     Contact Info: {this.props.phone}
 
                     <br />
-                    Account Type: {this.props.userLevel}
+                    Account Type: {this.props.userLevel}{this.props.userType}
                   </Card>
                   <Link to='/editprofile'>
                     <Button
@@ -103,7 +103,7 @@ class Profile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    Teams
+                    Teams: {this.props.teamIds}
                     <br />
                     Team Name- Coaches Info
                   </Card>
@@ -148,20 +148,20 @@ class Profile extends Component {
   }
 }
 
-/////////////////////// incoming change
 
 function mapStateToProps({ auth }) {
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
-    TeamIds: auth.user.teamIds,
-    userLevel: auth.user.userType
+    teamIds: auth.user.teamIds,
+    userLevel: auth.user.userType,
   };
-}
+ }
 const mapDispatchToProps = {
   getUserById,
-  handleDeleteUser
+  handleDeleteUser,
+  getTeamByTeamId
 };
 
 export default connect(

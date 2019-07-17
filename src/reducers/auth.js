@@ -7,7 +7,8 @@ import {
   LOGOUT_FAIL,
   DELETE_USER,
   DELETE_USER_SUCCESS,
-  DELETE_USER_FAIL
+  DELETE_USER_FAIL,
+  EDIT_PROFILE_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -58,6 +59,12 @@ export default (state = getInitState(), action) => {
         logoutError: action.payload,
         logoutLoading: false
       };
+
+    case EDIT_PROFILE_SUCCESS:
+      return {
+      ...state,
+      user: action.payload
+    };
 
     default:
       return state;
