@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { editProfile, GET_USERS } from "../actions";
+import { editProfile } from "../actions";
 import { connect } from "react-redux";
 import Spinner from "react-spinkit";
 import {

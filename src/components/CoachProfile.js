@@ -6,20 +6,20 @@ import {
   Card,
   Button,
   Popconfirm,
+  Modal
 } from "antd";
 import { connect } from "react-redux";
+import RegisterParentSelectTeamsForm from "../components/RegisterForms/RegisterParentSelectTeamsForm"
 import { getUserById, getTeamByTeamId, editProfile, deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
 
 const text = "Are you sure to delete this Account?";
 
-class Profile extends Component {
+class CoachProfile extends Component {
   state = {}
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
     console.log(this.props)
-    if(this.props.teamIds){
-      this.props.getTeamByTeamId(this.props.teamIds[0])
-    }
+    this.props.getTeamByTeamId(this.props.teamId)
   }
   toggleModal = () => {
     this.setState({modal : !this.state.modal})
@@ -111,63 +111,68 @@ class Profile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    Teams: <h4>Frogs</h4>
-                    Coach: <h4>Ben Carter</h4>
-                    Coach Email: <h4>bc@gm.com</h4>
-                    Coach Phone: <h4>(000) 000-0009</h4>
-
+                    <h1>Team:</h1> 
+                    <h4>Tigers</h4>
+                    <h1>Parents:</h1>
+                    <h4>John Smith</h4>
+                    <div>Phone: (000) 000-0001</div>
+                    <div>Email: js@gm.com</div>
+                    <h4>Mary Hamm</h4>
+                    <div>Phone: (000) 000-0002</div>
+                    <div>Email: mhamm@gm.com</div>
+                    <h4>Poppy Gloria</h4>
+                    <div>Phone: (000) 000-0003</div>
+                    <div>Email: pg@gm.com</div>
+                    <h4>Carl Weathers</h4>
+                    <div>Phone: (000) 000-0004</div>
+                    <div>Email: cw@gm.com</div>
+                    <h4>John Wick</h4>
+                    <div>Phone: (000) 000-0005</div>
+                    <div>Email: jw@gm.com</div>
+                    <h4>Rick Sanchez</h4>
+                    <div>Phone: (000) 000-0006</div>
+                    <div>Email: rs@gm.com</div>
+                    <h4>Homer Simpson</h4>
+                    <div>Phone: (000) 000-0007</div>
+                    <div>Email: hs@gm.com</div>
+                    <h4>Tom Harris</h4>
+                    <div>Phone: (000) 000-0008</div>
+                    <div>Email: th@gm.com</div>
+                    <h4>George Martin</h4>
+                    <div>Phone: (000) 000-0009</div>
+                    <div>Email: grrm@gm.com</div>
+                    <h4>Stephen King</h4>
+                    <div>Phone: (000) 000-0010</div>
+                    <div>Email: sk@gm.com</div>
                   </Card>
-                  <Button
-                    span={8}
-                    offset={4}
-                    type='submit'
-                    style={{
-                      background: "rgba(0, 53, 89, 1)",
-                      color: "rgb(161, 233, 29)",
-                      border: "3px rgb(130, 184, 31) solid",
-                      borderRadius: "25px",
-                      textAlign: "center",
-                    }}
-                    onClick={this.toggleModal}
-                  >
-                    Add Team(s)
-                    </Button>
-                  <Button
-                    span={8}
-                    offset={4}
-                    type='submit'
-                    style={{
-                      background: "rgba(0, 53, 89, 1)",
-                      color: "rgb(161, 233, 29)",
-                      border: "3px rgb(130, 184, 31) solid",
-                      borderRadius: "25px",
-                      textAlign: "center",
-                    }}
-                  >
-                    Remove Team(s)
-                    </Button>
-
-
+                
                 </Col>
               </div>
 
             </div>
           </div>
         </section>
+        <Modal
+          title="Basic Modal"
+          visible={this.state.modal}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <RegisterParentSelectTeamsForm />
+        </Modal>
       </React.Fragment>
     );
   }
 }
 
 
-function mapStateToProps({ auth, teams }) {
+function mapStateToProps({ auth }) {
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
     userLevel: auth.user.userType,
-    // teamIds: auth.user.teamIds,
   };
  }
 
@@ -181,4 +186,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Profile);
+)(CoachProfile);

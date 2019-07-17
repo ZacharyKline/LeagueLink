@@ -2,25 +2,26 @@ import React, { Component } from "react";
 import { getUserById } from "../actions";
 import { connect } from "react-redux";
 import Profile from "./ProfilePage"
+import CoachProfile from './CoachProfile'
 
  class ProfileContainer extends Component{
     
     render(){
         const {userLevel} = this.props
 
-        if(userLevel === parent){
+        if(userLevel === "parent"){
             return(
                 <Profile />
             )
-        }else if(userLevel === coaches){
+        }else if(userLevel === "coach"){
+            return(
+                <CoachProfile />
+            )
+        }else if(userLevel === "manager"){
             return(
                 <Profile />
             )
-        }else if(userLevel === managers){
-            return(
-                <Profile />
-            )
-        }
+        } else { return <Profile/>}
     }
 
 }
