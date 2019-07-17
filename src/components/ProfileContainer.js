@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getUserById } from "../actions";
 import { connect } from "react-redux";
 import Profile from "./ProfilePage"
+import CoachProfile from './CoachProfile'
 
  class ProfileContainer extends Component{
     
@@ -12,9 +13,9 @@ import Profile from "./ProfilePage"
             return(
                 <Profile />
             )
-        }else if(userLevel === coaches){
+        }else if(userLevel === coach){
             return(
-                <Profile />
+                <CoachProfile />
             )
         }else if(userLevel === managers){
             return(
