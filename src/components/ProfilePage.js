@@ -6,10 +6,8 @@ import {
   Card,
   Button,
   Popconfirm,
-  Modal
 } from "antd";
 import { connect } from "react-redux";
-import RegisterParentSelectTeamsForm from "../components/RegisterForms/RegisterParentSelectTeamsForm"
 import { getUserById, getTeamByTeamId, editProfile, deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
 
 const text = "Are you sure to delete this Account?";
@@ -19,7 +17,9 @@ class Profile extends Component {
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
     console.log(this.props)
-    this.props.getTeamByTeamId(this.props.teamId)
+    if(this.props.teamIds){
+      this.props.getTeamByTeamId(this.props.teamIds[0])
+    }
   }
   toggleModal = () => {
     this.setState({modal : !this.state.modal})
@@ -154,27 +154,20 @@ class Profile extends Component {
             </div>
           </div>
         </section>
-        <Modal
-          title="Basic Modal"
-          visible={this.state.modal}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <RegisterParentSelectTeamsForm />
-        </Modal>
       </React.Fragment>
     );
   }
 }
 
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, teams }) {
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
     userLevel: auth.user.userType,
+    teamIds: auth.user.teamIds,
   };
  }
 
