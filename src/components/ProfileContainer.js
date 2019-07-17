@@ -9,19 +9,19 @@ import CoachProfile from './CoachProfile'
     render(){
         const {userLevel} = this.props
 
-        if(userLevel === 'parent'){
+        if(userLevel === "parent"){
             return(
                 <Profile />
             )
-        }else if(userLevel === 'coach'){
+        }else if(userLevel === "coach"){
             return(
                 <CoachProfile />
             )
-        }else if(userLevel === 'managers'){
+        }else if(userLevel === "manager"){
             return(
                 <Profile />
             )
-        }
+        } else { return <Profile/>}
     }
 
 }
