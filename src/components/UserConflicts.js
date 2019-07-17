@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import Spinner from "react-spinkit";
 import { connect } from "react-redux";
-import { Calendar } from "antd";
+import { Calendar, message} from "antd";
 import { Navbar, TimeBlock, RegisterHeader } from ".";
 import {
   getTimeBlocksByUserId,
@@ -65,7 +66,8 @@ class UserConflicts extends Component {
     }
     dataObj[data] = data;
     console.log(dataObj);
-    this.props.updateTimeBlock(userId, dataObj);
+    this.props.updateTimeBlock(userId, dataObj)
+    message.info("You have updated the time blocks")
     return dataObj;
   };
 
@@ -105,6 +107,7 @@ class UserConflicts extends Component {
   };
 
   handleClick = (hourblock, i) => e => {
+  
     if (i === 0) {
       if (this.state.timeBlock1 === "okay") {
         return this.setState({ timeBlock1: "conflict" });
@@ -280,14 +283,18 @@ class UserConflicts extends Component {
             </div>
           </div>
         </div>
+        {this.props.isLoading && <Spinner name="circle" color="blue" />}
+        {this.props.err && <p style={{ color: "red" }}>{this.props.err}</p>}
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({auth, timeblocks}) => {
   return {
-    myLogin: state.auth.login
+    myLogin: auth.login,
+    err: timeblocks.updateTimeBlocksError,
+    isLoading: timeblocks.updateTimeBlocksLoading,
   };
 };
 

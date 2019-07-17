@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { editProfile } from "../actions";
 import { connect } from "react-redux";
+import Spinner from "react-spinkit";
 import {
     Button, 
     Form,
@@ -12,10 +13,6 @@ import { getUserById } from "../actions";
 
 
 class EditProfile extends Component {
-    state = {
-        fullName : "",
-        phone : ""
-    }
     componentDidMount() {
         this.props.getUserById(this.props.login.id);
     }
@@ -24,13 +21,9 @@ class EditProfile extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    handleEditProfile = event => {
-        event.preventDefault();
-        let inputObj = {
-            fullName: this.state.fullName,
-            phone: this.state.phone,
-        };
-        this.props.editProfile(inputObj);
+    handleEditProfile = e => {
+        e.preventDefault()
+        this.props.editProfile(this.state);
     };
 
     render() {
@@ -107,18 +100,21 @@ class EditProfile extends Component {
                                 >Submit</Button>
                         </Form.Item>
                     </Form>
+                    {this.props.isLoading && <Spinner name="circle" color="blue" />}
+                    {this.props.err && <p style={{ color: "red" }}>{this.props.err}</p>}
                 </Layout>
             </React.Fragment>
         )
     }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, users }) {
     return {
         login: auth.login,
         fullName: auth.user.fullName,
         phone: auth.user.phone,
-
+        isLoading: users.user.editUserLoading,
+        err: users.user.editUserError,
     };
 }
 

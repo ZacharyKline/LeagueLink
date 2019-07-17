@@ -82,8 +82,7 @@
 
 .teamTimeBlockDiv {
   background: rgb(74, 162, 197);
-
-  width: 990px;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -157,8 +156,9 @@
 
 .teamTimeBlockDiv2 {
   display: flex;
+  justify-content: center;
+  width: 75%;
   flex-direction: row;
-  width: 920px;
   padding: 5px;
   padding-top: 10px;
 }
@@ -218,7 +218,6 @@ hr {
   border: 5px rgba(0, 53, 89, 1) solid;
   border-radius: 5px;
   width: 670px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   margin: 20px auto;
@@ -228,6 +227,7 @@ hr {
   display: flex;
   flex-direction: row;
   width: 650px;
+  height: 100%;
 }
 
 .userConflictsContainerDiv3 {
