@@ -112,8 +112,10 @@ class Profile extends Component {
                     }}
                   >
                     Teams: <h4>Frogs</h4>
+                    Coach: <h4>Ben Carter</h4>
+                    Coach Email: <h4>bc@gm.com</h4>
+                    Coach Phone: <h4>(000) 000-0009</h4>
 
-                    Coach: <h4>Kermit Croaker</h4>
                   </Card>
                   <Button
                     span={8}
