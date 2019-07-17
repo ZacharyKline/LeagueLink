@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { editProfile } from "../actions";
+import { editProfile, GET_USERS } from "../actions";
 import { connect } from "react-redux";
+import Spinner from "react-spinkit";
 import {
     Button, 
     Form,
@@ -99,18 +100,21 @@ class EditProfile extends Component {
                                 >Submit</Button>
                         </Form.Item>
                     </Form>
+                    {this.props.isLoading && <Spinner name="circle" color="blue" />}
+                    {this.props.err && <p style={{ color: "red" }}>{this.props.err}</p>}
                 </Layout>
             </React.Fragment>
         )
     }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, users }) {
     return {
         login: auth.login,
         fullName: auth.user.fullName,
         phone: auth.user.phone,
-
+        isLoading: users.user.editUserLoading,
+        err: users.user.editUserError,
     };
 }
 
