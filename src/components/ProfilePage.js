@@ -10,7 +10,7 @@ import {
 import { connect } from "react-redux";
 import { getUserById } from "../actions";
 import { deleteUserThenGoToLoginPage as handleDeleteUser } from '../actions'
-const text = "Are you sure to delete this Account?";
+const text = "Are you sure you want to delete this Account?";
 
 class Profile extends Component {
   componentDidMount() {
