@@ -15,6 +15,7 @@ import monthDefaultOkay from "../monthDefaultOkay.json";
 import atheletesConflicts from "../fakeAtheletesConflicts.json";
 import teamconflicts from "../fakeTeamconflicts.json";
 import coachConflicts from "../fakeCoachConflicts.json";
+import parents from "../fakeParents.json";
 
 class TeamConflicts extends Component {
   state = {
@@ -35,7 +36,8 @@ class TeamConflicts extends Component {
     timeBlock6: "",
     timeBlock7: "",
     coachHours: [],
-    parentHours: []
+    parentHours: [],
+    parentIds: []
   };
 
   componentDidMount = () => {};
@@ -116,8 +118,10 @@ class TeamConflicts extends Component {
 
   handleParentHours = selectedDay => {
     let containerArr = [];
+    let parentIds = [];
     for (let i = 0; i < atheletesConflicts.length; i++) {
       let arr = [];
+      let parentId = atheletesConflicts[i].userId;
       let dayConflicts = atheletesConflicts[i].data[selectedDay];
       let x = Object.assign(
         {
@@ -134,8 +138,9 @@ class TeamConflicts extends Component {
       let arr2 = Object.values(x);
       arr.push(arr2);
       containerArr.push(arr);
+      parentIds.push(parentId);
     }
-    this.setState({ parentHours: containerArr });
+    this.setState({ parentHours: containerArr, parentIds: parentIds });
   };
 
   handleBlocks = selectedDay => {
@@ -344,6 +349,11 @@ class TeamConflicts extends Component {
                   </div>
                   <div className="parentTimeBlockDiv">
                     {this.state.parentHours.map((day, i) => {
+                      let currentParentId = this.state.parentIds[i];
+                      let currentParent = parents.find(
+                        parent => parent.id === currentParentId
+                      );
+                      let parentName = currentParent.fullName;
                       return (
                         <Row
                           className1={`${day[0][0]} cell`}
@@ -353,6 +363,7 @@ class TeamConflicts extends Component {
                           className5={`${day[0][4]} cell`}
                           className6={`${day[0][5]} cell`}
                           className7={`${day[0][6]} cell`}
+                          parent={parentName}
                           key={i}
                         />
                       );

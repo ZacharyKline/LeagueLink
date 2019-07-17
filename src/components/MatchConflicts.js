@@ -34,7 +34,7 @@ class MatchConflicts extends Component {
 
   handleAllowSelect = e => {
     if (this.state.teamIds.length > 0) {
-      alert("Please uncheck boxes first");
+      alert("Please uncheck boxes before switching age categories!");
     }
   };
 
@@ -127,7 +127,7 @@ class MatchConflicts extends Component {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            width: "100%",
+            width: "1050px",
             marginTop: "20px"
           }}
         >
@@ -158,7 +158,7 @@ class MatchConflicts extends Component {
               <div className="instructionsDiv">
                 <h4>Instructions:</h4>
                 <ul>
-                  <li>Select a team age category.</li>
+                  <li>Select an age category.</li>
                   <li>A list of teams will appear.</li>
                   <li>Select two teams from the list.</li>
                   <li>Select a date from calendar.</li>
@@ -172,9 +172,11 @@ class MatchConflicts extends Component {
                   </li>
                   <li>Green = "good time to schedule a game"</li>
                   <li>
-                    Orange = "inconvenient, but can make it work if necessary"
+                    Orange = "inconvenient time, but can work if necessary"
                   </li>
-                  <li>Dark blue = "impossible, do not schedule a game!"</li>
+                  <li>
+                    Dark blue = "impossible time, do not schedule a game!"
+                  </li>
                   <li>
                     If you do not see a good time to schedule a match on the
                     selected day, click on other dates until you find a time
@@ -265,34 +267,32 @@ class MatchConflicts extends Component {
                 )}
               </div>
             </div>
-            {this.state.teamIds.length === 2 &&
-              this.state.selectedDate !== null && (
-                <div className="timeBlockDiv" style={{ height: "540px" }}>
-                  {this.state.selectedDate !== null && (
-                    <div className="date">
-                      {this.state.selectedDate.toDateString()}
-                    </div>
-                  )}
-                  {this.state.selectedDate !== null &&
-                    this.state.matchBlocks.map((block, i) => {
-                      let faceIcon =
-                        block === "impossible"
-                          ? "frown"
-                          : block === "conflict"
-                          ? "meh"
-                          : "smile";
-                      return (
-                        <TimeBlock
-                          key={i}
-                          className={`block ${block}`}
-                          status={block}
-                          hours={hours[i]}
-                          type={faceIcon}
-                        />
-                      );
-                    })}
+
+            <div className="timeBlockDiv" style={{ height: "540px" }}>
+              {this.state.selectedDate !== null && (
+                <div className="date">
+                  {this.state.selectedDate.toDateString()}
                 </div>
               )}
+              {this.state.selectedDate !== null &&
+                this.state.matchBlocks.map((block, i) => {
+                  let faceIcon =
+                    block === "impossible"
+                      ? "frown"
+                      : block === "conflict"
+                      ? "meh"
+                      : "smile";
+                  return (
+                    <TimeBlock
+                      key={i}
+                      className={`block ${block}`}
+                      status={block}
+                      hours={hours[i]}
+                      type={faceIcon}
+                    />
+                  );
+                })}
+            </div>
           </div>
         </div>
       </React.Fragment>
