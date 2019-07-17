@@ -17,7 +17,7 @@ class Row extends Component {
           className="teamDate"
           style={{ width: "160px", height: "50px", padding: "0px" }}
         >
-          Parent Name
+          {this.props.parent}
         </div>
         <Cell className={this.props.className1} />
         <Cell className={this.props.className2} />
