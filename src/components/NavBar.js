@@ -8,7 +8,7 @@ import "../userConflicts.css";
 
 class Navbar extends Component {
   render() {
-    // const { login } = this.props;
+    const { userType } = this.props;
 
     return (
       <React.Fragment>
@@ -21,14 +21,14 @@ class Navbar extends Component {
             </Link> */}
               </Menu.Item>
             )}
-            {
+            {userType !== "manager" && (
               <Menu.Item>
                 <Link to="/conflicts" style={{ color: "rgb(161, 233, 29)" }}>
                   My Conflicts
                 </Link>
               </Menu.Item>
-            }
-            {
+            )}
+            {userType === "coach" && (
               <Menu.Item>
                 <Link
                   to="/teamconflicts"
@@ -37,8 +37,8 @@ class Navbar extends Component {
                   Team Conflicts
                 </Link>
               </Menu.Item>
-            }
-            {
+            )}
+            {userType === "manager" && (
               <Menu.Item>
                 <Link
                   to="/matchconflicts"
@@ -47,25 +47,11 @@ class Navbar extends Component {
                   Match Conflicts
                 </Link>
               </Menu.Item>
-            }
+            )}
             {
               <Menu.Item>
                 <Link to="/profile" style={{ color: "rgb(161, 233, 29)" }}>
                   Profile Page
-                </Link>
-              </Menu.Item>
-            }
-            {
-              <Menu.Item>
-                <Link to="/registration" style={{ color: "rgb(161, 233, 29)" }}>
-                  Registration Page
-                </Link>
-              </Menu.Item>
-            }
-            {
-              <Menu.Item>
-                <Link to="/" style={{ color: "rgb(161, 233, 29)" }}>
-                  Login Page
                 </Link>
               </Menu.Item>
             }
@@ -86,7 +72,7 @@ class Navbar extends Component {
 
 const mapStateToProps = state => {
   return {
-    // login: state.auth.login
+    userType: state.users.user.userType
   };
 };
 

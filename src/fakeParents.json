@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "fullName": "John Smith",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0001",
+    "email": "js@gm.com"
+  },
+  {
+    "id": "2",
+    "fullName": "Mary Hamm",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0002",
+    "email": "mhamm@gm.com"
+  },
+  {
+    "id": "3",
+    "fullName": "Poppy Gloria",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0003",
+    "email": "pg@gm.com"
+  },
+  {
+    "id": "4",
+    "fullName": "Carl Weathers",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0004",
+    "email": "cw@gm.com"
+  },
+  {
+    "id": "5",
+    "fullName": "John Wick",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0005",
+    "email": "jw@gm.com"
+  },
+  {
+    "id": "6",
+    "fullName": "Rick Sanchez",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0006",
+    "email": "rs@gm.com"
+  },
+  {
+    "id": "7",
+    "fullName": "Homer Simpson",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0007",
+    "email": "hs@gm.com"
+  },
+  {
+    "id": "8",
+    "fullName": "Tom Harris",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0008",
+    "email": "th@gm.com"
+  },
+  {
+    "id": "9",
+    "fullName": "George Martin",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0009",
+    "email": "grrm@gm.com"
+  },
+  {
+    "id": "10",
+    "fullName": "Stephen King",
+    "teamIds": [],
+    "coachIds": ["5d2f2ad69c839a0017778aab"],
+    "phone": "(000) 000-0010",
+    "email": "sk@gm.com"
+  }
+]
