@@ -167,7 +167,7 @@ function mapStateToProps({ auth, teams }) {
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
     userLevel: auth.user.userType,
-    teamIds: auth.user.teamIds,
+    // teamIds: auth.user.teamIds,
   };
  }
 
