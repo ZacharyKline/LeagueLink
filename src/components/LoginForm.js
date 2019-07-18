@@ -53,8 +53,8 @@ class LoginForm extends Component {
               flexDirection: "column",
               justifyContent: "center",
 
-              margin: "40px auto",
-              marginLeft: "40px"
+              margin: "200px auto"
+              //marginLeft: "40px"
             }}
             // className="stylesForm"
           >
