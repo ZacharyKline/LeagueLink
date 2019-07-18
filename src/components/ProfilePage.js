@@ -115,12 +115,12 @@ class Profile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    Teams: <h4>Frogs</h4>
+                    Teams: <h4>The Frogs</h4>
                     Coach: <h4>Ben Carter</h4>
                     Coach Email: <h4>bc@gm.com</h4>
                     Coach Phone: <h4>(000) 000-0009</h4>
                   </Card>
-                  <Button
+                  {/* <Button
                     span={8}
                     offset={4}
                     type="submit"
@@ -148,7 +148,7 @@ class Profile extends Component {
                     }}
                   >
                     Remove Team(s)
-                  </Button>
+                  </Button> */}
                 </Col>
               </div>
             </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 import { Navbar } from ".";
 import { connect } from "react-redux";
-import { Col, Card, Button, Popconfirm, Modal } from "antd";
+import { Col, Card, Button, Popconfirm } from "antd";
 import { getUserById, getFacilityByManagerId, editProfile, deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
 
 
@@ -160,14 +160,14 @@ class FacilityManagerProfile extends Component {
 
 
 function mapStateToProps({ auth, teams, facilities }) {
-    facility = facilities.managerFacility.foundFacilities[0]
+    // facility = facilities.managerFacility.foundFacilities[0]
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
     userLevel: auth.user.userType,
-    facility: facility
+    // facility: facility
     // teamIds: auth.user.teamIds,
   };
  }

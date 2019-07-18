@@ -3,6 +3,7 @@ import { getUserById } from "../actions";
 import { connect } from "react-redux";
 import Profile from "./ProfilePage"
 import CoachProfile from './CoachProfile'
+import FacilityManagerProfile from './FacilityManagerProfile'
 
  class ProfileContainer extends Component{
     
@@ -19,7 +20,7 @@ import CoachProfile from './CoachProfile'
             )
         }else if(userLevel === "manager"){
             return(
-                <Profile />
+                <FacilityManagerProfile />
             )
         } else { return <Profile/>}
     }
