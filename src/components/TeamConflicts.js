@@ -77,7 +77,7 @@ class TeamConflicts extends Component {
     });
     console.log(dataObj);
     this.props.updateTimeBlock(userId, dataObj);
-    message.info("You have updated the time blocks")
+    message.info("You have updated the time blocks");
     return dataObj;
   };
 
@@ -254,7 +254,7 @@ class TeamConflicts extends Component {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "95%",
+            width: "100%",
             marginTop: "20px"
           }}
         >
@@ -313,41 +313,86 @@ class TeamConflicts extends Component {
               {this.state.selectedDate !== null && (
                 <React.Fragment>
                   <div className="teamTimeBlockDiv2">
-                    <div className="teamTimeBlockDiv3">
-                      <div className="teamDate">
-                        {this.state.selectedDate.toDateString()}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        width: "100%"
+                      }}
+                    >
+                      <div className="teamTimeBlockDiv3">
+                        <div className="teamDate">
+                          {this.state.selectedDate.toDateString()}
+                        </div>
+                        <button
+                          className="buttonStyle"
+                          onClick={this.handleSave}
+                        >
+                          Save Changes
+                        </button>
                       </div>
-                      <button className="buttonStyle" onClick={this.handleSave}>
-                        Save Changes
-                      </button>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          width: "85%"
+                        }}
+                      >
+                        {hourBlocks.map((block, i) => {
+                          let faceIcon =
+                            block === "impossible"
+                              ? "frown"
+                              : block === "conflict"
+                              ? "meh"
+                              : "smile";
+                          return (
+                            <TimeBlock
+                              key={i}
+                              className={`teamBlock ${block}`}
+                              status={block}
+                              hours={hours[i]}
+                              type={faceIcon}
+                              onClick={this.handleClick(block, i)}
+                            />
+                          );
+                        })}
+                      </div>
                     </div>
-                    {hourBlocks.map((block, i) => {
-                      let faceIcon =
-                        block === "impossible"
-                          ? "frown"
-                          : block === "conflict"
-                          ? "meh"
-                          : "smile";
-                      return (
-                        <TimeBlock
-                          key={i}
-                          className={`teamBlock ${block}`}
-                          status={block}
-                          hours={hours[i]}
-                          type={faceIcon}
-                          onClick={this.handleClick(block, i)}
-                        />
-                      );
-                    })}
                   </div>
                   <hr />
-                  <div className="coachTimeBlockDiv">
-                    <div className="myConflictsDiv">My Conflicts</div>
-                    {this.state.coachHours.map((block, i) => {
-                      return <Cell className={`${block} cell`} key={i} />;
-                    })}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      width: "100%"
+                    }}
+                  >
+                    <div
+                      className="coachTimeBlockDiv"
+                      style={{ marginLeft: "5px", marginRight: "5px" }}
+                    >
+                      <div className="myConflictsDiv">My Conflicts</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          width: "85%"
+                        }}
+                      >
+                        {this.state.coachHours.map((block, i) => {
+                          return <Cell className={`${block} cell`} key={i} />;
+                        })}
+                      </div>
+                    </div>
                   </div>
-                  <div className="parentTimeBlockDiv">
+                  <div
+                    className="parentTimeBlockDiv"
+                    style={{
+                      //width: "100%",
+                      marginLeft: "20px",
+                      marginRight: "20px"
+                    }}
+                  >
                     {this.state.parentHours.map((day, i) => {
                       let currentParentId = this.state.parentIds[i];
                       let currentParent = parents.find(
@@ -381,11 +426,11 @@ class TeamConflicts extends Component {
   }
 }
 
-const mapStateToProps = ({auth, timeblocks}) => {
+const mapStateToProps = ({ auth, timeblocks }) => {
   return {
     myLogin: auth.login,
     err: timeblocks.updateTimeBlocksError,
-    isLoading: timeblocks.updateTimeBlocksLoading,
+    isLoading: timeblocks.updateTimeBlocksLoading
   };
 };
 

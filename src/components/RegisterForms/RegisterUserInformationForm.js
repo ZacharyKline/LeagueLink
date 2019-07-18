@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 //import { connect } from "react-redux";
 //import { registerUser as register } from "../../actions";
-import { Input, Form, Icon, Button } from "antd";
+import { Input, Form, Icon } from "antd";
 import "../../App.css";
 import { RegisterHeader } from "..";
 import "../../registration.css";
@@ -20,21 +20,6 @@ class RegisterUserInformationForm extends Component {
     } = this.props;
     return (
       <Form className="stylesForm" id="userInformation">
-        <Link to="/">
-          <Button
-            style={{
-              background: "rgba(0, 53, 89, 1)",
-              color: "rgb(161, 233, 29)",
-              border: "3px rgb(130, 184, 31) solid",
-              borderRadius: "25px",
-              textAlign: "center",
-              fontSize: "15px"
-            }}
-          >
-            Login
-          </Button>
-        </Link>
-        <br />
         <RegisterHeader text={"Register"} />
         <Form.Item layout="vertical">
           <Input
@@ -106,6 +91,12 @@ class RegisterUserInformationForm extends Component {
             Next
             <Icon type="right" />
           </button>
+          <p>
+            <i>- or -</i>
+          </p>
+          <Link to="/" className="buttonStyle" style={{ textAlign: "center" }}>
+            <Icon type="left" /> Login{" "}
+          </Link>
         </div>
       </Form>
     );

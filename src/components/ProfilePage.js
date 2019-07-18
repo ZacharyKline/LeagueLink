@@ -1,36 +1,41 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Navbar } from ".";
-import {
-  Col,
-  Card,
-  Button,
-  Popconfirm,
-} from "antd";
+import { Col, Card, Button, Popconfirm } from "antd";
 import { connect } from "react-redux";
-import { getUserById, getTeamByTeamId, editProfile, deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
+import {
+  getUserById,
+  getTeamByTeamId,
+  editProfile,
+  deleteUserThenGoToLoginPage as handleDeleteUser
+} from "../actions";
 
 const text = "Are you sure to delete this Account?";
 
 class Profile extends Component {
-  state = {}
+  state = {};
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
-    console.log(this.props)
-    if(this.props.teamIds){
-      this.props.getTeamByTeamId(this.props.teamIds[0])
+    console.log(this.props);
+    if (this.props.teamIds) {
+      this.props.getTeamByTeamId(this.props.teamIds[0]);
     }
   }
   toggleModal = () => {
-    this.setState({modal : !this.state.modal})
-  }
+    this.setState({ modal: !this.state.modal });
+  };
 
   render() {
     return (
       <React.Fragment>
         <section>
           <Navbar />
-          <div style={{marginTop: '40px'}}  />
+          <div
+            style={{
+              marginTop: "40px",
+              margin: "15px"
+            }}
+          />
           <div
             style={{
               backgroundColor: "rgb(74, 162, 197)",
@@ -38,7 +43,7 @@ class Profile extends Component {
               margin: "auto",
               alignContent: "center",
               border: "5px rgba(0, 53, 89, 1) solid",
-              borderRadius: "5px",
+              borderRadius: "5px"
             }}
           >
             <div
@@ -49,8 +54,7 @@ class Profile extends Component {
                 marginTop: "50px"
               }}
             >
-              <div
-               >
+              <div>
                 <Col>
                   <Card
                     style={{
@@ -61,25 +65,25 @@ class Profile extends Component {
                     Name: {this.props.fullName}
                     <br />
                     Contact Info: {this.props.phone}
-
                     <br />
-                    Account Type: {this.props.userLevel}{this.props.userType}
+                    Account Type: {this.props.userLevel}
+                    {this.props.userType}
                   </Card>
-                  <Link to='/editprofile'>
+                  <Link to="/editprofile">
                     <Button
                       span={8}
                       offset={4}
-                      type='submit'
+                      type="submit"
                       style={{
                         background: "rgba(0, 53, 89, 1)",
                         color: "rgb(161, 233, 29)",
                         border: "3px rgb(130, 184, 31) solid",
                         borderRadius: "25px",
-                        textAlign: "center",
+                        textAlign: "center"
                       }}
                     >
                       Edit Profile
-                  </Button>
+                    </Button>
                   </Link>
                   <Popconfirm
                     placement="top"
@@ -91,13 +95,13 @@ class Profile extends Component {
                     <Button
                       span={8}
                       offset={4}
-                      type='submit'
+                      type="submit"
                       style={{
                         background: "rgba(0, 53, 89, 1)",
                         color: "rgb(161, 233, 29)",
                         border: "3px rgb(130, 184, 31) solid",
                         borderRadius: "25px",
-                        textAlign: "center",
+                        textAlign: "center"
                       }}
                     >
                       Delete Account
@@ -115,42 +119,38 @@ class Profile extends Component {
                     Coach: <h4>Ben Carter</h4>
                     Coach Email: <h4>bc@gm.com</h4>
                     Coach Phone: <h4>(000) 000-0009</h4>
-
                   </Card>
                   <Button
                     span={8}
                     offset={4}
-                    type='submit'
+                    type="submit"
                     style={{
                       background: "rgba(0, 53, 89, 1)",
                       color: "rgb(161, 233, 29)",
                       border: "3px rgb(130, 184, 31) solid",
                       borderRadius: "25px",
-                      textAlign: "center",
+                      textAlign: "center"
                     }}
                     onClick={this.toggleModal}
                   >
                     Add Team(s)
-                    </Button>
+                  </Button>
                   <Button
                     span={8}
                     offset={4}
-                    type='submit'
+                    type="submit"
                     style={{
                       background: "rgba(0, 53, 89, 1)",
                       color: "rgb(161, 233, 29)",
                       border: "3px rgb(130, 184, 31) solid",
                       borderRadius: "25px",
-                      textAlign: "center",
+                      textAlign: "center"
                     }}
                   >
                     Remove Team(s)
-                    </Button>
-
-
+                  </Button>
                 </Col>
               </div>
-
             </div>
           </div>
         </section>
@@ -159,17 +159,16 @@ class Profile extends Component {
   }
 }
 
-
 function mapStateToProps({ auth, teams }) {
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
-    userLevel: auth.user.userType,
+    userLevel: auth.user.userType
     // teamIds: auth.user.teamIds,
   };
- }
+}
 
 const mapDispatchToProps = {
   getUserById,
