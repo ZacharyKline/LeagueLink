@@ -10,7 +10,8 @@ class RegisterHeader extends Component {
           border: "3px rgb(130, 184, 31) solid",
           borderRadius: "25px",
           textAlign: "center",
-          width: "100%"
+          width: "100%",
+          fontSize: "25px"
         }}
       >
         {this.props.text}

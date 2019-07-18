@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { loginThenGoToUserProfile as login } from "../actions";
 import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
-import { Button, Form, Input, Layout } from "antd";
+import { Button, Form, Input, Layout, Icon } from "antd";
 import ForgotPasswordModal from "./ForgotPasswordModal";
+import { RegisterHeader } from ".";
 
 //import "./index.css";
 
@@ -38,7 +39,6 @@ class LoginForm extends Component {
     return (
       <React.Fragment>
         <Layout>
-
           <Form
             className="myStyle"
             onSubmit={this.handleLogin}
@@ -48,25 +48,17 @@ class LoginForm extends Component {
               padding: "20px",
               border: "5px rgba(0, 53, 89, 1) solid",
               borderRadius: "5px",
-              width: "400px",
+              width: "390px",
               display: "flex",
               flexDirection: "column",
+              justifyContent: "center",
+
               margin: "40px auto",
-              marginLeft: '40px'
+              marginLeft: "40px"
             }}
+            // className="stylesForm"
           >
-            <h1
-              style={{
-                background: "rgba(0, 53, 89, 1)",
-                color: "rgb(161, 233, 29)",
-                border: "3px rgb(130, 184, 31) solid",
-                borderRadius: "25px",
-                textAlign: "center",
-                width: "100%"
-              }}
-              >
-              Login
-            </h1>
+            <RegisterHeader text={"Login"} />
             <br />
             <Form.Item>
               <Input
@@ -77,7 +69,7 @@ class LoginForm extends Component {
                 autoFocus
                 required
                 onChange={handleChange}
-                />
+              />
             </Form.Item>
             <Form.Item>
               <Input.Password
@@ -88,55 +80,58 @@ class LoginForm extends Component {
                 required
                 onChange={handleChange}
                 onKeyPress={e => {
-                  if (e.key === 'Enter') this.handleLogin(e);
+                  if (e.key === "Enter") this.handleLogin(e);
                 }}
               />
             </Form.Item>
-            <Form.Item style={{ marginLeft: "230px" }}>
+
+            <div className="buttonContainerDiv">
               <Button
-              onClick={this.handleLogin}
+                onClick={this.handleLogin}
                 type="submit"
                 style={{
                   background:
-                  "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
+                    "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
                   color: "rgb(161, 233, 29)",
                   border: "2px rgb(130, 184, 31) solid",
                   borderRadius: "25px",
                   fontSize: "large",
                   minWidth: "120px"
                 }}
+                className="buttonStyle"
                 // disabled={isLoading}
               >
-                Submit
+                Login
+                <Icon type="right" />
               </Button>
-              <br />
-            </Form.Item>
-            <Link
-              to={"/registration"}
-              className={"registerLink"}
-              style={{
-                background:
-                  "linear-gradient(rgb(8, 77, 121),rgba(0, 53, 89, 1))",
-                color: "rgb(161, 233, 29)",
-                border: "2px rgb(130, 184, 31) solid",
-                borderRadius: "25px",
-                fontSize: "large",
-                textAlign: "center",
-                marginLeft: "235px",
-                width: "120px"
-              }}
-            >
-              Register
-            </Link>
+              <p>
+                <i>- or -</i>
+              </p>
+              <Link
+                to={"/registration"}
+                className="buttonStyle"
+                style={{
+                  height: "32px",
+                  width: "73px",
+                  textAlign: "center"
+                }}
+              >
+                <Icon type="left" /> Register
+              </Link>
+            </div>
+
             {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
           </Form>
         </Layout>
-        <ForgotPasswordModal
-          visible={this.state.showModal}
-          Loading={isLoading}
-          close={this.handleModalClose}
-        />
+
+        {false && (
+          <ForgotPasswordModal
+            visible={this.state.showModal}
+            Loading={isLoading}
+            close={this.handleModalClose}
+          />
+        )}
       </React.Fragment>
     );
   }

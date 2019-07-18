@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+//import { Layout } from "antd";
 import {
   getCoachByCoachId,
   getManagerByManagerId,
@@ -33,6 +34,7 @@ import coaches from "../coaches.json";
 import facilities from "../facilities.json";
 import managers from "../managers.json";
 import "../registration.css";
+import { Layout } from "antd";
 
 class RegisterForm extends Component {
   state = {
@@ -372,123 +374,124 @@ class RegisterForm extends Component {
 
     return (
       <React.Fragment>
-        {userInformationForm && (
-          <RegisterUserInformationForm
-            handleChange={handleChange}
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            phone={phone}
-            password={password}
-            confirmPassword={confirmPassword}
-            handleNext={handleNext("toUserTypeForm")}
-          />
-        )}
+        <Layout>
+          {userInformationForm && (
+            <RegisterUserInformationForm
+              handleChange={handleChange}
+              firstName={firstName}
+              lastName={lastName}
+              email={email}
+              phone={phone}
+              password={password}
+              confirmPassword={confirmPassword}
+              handleNext={handleNext("toUserTypeForm")}
+            />
+          )}
 
-        {userTypeForm && (
-          <RegisterUserTypeForm
-            handleRadioClick={handleRadioClick}
-            userType={userType}
-            handleNext={handleNext(userType)}
-            handleBack={handleBack("ToUserInformationForm")}
-          />
-        )}
+          {userTypeForm && (
+            <RegisterUserTypeForm
+              handleRadioClick={handleRadioClick}
+              userType={userType}
+              handleNext={handleNext(userType)}
+              handleBack={handleBack("ToUserInformationForm")}
+            />
+          )}
 
-        {parentSelectTeamsForm && (
-          <RegisterParentSelectTeamsForm
-            teams={teams}
-            coaches={coaches}
-            handleStaySelected={handleStaySelected}
-            handleSelectTeam={handleSelectTeam}
-            handleNext2={handleNext("toMissingTeamInformationPage")}
-            handleNext={handleNext("toConfirmationPageForm")}
-            handleBack={handleBack("toUserTypeForm")}
-          />
-        )}
+          {parentSelectTeamsForm && (
+            <RegisterParentSelectTeamsForm
+              teams={teams}
+              coaches={coaches}
+              handleStaySelected={handleStaySelected}
+              handleSelectTeam={handleSelectTeam}
+              handleNext2={handleNext("toMissingTeamInformationPage")}
+              handleNext={handleNext("toConfirmationPageForm")}
+              handleBack={handleBack("toUserTypeForm")}
+            />
+          )}
 
-        {coachSelectFacilityForm && (
-          <RegisterCoachSelectFacilityForm
-            facilities={facilities}
-            managers={managers}
-            selectedFacilityId={selectedFacilityId}
-            handleSelectFacility={handleSelectFacility}
-            handleNext2={handleNext("toMissingFacilityPage")}
-            handleNext={handleNext("toCoachRegisterTeamForm")}
-            handleBack={handleBack("toUserTypeForm")}
-          />
-        )}
+          {coachSelectFacilityForm && (
+            <RegisterCoachSelectFacilityForm
+              facilities={facilities}
+              managers={managers}
+              selectedFacilityId={selectedFacilityId}
+              handleSelectFacility={handleSelectFacility}
+              handleNext2={handleNext("toMissingFacilityPage")}
+              handleNext={handleNext("toCoachRegisterTeamForm")}
+              handleBack={handleBack("toUserTypeForm")}
+            />
+          )}
 
-        {missingFacilityForm && (
-          <RegisterMissingFacilityForm
-            handleNext={handleNext("toCoachRegisterTeamForm")}
-            handleBack={handleBack("toCoachSelectFacilityForm")}
-          />
-        )}
+          {missingFacilityForm && (
+            <RegisterMissingFacilityForm
+              handleNext={handleNext("toCoachRegisterTeamForm")}
+              handleBack={handleBack("toCoachSelectFacilityForm")}
+            />
+          )}
 
-        {missingTeamInformation && (
-          <RegisterMissingTeamInformation
-            handleBack={handleBack("parent")}
-            handleNext={handleNext("toConfirmationPageForm")}
-          />
-        )}
+          {missingTeamInformation && (
+            <RegisterMissingTeamInformation
+              handleBack={handleBack("parent")}
+              handleNext={handleNext("toConfirmationPageForm")}
+            />
+          )}
 
-        {coachRegisterTeamForm && (
-          <RegisterCoachRegisterTeamForm
-            handleChange={handleChange}
-            handleNext={handleNext("toConfirmationPageForm")}
-            handleBack={handleBack("toCoachSelectFacilityForm")}
-            teamName={teamName}
-            ageGroup={ageGroup}
-          />
-        )}
+          {coachRegisterTeamForm && (
+            <RegisterCoachRegisterTeamForm
+              handleChange={handleChange}
+              handleNext={handleNext("toConfirmationPageForm")}
+              handleBack={handleBack("toCoachSelectFacilityForm")}
+              teamName={teamName}
+              ageGroup={ageGroup}
+            />
+          )}
 
-        {managerRegisterFacilityForm && (
-          <RegisterManagerRegisterFacilityForm
-            handleChange={handleChange}
-            facilityName={facilityName}
-            facilityAddress={facilityAddress}
-            facilityCity={facilityCity}
-            facilityState={facilityState}
-            facilityZipCode={facilityZipCode}
-            facilityUrl={facilityUrl}
-            facilityEmail={facilityEmail}
-            facilityPhone={facilityPhone}
-            handleNext={handleNext("toConfirmationPageForm")}
-            handleBack={handleBack("toUserTypeForm")}
-          />
-        )}
+          {managerRegisterFacilityForm && (
+            <RegisterManagerRegisterFacilityForm
+              handleChange={handleChange}
+              facilityName={facilityName}
+              facilityAddress={facilityAddress}
+              facilityCity={facilityCity}
+              facilityState={facilityState}
+              facilityZipCode={facilityZipCode}
+              facilityUrl={facilityUrl}
+              facilityEmail={facilityEmail}
+              facilityPhone={facilityPhone}
+              handleNext={handleNext("toConfirmationPageForm")}
+              handleBack={handleBack("toUserTypeForm")}
+            />
+          )}
 
-        {confirmationPageForm && (
-          <RegisterConfirmationPageForm
-            teams={teams}
-            coaches={coaches}
-            facilities={facilities}
-            managers={managers}
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            phone={phone}
-            userType={userType}
-            selectedTeamIds={selectedTeamIds}
-            teamName={teamName}
-            ageGroup={ageGroup}
-            selectedFacilityId={selectedFacilityId}
-            facilityAddress={facilityAddress}
-            facilityCity={facilityCity}
-            facilityEmail={facilityEmail}
-            facilityName={facilityName}
-            facilityPhone={facilityPhone}
-            facilityState={facilityState}
-            facilityUrl={facilityUrl}
-            facilityZipCode={facilityZipCode}
-            handleBack={handleBack(userType)}
-            handleSubmit={handleSubmit(userType)}
-          />
-        )}
-        
-        {isLoading && <Spinner name="circle" color="blue" />}
-        {err && <p style={{ color: "red" }}>{err}</p>}
-        
+          {confirmationPageForm && (
+            <RegisterConfirmationPageForm
+              teams={teams}
+              coaches={coaches}
+              facilities={facilities}
+              managers={managers}
+              firstName={firstName}
+              lastName={lastName}
+              email={email}
+              phone={phone}
+              userType={userType}
+              selectedTeamIds={selectedTeamIds}
+              teamName={teamName}
+              ageGroup={ageGroup}
+              selectedFacilityId={selectedFacilityId}
+              facilityAddress={facilityAddress}
+              facilityCity={facilityCity}
+              facilityEmail={facilityEmail}
+              facilityName={facilityName}
+              facilityPhone={facilityPhone}
+              facilityState={facilityState}
+              facilityUrl={facilityUrl}
+              facilityZipCode={facilityZipCode}
+              handleBack={handleBack(userType)}
+              handleSubmit={handleSubmit(userType)}
+            />
+          )}
+
+          {isLoading && <Spinner name="circle" color="blue" />}
+          {err && <p style={{ color: "red" }}>{err}</p>}
+        </Layout>
       </React.Fragment>
     );
   }

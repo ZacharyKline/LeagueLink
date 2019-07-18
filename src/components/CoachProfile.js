@@ -1,36 +1,35 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Navbar } from ".";
-import {
-  Col,
-  Card,
-  Button,
-  Popconfirm,
-  Modal
-} from "antd";
+import { Col, Card, Button, Popconfirm, Modal } from "antd";
 import { connect } from "react-redux";
-import RegisterParentSelectTeamsForm from "../components/RegisterForms/RegisterParentSelectTeamsForm"
-import { getUserById, getTeamByTeamId, editProfile, deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
+import RegisterParentSelectTeamsForm from "../components/RegisterForms/RegisterParentSelectTeamsForm";
+import {
+  getUserById,
+  getTeamByTeamId,
+  editProfile,
+  deleteUserThenGoToLoginPage as handleDeleteUser
+} from "../actions";
 
 const text = "Are you sure to delete this Account?";
 
 class CoachProfile extends Component {
-  state = {}
+  state = {};
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
-    console.log(this.props)
-    this.props.getTeamByTeamId(this.props.teamId)
+    console.log(this.props);
+    this.props.getTeamByTeamId(this.props.teamId);
   }
   toggleModal = () => {
-    this.setState({modal : !this.state.modal})
-  }
+    this.setState({ modal: !this.state.modal });
+  };
 
   render() {
     return (
       <React.Fragment>
         <section>
           <Navbar />
-          <div style={{marginTop: '40px'}}  />
+          <div style={{ marginTop: "40px" }} />
           <div
             style={{
               backgroundColor: "rgb(74, 162, 197)",
@@ -39,6 +38,7 @@ class CoachProfile extends Component {
               alignContent: "center",
               border: "5px rgba(0, 53, 89, 1) solid",
               borderRadius: "5px",
+              padding: "15px"
             }}
           >
             <div
@@ -49,8 +49,7 @@ class CoachProfile extends Component {
                 marginTop: "50px"
               }}
             >
-              <div
-               >
+              <div>
                 <Col>
                   <Card
                     style={{
@@ -61,48 +60,57 @@ class CoachProfile extends Component {
                     Name: {this.props.fullName}
                     <br />
                     Contact Info: {this.props.phone}
-
                     <br />
-                    Account Type: {this.props.userLevel}{this.props.userType}
+                    Account Type: {this.props.userLevel}
+                    {this.props.userType}
                   </Card>
-                  <Link to='/editprofile'>
-                    <Button
-                      span={8}
-                      offset={4}
-                      type='submit'
-                      style={{
-                        background: "rgba(0, 53, 89, 1)",
-                        color: "rgb(161, 233, 29)",
-                        border: "3px rgb(130, 184, 31) solid",
-                        borderRadius: "25px",
-                        textAlign: "center",
-                      }}
-                    >
-                      Edit Profile
-                  </Button>
-                  </Link>
-                  <Popconfirm
-                    placement="top"
-                    title={text}
-                    onConfirm={this.props.handleDeleteUser}
-                    okText="Yes"
-                    cancelText="No"
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-around",
+                      marginTop: "5px"
+                    }}
                   >
-                    <Button
-                      span={8}
-                      offset={4}
-                      type='submit'
-                      style={{
-                        background: "rgba(0, 53, 89, 1)",
-                        color: "rgb(161, 233, 29)",
-                        border: "3px rgb(130, 184, 31) solid",
-                        borderRadius: "25px",
-                        textAlign: "center",
-                      }}
+                    <Link to="/editprofile">
+                      <Button
+                        span={8}
+                        offset={4}
+                        type="submit"
+                        style={{
+                          background: "rgba(0, 53, 89, 1)",
+                          color: "rgb(161, 233, 29)",
+                          border: "3px rgb(130, 184, 31) solid",
+                          borderRadius: "25px",
+                          textAlign: "center"
+                        }}
+                      >
+                        Edit Profile
+                      </Button>
+                    </Link>
+                    <Popconfirm
+                      placement="top"
+                      title={text}
+                      onConfirm={this.props.handleDeleteUser}
+                      okText="Yes"
+                      cancelText="No"
                     >
-                      Delete Account
-                    </Button>
-                  </Popconfirm>
+                      <Button
+                        span={8}
+                        offset={4}
+                        type="submit"
+                        style={{
+                          background: "rgba(0, 53, 89, 1)",
+                          color: "rgb(161, 233, 29)",
+                          border: "3px rgb(130, 184, 31) solid",
+                          borderRadius: "25px",
+                          textAlign: "center"
+                        }}
+                      >
+                        Delete Account
+                      </Button>
+                    </Popconfirm>
+                  </div>
                   <br />
                   <br />
                   <Card
@@ -111,7 +119,7 @@ class CoachProfile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    <h1>Team:</h1> 
+                    <h1>Team:</h1>
                     <h4>Tigers</h4>
                     <h1>Parents:</h1>
                     <h4>John Smith</h4>
@@ -145,10 +153,8 @@ class CoachProfile extends Component {
                     <div>Phone: (000) 000-0010</div>
                     <div>Email: sk@gm.com</div>
                   </Card>
-                
                 </Col>
               </div>
-
             </div>
           </div>
         </section>
@@ -165,16 +171,15 @@ class CoachProfile extends Component {
   }
 }
 
-
 function mapStateToProps({ auth }) {
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
-    userLevel: auth.user.userType,
+    userLevel: auth.user.userType
   };
- }
+}
 
 const mapDispatchToProps = {
   getUserById,
