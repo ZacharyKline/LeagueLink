@@ -161,9 +161,9 @@ class MatchConflicts extends Component {
                   <li>Select an age category.</li>
                   <li>A list of teams will appear.</li>
                   <li>Select two teams from the list.</li>
-                  <li>Select a date from calendar.</li>
+                  <li>Select a date from the calendar.</li>
                   <li>
-                    A columns of 2 hour blocks will appear that represent the
+                    A column of 2 hour blocks will appear that represent the
                     combined conflicts of both teams.
                   </li>
                   <li>

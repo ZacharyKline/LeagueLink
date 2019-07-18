@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
-import { Calendar, message} from "antd";
+import { Calendar, message } from "antd";
 import { Navbar, TimeBlock, RegisterHeader } from ".";
 import {
   getTimeBlocksByUserId,
@@ -66,8 +66,8 @@ class UserConflicts extends Component {
     }
     dataObj[data] = data;
     console.log(dataObj);
-    this.props.updateTimeBlock(userId, dataObj)
-    message.info("You have updated the time blocks")
+    this.props.updateTimeBlock(userId, dataObj);
+    message.info("You have updated the time blocks");
     return dataObj;
   };
 
@@ -107,7 +107,6 @@ class UserConflicts extends Component {
   };
 
   handleClick = (hourblock, i) => e => {
-  
     if (i === 0) {
       if (this.state.timeBlock1 === "okay") {
         return this.setState({ timeBlock1: "conflict" });
@@ -196,7 +195,7 @@ class UserConflicts extends Component {
       <React.Fragment>
         <Navbar />
         <div className="userConflictsContainerDiv">
-          <RegisterHeader text={"Remove Times that Conflict"} />
+          <RegisterHeader text={"Mark Times that Conflict"} />
           <div className="userConflictsContainerDiv2">
             <div className="userConflictsContainerDiv3">
               <div className="userConflictCalendarDiv">
@@ -223,7 +222,7 @@ class UserConflicts extends Component {
               <div className="instructionsDiv">
                 <h4>Instructions:</h4>
                 <ul>
-                  <li>Select a date from calendar.</li>
+                  <li>Select a date from the calendar.</li>
                   <li>
                     A column of blocks will appear. Each block represents 2
                     hours.
@@ -290,11 +289,11 @@ class UserConflicts extends Component {
   }
 }
 
-const mapStateToProps = ({auth, timeblocks}) => {
+const mapStateToProps = ({ auth, timeblocks }) => {
   return {
     myLogin: auth.login,
     err: timeblocks.updateTimeBlocksError,
-    isLoading: timeblocks.updateTimeBlocksLoading,
+    isLoading: timeblocks.updateTimeBlocksLoading
   };
 };
 
