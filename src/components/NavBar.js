@@ -72,7 +72,7 @@ class Navbar extends Component {
 
 const mapStateToProps = state => {
   return {
-    userType: state.users.user.userType
+    userType: state.auth.user.userType
   };
 };
 
