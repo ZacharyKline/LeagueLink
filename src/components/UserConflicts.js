@@ -195,7 +195,7 @@ class UserConflicts extends Component {
       <React.Fragment>
         <Navbar />
         <div className="userConflictsContainerDiv">
-          <RegisterHeader text={"Remove Times that Conflict"} />
+          <RegisterHeader text={"Mark Times that Conflict"} />
           <div className="userConflictsContainerDiv2">
             <div className="userConflictsContainerDiv3">
               <div className="userConflictCalendarDiv">

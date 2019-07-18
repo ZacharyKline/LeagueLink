@@ -258,7 +258,7 @@ class TeamConflicts extends Component {
             marginTop: "20px"
           }}
         >
-          <RegisterHeader text={"Remove Confict Times for Team"} />
+          <RegisterHeader text={"Mark Confict Times for Team"} />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div style={{ margin: "5px" }}>
               <div className="teamCalendarDivContainer">
