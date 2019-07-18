@@ -125,30 +125,38 @@ class CoachProfile extends Component {
                     <h4>John Smith</h4>
                     <div>Phone: (000) 000-0001</div>
                     <div>Email: js@gm.com</div>
+                    <br></br>
                     <h4>Mary Hamm</h4>
                     <div>Phone: (000) 000-0002</div>
                     <div>Email: mhamm@gm.com</div>
+                    <br></br>
                     <h4>Poppy Gloria</h4>
                     <div>Phone: (000) 000-0003</div>
                     <div>Email: pg@gm.com</div>
+                    <br></br>
                     <h4>Carl Weathers</h4>
                     <div>Phone: (000) 000-0004</div>
                     <div>Email: cw@gm.com</div>
+                    <br></br>
                     <h4>John Wick</h4>
                     <div>Phone: (000) 000-0005</div>
                     <div>Email: jw@gm.com</div>
+                    <br></br>
                     <h4>Rick Sanchez</h4>
                     <div>Phone: (000) 000-0006</div>
                     <div>Email: rs@gm.com</div>
                     <h4>Homer Simpson</h4>
                     <div>Phone: (000) 000-0007</div>
                     <div>Email: hs@gm.com</div>
+                    <br></br>
                     <h4>Tom Harris</h4>
                     <div>Phone: (000) 000-0008</div>
                     <div>Email: th@gm.com</div>
+                    <br></br>
                     <h4>George Martin</h4>
                     <div>Phone: (000) 000-0009</div>
                     <div>Email: grrm@gm.com</div>
+                    <br></br>
                     <h4>Stephen King</h4>
                     <div>Phone: (000) 000-0010</div>
                     <div>Email: sk@gm.com</div>
