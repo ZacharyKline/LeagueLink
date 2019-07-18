@@ -38,7 +38,7 @@ class Navbar extends Component {
                 </Link>
               </Menu.Item>
             )}
-            {userType === "manager" && (
+            {userType !== "parent" && (
               <Menu.Item>
                 <Link
                   to="/matchconflicts"
