@@ -1,30 +1,36 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Navbar } from ".";
 import { connect } from "react-redux";
 import { Col, Card, Button, Popconfirm } from "antd";
-import { getUserById, getFacilityByManagerId, editProfile, deleteUserThenGoToLoginPage as handleDeleteUser } from "../actions";
-
+import {
+  getUserById,
+  getFacilityByManagerId,
+  editProfile,
+  deleteUserThenGoToLoginPage as handleDeleteUser
+} from "../actions";
 
 const text = "Are you sure to delete this Account?";
 
 class FacilityManagerProfile extends Component {
-  state = {}
+  state = {};
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
-    this.props.getFacilityByManagerId(this.props.login.id).then(res => console.log(res))
-    console.log(this.props)
+    this.props
+      .getFacilityByManagerId(this.props.login.id)
+      .then(res => console.log(res));
+    console.log(this.props);
   }
   toggleModal = () => {
-    this.setState({modal : !this.state.modal})
-  }
+    this.setState({ modal: !this.state.modal });
+  };
 
   render() {
     return (
       <React.Fragment>
         <section>
           <Navbar />
-          <div style={{marginTop: '40px'}}  />
+          <div style={{ marginTop: "40px" }} />
           <div
             style={{
               backgroundColor: "rgb(74, 162, 197)",
@@ -33,6 +39,7 @@ class FacilityManagerProfile extends Component {
               alignContent: "center",
               border: "5px rgba(0, 53, 89, 1) solid",
               borderRadius: "5px",
+              padding: "15px"
             }}
           >
             <div
@@ -43,8 +50,7 @@ class FacilityManagerProfile extends Component {
                 marginTop: "50px"
               }}
             >
-              <div
-               >
+              <div>
                 <Col>
                   <Card
                     style={{
@@ -55,25 +61,25 @@ class FacilityManagerProfile extends Component {
                     Name: {this.props.fullName}
                     <br />
                     Contact Info: {this.props.phone}
-
                     <br />
-                    Account Type: {this.props.userLevel}{this.props.userType}
+                    Account Type: {this.props.userLevel}
+                    {this.props.userType}
                   </Card>
-                  <Link to='/editprofile'>
+                  <Link to="/editprofile">
                     <Button
                       span={8}
                       offset={4}
-                      type='submit'
+                      type="submit"
                       style={{
                         background: "rgba(0, 53, 89, 1)",
                         color: "rgb(161, 233, 29)",
                         border: "3px rgb(130, 184, 31) solid",
                         borderRadius: "25px",
-                        textAlign: "center",
+                        textAlign: "center"
                       }}
                     >
                       Edit Profile
-                  </Button>
+                    </Button>
                   </Link>
                   <Popconfirm
                     placement="top"
@@ -85,13 +91,13 @@ class FacilityManagerProfile extends Component {
                     <Button
                       span={8}
                       offset={4}
-                      type='submit'
+                      type="submit"
                       style={{
                         background: "rgba(0, 53, 89, 1)",
                         color: "rgb(161, 233, 29)",
                         border: "3px rgb(130, 184, 31) solid",
                         borderRadius: "25px",
-                        textAlign: "center",
+                        textAlign: "center"
                       }}
                     >
                       Delete Account
@@ -114,7 +120,6 @@ class FacilityManagerProfile extends Component {
                     zipCode: <h4>46203</h4>
                     phone: <h4>7735551234</h4>
                     email: <h4>facility@gmail.com</h4>
-
                   </Card>
                   {/* <Button
                     span={8}
@@ -145,11 +150,8 @@ class FacilityManagerProfile extends Component {
                   >
                     Remove Team(s)
                     </Button> */}
-
-
                 </Col>
               </div>
-
             </div>
           </div>
         </section>
@@ -158,19 +160,18 @@ class FacilityManagerProfile extends Component {
   }
 }
 
-
 function mapStateToProps({ auth, teams, facilities }) {
-    // facility = facilities.managerFacility.foundFacilities[0]
+  // facility = facilities.managerFacility.foundFacilities[0]
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
-    userLevel: auth.user.userType,
+    userLevel: auth.user.userType
     // facility: facility
     // teamIds: auth.user.teamIds,
   };
- }
+}
 
 const mapDispatchToProps = {
   getUserById,

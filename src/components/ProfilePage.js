@@ -43,7 +43,8 @@ class Profile extends Component {
               margin: "auto",
               alignContent: "center",
               border: "5px rgba(0, 53, 89, 1) solid",
-              borderRadius: "5px"
+              borderRadius: "5px",
+              padding: "15px"
             }}
           >
             <div
