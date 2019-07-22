@@ -5,32 +5,9 @@ import { Cell } from ".";
 class Row extends Component {
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          paddingTop: "0px",
-          padding: "0px",
-          marginLeft: "3px",
-          marginRight: "6px",
-          width: "100%"
-        }}
-      >
-        <div
-          className="teamDate"
-          style={{ width: "150px", height: "50px", padding: "0px" }}
-        >
-          {this.props.parent}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "85%",
-            marginRight: "6px",
-            marginLeft: "2px"
-          }}
-        >
+      <div className="rowContainerDiv">
+        <div className="parentNameDiv">{this.props.parent}</div>
+        <div className="cellContainerDiv">
           <Cell className={this.props.className1} />
           <Cell className={this.props.className2} />
           <Cell className={this.props.className3} />

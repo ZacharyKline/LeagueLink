@@ -177,31 +177,30 @@ class UserConflicts extends Component {
             </div>
             <div className="timeBlockDiv">
               {selectedDate && (
-                <div className="date">{selectedDate.toDateString()}</div>
-              )}
-              {selectedDate &&
-                timeBlocks.map((block, i) => {
-                  let faceIcon =
-                    block === "impossible"
-                      ? "frown"
-                      : block === "conflict"
-                      ? "meh"
-                      : "smile";
-                  return (
-                    <TimeBlock
-                      key={i}
-                      className={`block ${block}`}
-                      status={block}
-                      hours={hours[i]}
-                      type={faceIcon}
-                      onClick={handleClick(i)}
-                    />
-                  );
-                })}
-              {selectedDate && (
-                <button className="buttonStyle" onClick={handleSave}>
-                  Save Changes
-                </button>
+                <React.Fragment>
+                  <div className="date">{selectedDate.toDateString()}</div>
+                  {timeBlocks.map((block, i) => {
+                    let faceIcon =
+                      block === "impossible"
+                        ? "frown"
+                        : block === "conflict"
+                        ? "meh"
+                        : "smile";
+                    return (
+                      <TimeBlock
+                        key={i}
+                        className={`block ${block}`}
+                        status={block}
+                        hours={hours[i]}
+                        type={faceIcon}
+                        onClick={handleClick(i)}
+                      />
+                    );
+                  })}
+                  <button className="buttonStyle" onClick={handleSave}>
+                    Save Changes
+                  </button>
+                </React.Fragment>
               )}
             </div>
           </div>

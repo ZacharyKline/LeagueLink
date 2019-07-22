@@ -9,6 +9,16 @@ import teamsConflicts from "../fakeTeamsConflicts.json";
 import coaches from "../fakeCoaches.json";
 import teams from "../fakeTeams.json";
 const { Option } = Select;
+const hours = [
+  "8AM - 10AM",
+  "10AM - 12PM",
+  "12PM - 2PM",
+  "2PM - 4PM",
+  "4PM - 6PM",
+  "6PM - 8PM",
+  "8PM - 10PM"
+];
+const okays = ["okay", "okay", "okay", "okay", "okay", "okay", "okay"];
 
 class MatchConflicts extends Component {
   state = {
@@ -20,10 +30,7 @@ class MatchConflicts extends Component {
     lastMonth: 6,
     firstDay: 1,
     lastDay: 30,
-    ageCategory: "",
     matchBlocks: [],
-    coachHours: [],
-    parentHours: [],
     ageGroup: "",
     teamIds: []
   };
@@ -43,7 +50,6 @@ class MatchConflicts extends Component {
     let teamId = e.target.value;
     if (!this.state.teamIds.includes(teamId)) {
       newArr = [...this.state.teamIds, teamId];
-      console.log(newArr);
       this.setState({ teamIds: newArr });
     } else {
       newArr = this.state.teamIds.filter(id => id !== teamId);
@@ -58,21 +64,36 @@ class MatchConflicts extends Component {
       let selectedDate = value._d;
       let selectedDay = value.get("date");
       let isodate = value.toISOString();
+      let team1Blocks = this.handleBlocks(team1, selectedDay);
+      let team2Blocks = this.handleBlocks(team2, selectedDay);
+      let combinedBlocks = this.handleCombine(team1Blocks, team2Blocks);
       this.setState({
         value,
         selectedDate: selectedDate,
         selectedDay: selectedDay,
-        isodate: isodate
+        isodate: isodate,
+        matchBlocks: combinedBlocks
       });
-      let team1Blocks = this.handleTeamConflicts(team1, selectedDay);
-      console.log(team1Blocks);
-      let team2Blocks = this.handleTeamConflicts(team2, selectedDay);
-      console.log(team2Blocks);
-      let combinedBlocks = this.handleCombine(team1Blocks, team2Blocks);
-      // console.log(combinedBlocks);
-      this.setState({ matchBlocks: combinedBlocks });
     } else {
       alert("Select two Teams");
+    }
+  };
+
+  handleBlocks = (teamId, selectedDay) => {
+    let conflicts = teamsConflicts.find(team => team.teamId === teamId);
+    let dayConflicts = conflicts.data[selectedDay];
+    if (dayConflicts === undefined) {
+      return okays;
+    } else {
+      let arr = [];
+      for (let i = 1; i < 8; i++) {
+        if (dayConflicts[i] === undefined) {
+          arr.push("okay");
+        } else {
+          arr.push(dayConflicts[i]);
+        }
+      }
+      return arr;
     }
   };
 
@@ -90,67 +111,50 @@ class MatchConflicts extends Component {
     return arr;
   };
 
-  handleTeamConflicts = (teamId, selectedDay) => {
-    let arr = [];
-    let conflicts = teamsConflicts.find(team => team.teamId === teamId);
-    let dayConflicts = conflicts.data[selectedDay];
-    if (dayConflicts === undefined) {
-      return ["okay", "okay", "okay", "okay", "okay", "okay", "okay"];
-    } else {
-      for (let i = 1; i < 8; i++) {
-        if (dayConflicts[i] === undefined) {
-          arr.push("okay");
-        } else {
-          arr.push(dayConflicts[i]);
-        }
-      }
-      return arr;
-    }
-  };
-
   render() {
-    let hours = [
-      "8AM - 10AM",
-      "10AM - 12PM",
-      "12PM - 2PM",
-      "2PM - 4PM",
-      "4PM - 6PM",
-      "6PM - 8PM",
-      "8PM - 10PM"
-    ];
+    const {
+      selectedDate,
+      year,
+      firstMonth,
+      lastMonth,
+      firstDay,
+      lastDay,
+      matchBlocks,
+      ageGroup,
+      teamIds
+    } = this.state;
+
+    const {
+      handleAllowSelect,
+      handleChange,
+      handleSelect,
+      handleSelectTeams
+    } = this;
+
     return (
       <React.Fragment>
         <Navbar />
-        <div
-          className="stylesForm"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            width: "1050px",
-            marginTop: "20px"
-          }}
-        >
+        <div className="matchConflictsContainerDiv">
           <RegisterHeader text={"Check match conflicts"} />
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <div className="flexRow">
             <div style={{ margin: "5px" }}>
               <div className="teamCalendarDivContainer">
                 <Calendar
-                  onSelect={this.handleSelect}
+                  onSelect={handleSelect}
                   fullscreen={false}
                   defaultValue={moment()
-                    .year(this.state.year)
-                    .month(this.state.firstMonth)
-                    .day(this.state.firstDay)}
+                    .year(year)
+                    .month(firstMonth)
+                    .day(firstDay)}
                   validRange={[
                     moment()
-                      .year(this.state.year)
-                      .month(this.state.firstMonth - 1)
-                      .day(this.state.firstDay),
+                      .year(year)
+                      .month(firstMonth - 1)
+                      .day(firstDay),
                     moment()
-                      .year(this.state.year)
-                      .month(this.state.lastMonth - 1)
-                      .day(this.state.lastDay)
+                      .year(year)
+                      .month(lastMonth - 1)
+                      .day(lastDay)
                   ]}
                 />
               </div>
@@ -185,27 +189,13 @@ class MatchConflicts extends Component {
                 </ul>
               </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                //justifyContent: "center"
-                allignItems: "center"
-              }}
-            >
-              <div
-                className="instructionsDiv"
-                style={{
-                  background: " rgb(235, 236, 238)",
-                  margin: "5px",
-                  marginLeft: "10px"
-                }}
-              >
+            <div className="flexColumnCenter">
+              <div className="selectTeamContainerDiv">
                 <Select
                   defaultValue="Select an Age Category"
                   style={{ width: 300 }}
-                  onChange={this.handleChange}
-                  onMouseEnter={this.handleAllowSelect}
+                  onChange={handleChange}
+                  onMouseEnter={handleAllowSelect}
                 >
                   <Option value="Select an Age Category">
                     Select An Age Category
@@ -225,32 +215,27 @@ class MatchConflicts extends Component {
                   <Option value="17">17 year olds</Option>
                   <Option value="Adult">Adult </Option>
                 </Select>
-                {this.state.ageGroup !== "" && (
+                {ageGroup !== "" && (
                   <Form style={{ margin: "5px", padding: "10px" }}>
                     <h2>Select two teams</h2>
                     {teams
-                      .filter(team => team.ageGroup === this.state.ageGroup)
+                      .filter(team => team.ageGroup === ageGroup)
                       .map((team, i) => {
                         let currentCoach = coaches.find(
                           coach => coach.id === team.coachId
                         );
                         let teamId = team.id;
-                        console.log(team.teamName);
                         return (
-                          <div
-                            key={i}
-                            style={{ display: "flex", flexDirection: "row" }}
-                          >
+                          <div className="flexRow" key={i}>
                             <Checkbox
                               value={team.id}
-                              onChange={this.handleSelectTeams}
+                              onChange={handleSelectTeams}
                               style={{ margin: "5px" }}
                               disabled={
-                                this.state.teamIds.length === 2 &&
-                                !this.state.teamIds.includes(teamId)
+                                teamIds.length === 2 &&
+                                !teamIds.includes(teamId)
                               }
                             />
-
                             <p>
                               <b>{team.teamName}</b>
                               <br />
@@ -268,30 +253,29 @@ class MatchConflicts extends Component {
               </div>
             </div>
 
-            <div className="timeBlockDiv" style={{ height: "540px" }}>
-              {this.state.selectedDate !== null && (
-                <div className="date">
-                  {this.state.selectedDate.toDateString()}
-                </div>
+            <div className="matchTimeBlockDiv">
+              {selectedDate && (
+                <React.Fragment>
+                  <div className="date">{selectedDate.toDateString()}</div>
+                  {matchBlocks.map((block, i) => {
+                    let faceIcon =
+                      block === "impossible"
+                        ? "frown"
+                        : block === "conflict"
+                        ? "meh"
+                        : "smile";
+                    return (
+                      <TimeBlock
+                        key={i}
+                        className={`block ${block}`}
+                        status={block}
+                        hours={hours[i]}
+                        type={faceIcon}
+                      />
+                    );
+                  })}
+                </React.Fragment>
               )}
-              {this.state.selectedDate !== null &&
-                this.state.matchBlocks.map((block, i) => {
-                  let faceIcon =
-                    block === "impossible"
-                      ? "frown"
-                      : block === "conflict"
-                      ? "meh"
-                      : "smile";
-                  return (
-                    <TimeBlock
-                      key={i}
-                      className={`block ${block}`}
-                      status={block}
-                      hours={hours[i]}
-                      type={faceIcon}
-                    />
-                  );
-                })}
             </div>
           </div>
         </div>

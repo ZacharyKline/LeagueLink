@@ -1,1 +1,25 @@
-{}
+{
+  "1": {
+    "6": "impossible",
+    "7": "impossible"
+  },
+  "2": {
+    "1": "conflict",
+    "2": "conflict",
+    "3": "conflict"
+  },
+  "4": {
+    "6": "conflict",
+    "7": "impossible"
+  },
+  "5": {
+    "1": "impossible",
+    "7": "conflict"
+  },
+  "6": {
+    "4": "impossible"
+  },
+  "7": {
+    "7": "impossible"
+  }
+}
