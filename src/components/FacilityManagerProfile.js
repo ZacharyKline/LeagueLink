@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from ".";
-import { Col, Card, Button, Popconfirm } from "antd";
 import { connect } from "react-redux";
+import { Col, Card, Button, Popconfirm } from "antd";
 import {
   getUserById,
-  getTeamByTeamId,
+  getFacilityByManagerId,
   editProfile,
   deleteUserThenGoToLoginPage as handleDeleteUser
 } from "../actions";
 
 const text = "Are you sure to delete this Account?";
 
-class Profile extends Component {
+class FacilityManagerProfile extends Component {
   state = {};
   componentDidMount() {
     this.props.getUserById(this.props.login.id);
+    this.props
+      .getFacilityByManagerId(this.props.login.id)
+      .then(res => console.log(res));
     console.log(this.props);
-    if (this.props.teamIds) {
-      this.props.getTeamByTeamId(this.props.teamIds[0]);
-    }
   }
   toggleModal = () => {
     this.setState({ modal: !this.state.modal });
@@ -30,12 +30,7 @@ class Profile extends Component {
       <React.Fragment>
         <section>
           <Navbar />
-          <div
-            style={{
-              marginTop: "40px",
-              margin: "15px"
-            }}
-          />
+          <div style={{ marginTop: "40px" }} />
           <div
             style={{
               backgroundColor: "rgb(74, 162, 197)",
@@ -116,40 +111,45 @@ class Profile extends Component {
                       borderRadius: "25px"
                     }}
                   >
-                    Teams: <h4>The Frogs</h4>
-                    Coach: <h4>Ben Carter</h4>
-                    Coach Email: <h4>bc@gm.com</h4>
-                    Coach Phone: <h4>(000) 000-0009</h4>
+                    Facility: <h4>Intermural Sportsplex</h4>
+                    Manager: <h4>Ethan Ebel</h4>
+                    Teams: <h4>Awesome highschool Team, Undefeated champs</h4>
+                    Address: <h4>123 main st</h4>
+                    city: <h4>Indianapolis</h4>
+                    state: <h4>Indiana</h4>
+                    zipCode: <h4>46203</h4>
+                    phone: <h4>7735551234</h4>
+                    email: <h4>facility@gmail.com</h4>
                   </Card>
                   {/* <Button
                     span={8}
                     offset={4}
-                    type="submit"
+                    type='submit'
                     style={{
                       background: "rgba(0, 53, 89, 1)",
                       color: "rgb(161, 233, 29)",
                       border: "3px rgb(130, 184, 31) solid",
                       borderRadius: "25px",
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
                     onClick={this.toggleModal}
                   >
                     Add Team(s)
-                  </Button>
+                    </Button>
                   <Button
                     span={8}
                     offset={4}
-                    type="submit"
+                    type='submit'
                     style={{
                       background: "rgba(0, 53, 89, 1)",
                       color: "rgb(161, 233, 29)",
                       border: "3px rgb(130, 184, 31) solid",
                       borderRadius: "25px",
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
                   >
                     Remove Team(s)
-                  </Button> */}
+                    </Button> */}
                 </Col>
               </div>
             </div>
@@ -160,13 +160,15 @@ class Profile extends Component {
   }
 }
 
-function mapStateToProps({ auth, teams }) {
+function mapStateToProps({ auth, teams, facilities }) {
+  // facility = facilities.managerFacility.foundFacilities[0]
   return {
     login: auth.login,
     fullName: auth.user.fullName,
     phone: auth.user.phone,
     teamIds: auth.user.teamIds,
     userLevel: auth.user.userType
+    // facility: facility
     // teamIds: auth.user.teamIds,
   };
 }
@@ -174,11 +176,11 @@ function mapStateToProps({ auth, teams }) {
 const mapDispatchToProps = {
   getUserById,
   handleDeleteUser,
-  getTeamByTeamId,
-  editProfile
+  editProfile,
+  getFacilityByManagerId
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Profile);
+)(FacilityManagerProfile);

@@ -61,8 +61,6 @@ class CalendarPage extends Component {
       <React.Fragment>
         <Navbar />
 
-
-
         <div>
           <Layout>
             <Header style={{ backgroundColor: "white" }}>
@@ -132,57 +130,58 @@ class CalendarPage extends Component {
                 flexDirection: "column"
               }}
             >
-
               {/* STARTS HERE  */}
-        {this.state.selectedDate !== null && (
-          <div
-            style={{
-              // background: "rgb(74, 162, 197)",
-              height: "570px",
-              width: "200px",
-              display: "flex",
-              flexBasis: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              // border: "5px rgba(0, 53, 89, 1) solid",
-              borderRadius: "5px"
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  height: "30px",
-                  width: "160px",
-                  textAlign: "center",
-                  border: "5px rgb(161, 233, 29) solid",
-                  borderRadius: "5px",
-                  color: "rgb(161, 233, 29)",
-                  background: "rgba(0, 53, 89, 1)"
-                }}
-              >
-                {this.state.selectedDate.toDateString()}
-              </div>
-              {dates
-                .find(
-                  day => day.date === this.state.selectedDate.toDateString()
-                )
-                .timeBlocks.map(timeBlock => {
-                  return (
-                    <TimeBlock
-                      key={timeBlock.id}
-                      date={this.state.selectedDate.toDateString()}
-                      status={timeBlock.status}
-                      start={timeBlock.start}
-                      id={timeBlock.id}
-                      end={timeBlock.end}
-                    />
-                  );
-                })}
-            </div>
-          </div>
-        )}            </Sider>
+              {this.state.selectedDate !== null && (
+                <div
+                  style={{
+                    // background: "rgb(74, 162, 197)",
+                    height: "570px",
+                    width: "200px",
+                    display: "flex",
+                    flexBasis: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    // border: "5px rgba(0, 53, 89, 1) solid",
+                    borderRadius: "5px"
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        height: "30px",
+                        width: "160px",
+                        textAlign: "center",
+                        border: "5px rgb(161, 233, 29) solid",
+                        borderRadius: "5px",
+                        color: "rgb(161, 233, 29)",
+                        background: "rgba(0, 53, 89, 1)"
+                      }}
+                    >
+                      {this.state.selectedDate.toDateString()}
+                    </div>
+                    {dates
+                      .find(
+                        day =>
+                          day.date === this.state.selectedDate.toDateString()
+                      )
+                      .timeBlocks.map(timeBlock => {
+                        return (
+                          <TimeBlock
+                            key={timeBlock.id}
+                            date={this.state.selectedDate.toDateString()}
+                            status={timeBlock.status}
+                            start={timeBlock.start}
+                            id={timeBlock.id}
+                            end={timeBlock.end}
+                          />
+                        );
+                      })}
+                  </div>
+                </div>
+              )}{" "}
+            </Sider>
 
-      {/* // ENDS HERE */}
+            {/* // ENDS HERE */}
           </Layout>
         </div>
       </React.Fragment>

@@ -5,7 +5,7 @@ import { Input, Form, Icon } from "antd";
 import "../../App.css";
 import { RegisterHeader } from "..";
 import "../../registration.css";
-
+import { Link } from "react-router-dom";
 class RegisterUserInformationForm extends Component {
   render() {
     const {
@@ -91,6 +91,12 @@ class RegisterUserInformationForm extends Component {
             Next
             <Icon type="right" />
           </button>
+          <p>
+            <i>- or -</i>
+          </p>
+          <Link to="/" className="buttonStyle" style={{ textAlign: "center" }}>
+            <Icon type="left" /> Login{" "}
+          </Link>
         </div>
       </Form>
     );

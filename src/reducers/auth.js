@@ -7,7 +7,8 @@ import {
   LOGOUT_FAIL,
   DELETE_USER,
   DELETE_USER_SUCCESS,
-  DELETE_USER_FAIL
+  DELETE_USER_FAIL,
+  EDIT_PROFILE_SUCCESS,
 } from "../actions";
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
   deleteUserLoading: false,
   deleteUserError: null,
   logoutError: null,
-  logoutLoading: false
+  logoutLoading: false,
+  user:{},
 };
 
 const getInitState = () => {
@@ -33,7 +35,7 @@ export default (state = getInitState(), action) => {
         loginError: null
       };
     case LOGIN_SUCCESS:
-      return { ...state, login: action.payload, loginLoading: false };
+      return { ...state, login: action.payload, user: action.payload.user[0], token: action.payload.token, loginLoading: false };
     case LOGIN_FAIL:
       return { ...state, loginError: action.payload, loginLoading: false };
     case DELETE_USER:
@@ -57,6 +59,12 @@ export default (state = getInitState(), action) => {
         logoutError: action.payload,
         logoutLoading: false
       };
+
+    case EDIT_PROFILE_SUCCESS:
+      return {
+      ...state,
+      user: action.payload
+    };
 
     default:
       return state;

@@ -114,9 +114,10 @@ export const getTeams = () => dispatch => {
   })
     .then(handleJsonResponse)
     .then(result => {
+      console.log(result)
       return dispatch({
         type: GET_TEAMS_SUCCESS,
-        payload: result.messages
+        payload: result
       });
     })
     .catch(err => {
@@ -154,20 +155,21 @@ export const getTeamsByFacilityId = facilityId => dispatch => {
 export const getTeamByTeamId = teamId => dispatch => {
   dispatch({ type: GET_TEAM_BY_TEAMID });
 
-  return fetch(url + `/${teamId}`, {
+  return fetch(url + `/teams/${teamId}`, {
     method: "GET",
     headers: jsonHeaders
   })
     .then(handleJsonResponse)
     .then(result => {
+      console.log(result)
       return dispatch({
         type: GET_TEAM_BY_TEAMID_SUCCESS,
-        payload: result.messages
+        payload: result
       });
     })
     .catch(err => {
       dispatch({
-        type: GET_TEAMS_BY_FACILITYID_FAIL,
+        type: GET_TEAM_BY_TEAMID_FAIL,
         payload: err.message
       });
     });

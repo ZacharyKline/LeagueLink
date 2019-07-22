@@ -73,13 +73,10 @@ export const getTimeBlocksOfUserByDate = (userId, dateObj) => dispatch => {
   dispatch({
     type: GET_TIMEBLOCKS_BY_USERID
   });
-  return fetch(
-    url + `/bydate/${userId}?year=${dateObj.year}&?month=${dateObj.month}`,
-    {
-      method: "GET",
-      headers: jsonHeaders
-    }
-  )
+  return fetch(url + `/bydate/${userId}?date=${dateObj}`, {
+    method: "GET",
+    headers: jsonHeaders
+  })
     .then(handleJsonResponse)
     .then(result => {
       return dispatch({
@@ -98,13 +95,10 @@ export const getAllTimeBlocksOfUserByDate = (userId, dateObj) => dispatch => {
   dispatch({
     type: GET_ALL_TIMEBLOCKS_BY_DATE
   });
-  return fetch(
-    url + `/bydate/all?year=${dateObj.year}&?month=${dateObj.month}`,
-    {
-      method: "GET",
-      headers: jsonHeaders
-    }
-  )
+  return fetch(url + `/bydate/all?date=${dateObj}`, {
+    method: "GET",
+    headers: jsonHeaders
+  })
     .then(handleJsonResponse)
     .then(result => {
       return dispatch({

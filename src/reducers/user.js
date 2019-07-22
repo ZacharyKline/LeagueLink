@@ -102,7 +102,9 @@ const initialState = {
   editUserLoading: false,
   editUserError: null,
   getUserByIdError: null,
-  getUserByIdLoading: false
+  getUserByIdLoading: false,
+  fullName: '',
+  phone: ''
 };
 
 export default (state = initialState, action) => {
@@ -355,9 +357,7 @@ export default (state = initialState, action) => {
     case EDIT_PROFILE_SUCCESS:
       return {
         ...state,
-        userId: action.payload.id,
-        contactPhone: action.payload.contactPhone,
-        teamAffiliation: action.payload.teamAffiliation,
+        user: action.payload,
         editUserLoading: false
       };
     case EDIT_PROFILE_FAIL:

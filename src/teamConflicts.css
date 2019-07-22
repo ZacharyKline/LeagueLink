@@ -1,0 +1,32 @@
+.cell {
+  height: 50px;
+  width: 88px;
+  margin: 3px;
+}
+
+.okay {
+  background: rgb(161, 233, 29);
+  border-top: 5px solid rgb(220, 250, 164);
+  border-left: 5px solid rgb(194, 238, 113);
+  border-bottom: 5px solid rgb(74, 112, 4);
+  border-right: 5px solid rgb(99, 150, 5);
+  user-select: none;
+}
+
+.conflict {
+  background: orange;
+  border-top: 5px solid rgb(156, 103, 4);
+  border-left: 5px solid rgb(189, 124, 3);
+  border-bottom: 5px solid rgb(248, 201, 114);
+  border-right: 5px solid rgb(247, 187, 75);
+  font-size: 16px;
+  user-select: none;
+}
+
+.impossible {
+  background: rgba(0, 53, 89, 1);
+  border: 5px solid rgba(0, 53, 89, 1);
+  color: rgb(161, 233, 29);
+  font-size: 16px;
+  user-select: none;
+}

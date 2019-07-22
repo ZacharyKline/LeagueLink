@@ -5,11 +5,15 @@ import {
   InvalidUrlPage,
   CalendarPage,
   LoginPage,
-  ProfilePage,
+  // ProfilePage,
   RegistrationPage,
   EditProfile,
   //Conflicts,
-  UserConflicts
+  UserConflicts,
+  TeamConflicts,
+  MatchConflicts,
+  // CoachProfile,
+  ProfileContainer
 } from ".";
 
 class App extends Component {
@@ -19,10 +23,13 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <LoginPage />} />
           <Route path="/home" render={() => <CalendarPage />} />
-          <Route path="/profile" render={() => <ProfilePage />} />
+          <Route path="/profile" render={() => <ProfileContainer />} />
           <Route path="/registration" render={() => <RegistrationPage />} />
           <Route path="/editprofile" render={() => <EditProfile />} />
           <Route path="/conflicts" render={() => <UserConflicts />} />
+          <Route path="/teamconflicts" render={() => <TeamConflicts />} />
+          <Route path="/matchconflicts" render={() => <MatchConflicts />} />
+          {/* <Route path='/coachprofile' render={() => <CoachProfile />} /> */}
           <Route render={() => <InvalidUrlPage />} />
         </Switch>
       </React.Fragment>
