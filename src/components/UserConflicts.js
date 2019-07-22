@@ -11,8 +11,17 @@ import {
 } from "../actions";
 import moment from "moment";
 import "../userConflicts.css";
-import monthDefaultOkay from "../monthDefaultOkay.json";
-import fakeBackendMonth from "../fakeBackendMonth.json";
+import month from "../fakeBackendMonth.json";
+const hours = [
+  "8AM - 10AM",
+  "10AM - 12PM",
+  "12PM - 2PM",
+  "2PM - 4PM",
+  "4PM - 6PM",
+  "6PM - 8PM",
+  "8PM - 10PM"
+];
+const okays = ["okay", "okay", "okay", "okay", "okay", "okay", "okay"];
 
 class UserConflicts extends Component {
   state = {
@@ -25,51 +34,10 @@ class UserConflicts extends Component {
     lastMonth: 6,
     firstDay: 1,
     lastDay: 30,
-    timeBlock1: "",
-    timeBlock2: "",
-    timeBlock3: "",
-    timeBlock4: "",
-    timeBlock5: "",
-    timeBlock6: "",
-    timeBlock7: ""
+    timeBlocks: okays
   };
 
   componentDidMount = () => {};
-
-  handleSave = () => {
-    let userId = this.props.myLogin.id;
-    const dataObj = {
-      date: this.state.isodate.slice(0, 10),
-      userId: userId
-    };
-    const data = {};
-    if (this.state.timeBlock1 !== "okay") {
-      data[1] = this.state.timeBlock1;
-    }
-    if (this.state.timeBlock2 !== "okay") {
-      data[2] = this.state.timeBlock2;
-    }
-    if (this.state.timeBlock3 !== "okay") {
-      data[3] = this.state.timeBlock3;
-    }
-    if (this.state.timeBlock4 !== "okay") {
-      data[4] = this.state.timeBlock4;
-    }
-    if (this.state.timeBlock5 !== "okay") {
-      data[5] = this.state.timeBlock5;
-    }
-    if (this.state.timeBlock6 !== "okay") {
-      data[6] = this.state.timeBlock6;
-    }
-    if (this.state.timeBlock7 !== "okay") {
-      data[7] = this.state.timeBlock7;
-    }
-    dataObj[data] = data;
-    console.log(dataObj);
-    this.props.updateTimeBlock(userId, dataObj);
-    message.info("You have updated the time blocks");
-    return dataObj;
-  };
 
   handleSelect = value => {
     let selectedDate = value._d;
@@ -85,111 +53,70 @@ class UserConflicts extends Component {
   };
 
   handleBlocks = selectedDay => {
-    let arr = [];
-    let monthObj = this.fillOutMonth(monthDefaultOkay, fakeBackendMonth);
-    let currentDay = monthObj[selectedDay];
-    for (let i = 1; i < 8; i++) {
-      if (currentDay[i] === undefined) {
-        arr.push("okay");
-      } else {
-        arr.push(currentDay[i]);
+    let currentDay = month[selectedDay];
+    if (month[selectedDay] === undefined) {
+      this.setState({
+        timeBlocks: okays
+      });
+    } else {
+      let arr = [];
+      for (let i = 1; i < 8; i++) {
+        if (currentDay[i] === undefined) {
+          arr.push("okay");
+        } else {
+          arr.push(currentDay[i]);
+        }
       }
-    }
-    return this.setState({
-      timeBlock1: arr[0],
-      timeBlock2: arr[1],
-      timeBlock3: arr[2],
-      timeBlock4: arr[3],
-      timeBlock5: arr[4],
-      timeBlock6: arr[5],
-      timeBlock7: arr[6]
-    });
-  };
-
-  handleClick = (hourblock, i) => e => {
-    if (i === 0) {
-      if (this.state.timeBlock1 === "okay") {
-        return this.setState({ timeBlock1: "conflict" });
-      } else if (hourblock === "conflict") {
-        return this.setState({ timeBlock1: "impossible" });
-      } else if (hourblock === "impossible") {
-        return this.setState({ timeBlock1: "okay" });
-      }
-    } else if (i === 1) {
-      if (this.state.timeBlock2 === "okay") {
-        return this.setState({ timeBlock2: "conflict" });
-      } else if (hourblock === "conflict") {
-        return this.setState({ timeBlock2: "impossible" });
-      } else if (hourblock === "impossible") {
-        return this.setState({ timeBlock2: "okay" });
-      }
-    } else if (i === 2) {
-      if (this.state.timeBlock3 === "okay") {
-        return this.setState({ timeBlock3: "conflict" });
-      } else if (hourblock === "conflict") {
-        return this.setState({ timeBlock3: "impossible" });
-      } else if (hourblock === "impossible") {
-        return this.setState({ timeBlock3: "okay" });
-      }
-    } else if (i === 3) {
-      if (this.state.timeBlock4 === "okay") {
-        return this.setState({ timeBlock4: "conflict" });
-      } else if (hourblock === "conflict") {
-        return this.setState({ timeBlock4: "impossible" });
-      } else if (hourblock === "impossible") {
-        return this.setState({ timeBlock4: "okay" });
-      }
-    } else if (i === 4) {
-      if (this.state.timeBlock5 === "okay") {
-        return this.setState({ timeBlock5: "conflict" });
-      } else if (hourblock === "conflict") {
-        return this.setState({ timeBlock5: "impossible" });
-      } else if (hourblock === "impossible") {
-        return this.setState({ timeBlock5: "okay" });
-      }
-    } else if (i === 5) {
-      if (this.state.timeBlock6 === "okay") {
-        return this.setState({ timeBlock6: "conflict" });
-      } else if (hourblock === "conflict") {
-        return this.setState({ timeBlock6: "impossible" });
-      } else if (hourblock === "impossible") {
-        return this.setState({ timeBlock6: "okay" });
-      }
-    } else if (i === 6) {
-      if (this.state.timeBlock7 === "okay") {
-        return this.setState({ timeBlock7: "conflict" });
-      } else if (hourblock === "conflict") {
-        return this.setState({ timeBlock7: "impossible" });
-      } else if (hourblock === "impossible") {
-        return this.setState({ timeBlock7: "okay" });
-      }
+      this.setState({ timeBlocks: arr });
     }
   };
 
-  fillOutMonth = (okaysObj, incompleteObj) => {
-    return Object.assign({}, okaysObj, incompleteObj);
+  handleClick = i => e => {
+    let arr = this.state.timeBlocks.slice();
+    if (this.state.timeBlocks[i] === "okay") {
+      arr.splice(i, 1, "conflict");
+      this.setState({ timeBlocks: arr });
+    } else if (this.state.timeBlocks[i] === "conflict") {
+      arr.splice(i, 1, "impossible");
+      this.setState({ timeBlocks: arr });
+    } else if (this.state.timeBlocks[i] === "impossible") {
+      arr.splice(i, 1, "okay");
+      this.setState({ timeBlocks: arr });
+    }
+  };
+
+  handleSave = () => {
+    let userId = this.props.myLogin.id;
+    const dataObj = {
+      date: this.state.isodate.slice(0, 10),
+      userId: userId
+    };
+    const data = {};
+    for (let i = 0; i < 7; i++) {
+      let num = i + 1;
+      if (this.state.timeBlocks[i] !== "okay") {
+        data[num] = this.state.timeBlocks[i];
+      }
+    }
+    dataObj[data] = data;
+    console.log("arr", dataObj);
+    this.props.updateTimeBlock(userId, dataObj);
+    message.info("You have updated the time blocks");
+    return dataObj;
   };
 
   render() {
-    let hourBlocks = [
-      this.state.timeBlock1,
-      this.state.timeBlock2,
-      this.state.timeBlock3,
-      this.state.timeBlock4,
-      this.state.timeBlock5,
-      this.state.timeBlock6,
-      this.state.timeBlock7
-    ];
+    const {
+      selectedDate,
+      year,
+      firstMonth,
+      lastMonth,
+      firstDay,
+      lastDay,
+      timeBlocks
+    } = this.state;
 
-    let hours = [
-      "8AM - 10AM",
-      "10AM - 12PM",
-      "12PM - 2PM",
-      "2PM - 4PM",
-      "4PM - 6PM",
-      "6PM - 8PM",
-      "8PM - 10PM"
-    ];
+    const { handleClick, handleSave, handleSelect } = this;
 
     return (
       <React.Fragment>
@@ -200,21 +127,21 @@ class UserConflicts extends Component {
             <div className="userConflictsContainerDiv3">
               <div className="userConflictCalendarDiv">
                 <Calendar
-                  onSelect={this.handleSelect}
+                  onSelect={handleSelect}
                   fullscreen={false}
                   defaultValue={moment()
-                    .year(this.state.year)
-                    .month(this.state.firstMonth)
-                    .day(this.state.firstDay)}
+                    .year(year)
+                    .month(firstMonth)
+                    .day(firstDay)}
                   validRange={[
                     moment()
-                      .year(this.state.year)
-                      .month(this.state.firstMonth - 1)
-                      .day(this.state.firstDay),
+                      .year(year)
+                      .month(firstMonth - 1)
+                      .day(firstDay),
                     moment()
-                      .year(this.state.year)
-                      .month(this.state.lastMonth - 1)
-                      .day(this.state.lastDay)
+                      .year(year)
+                      .month(lastMonth - 1)
+                      .day(lastDay)
                   ]}
                 />
               </div>
@@ -248,36 +175,32 @@ class UserConflicts extends Component {
                 </ul>
               </div>
             </div>
-
             <div className="timeBlockDiv">
-              {this.state.selectedDate !== null && (
-                <div className="date">
-                  {this.state.selectedDate.toDateString()}
-                </div>
-              )}
-              {this.state.selectedDate !== null &&
-                hourBlocks.map((block, i) => {
-                  let faceIcon =
-                    block === "impossible"
-                      ? "frown"
-                      : block === "conflict"
-                      ? "meh"
-                      : "smile";
-                  return (
-                    <TimeBlock
-                      key={i}
-                      className={`block ${block}`}
-                      status={block}
-                      hours={hours[i]}
-                      type={faceIcon}
-                      onClick={this.handleClick(block, i)}
-                    />
-                  );
-                })}
-              {this.state.selectedDate !== null && (
-                <button className="buttonStyle" onClick={this.handleSave}>
-                  Save Changes
-                </button>
+              {selectedDate && (
+                <React.Fragment>
+                  <div className="date">{selectedDate.toDateString()}</div>
+                  {timeBlocks.map((block, i) => {
+                    let faceIcon =
+                      block === "impossible"
+                        ? "frown"
+                        : block === "conflict"
+                        ? "meh"
+                        : "smile";
+                    return (
+                      <TimeBlock
+                        key={i}
+                        className={`block ${block}`}
+                        status={block}
+                        hours={hours[i]}
+                        type={faceIcon}
+                        onClick={handleClick(i)}
+                      />
+                    );
+                  })}
+                  <button className="buttonStyle" onClick={handleSave}>
+                    Save Changes
+                  </button>
+                </React.Fragment>
               )}
             </div>
           </div>
