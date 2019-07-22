@@ -3,18 +3,22 @@ import { connect } from "react-redux";
 import Spinner from "react-spinkit";
 import { Calendar, message } from "antd";
 import { Navbar, TimeBlock, RegisterHeader, Cell, Row } from ".";
+
 import {
   getTimeBlocksByUserId,
   updateTimeBlock,
   getTimeBlocksOfUserByDate,
   getAllTimeBlocksOfUserByDate
 } from "../actions";
+
 import moment from "moment";
 import "../userConflicts.css";
+
 import athletesConflicts from "../fakeAtheletesConflicts.json";
 import teamConflicts from "../fakeTeamconflicts.json";
 import coachConflicts from "../fakeCoachConflicts.json";
 import parents from "../fakeParents.json";
+
 const hours = [
   "8AM-10AM",
   "10AM-12PM",
@@ -24,45 +28,37 @@ const hours = [
   "6PM-8PM",
   "8PM-10PM"
 ];
+
 const okays = ["okay", "okay", "okay", "okay", "okay", "okay", "okay"];
 
 class TeamConflicts extends Component {
   state = {
-    value: null,
-    selectedDate: null,
-    selectedDay: null,
-    isodate: "",
     year: 2020,
     firstMonth: 3,
     lastMonth: 6,
     firstDay: 1,
     lastDay: 30,
     timeBlocks: okays,
-    coachHours: [],
-    parentHours: [],
-    parentIds: []
   };
 
-  componentDidMount = () => {};
-
   handleSelect = value => {
-    let selectedDate = value._d;
-    let selectedDay = value.get("date");
-    let isodate = value.toISOString();
-    let timeBlocks = this.handleBlocks(selectedDay, teamConflicts);
-    let coachHours = this.handleBlocks(selectedDay, coachConflicts);
+    let isodate = value.toISOString().split("T")[0];
+    console.log(isodate)
+    let timeBlocks = this.handleBlocks(isodate, teamConflicts);
+    let coachHours = this.handleBlocks(isodate, coachConflicts);
     this.setState({
       value,
-      selectedDate: selectedDate,
-      selectedDay: selectedDay,
+      selectedDate: isodate,
+      selectedDay: isodate,
       isodate: isodate,
       timeBlocks: timeBlocks,
       coachHours: coachHours
     });
-    this.handleParentHours(selectedDay);
+    this.handleParentHours(isodate);
   };
 
   handleBlocks = (selectedDay, conflictsObj) => {
+
     let currentDay = conflictsObj[selectedDay];
     if (currentDay === undefined) {
       return okays;
@@ -89,6 +85,7 @@ class TeamConflicts extends Component {
       let arr = this.handleBlocks(selectedDay, athlete.data);
       containerArr.push(arr);
     }
+
     this.setState({ parentHours: containerArr, parentIds: parentIds });
   };
 
@@ -252,13 +249,7 @@ class TeamConflicts extends Component {
                       let parentName = currentParent.fullName;
                       return (
                         <Row
-                          className1={`${day[0]} cell`}
-                          className2={`${day[1]} cell`}
-                          className3={`${day[2]} cell`}
-                          className4={`${day[3]} cell`}
-                          className5={`${day[4]} cell`}
-                          className6={`${day[5]} cell`}
-                          className7={`${day[6]} cell`}
+                          days={day}
                           parent={parentName}
                           key={i}
                         />
