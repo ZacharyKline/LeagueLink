@@ -3,7 +3,6 @@ import React, { Component } from "react";
 //import { registerUser as register } from "../../actions";
 import { Form, Icon } from "antd";
 import "../../App.css";
-import { RegisterHeader } from "..";
 import "../css/registration.css";
 // import {connect} from 'react-redux'
 
@@ -20,7 +19,7 @@ class RegisterParentSelectTeamsForm extends Component {
     } = this.props;
     return (
       <Form className="stylesForm" id="parentSelectTeams">
-        <RegisterHeader text={"Select your Team(s)"} />
+          <h1 className="header">"Select your Facility"</h1>
         <div className="ulContainerDiv">
           <ul style={{ listStyle: "none" }}>
             {teams.map(team => {

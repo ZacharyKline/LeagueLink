@@ -5,7 +5,6 @@ import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
 import { Button, Form, Input, Layout, Icon } from "antd";
 import ForgotPasswordModal from "./ForgotPasswordModal";
-import { RegisterHeader } from ".";
 
 //import "./index.css";
 
@@ -57,7 +56,7 @@ class LoginForm extends Component {
             }}
             // className="stylesForm"
           >
-            <RegisterHeader text={"Login"} />
+            <h1 className="header">Login</h1>
             <br />
             <Form.Item>
               <Input

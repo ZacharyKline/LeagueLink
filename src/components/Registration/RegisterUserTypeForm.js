@@ -3,7 +3,6 @@ import React, { Component } from "react";
 //import { registerUser as register } from "../../actions";
 import { Form, Icon, Radio } from "antd";
 import "../../App.css";
-import { RegisterHeader } from "..";
 import "../css/registration.css";
 
 class RegisterUserTypeForm extends Component {
@@ -11,7 +10,7 @@ class RegisterUserTypeForm extends Component {
     const { handleRadioClick, userType, handleNext, handleBack } = this.props;
     return (
       <Form className="stylesForm" id="userTypeForm">
-        <RegisterHeader text={"Are you a..."} />
+        <h1 className="header">"Are you a..."</h1>
         <div className="radioGroupContainerDiv">
           <Radio.Group
             onChange={handleRadioClick}

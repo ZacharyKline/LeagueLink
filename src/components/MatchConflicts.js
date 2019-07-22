@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Calendar, Select, Form, Checkbox } from "antd";
-import { Navbar, TimeBlock, RegisterHeader } from ".";
+import { Navbar, TimeBlock } from ".";
 import {} from "../actions";
 import moment from "moment";
 import "./css/userConflicts.css";
@@ -135,7 +135,7 @@ class MatchConflicts extends Component {
       <React.Fragment>
         <Navbar />
         <div className="matchConflictsContainerDiv">
-          <RegisterHeader text={"Check match conflicts"} />
+          <h1 className="header">"Check match conflicts"</h1>
           <div className="flexRow">
             <div style={{ margin: "5px" }}>
               <div className="teamCalendarDivContainer">

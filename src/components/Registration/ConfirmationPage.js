@@ -3,7 +3,6 @@ import React, { Component } from "react";
 //import { registerUser as register } from "../../actions";
 import { Form, Icon } from "antd";
 import "../../App.css";
-import { RegisterHeader } from "..";
 import "../css/registration.css";
 
 class RegisterConfirmationPageForm extends Component {
@@ -35,7 +34,7 @@ class RegisterConfirmationPageForm extends Component {
     } = this.props;
     return (
       <Form className="stylesForm" id="confirmationPage">
-        <RegisterHeader text={"Confirm your Details"} />
+        <h1 className="header">"Confirm your Details"</h1>
         <div className="containerDiv">
           <Form.Item className="formItemStyle">
             <div className="confirmContentContainers">
@@ -46,6 +45,7 @@ class RegisterConfirmationPageForm extends Component {
                 <b>{lastName}</b>
               </span>
             </div>
+
             <div className="confirmContentContainers">
               <span>{email}</span>
             </div>
@@ -53,12 +53,14 @@ class RegisterConfirmationPageForm extends Component {
               <span>{phone}</span>
             </div>
             <br />
+
             {userType === "parent" && selectedTeamIds.length === 0 && (
               <div className="confirmContentContainers">
                 <span>Account not linked to Team</span>
               </div>
             )}
             {userType === "parent" && selectedTeamIds.length > 0 && (
+              
               <React.Fragment>
                 {selectedTeamIds.map((selectedId, i) => {
                   let currentTeam = teams.find(team => team.id === selectedId);

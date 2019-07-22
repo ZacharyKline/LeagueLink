@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
 import { Calendar, message } from "antd";
-import { Navbar, TimeBlock, RegisterHeader } from ".";
+import { Navbar, TimeBlock, } from ".";
 import {
   getTimeBlocksByUserId,
   updateTimeBlock,
@@ -122,7 +122,7 @@ class UserConflicts extends Component {
       <React.Fragment>
         <Navbar />
         <div className="userConflictsContainerDiv">
-          <RegisterHeader text={"Mark Times that Conflict"} />
+          <h1 className="header">"Mark Times that Conflict"</h1>
           <div className="userConflictsContainerDiv2">
             <div className="userConflictsContainerDiv3">
               <div className="userConflictCalendarDiv">

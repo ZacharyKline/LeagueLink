@@ -1,4 +1,4 @@
-import { RegistrationForm } from "..";
+import { RegistrationForm } from "../Registration";
 import React, { Component } from "react";
 import { Layout } from "antd";
 import "../../App.css";

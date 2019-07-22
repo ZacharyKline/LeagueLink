@@ -3,7 +3,6 @@ import React, { Component } from "react";
 //import { registerUser as register } from "../../actions";
 import { Form, Icon, Radio } from "antd";
 import "../../App.css";
-import { RegisterHeader } from "..";
 import "../css/registration.css";
 
 class RegisterCoachSelectFacilityForm extends Component {
@@ -19,7 +18,8 @@ class RegisterCoachSelectFacilityForm extends Component {
     } = this.props;
     return (
       <Form className="stylesForm" id="coachSelectFacility">
-        <RegisterHeader text={"Select your Facility"} />
+          <h1 className="header">"Select your Facility"</h1>
+
         <div className="radioGroupContainerDiv">
           <Radio.Group
             value={selectedFacilityId}

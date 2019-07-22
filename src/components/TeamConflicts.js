@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "react-spinkit";
 import { Calendar, message } from "antd";
-import { Navbar, TimeBlock, RegisterHeader, Cell, Row } from ".";
+import { Navbar, TimeBlock, Cell, Row } from ".";
 
 import {
   getTimeBlocksByUserId,
@@ -143,7 +143,7 @@ class TeamConflicts extends Component {
       <React.Fragment>
         <Navbar />
         <div className="teamConflictsContainerDiv">
-          <RegisterHeader text={"Mark Confict Times for Team"} />
+          <h1 className="header">"Mark Confict Times for Team"</h1>
           <div className="flexRow">
             <div style={{ margin: "5px" }}>
               <div className="teamCalendarDivContainer">

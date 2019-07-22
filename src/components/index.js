@@ -10,7 +10,6 @@ export { default as Row } from "./Row";
 export { default as MatchConflicts } from "./MatchConflicts";
 export { default as CalendarPage } from "./Pages/CalendarPage";
 export { default as CoachProfile } from './CoachProfile'
-export { default as Day } from "./Day";
 export { default as EditProfile } from "./Pages/EditProfilePage";
 export { default as FacilityManagerProfile } from "./FacilityManagerProfile";
 export { default as InvalidUrlPage } from "./Pages/InvalidUrlPage";
@@ -20,36 +19,34 @@ export { default as Logout } from "./Logout";
 export { default as Navbar } from "./NavBar";
 export { default as ProfileContainer } from './ProfileContainer'
 export { default as ProfilePage } from "./Pages/ProfilePage";
-export { default as RegisterHeader } from "./RegisterHeader";
 export { default as RegistrationForm } from "./RegistrationForm";
 export { default as RegistrationPage } from "./Pages/RegistrationPage";
 export { default as TimeBlock } from "./TimeBlock";
-export { default as Week } from "./Week";
 
 export {
   default as RegisterUserInformationForm
-} from "./RegisterForms/RegisterUserInformationForm";
+} from "./Registration/UserInfoForm";
 export {
   default as RegisterUserTypeForm
-} from "./RegisterForms/RegisterUserTypeForm";
+} from "./Registration/RegisterUserTypeForm";
 export {
   default as RegisterParentSelectTeamsForm
-} from "./RegisterForms/RegisterParentSelectTeamsForm";
+} from "./Registration/SelectTeamForm";
 export {
   default as RegisterCoachSelectFacilityForm
-} from "./RegisterForms/RegisterCoachSelectFacilityForm";
+} from "./Registration/SelectFacilityForm";
 export {
   default as RegisterMissingFacilityForm
-} from "./RegisterForms/RegisterMissingFacilityForm";
+} from "./Registration/MissingFacilityInfo";
 export {
   default as RegisterMissingTeamInformation
-} from "./RegisterForms/RegisterMissingTeamInformation";
+} from "./Registration/MissingTeamInfo";
 export {
   default as RegisterCoachRegisterTeamForm
-} from "./RegisterForms/RegisterCoachRegisterTeamForm";
+} from "./Registration/RegisterTeam";
 export {
   default as RegisterManagerRegisterFacilityForm
-} from "./RegisterForms/RegisterManagerRegisterFacilityForm";
+} from "./Registration/RegisterFacilityForm";
 export {
   default as RegisterConfirmationPageForm
-} from "./RegisterForms/RegisterConfirmationPageForm";
+} from "./Registration/ConfirmationPage";

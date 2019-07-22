@@ -3,7 +3,6 @@ import React, { Component } from "react";
 //import { registerUser as register } from "../../actions";
 import { Input, Form, Icon } from "antd";
 import "../../App.css";
-import { RegisterHeader } from "..";
 import "../css/registration.css";
 
 class RegisterManagerRegisterFacilityForm extends Component {
@@ -23,7 +22,7 @@ class RegisterManagerRegisterFacilityForm extends Component {
     } = this.props;
     return (
       <Form className="stylesForm" id="managerRegisterFacility">
-        <RegisterHeader text={"Register your Facility"} />
+          <h1 className="header">"Register your Facility"</h1>
         <Form.Item>
           <Input
             addonBefore="Facility Name"

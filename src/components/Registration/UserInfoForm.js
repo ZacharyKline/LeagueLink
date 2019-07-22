@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-//import { connect } from "react-redux";
-//import { registerUser as register } from "../../actions";
-import { Input, Form, Icon } from "antd";
+import { Input, Form, Icon, Button } from "antd";
 import "../../App.css";
-import { RegisterHeader } from "..";
 import "../css/registration.css";
 import { Link } from "react-router-dom";
-class RegisterUserInformationForm extends Component {
+
+class UserInfoForm extends Component {
   render() {
     const {
       handleChange,
@@ -20,7 +18,8 @@ class RegisterUserInformationForm extends Component {
     } = this.props;
     return (
       <Form className="stylesForm" id="userInformation">
-        <RegisterHeader text={"Register"} />
+        <h1 className="header" >Register</h1>
+        
         <Form.Item layout="vertical">
           <Input
             addonBefore="First Name"
@@ -61,6 +60,7 @@ class RegisterUserInformationForm extends Component {
             value={phone}
           />
         </Form.Item>
+
         <Form.Item>
           <Input.Password
             addonBefore="Password"
@@ -82,24 +82,24 @@ class RegisterUserInformationForm extends Component {
             onChange={handleChange}
           />
         </Form.Item>
+
         <div className="buttonContainerDiv">
-          <button
-            //type="submit"
-            onClick={handleNext}
-            className="buttonStyle"
-          >
-            Next
-            <Icon type="right" />
-          </button>
+          <Button onClick={handleNext} className="buttonStyle">
+            Next <Icon type="right" />
+          </Button>
+          
           <p>
             <i>- or -</i>
           </p>
+
           <Link to="/" className="buttonStyle" style={{ textAlign: "center" }}>
             <Icon type="left" /> Login{" "}
           </Link>
+
         </div>
       </Form>
     );
   }
 }
-export default RegisterUserInformationForm;
+
+export default UserInfoForm;

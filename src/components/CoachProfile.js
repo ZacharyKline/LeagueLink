@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Navbar } from ".";
 import { Col, Card, Button, Popconfirm, Modal } from "antd";
 import { connect } from "react-redux";
-import RegisterParentSelectTeamsForm from "../components/RegisterForms/RegisterParentSelectTeamsForm";
+import RegisterParentSelectTeamsForm from "./Registration/SelectTeamForm";
 import {
   getUserById,
   getTeamByTeamId,

@@ -68,16 +68,6 @@ class RegisterForm extends Component {
     userType: "parent"
   };
 
-  componentDidMount = () => {
-    //this.props.getUsers(1000);
-    //this.props.getCoaches();
-    //this.props.getManagers();
-    //this.props.getParents();
-    //this.props.getParentByParentId("5d24de27a4462a0017208514");
-    //this.props.getCoachByCoachId("5d24e09217527b00173993be");
-    //this.props.getManagerByManagerId("5d24e09217527b00173993bf");
-  };
-
   handleSubmit = userType => e => {
     e.preventDefault();
     const fullName = this.state.firstName + " " + this.state.lastName;
@@ -104,41 +94,17 @@ class RegisterForm extends Component {
       password: this.state.password,
       type: this.state.userType
     };
-    console.log("line 105")
-    console.log(userObj)
     switch (userType) {
       case "parent":
         userObj.teamIds = this.state.selectedTeamIds;
-        console.log(userObj);
-        console.log(
-          "Create Parent, Login In User,Add Parent ID to Team, Redirect to Profile page"
-        );
-        //this.props.createUser(userObj);
         this.props.createUserThenLogin(userObj);
-        //this.props.registerParent(userObj);
         break;
       case "coach":
         userObj.facilityId = this.state.selectedFacilityId;
-        console.log(userObj);
-        console.log(teamObj);
-        console.log(
-          "Create Coach, Login In User, Create Team, Add Team ID to Facility, Add Team ID to Coach, Redirect to Profile Page"
-        );
-        //this.props.createUser(userObj);
-        //this.props.createUserThenLogin(userObj);
         this.props.createUserThenLoginThenCreateTeam(userObj, teamObj);
-        //this.props.registerCoach(userObj, teamObj);
         break;
       case "manager":
-        console.log(
-          "Create Manager, Login In User, Create Facility, Add Facility ID to Manager, Add ManagerId to Facility, redirect to profile page"
-        );
-        //this.props.createUser(userObj);
         this.props.createUserThenLogin(userObj);
-        //this.props.registerManager(userObj, facilityObj);
-        break;
-      default:
-        console.log("err");
         break;
     }
   };
