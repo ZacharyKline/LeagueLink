@@ -29,11 +29,11 @@ import {
   RegisterManagerRegisterFacilityForm,
   RegisterConfirmationPageForm
 } from ".";
-import teams from "../teams.json";
-import coaches from "../coaches.json";
-import facilities from "../facilities.json";
-import managers from "../managers.json";
-import "../registration.css";
+import teams from "../SampleJson/teams.json";
+import coaches from "../SampleJson/coaches.json";
+import facilities from "../SampleJson/facilities.json";
+import managers from "../SampleJson/managers.json";
+import "./css/registration.css";
 import { Layout } from "antd";
 
 class RegisterForm extends Component {

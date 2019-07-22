@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Layout, Menu, Calendar, List } from "antd";
-import { Navbar, TimeBlock } from ".";
+import { Navbar, TimeBlock } from "../";
 //import { connect } from "tls";
 // import CalendarComponent from './Calendar'
-import dates from "../dates.json";
+import dates from "../../SampleJson/dates.json";
 const { Header, Sider, Content } = Layout;
 const noConflict = 0;
 const unresolvableConflict = 1;

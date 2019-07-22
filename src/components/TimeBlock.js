@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
-import "../userConflicts.css";
+import "./css/userConflicts.css";
 
 class TimeBlock extends Component {
   render() {

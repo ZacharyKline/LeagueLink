@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../userConflicts.css";
+import "./css/userConflicts.css";
 import { Cell } from ".";
 
 class Row extends Component {

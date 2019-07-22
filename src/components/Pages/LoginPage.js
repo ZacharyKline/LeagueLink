@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { LoginForm } from ".";
+import { LoginForm } from "..";
 import { Layout } from "antd";
-import "../userConflicts.css";
+import "../css/userConflicts.css";
 
 export default class Landing extends Component {
   render() {

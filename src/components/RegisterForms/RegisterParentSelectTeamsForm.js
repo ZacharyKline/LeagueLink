@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Form, Icon } from "antd";
 import "../../App.css";
 import { RegisterHeader } from "..";
-import "../../registration.css";
+import "../css/registration.css";
 // import {connect} from 'react-redux'
 
 class RegisterParentSelectTeamsForm extends Component {

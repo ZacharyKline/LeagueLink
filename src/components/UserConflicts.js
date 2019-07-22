@@ -10,8 +10,8 @@ import {
   getAllTimeBlocksOfUserByDate
 } from "../actions";
 import moment from "moment";
-import "../userConflicts.css";
-import month from "../fakeBackendMonth.json";
+import "./css/userConflicts.css";
+import month from "../SampleJson/fakeBackendMonth.json";
 const hours = [
   "8AM - 10AM",
   "10AM - 12PM",

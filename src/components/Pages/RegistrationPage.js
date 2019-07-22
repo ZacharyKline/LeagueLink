@@ -1,7 +1,7 @@
-import { RegistrationForm } from ".";
+import { RegistrationForm } from "..";
 import React, { Component } from "react";
 import { Layout } from "antd";
-import "../App.css";
+import "../../App.css";
 /*import { connect } from "react-redux";
 import { registerUser as register } from "../actions";
 import { Input, Form, Icon, Radio } from "antd";

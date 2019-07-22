@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Navbar } from ".";
+import { Navbar } from "..";
 import { Col, Card, Button, Popconfirm } from "antd";
 import { connect } from "react-redux";
 import {
@@ -8,7 +8,7 @@ import {
   getTeamByTeamId,
   editProfile,
   deleteUserThenGoToLoginPage as handleDeleteUser
-} from "../actions";
+} from "../../actions";
 
 const text = "Are you sure to delete this Account?";
 

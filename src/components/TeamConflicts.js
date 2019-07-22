@@ -12,12 +12,12 @@ import {
 } from "../actions";
 
 import moment from "moment";
-import "../userConflicts.css";
+import "./css/userConflicts.css";
 
-import athletesConflicts from "../fakeAtheletesConflicts.json";
-import teamConflicts from "../fakeTeamconflicts.json";
-import coachConflicts from "../fakeCoachConflicts.json";
-import parents from "../fakeParents.json";
+import athletesConflicts from "../SampleJson/fakeAtheletesConflicts.json";
+import teamConflicts from "../SampleJson/fakeTeamconflicts.json";
+import coachConflicts from "../SampleJson/fakeCoachConflicts.json";
+import parents from "../SampleJson/fakeParents.json";
 
 const hours = [
   "8AM-10AM",

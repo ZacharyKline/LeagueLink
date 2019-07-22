@@ -4,10 +4,10 @@ import { Calendar, Select, Form, Checkbox } from "antd";
 import { Navbar, TimeBlock, RegisterHeader } from ".";
 import {} from "../actions";
 import moment from "moment";
-import "../userConflicts.css";
-import teamsConflicts from "../fakeTeamsConflicts.json";
-import coaches from "../fakeCoaches.json";
-import teams from "../fakeTeams.json";
+import "./css/userConflicts.css";
+import teamsConflicts from "../SampleJson/fakeTeamsConflicts.json";
+import coaches from "../SampleJson/fakeCoaches.json";
+import teams from "../SampleJson/fakeTeams.json";
 const { Option } = Select;
 const hours = [
   "8AM - 10AM",

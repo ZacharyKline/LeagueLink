@@ -4,7 +4,7 @@ import { Menu, Icon } from "antd";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import { Logout } from ".";
-import "../userConflicts.css";
+import "./css/userConflicts.css";
 
 class Navbar extends Component {
   render() {

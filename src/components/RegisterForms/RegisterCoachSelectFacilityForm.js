@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Form, Icon, Radio } from "antd";
 import "../../App.css";
 import { RegisterHeader } from "..";
-import "../../registration.css";
+import "../css/registration.css";
 
 class RegisterCoachSelectFacilityForm extends Component {
   render() {

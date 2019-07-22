@@ -3,7 +3,7 @@ import React, { Component } from "react";
 //import { registerUser as register } from "../../actions";
 import { Form, Icon } from "antd";
 import "../../App.css";
-import "../../registration.css";
+import "../css/registration.css";
 
 class RegisterMissingTeamInformation extends Component {
   render() {

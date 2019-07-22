@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { editProfile } from "../actions";
+import { editProfile } from "../../actions";
 import { connect } from "react-redux";
 import Spinner from "react-spinkit";
 import {
@@ -9,8 +9,7 @@ import {
     Layout,
         } from "antd";
 import { Link } from 'react-router-dom'
-import { getUserById } from "../actions";
-
+import { getUserById } from "../../actions";
 
 class EditProfile extends Component {
     componentDidMount() {

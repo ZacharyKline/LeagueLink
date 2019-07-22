@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Input, Form, Icon } from "antd";
 import "../../App.css";
 import { RegisterHeader } from "..";
-import "../../registration.css";
+import "../css/registration.css";
 import { Link } from "react-router-dom";
 class RegisterUserInformationForm extends Component {
   render() {
