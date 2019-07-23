@@ -140,11 +140,13 @@ class RegisterForm extends Component {
           coachSelectFacilityForm: true,
           missingFacilityForm: false
         });
+
       case "manager":
         return this.setState({
           userTypeForm: false,
           managerRegisterFacilityForm: true
         });
+        
       case "toCoachRegisterTeamForm":
         return this.setState({
           coachSelectFacilityForm: false,
