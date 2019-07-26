@@ -252,7 +252,6 @@ class MatchConflicts extends Component {
                 )}
               </div>
             </div>
-
             <div className="matchTimeBlockDiv">
               {selectedDate && (
                 <React.Fragment>

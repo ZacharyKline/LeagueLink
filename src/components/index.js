@@ -1,12 +1,12 @@
 export { default as App } from "./App";
 export { default as Navbar } from "./NavBar";
 export { default as CalendarPage } from "./CalendarPage";
-export { default as ProfileContainer } from './ProfileContainer'
+export { default as ProfileContainer } from "./ProfileContainer";
 export { default as RegisterHeader } from "./RegisterHeader";
 export { default as LoginForm } from "./LoginForm";
 // export { default as RegisterForm } from "./RegisterForm";
 export { default as EditProfile } from "./EditProfilePage";
-export { default as CoachProfile } from './CoachProfile'
+export { default as CoachProfile } from "./CoachProfile";
 //export { default as Menu } from "./Menu";
 //export { default as Settings } from "./Settings";
 export { default as Logout } from "./Logout";
@@ -19,8 +19,6 @@ export { default as RegistrationPage } from "./RegistrationPage";
 export { default as RegistrationForm } from "./RegistrationForm";
 
 export { default as TimeBlock } from "./TimeBlock";
-export { default as Day } from "./Day";
-export { default as Week } from "./Week";
 
 export {
   default as RegisterUserInformationForm
